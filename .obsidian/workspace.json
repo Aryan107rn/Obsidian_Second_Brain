@@ -1,0 +1,237 @@
+{
+  "main": {
+    "id": "85eac16b0d4dfe3d",
+    "type": "split",
+    "children": [
+      {
+        "id": "81045edc11942c6b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "614972a4b8f98990",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d657066f3df8e5dd",
+    "type": "split",
+    "children": [
+      {
+        "id": "8b0fed0b7d6b23e3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f2339277baec7b99",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "9e340cb3ffa039de",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "734a38417302b848",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 346.83984375
+  },
+  "right": {
+    "id": "833dfb8e29c37f6c",
+    "type": "split",
+    "children": [
+      {
+        "id": "eb91a57a80ef48d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ccbce09d0435a59d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "56db6cf14c60c4f9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "d2be9c97e32252a6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b06c725cbdbba27c",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "1bf14154b4b44199",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "f748a7e01aa5e87f",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "spreadsheet",
+              "title": "Advanced Tables"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false,
+      "omnisearch:Omnisearch": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "614972a4b8f98990",
+  "lastOpenFiles": [
+    "Computer Science/DSA/Recursion and Backtracking.md",
+    "Computer Science/DSA/Binary Search.md",
+    "Computer Science/C++/C++ Core Language Features.md",
+    "Computer Science/Web Development/APIs/GraphQL.md",
+    "Computer Science/Web Development/APIs/API.md",
+    "Computer Science/Web Development/Git/Git and GitHub.md",
+    "Computer Science/Web Development/APIs/gRPC.md",
+    "Computer Science/Web Development/APIs/WebSocket.md",
+    "Computer Science/Web Development/APIs/SOAP.md",
+    "Computer Science/Web Development/APIs/REST APIs.md",
+    "Computer Science/Web Development/React.md",
+    "Computer Science/Web Development/APIs",
+    "Computer Science/Web Development/Git/Git Rebase.md",
+    "Computer Science/Web Development/Git/Git Stash.md",
+    "Computer Science/Web Development/REST APIs.md",
+    "Computer Science/Web Development/Git/Git Tags.md",
+    "Computer Science/Web Development/Git",
+    "Computer Science/Web Development/React/React.md",
+    "Computer Science/Web Development/React/React Common Mistakes and Edge Cases.md",
+    "Computer Science/Web Development/React/State (useState).md",
+    "Computer Science/Web Development/React/Hooks and useEffect.md",
+    "Computer Science/Web Development/React/Components and Props.md",
+    "Computer Science/Web Development/React/Todo List Example.md",
+    "Computer Science/Web Development/React/JSX.md",
+    "Computer Science/Web Development/React",
+    "Computer Science/Web Development/JavaScript/Package Managers and Build Tools.md",
+    "Computer Science/Web Development/JavaScript/JS Interview Questions and Tricky Outputs.md",
+    "Computer Science/Web Development/JavaScript/DOM and Events.md",
+    "Computer Science/Web Development/JavaScript/Scope and Hoisting.md",
+    "Untitled 1.canvas",
+    "Untitled.canvas",
+    "Untitled.base",
+    "Excalidraw",
+    "Untitled",
+    "Computer Science/Templates",
+    "Computer Science/C++",
+    "Computer Science/Web Development/JavaScript",
+    "Computer Science/Web Development"
+  ]
+}
