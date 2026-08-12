@@ -180,6 +180,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "github-sync:Sync with Remote": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -195,9 +196,9 @@
   },
   "active": "614972a4b8f98990",
   "lastOpenFiles": [
-    "Computer Science/DSA/Recursion and Backtracking.md",
     "Computer Science/DSA/Binary Search.md",
     "Computer Science/C++/C++ Core Language Features.md",
+    "Computer Science/DSA/Recursion and Backtracking.md",
     "Computer Science/Web Development/APIs/GraphQL.md",
     "Computer Science/Web Development/APIs/API.md",
     "Computer Science/Web Development/Git/Git and GitHub.md",
