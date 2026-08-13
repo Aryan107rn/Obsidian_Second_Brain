@@ -257,3 +257,8 @@ int height(TreeNode* root) {
 [[Strings]]
 [[Linked List]]
 [[CPP Complete Revision]]
+
+
+## Related concepts
+- [[Dynamic Programming]] — recursion + memoization is top-down DP; full treatment of memoization, tabulation, and space optimization.
+- [[Kadane's Algorithm]] — a concrete worked example of DP in its space-optimized form.

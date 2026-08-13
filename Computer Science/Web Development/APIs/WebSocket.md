@@ -2,6 +2,7 @@
 tags: [api, websocket, web-development, backend, networking, computer-science, realtime]
 aliases: [WebSockets, WS]
 created: 2026-08-09
+updated: 2026-08-09
 ---
 
 # WebSocket
@@ -18,6 +19,24 @@ Some applications need the server to push updates to the client the moment somet
 - **Long polling**: the client sends a request, and the server holds it open until there's something to say — better, but still re-opens a new request after every response, with overhead per cycle.
 
 WebSocket solves this properly: open **one** connection, and let the server push data the instant it's available, with no repeated request overhead.
+
+## Request-response vs WebSocket, visually
+
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    Note over C,S: 1. Handshake — a normal HTTP request that "upgrades"
+    C->>S: GET /chat (Upgrade: websocket)
+    S-->>C: 101 Switching Protocols
+
+    Note over C,S: 2. Connection now persistent & full-duplex
+    C->>S: chat message
+    S->>C: chat message (pushed anytime, no request needed)
+    S->>C: user_joined notification
+    C->>S: chat message
+```
 
 ## How does it work?
 

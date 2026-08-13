@@ -16,7 +16,25 @@ APIs come in different flavors depending on two independent questions:
 1. **How is it built?** — the architecture/protocol (REST, GraphQL, SOAP, gRPC, WebSocket)
 2. **Who can access it?** — the scope (public, internal, partner, composite)
 
-A REST API can be public or private; a public API can be REST or GraphQL. These two classifications are separate axes, not a single hierarchy.
+```mermaid
+flowchart TD
+    API[API]
+    API --> P["By Protocol<br/>(how it's built)"]
+    API --> S["By Scope<br/>(who can use it)"]
+
+    P --> REST
+    P --> GraphQL
+    P --> SOAP
+    P --> gRPC
+    P --> WebSocket
+
+    S --> Public["Open / Public"]
+    S --> Internal["Internal / Private"]
+    S --> Partner["Partner"]
+    S --> Composite["Composite"]
+```
+
+A REST API can be public or private; a public API can be REST or GraphQL. These two classifications are independent axes, not a single hierarchy.
 
 ## Why does it exist?
 
@@ -26,7 +44,7 @@ Without APIs, every piece of software that wanted to use another service's data 
 
 ## Classification by architecture / protocol
 
-Each style is covered in full depth in its own note:
+Each style is covered in full depth, with its own diagrams, in its own note:
 
 - [[REST APIs]] — resources manipulated via HTTP methods (`GET`/`POST`/`PUT`/`PATCH`/`DELETE`), stateless, JSON. The default for general-purpose public and internal web APIs.
 - [[GraphQL]] — client specifies exactly what data shape it wants in a single query, over one endpoint. Solves REST's over-fetching/under-fetching problem; best for complex nested data and multiple client types.
