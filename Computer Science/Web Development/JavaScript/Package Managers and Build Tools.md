@@ -131,5 +131,5 @@ npx create-next-app@latest my-app
 
 ## Related concepts
 
-- [[React]] — the library these tools set up and serve
+- [[00 - React MOC]] — the library these tools set up and serve
 - [[ES6+ Modern Features]] — the `import`/`export` module syntax bundlers process

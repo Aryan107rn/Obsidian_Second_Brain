@@ -17,7 +17,7 @@ updated: 2026-08-14
 
 ## 🖼️ useEffect Lifecycle & Cleanup Phases
 
-![[react-useeffect-lifecycle.svg|740]]
+![[react-useeffect-lifecycle.svg|960]]
 
 ---
 
@@ -31,7 +31,7 @@ The two most common hooks:
 
 | Hook | Purpose |
 |---|---|
-| [[State (useState)\|useState]] | Add state to a component |
+| [[04 - State & useState Hook\|useState]] | Add state to a component |
 | `useEffect` | Run side effects — code outside the normal render flow |
 
 ```jsx
@@ -105,7 +105,7 @@ function useFetch(url) {
 ---
 
 ## 🔗 Related concepts
-- [[React]] — Hooks are how modern function-component React accesses state and lifecycle behavior
-- [[State (useState)]] — `useState` is the most basic Hook
+- [[00 - React MOC]] — Hooks are how modern function-component React accesses state and lifecycle behavior
+- [[04 - State & useState Hook]] — `useState` is the most basic Hook
 - [[Closures]] — Hooks rely on closures to "remember" values between renders
 - [[REST APIs]] — `useEffect` + `fetch` is the typical pattern for loading data from a backend

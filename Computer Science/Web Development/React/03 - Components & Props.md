@@ -8,7 +8,7 @@ created: 2026-08-09
 
 ## What is it?
 
-A **component** is a JavaScript function that returns a description of UI (via [[JSX]]). Components can be nested inside each other, forming a tree, just like HTML elements nest.
+A **component** is a JavaScript function that returns a description of UI (via [[02 - JSX & Building Blocks]]). Components can be nested inside each other, forming a tree, just like HTML elements nest.
 
 **Props** ("properties") are how a parent component passes data down to a child component — similar to function arguments.
 
@@ -78,12 +78,12 @@ Each `<Greeting />` call is independent and renders with its own `name`. Props a
 
 ## Common mistakes
 
-- **Treating props as mutable**: `props.name = "new"` inside a component is a bug. If a child needs to change something, the parent must pass down a function (often paired with [[State (useState)|state]]) that the child calls — the parent still owns the update.
+- **Treating props as mutable**: `props.name = "new"` inside a component is a bug. If a child needs to change something, the parent must pass down a function (often paired with [[04 - State & useState Hook|state]]) that the child calls — the parent still owns the update.
 - Forgetting that each rendered instance of a component (e.g. two `<Greeting />` calls) is fully independent — they don't share data unless explicitly passed the same props or state.
 
 ## Related concepts
 
-- [[React]] — components are React's core building block
-- [[JSX]] — what components return to describe their UI
-- [[State (useState)]] — data a component manages itself, as opposed to props received from a parent
+- [[00 - React MOC]] — components are React's core building block
+- [[02 - JSX & Building Blocks]] — what components return to describe their UI
+- [[04 - State & useState Hook]] — data a component manages itself, as opposed to props received from a parent
 - [[Functions in JavaScript]] — components are just JavaScript functions

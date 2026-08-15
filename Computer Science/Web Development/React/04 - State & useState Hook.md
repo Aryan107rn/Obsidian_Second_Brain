@@ -9,7 +9,7 @@ updated: 2026-08-14
 
 ## What is it?
 
-**State** is data a component owns and manages itself, which can change over time — e.g. a counter value, whether a modal is open, or text typed into an input. Unlike [[Components and Props|props]], a component *can* update its own state, and doing so is what triggers React to re-render it.
+**State** is data a component owns and manages itself, which can change over time — e.g. a counter value, whether a modal is open, or text typed into an input. Unlike [[03 - Components & Props|props]], a component *can* update its own state, and doing so is what triggers React to re-render it.
 
 ---
 
@@ -73,8 +73,8 @@ function addTodo(text) {
 
 ## Related concepts
 
-- [[React]] — state is one of React's two core data sources (alongside props)
-- [[Components and Props]] — state is owned by a component, unlike props which are received
-- [[Hooks and useEffect]] — `useState` is one of React's built-in Hooks
+- [[00 - React MOC]] — state is one of React's two core data sources (alongside props)
+- [[03 - Components & Props]] — state is owned by a component, unlike props which are received
+- [[05 - Hooks & useEffect Hook]] — `useState` is one of React's built-in Hooks
 - [[Objects Destructuring Spread Rest]] — `{...obj}` / `[...arr]` spreading is central to updating state immutably
 - [[Closures]] — `useState` setter callbacks rely on closures to "remember" values across renders

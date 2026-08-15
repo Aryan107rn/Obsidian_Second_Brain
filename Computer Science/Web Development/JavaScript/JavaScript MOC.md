@@ -52,6 +52,6 @@ Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scop
 ---
 
 ## 🔗 Related Areas
-- [[React]] — Declarative UI library built with JavaScript
+- [[00 - React MOC]] — Declarative UI library built with JavaScript
 - [[REST APIs]] & [[GraphQL]] — Connecting frontend JS to backend servers
 - [[Git and GitHub]] — Version control workflows
