@@ -52,27 +52,6 @@ A bundler/build tool:
 | **Webpack** | Highly configurable bundler that powered CRA and most of the React ecosystem for years. Still common in large/legacy codebases; slower and much more config-heavy than Vite. Rarely chosen to start new projects now. |
 | **Next.js** | Not just a bundler — a full **framework** built on React adding server-side rendering, file-based routing, and its own build pipeline (Turbopack internally). Use when you need more than a client-side app (e.g. SEO, server rendering). |
 
-
-### Babel — the compiler behind the bundler
-
-A bundler needs something to actually convert JSX and modern JS syntax into plain, browser-compatible JS. That translation step is done by a **compiler**, and historically that compiler was **Babel**.
-
-```jsx
-// what you write
-const element = <h1>Hi</h1>;
-
-// what Babel outputs
-const element = React.createElement("h1", null, "Hi");
-```
-
-- **Create React App / Webpack** historically used Babel directly for this JSX/syntax transformation.
-- **Vite** uses **esbuild** for this same job during development instead — esbuild does the same kind of transformation but is written in Go, making it roughly 10–100x faster than Babel. Vite still uses Babel internally for some production-build cases, but you rarely configure it directly.
-
-You don't usually interact with Babel yourself in a modern Vite project — it's invisible tooling. It's worth knowing the term mainly because ".babelrc" or "Babel plugin" still show up in older projects and docs.
-
-**Common mistake**: confusing Babel/esbuild (the **compilers** that transform JSX/syntax) with Webpack/Vite (the **bundlers** that call those compilers as part of a larger pipeline) — they're different layers, not competing alternatives.
-
-
 ### Babel — the compiler behind the bundler
 
 A bundler needs something to actually convert JSX and modern JS syntax into plain, browser-compatible JS. That translation step is done by a **compiler**, and historically that compiler was **Babel**.
@@ -133,3 +112,4 @@ npx create-next-app@latest my-app
 
 - [[00 - React MOC]] — the library these tools set up and serve
 - [[ES6+ Modern Features]] — the `import`/`export` module syntax bundlers process
+- [[JavaScript MOC]]

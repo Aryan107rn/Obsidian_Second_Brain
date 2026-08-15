@@ -6,6 +6,8 @@ Dynamic Programming is a technique for solving problems by breaking them into sm
 
 Think of it as **"smart recursion that remembers its own answers."**
 
+![[dynamic-programming-memoization.png|860]]
+
 ## Why does it exist?
 
 Plain recursion can be extremely wasteful. Some recursive solutions branch out and solve the *exact same smaller subproblem* many times over. DP eliminates this repeated work, turning exponential-time solutions into polynomial-time ones.

@@ -13,7 +13,7 @@ A **REST API** (Representational State Transfer) is an architectural style desig
 
 ## 🖼️ RESTful Request & Response Lifecycle Diagram
 
-![[rest-architecture-diagram.svg]]
+![[rest-architecture-diagram.svg|960]]
 
 ---
 

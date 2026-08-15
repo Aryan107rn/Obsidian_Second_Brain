@@ -1,94 +1,56 @@
 ---
-tags: [git, github, version-control, command-line, computer-science, devops]
-aliases: [Git Commands, GitHub Basics]
+tags: [git, github, version-control, moc, computer-science]
+aliases: [Git Commands, Git MOC]
 created: 2026-08-08
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
-# Git & GitHub — Architecture & Command Reference
+# Git & GitHub — MOC
 
 **Git** is a distributed version control system that tracks changes to files over time. **GitHub** is a cloud hosting service for Git repositories, adding collaboration features (pull requests, issues, actions) on top of Git.
-
----
-
-## 🖼️ Git 4-Tier Architecture & Workflow
-
-![[git-workflow-architecture.svg]]
-
----
 
 ## The Core Workflow
 
 Changes move through four stages:
-1. **Working directory** — your actual edited files on disk
-2. **Staging area (Index)** — files marked with `git add` to be included in the next snapshot
-3. **Local repo (.git)** — committed snapshots (history), stored on your machine
-4. **Remote (GitHub)** — cloud-hosted repository, synchronized via `push` / `pull`
 
----
+```
+Working dir  --git add-->  Staging area  --git commit-->  Local repo  --git push-->  Remote (GitHub)
+```
+- **Working directory** — your actual edited files
+- **Staging area (Index)** — files marked with `git add` for the next commit
+- **Local repo (`.git`)** — committed snapshots (history), stored on your machine
+- **Remote** — the hosted copy (GitHub), synced via `push`/`pull`
 
 ## Key Concepts
+- **Distributed** — every clone has the full history, not just a snapshot from a central server
+- **Commit** — an immutable snapshot of the repo, identified by a hash
+- **HEAD** — pointer to your current position (usually the tip of the active branch)
 
-- **Distributed**: Every clone has the full history — not just a snapshot from a central server.
-- **Commit**: An immutable snapshot of the repository at a point in time, identified by a unique SHA-1/SHA-256 hash.
-- **HEAD**: A reference pointer to your current position (usually the tip of the current active branch).
+## Notes in this folder
 
----
+| Note | Covers |
+|---|---|
+| [[Git Basics]] | Setup, daily add/commit/push/pull flow, viewing history |
+| [[Git Branching]] | Creating, switching, merging, deleting branches |
+| [[Git Undoing Changes]] | restore / reset / revert — picking the right undo tool |
+| [[GitHub Basics]] | Fork, clone, PR, issues, Actions, `.gitignore` |
+| [[Git Stash]] | Parking uncommitted work temporarily |
+| [[Git Rebase]] | Replaying commits for linear history |
+| [[Git Tags]] | Marking release points |
+| [[Merge Conflicts]] | Resolving conflicting changes |
 
-## Command Reference
+## Best Practices
+- Commit frequently, one logical change per commit
+- Write present-tense messages: `add login form`, not `added login form`
+- One feature per branch; pull before you push
+- Never commit secrets — if one slips in, rotate it immediately
+- Review with `git diff` / `git status` before every commit
 
-### Setup & Config
-```bash
-git init                             # Start a new local repository
-git clone <url>                      # Clone a remote repo
-git config --global user.name "You"
-git config --global user.email "you@example.com"
-```
+## Related Concepts
+- [[Linux]] — Git is typically run from the same command-line environment
+- [[SSH]] — commonly used to authenticate `git push`/`pull` with GitHub
 
-### Daily Workflow
-```bash
-git status                # Inspect modified & staged files
-git add <file>            # Stage a specific file
-git add .                  # Stage all changes in current dir
-git commit -m "message"    # Commit staged snapshot
-git push origin <branch>   # Push commits to remote
-git pull origin <branch>   # Fetch + merge from remote
-```
-
-### Branching & Merging
-```bash
-git branch                 # List branches
-git branch <name>          # Create a new branch
-git switch <name>          # Switch to a branch (or git checkout <name>)
-git switch -c <name>       # Create and switch in one step
-git merge <name>           # Merge target branch into current branch
-git branch -d <name>       # Safely delete merged branch
-```
-
-### Inspecting History
-```bash
-git log                        # Full commit history
-git log --oneline --graph       # Compact visual ASCII history
-git diff                        # Unstaged changes vs. staging area
-git diff --staged               # Staged changes vs. last commit
-git show <commit_hash>          # Details of a specific commit
-```
-
-### Undoing Changes Safely
-
-| Command | Effect | Scope |
-| :--- | :--- | :--- |
-| `git restore <file>` | Discard uncommitted edits to a file | Working directory |
-| `git restore --staged <file>`| Unstage file (preserves code edits) | Staging Area |
-| `git reset --soft HEAD~1` | Undo last commit, keep changes staged | Local repo $\to$ Staging |
-| `git reset --hard HEAD~1` | **Destructive**: Erase last commit and all edits | All local stages |
-| `git revert <commit_hash>`| Safe: Creates a new commit undoing previous commit | Shared branches |
-
----
-
-## 🔗 Related Concepts
-- [[Git Rebase]] — Linear commit history alternative to merging
-- [[Git Stash]] — Temporarily stashing dirty uncommitted work
-- [[Git Tags]] — Marking release versions
-- [[Merge Conflicts]] — How to resolve colliding changes
-- [[Linux]] — The shell environment where Git commands run
+## Open Questions / To Explore Later
+- Git Flow and other branching strategies
+- GitHub Actions / CI pipelines in depth
+- Interactive rebase (`rebase -i`)

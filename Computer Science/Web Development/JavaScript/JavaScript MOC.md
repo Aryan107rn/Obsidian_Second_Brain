@@ -47,9 +47,12 @@ Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scop
 - [[Error Handling and Memory]] — try/catch/custom errors, modules, JSON, garbage collection, storage APIs
 
 ## 8. Interview Prep
+
+## 8. Interview Prep
 - [[JS Interview Questions and Tricky Outputs]] — ranked Q&A drill sheet + predict-the-output practice
 
----
+## 9. Tooling
+- [[Package Managers and Build Tools]] — npm/pnpm/yarn vs Vite/Webpack/Next.js, what each layer actually does
 
 ## 🔗 Related Areas
 - [[00 - React MOC]] — Declarative UI library built with JavaScript
