@@ -11,10 +11,14 @@
             "id": "614972a4b8f98990",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Computer Science/Web Development/JavaScript/Event Loop.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Event Loop"
             }
           }
         ]
@@ -76,7 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 346.83984375
+    "width": 289.8658866882324
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -196,20 +200,24 @@
   },
   "active": "614972a4b8f98990",
   "lastOpenFiles": [
-    "Computer Science/Web Development/JavaScript/Array Methods.md",
+    "Computer Science/DSA/Arrays.md",
+    "Computer Science/Web Development/JavaScript/Closures.md",
     "Computer Science/Web Development/JavaScript/Asynchronous JavaScript.md",
+    "Computer Science/Web Development/JavaScript/Event Loop.md",
     "Computer Science/Web Development/JavaScript/Common Coding Patterns.md",
+    "Computer Science/Web Development/JavaScript/Objects Destructuring Spread Rest.md",
+    "Computer Science/Web Development/React/Hooks and useEffect.md",
+    "Computer Science/Web Development/React/Components and Props.md",
+    "Computer Science/Web Development/JavaScript/Array Methods.md",
     "Computer Science/Web Development/JavaScript/DOM and Events.md",
     "Computer Science/Web Development/JavaScript/JavaScript MOC.md",
     "Computer Science/Web Development/JavaScript/JS Interview Questions and Tricky Outputs.md",
     "Computer Science/Web Development/JavaScript/Functions in JavaScript.md",
-    "Computer Science/Web Development/JavaScript/Event Loop.md",
     "Computer Science/Web Development/React/Todo List Example.md",
     "Computer Science/Web Development/React/State (useState).md",
     "Computer Science/Web Development/React/React Common Mistakes and Edge Cases.md",
     "Computer Science/Web Development/React/React.md",
     "Computer Science/Web Development/React/JSX.md",
-    "Computer Science/Web Development/React/Hooks and useEffect.md",
     "Computer Science/Web Development/APIs/gRPC.md",
     "Computer Science/Web Development/APIs/REST APIs.md",
     "Computer Science/Web Development/APIs/GraphQL.md",
@@ -218,10 +226,6 @@
     "Computer Science/Web Development/APIs/API.md",
     "Computer Science/Web Development/JavaScript/Variables and Data Types.md",
     "Computer Science/Web Development/JavaScript/this Keyword.md",
-    "Computer Science/Web Development/JavaScript/Scope and Hoisting.md",
-    "Computer Science/Web Development/JavaScript/Prototypes and Inheritance.md",
-    "Computer Science/Web Development/JavaScript/Package Managers and Build Tools.md",
-    "Computer Science/Web Development/JavaScript/Operators and Type Coercion.md",
     "attachments/linux-filesystem-hierarchy.svg",
     "attachments/js-async-promises.svg",
     "attachments/js-prototype-chain.svg",

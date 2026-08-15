@@ -55,33 +55,47 @@ console.log("4");
 // 🎯 Final Output Order: 1, 4, 3, 2
 ```
 
-### Detailed Trace:
+### 🚀 Step-by-Step State Transition Trace
+
+Instead of a complex timeline, let's track the **exact state** of the Call Stack and Queues at each line of code:
+
+| Step | Code Line Executed | Call Stack (LIFO) | Microtask Queue (VIP 🥇) | Macrotask Queue | 🖥️ Output | Visual Trace / Explanation |
+| :---: | :--- | :--- | :--- | :--- | :--- | :--- |
+| **1** | `console.log("1")` | `["console.log('1')"]` | `[]` | `[]` | `1` | **Synchronous**: Pushed to stack, executed, and popped. Prints `1`. |
+| **2** | `setTimeout(cb2, 0)` | `["setTimeout"]` | `[]` | `[cb2]` | `1` | **Asynchronous**: Handed to Web API. Since timer is `0ms`, Web API immediately moves the callback `cb2` to the Macrotask Queue. |
+| **3** | `Promise.resolve().then(cb3)`| `["Promise.resolve"]`| `[cb3]` | `[cb2]` | `1` | **Asynchronous**: Promise resolves instantly and registers `cb3` in the Microtask Queue. |
+| **4** | `console.log("4")` | `["console.log('4')"]` | `[cb3]` | `[cb2]` | `1, 4` | **Synchronous**: Executed immediately. Prints `4`. Call Stack is now **completely empty**. |
+| **5** | *Draining Microtasks (VIP)* | `["cb3"]` | `[]` *(Empty)* | `[cb2]` | `1, 4, 3` | **Event Loop Action**: Since stack is empty, it drains the Microtask Queue first. Moves `cb3` to Call Stack. Prints `3`. |
+| **6** | *Executing Macrotask* | `["cb2"]` | `[]` | `[]` *(Empty)* | `1, 4, 3, 2` | **Event Loop Action**: With both the stack and Microtasks empty, the Event Loop takes **ONE** task from the Macrotask queue (`cb2`). Prints `2`. |
+
+### 📊 Visual Execution Flow
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    participant Stack as 1. Call Stack
-    participant Web as 2. Web APIs
-    participant Micro as 3A. Microtask Queue (VIP)
-    participant Macro as 3B. Macrotask Queue
-    participant Console as 🖥️ Output
+graph TD
+    subgraph Phase 1: Synchronous Execution
+        S1["1. Run console.log('1')"] -->|Prints '1'| S2["2. setTimeout(cb2, 0)"]
+        S2 -->|Registers cb2 in Macrotask Queue| S3["3. Promise.then(cb3)"]
+        S3 -->|Registers cb3 in Microtask Queue| S4["4. Run console.log('4')"]
+        S4 -->|Prints '4'| S5["Call Stack is EMPTY"]
+    end
 
-    Note over Stack: Step 1: Run Synchronous Code
-    Stack->>Console: console.log("1") -> Prints "1"
-    Stack->>Web: setTimeout(cb2, 0) handed to Web API
-    Web->>Macro: 0ms elapsed -> cb2 queued in Macrotask
-    Stack->>Micro: Promise.then(cb3) queued in Microtask
-    Stack->>Console: console.log("4") -> Prints "4"
-    Note over Stack: Call Stack is now completely EMPTY!
+    subgraph Phase 2: Draining Microtasks (VIP)
+        S5 -->|Event Loop executes all microtasks| M1["5. Run cb3 from Microtask Queue"]
+        M1 -->|Prints '3'| M2["Microtask Queue is EMPTY"]
+    end
 
-    Note over Stack,Micro: Step 2: Event Loop drains VIP Microtask Queue
-    Micro->>Stack: cb3 pushed to Stack
-    Stack->>Console: console.log("3") -> Prints "3"
-    Note over Micro: Microtask Queue is now EMPTY!
+    subgraph Phase 3: Executing Macrotasks
+        M2 -->|Event Loop executes ONE macrotask| T1["6. Run cb2 from Macrotask Queue"]
+        T1 -->|Prints '2'| T2["All Queues and Stack EMPTY"]
+    end
 
-    Note over Stack,Macro: Step 3: Event Loop takes ONE Macrotask
-    Macro->>Stack: cb2 pushed to Stack
-    Stack->>Console: console.log("2") -> Prints "2"
+    style S1 fill:#ecf0f1,stroke:#2c3e50,stroke-width:2px
+    style S4 fill:#ecf0f1,stroke:#2c3e50,stroke-width:2px
+    style M1 fill:#f1c40f,stroke:#d35400,stroke-width:2px
+    style T1 fill:#3498db,stroke:#2980b9,stroke-width:2px
+    style S5 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
+    style M2 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
+    style T2 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
 ```
 
 ---
