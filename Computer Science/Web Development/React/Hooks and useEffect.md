@@ -2,6 +2,7 @@
 tags: [react, javascript, frontend, web-development, computer-science, hooks]
 aliases: [useEffect, React Hooks, Rules of Hooks]
 created: 2026-08-09
+updated: 2026-08-14
 ---
 
 # Hooks and useEffect
@@ -12,9 +13,17 @@ created: 2026-08-09
 
 `useEffect` is the Hook for running **side effects** — code that reaches outside of rendering, like fetching data, subscribing to an event, or setting a timer.
 
+---
+
+## 🖼️ useEffect Lifecycle & Cleanup Phases
+
+![[react-useeffect-lifecycle.svg|740]]
+
+---
+
 ## Why does it exist?
 
-Before Hooks, only class components could hold state or run code at specific lifecycle points (mount, update, unmount), which meant plain function components were limited to pure display logic. Hooks let any function component do everything a class component could, with less boilerplate — this is why modern React code rarely uses classes.
+Before Hooks, only class components could hold state or run code at specific lifecycle points (mount, update, unmount), which meant plain function components were limited to pure display logic. Hooks let any function component do everything a class component could, with less boilerplate.
 
 ## How does it work?
 
@@ -32,9 +41,13 @@ function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
     fetch(`/api/users/${userId}`)
       .then(res => res.json())
-      .then(data => setUser(data));
+      .then(data => { if (isMounted) setUser(data); });
+
+    // Cleanup function runs on unmount or before re-running
+    return () => { isMounted = false; };
   }, [userId]); // dependency array: re-run this effect only when userId changes
 
   if (!user) return <p>Loading...</p>;
@@ -46,30 +59,30 @@ function UserProfile({ userId }) {
 
 The **dependency array** (`[userId]`, the second argument to `useEffect`) tells React when to re-run the effect:
 
-- `[]` (empty) — run once, after the first render only.
+- `[]` (empty) — run once, after the first render only (Mount).
 - `[userId]` — re-run whenever `userId` changes.
 - omitted entirely — run after *every* render (rarely what you want).
 
 ### Rules of Hooks
 
-Only call hooks at the top level of a component (never inside loops, conditions, or nested functions), and only from React function components or other hooks. React relies on hooks being called in the **exact same order** on every render to correctly match state to the right `useState`/`useEffect` call.
+1. **Only call hooks at the top level**: Never inside loops, conditions, or nested functions.
+2. **Only call hooks from React functions**: Either custom hooks or React functional components.
 
+---
 
 ## Other common hooks (overview)
-
-Beyond `useState` and `useEffect`, a few other hooks come up often:
 
 | Hook | Used for |
 |---|---|
 | `useContext` | Reading shared data from a parent without manually passing props down through every level of the tree |
-| `useRef` | Holding a mutable value that persists across renders **without** causing a re-render when it changes (e.g. referencing a DOM element directly) |
+| `useRef` | Holding a mutable value that persists across renders **without** causing a re-render when it changes |
 | `useMemo` / `useCallback` | Avoiding expensive recalculations or function recreation on every render (performance optimization) |
 
-These are covered in more depth in their own notes when explored later (see [[React#Open Questions / To Explore Later]]).
+---
 
 ## Custom hooks
 
-You can write your **own** hooks — a regular function (name must start with `use`) that internally calls `useState`/`useEffect`/etc. — purely to extract and reuse stateful logic across multiple components.
+Extract reusable stateful logic into a function starting with `use`:
 
 ```jsx
 function useFetch(url) {
@@ -87,26 +100,12 @@ function useFetch(url) {
 
   return { data, loading };
 }
-
-// used in any component:
-function UserProfile({ userId }) {
-  const { data: user, loading } = useFetch(`/api/users/${userId}`);
-  if (loading) return <p>Loading...</p>;
-  return <p>{user.name}</p>;
-}
 ```
 
-This isn't a separate React feature — it's just the `use` naming convention plus the Rules of Hooks, applied to your own function. It's the standard way to avoid duplicating the same `useState`/`useEffect` logic across multiple components.
+---
 
-## Common mistakes
-
-- **Forgetting the `useEffect` dependency array**: putting `[]` when the effect actually depends on a prop/state value causes the effect to keep using a stale, outdated value forever — known as a **stale closure**.
-- **Calling hooks conditionally**: `if (x) { useState(...) }` breaks React's hook-order tracking and causes hard-to-debug errors.
-- Omitting the dependency array entirely when you only meant to run something once — causes the effect to re-run after every single render, often creating infinite loops (e.g. an effect that itself sets state with no dependency array).
-
-## Related concepts
-
+## 🔗 Related concepts
 - [[React]] — Hooks are how modern function-component React accesses state and lifecycle behavior
 - [[State (useState)]] — `useState` is the most basic Hook
 - [[Closures]] — Hooks rely on closures to "remember" values between renders
-- [[REST APIs]] — `useEffect` + `fetch` is the typical pattern for loading data from a backend on component mount
+- [[REST APIs]] — `useEffect` + `fetch` is the typical pattern for loading data from a backend

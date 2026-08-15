@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" height="100%">
+  <rect width="900" height="360" rx="16" fill="#170b22" stroke="#e10098" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" fill="#f472b6" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">GRAPHQL SINGLE-ENDPOINT QUERY RESOLUTION</text>
+
+  <!-- Query Request -->
+  <g transform="translate(50, 80)">
+    <rect width="240" height="230" rx="12" fill="#1e0a2b" stroke="#ec4899" stroke-width="2"/>
+    <rect width="240" height="36" rx="12" fill="#be185d"/>
+    <text x="120" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">CLIENT QUERY (POST /graphql)</text>
+    <rect x="15" y="55" width="210" height="155" rx="6" fill="#09030d" stroke="#4a044e"/>
+    <text x="25" y="80" fill="#f472b6" font-family="monospace" font-size="11">query {</text>
+    <text x="40" y="102" fill="#38bdf8" font-family="monospace" font-size="11">user(id: &quot;42&quot;) {</text>
+    <text x="55" y="124" fill="#fcd34d" font-family="monospace" font-size="11">name</text>
+    <text x="55" y="146" fill="#fcd34d" font-family="monospace" font-size="11">orders {</text>
+    <text x="70" y="168" fill="#4ade80" font-family="monospace" font-size="11">total</text>
+    <text x="55" y="188" fill="#fcd34d" font-family="monospace" font-size="11">}</text>
+    <text x="40" y="200" fill="#38bdf8" font-family="monospace" font-size="11">}</text>
+  </g>
+
+  <!-- Engine Center -->
+  <g transform="translate(325, 80)">
+    <rect width="250" height="230" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+    <rect width="250" height="36" rx="12" fill="#4338ca"/>
+    <text x="125" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">GRAPHQL ENGINE</text>
+    <text x="125" y="70" text-anchor="middle" fill="#a5b4fc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">1. Type Schema (SDL)</text>
+    <text x="125" y="95" text-anchor="middle" fill="#a5b4fc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">2. AST Query Validation</text>
+    <path d="M 30 115 L 220 115" stroke="#475569" stroke-width="1"/>
+    <text x="125" y="140" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12">Resolver: Query.user</text>
+    <text x="125" y="165" text-anchor="middle" fill="#fcd34d" font-family="system-ui, sans-serif" font-size="12">Resolver: User.name</text>
+    <text x="125" y="190" text-anchor="middle" fill="#4ade80" font-family="system-ui, sans-serif" font-size="12">Resolver: User.orders</text>
+    <text x="125" y="215" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">DataLoader Batched Fetch</text>
+  </g>
+
+  <!-- Response Right -->
+  <g transform="translate(610, 80)">
+    <rect width="240" height="230" rx="12" fill="#064e3b" stroke="#34d399" stroke-width="2"/>
+    <rect width="240" height="36" rx="12" fill="#059669"/>
+    <text x="120" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">TAILORED JSON RESPONSE</text>
+    <rect x="15" y="55" width="210" height="155" rx="6" fill="#022c22" stroke="#065f46"/>
+    <text x="25" y="80" fill="#34d399" font-family="monospace" font-size="11">{ &quot;data&quot;: {</text>
+    <text x="40" y="102" fill="#a7f3d0" font-family="monospace" font-size="11">&quot;user&quot;: {</text>
+    <text x="55" y="124" fill="#fcd34d" font-family="monospace" font-size="11">&quot;name&quot;: &quot;Asha&quot;,</text>
+    <text x="55" y="146" fill="#67e8f9" font-family="monospace" font-size="11">&quot;orders&quot;: [</text>
+    <text x="70" y="168" fill="#4ade80" font-family="monospace" font-size="11">{ &quot;total&quot;: 42.5 }</text>
+    <text x="55" y="188" fill="#67e8f9" font-family="monospace" font-size="11">]</text>
+    <text x="40" y="200" fill="#a7f3d0" font-family="monospace" font-size="11">} } }</text>
+  </g>
+</svg>

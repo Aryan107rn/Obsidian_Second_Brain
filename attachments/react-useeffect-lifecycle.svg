@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" height="100%">
+  <rect width="900" height="360" rx="16" fill="#111827" stroke="#a855f7" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" fill="#c084fc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">useEffect LIFECYCLE &amp; CLEANUP PHASES</text>
+
+  <g transform="translate(50, 80)">
+    <rect width="240" height="230" rx="12" fill="#1e1b4b" stroke="#38bdf8" stroke-width="2"/>
+    <rect width="240" height="36" rx="12" fill="#0284c7"/>
+    <text x="120" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">1. COMPONENT RENDERS</text>
+    <text x="120" y="75" text-anchor="middle" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="13">JSX evaluated</text>
+    <text x="120" y="110" text-anchor="middle" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="13">DOM painted on screen</text>
+    <text x="120" y="160" text-anchor="middle" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="12">Effects do NOT block paint</text>
+    <text x="120" y="195" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Runs asynchronously</text>
+  </g>
+
+  <g transform="translate(330, 80)">
+    <rect width="240" height="230" rx="12" fill="#1e1b4b" stroke="#a855f7" stroke-width="2"/>
+    <rect width="240" height="36" rx="12" fill="#7e22ce"/>
+    <text x="120" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">2. EFFECT EXECUTES</text>
+    <text x="20" y="75" fill="#e9d5ff" font-family="monospace" font-size="11">useEffect(() =&gt; {</text>
+    <text x="30" y="98" fill="#e9d5ff" font-family="monospace" font-size="11">  fetchData();</text>
+    <text x="30" y="121" fill="#e9d5ff" font-family="monospace" font-size="11">  return () =&gt; cleanup();</text>
+    <text x="20" y="144" fill="#e9d5ff" font-family="monospace" font-size="11">}, [deps]);</text>
+    <text x="120" y="185" text-anchor="middle" fill="#c084fc" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">API calls, timers, listeners</text>
+  </g>
+
+  <g transform="translate(610, 80)">
+    <rect width="240" height="230" rx="12" fill="#1e1b4b" stroke="#f43f5e" stroke-width="2"/>
+    <rect width="240" height="36" rx="12" fill="#be123c"/>
+    <text x="120" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">3. CLEANUP PHASE</text>
+    <text x="120" y="75" text-anchor="middle" fill="#fda4af" font-family="system-ui, sans-serif" font-size="13">Before next effect runs</text>
+    <text x="120" y="110" text-anchor="middle" fill="#fda4af" font-family="system-ui, sans-serif" font-size="13">OR on Component Unmount</text>
+    <text x="120" y="160" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="12">• Clears intervals</text>
+    <text x="120" y="185" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="12">• Aborts fetch requests</text>
+    <text x="120" y="210" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Prevents memory leaks</text>
+  </g>
+</svg>

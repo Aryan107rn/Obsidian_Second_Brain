@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <defs>
+    <!-- Arrow Markers -->
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#c084fc"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#facc15"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+    </marker>
+
+    <!-- Background Gradient -->
+    <linearGradient id="bgDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#131b2e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1000" height="560" rx="16" fill="url(#bgDark)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Header -->
+  <text x="500" y="38" text-anchor="middle" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="bold" letter-spacing="1">JAVASCRIPT EVENT LOOP: NON-COLLIDING STEP-BY-STEP FLOW</text>
+
+  <!-- ================= 1. CALL STACK (LEFT) ================= -->
+  <g transform="translate(40, 70)">
+    <rect width="220" height="350" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <rect width="220" height="40" rx="12" fill="#0284c7"/>
+    <circle cx="24" cy="20" r="12" fill="#0369a1"/>
+    <text x="24" y="25" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">1</text>
+    <text x="125" y="25" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">CALL STACK (LIFO)</text>
+    
+    <text x="110" y="60" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">Executes Synchronous JS</text>
+
+    <!-- Stack Frames -->
+    <rect x="15" y="75" width="190" height="38" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="110" y="98" text-anchor="middle" fill="#e0f2fe" font-family="monospace" font-size="11" font-weight="bold">console.log(&quot;1&quot;)</text>
+
+    <rect x="15" y="120" width="190" height="38" rx="6" fill="#1e293b" stroke="#c084fc" stroke-width="1.5"/>
+    <text x="110" y="143" text-anchor="middle" fill="#f3e8ff" font-family="monospace" font-size="11" font-weight="bold">setTimeout(cb, 1000)</text>
+
+    <rect x="15" y="165" width="190" height="38" rx="6" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+    <text x="110" y="188" text-anchor="middle" fill="#d1fae5" font-family="monospace" font-size="11" font-weight="bold">Promise.resolve().then()</text>
+
+    <rect x="15" y="210" width="190" height="38" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+    <text x="110" y="233" text-anchor="middle" fill="#cbd5e1" font-family="monospace" font-size="11">main() / script</text>
+
+    <!-- Execution Arrow Inside Stack -->
+    <path d="M 110 320 L 110 265" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-blue)"/>
+    <text x="110" y="335" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">Executes Top-to-Bottom</text>
+  </g>
+
+  <!-- ================= ARROW 1 -> 2: OFF-LOAD ASYNC ================= -->
+  <!-- Clean straight horizontal line -->
+  <path d="M 260 210 L 360 210" stroke="#c084fc" stroke-width="3" marker-end="url(#arrow-purple)"/>
+  <rect x="270" y="175" width="80" height="24" rx="4" fill="#2e1065" stroke="#a855f7" stroke-width="1"/>
+  <text x="310" y="191" text-anchor="middle" fill="#f3e8ff" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">② Off-load</text>
+
+  <!-- ================= 2. WEB APIS (TOP CENTER) ================= -->
+  <g transform="translate(370, 70)">
+    <rect width="280" height="190" rx="12" fill="#170b22" stroke="#c084fc" stroke-width="2"/>
+    <rect width="280" height="38" rx="12" fill="#7e22ce"/>
+    <circle cx="24" cy="19" r="12" fill="#581c87"/>
+    <text x="24" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">2</text>
+    <text x="150" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">WEB APIS (Browser / libuv)</text>
+    
+    <text x="140" y="58" text-anchor="middle" fill="#d8b4fe" font-family="system-ui, sans-serif" font-size="10">Background Waiting (Non-blocking)</text>
+
+    <rect x="15" y="70" width="250" height="32" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1"/>
+    <text x="140" y="91" text-anchor="middle" fill="#f3e8ff" font-family="monospace" font-size="11">⏱️ Timer: 1000ms countdown</text>
+
+    <rect x="15" y="110" width="250" height="32" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1"/>
+    <text x="140" y="131" text-anchor="middle" fill="#f3e8ff" font-family="monospace" font-size="11">🌐 fetch(&quot;/api&quot;) network wait</text>
+
+    <rect x="15" y="150" width="250" height="30" rx="6" fill="#2e1065" stroke="#a855f7" stroke-width="1"/>
+    <text x="140" y="170" text-anchor="middle" fill="#d8b4fe" font-family="monospace" font-size="10">🖱️ DOM click event listener</text>
+  </g>
+
+  <!-- ================= ARROWS 2 -> 3: ROUTING TO QUEUES ================= -->
+  <!-- Arrow to Microtasks (3A) -->
+  <path d="M 650 115 L 730 115" stroke="#34d399" stroke-width="3" marker-end="url(#arrow-green)"/>
+  <rect x="655" y="90" width="70" height="20" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
+  <text x="690" y="104" text-anchor="middle" fill="#a7f3d0" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">③A Promise</text>
+
+  <!-- Arrow to Macrotasks (3B) -->
+  <path d="M 650 175 L 685 175 L 685 285 L 730 285" stroke="#fbbf24" stroke-width="3" fill="none" marker-end="url(#arrow-amber)"/>
+  <rect x="655" y="190" width="65" height="20" rx="4" fill="#451a03" stroke="#f59e0b" stroke-width="1"/>
+  <text x="687" y="204" text-anchor="middle" fill="#fde68a" font-family="system-ui, sans-serif" font-size="9" font-weight="bold">③B Timer</text>
+
+  <!-- ================= 3. TASK QUEUES (RIGHT) ================= -->
+  <g transform="translate(740, 70)">
+    <!-- 3A: Microtask Queue -->
+    <rect width="220" height="140" rx="12" fill="#06281e" stroke="#34d399" stroke-width="2"/>
+    <rect width="220" height="36" rx="12" fill="#059669"/>
+    <circle cx="22" cy="18" r="11" fill="#047857"/>
+    <text x="22" y="22" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">3A</text>
+    <text x="120" y="23" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">MICROTASK QUEUE (VIP 🥇)</text>
+
+    <rect x="12" y="48" width="196" height="34" rx="6" fill="#064e3b" stroke="#10b981"/>
+    <text x="110" y="69" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="10">Promise.then() callback</text>
+
+    <rect x="12" y="90" width="196" height="34" rx="6" fill="#064e3b" stroke="#10b981"/>
+    <text x="110" y="111" text-anchor="middle" fill="#6ee7b7" font-family="monospace" font-size="10">async/await continuation</text>
+  </g>
+
+  <g transform="translate(740, 230)">
+    <!-- 3B: Macrotask Queue -->
+    <rect width="220" height="140" rx="12" fill="#271804" stroke="#fbbf24" stroke-width="2"/>
+    <rect width="220" height="36" rx="12" fill="#d97706"/>
+    <circle cx="22" cy="18" r="11" fill="#b45309"/>
+    <text x="22" y="22" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">3B</text>
+    <text x="120" y="23" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">MACROTASK QUEUE</text>
+
+    <rect x="12" y="48" width="196" height="34" rx="6" fill="#451a03" stroke="#f59e0b"/>
+    <text x="110" y="69" text-anchor="middle" fill="#fde68a" font-family="monospace" font-size="10">setTimeout() callback</text>
+
+    <rect x="12" y="90" width="196" height="34" rx="6" fill="#451a03" stroke="#f59e0b"/>
+    <text x="110" y="111" text-anchor="middle" fill="#fde68a" font-family="monospace" font-size="10">DOM Event / Click callback</text>
+  </g>
+
+  <!-- ================= 4. THE EVENT LOOP (BOTTOM CENTER) ================= -->
+  <g transform="translate(370, 290)">
+    <rect width="280" height="130" rx="12" fill="#2e1805" stroke="#facc15" stroke-width="2.5"/>
+    <rect width="280" height="36" rx="12" fill="#a16207"/>
+    <circle cx="24" cy="18" r="12" fill="#713f12"/>
+    <text x="24" y="23" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">4</text>
+    <text x="150" y="23" text-anchor="middle" fill="#fef08a" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">THE EVENT LOOP (Gatekeeper)</text>
+    
+    <text x="140" y="60" text-anchor="middle" fill="#fef08a" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">Constantly Checks:</text>
+    <text x="140" y="80" text-anchor="middle" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11">1. Is Call Stack 100% empty?</text>
+    <text x="140" y="100" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="11">2. Yes → Drain ALL Microtasks first</text>
+    <text x="140" y="120" text-anchor="middle" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="11">3. Then → Take 1 Macrotask</text>
+  </g>
+
+  <!-- Arrow from Task Queues to Event Loop -->
+  <!-- Clean straight path along bottom right, zero intersection -->
+  <path d="M 740 330 L 660 330" stroke="#fbbf24" stroke-width="3" marker-end="url(#arrow-amber)"/>
+  <path d="M 740 160 L 705 160 L 705 310 L 660 310" stroke="#34d399" stroke-width="3" fill="none" marker-end="url(#arrow-green)"/>
+
+  <!-- ================= ARROW 4 -> 1: PUSH BACK TO STACK ================= -->
+  <!-- Clean straight horizontal line -->
+  <path d="M 370 370 L 270 370" stroke="#facc15" stroke-width="3.5" marker-end="url(#arrow-yellow)"/>
+  <rect x="275" y="340" width="85" height="24" rx="4" fill="#713f12" stroke="#facc15" stroke-width="1"/>
+  <text x="317" y="356" text-anchor="middle" fill="#fef08a" font-family="system-ui, sans-serif" font-size="10" font-weight="bold">④ Push to Stack</text>
+
+  <!-- ================= BOTTOM RULES BANNER ================= -->
+  <g transform="translate(40, 440)">
+    <rect width="920" height="95" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="24" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">📌 3 EXECUTION RULES TO REMEMBER:</text>
+    <text x="30" y="48" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="11"><b>1. Synchronous Code Always Wins:</b> Call Stack runs to completion. No queued callback can execute while stack is busy.</text>
+    <text x="30" y="68" fill="#34d399" font-family="system-ui, sans-serif" font-size="11"><b>2. Microtasks Drain Completely (VIP 🥇):</b> Promises always execute before any timer callback, even setTimeout(fn, 0).</text>
+    <text x="30" y="88" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="11"><b>3. One Macrotask Per Tick:</b> Event Loop moves 1 timer callback to stack, then immediately checks microtasks again.</text>
+  </g>
+</svg>

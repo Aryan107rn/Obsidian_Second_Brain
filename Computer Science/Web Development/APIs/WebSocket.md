@@ -1,122 +1,168 @@
 ---
-tags: [api, websocket, web-development, backend, networking, computer-science, realtime]
-aliases: [WebSockets, WS]
+tags: [api, websocket, web-development, backend, networking, computer-science, realtime, placement-prep, interview-favorite]
+aliases: [WebSockets, WS, WSS, Full Duplex]
 created: 2026-08-09
-updated: 2026-08-09
+updated: 2026-08-14
 ---
 
-# WebSocket
+# ![[websocket.svg|40]] WebSocket — Full-Duplex Real-Time Networking
 
-## What is it?
+**WebSocket** is a standardized computer communications protocol that provides **full-duplex, bidirectional communication channels** over a single, persistent TCP connection. Standardized by the IETF as RFC 6455 in 2011, WebSocket enables the server to push real-time events to the client instantly without the client needing to poll.
 
-**WebSocket** is a protocol that keeps a single, **persistent, two-way (full-duplex)** connection open between a client and a server. This is fundamentally different from [[REST APIs|REST]], [[GraphQL]], [[SOAP]], and typical [[gRPC]] unary calls, all of which follow a **request → response, connection closes** pattern. With WebSocket, once the connection is open, either side can send a message to the other **at any time**, without the client having to ask first.
+---
 
-## Why does it exist?
+## 🖼️ WebSocket Full-Duplex Connection Diagram
 
-Some applications need the server to push updates to the client the moment something happens — a new chat message, a live stock price change, another player's move in a game. With a request-response model like REST, the client has no way to know *when* new data is available; it would have to keep asking:
+![[websocket-lifecycle-diagram.svg|960]]
 
-- **Polling**: the client sends a REST request every few seconds asking "anything new?" — wasteful (most requests return "no"), and updates are delayed by the polling interval.
-- **Long polling**: the client sends a request, and the server holds it open until there's something to say — better, but still re-opens a new request after every response, with overhead per cycle.
+---
 
-WebSocket solves this properly: open **one** connection, and let the server push data the instant it's available, with no repeated request overhead.
-
-## Request-response vs WebSocket, visually
+## ⚡ The Real-Time Dilemma: 4 Approaches Compared
 
 ```mermaid
 sequenceDiagram
-    participant C as Client
-    participant S as Server
+    autonumber
+    box LightYellow 1. Short Polling (Wasteful & Delayed)
+    participant C1 as Client
+    participant S1 as Server
+    end
+    C1->>S1: GET /messages (Any new data?)
+    S1-->>C1: 200 OK: "No"
+    Note over C1: Wait 3s...
+    C1->>S1: GET /messages (Any new data?)
+    S1-->>C1: 200 OK: "No"
 
-    Note over C,S: 1. Handshake — a normal HTTP request that "upgrades"
-    C->>S: GET /chat (Upgrade: websocket)
-    S-->>C: 101 Switching Protocols
+    box LightBlue 2. Long Polling (Hangs open until event)
+    participant C2 as Client
+    participant S2 as Server
+    end
+    C2->>S2: GET /messages (Hanging request)
+    Note over S2: Waits until new message arrives...
+    S2-->>C2: 200 OK: { message: "Hello" }
+    C2->>S2: GET /messages (Immediately opens next hanging request)
 
-    Note over C,S: 2. Connection now persistent & full-duplex
-    C->>S: chat message
-    S->>C: chat message (pushed anytime, no request needed)
-    S->>C: user_joined notification
-    C->>S: chat message
+    box LightGreen 3. Server-Sent Events (SSE - One-Way Push)
+    participant C3 as Client
+    participant S3 as Server
+    end
+    C3->>S3: GET /events (text/event-stream)
+    S3-->>C3: Stream Open
+    S3-->>C3: Event 1 (Push)
+    S3-->>C3: Event 2 (Push)
+
+    box LightPink 4. WebSocket (Full-Duplex Two-Way Pipe)
+    participant C4 as Client
+    participant S4 as Server
+    end
+    C4->>S4: HTTP Upgrade Handshake
+    S4-->>C4: 101 Switching Protocols
+    Note over C4,S4: Bi-directional Persistent TCP Pipe
+    C4->>S4: Client Frame (2-6 bytes overhead)
+    S4-->>C4: Server Push Frame (Instant!)
 ```
 
-## How does it work?
+---
 
-### The handshake
+## 🚀 Practical WebSocket Implementation Example
 
-A WebSocket connection starts as a normal HTTP request, containing a special `Upgrade` header:
+To illustrate the full-duplex communication cycle, here is how a connection is established and used:
 
-```
-GET /chat HTTP/1.1
-Host: example.com
-Upgrade: websocket
-Connection: Upgrade
-```
-
-If the server supports it, it responds confirming the upgrade, and from that point on, **the same underlying TCP connection is reused for WebSocket framing instead of HTTP** — no more HTTP requests are needed on that connection. The URL scheme changes to `ws://` (or `wss://` for the encrypted version, the WebSocket equivalent of `https://`).
-
-### After the handshake: free-form, two-way messaging
-
-Once connected, both client and server can send messages independently, at any time:
-
-```
-Client → Server: { "type": "chat_message", "text": "hi" }
-Server → Client: { "type": "chat_message", "user": "Ravi", "text": "hey!" }
-Server → Client: { "type": "user_joined", "user": "Priya" }
-```
-
-There's no concept of "request" and "response" anymore — just a stream of messages in either direction, whenever either side has something to send.
-
-### Example: browser client
-
+### 1. The Client-Side Browser Connection
 ```javascript
-const socket = new WebSocket("wss://example.com/chat");
+// 1. Establish persistent connection to WebSocket Server
+const socket = new WebSocket('ws://localhost:8080');
 
-socket.onopen = () => {
-  socket.send(JSON.stringify({ type: "chat_message", text: "hi" }));
+// 2. Event: Connection opened (Handshake completed successfully)
+socket.onopen = (event) => {
+  console.log('Connected! Handshake complete.');
+  // Client can send message packets containing any text/JSON or binary data
+  socket.send(JSON.stringify({ type: 'greet', text: 'Hello Server!' }));
 };
 
+// 3. Event: Server pushed a message to the client (Real-time Push)
 socket.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  console.log("Received:", data);
+  console.log('Message from server:', data);
 };
 
+// 4. Event: Connection closed
 socket.onclose = () => {
-  console.log("Connection closed");
+  console.log('Connection closed by remote peer.');
 };
 ```
 
-## When to use
+### 2. The Server-Side Handler (Node.js - `ws` library)
+```javascript
+const WebSocket = require('ws');
 
-- Live chat and messaging apps
-- Multiplayer games needing near-instant state sync between players
-- Real-time dashboards — live stock tickers, sports scores, monitoring metrics
-- Collaborative editing (Google Docs-style — seeing other users' cursors and edits instantly)
-- Live notifications that must arrive the moment they happen, not seconds later
+// Instantiate a persistent TCP server port
+const wss = new WebSocket.Server({ port: 8080 });
 
-## When not to use
+wss.on('connection', (ws) => {
+  console.log('New client joined!');
 
-- Data that changes infrequently — a REST endpoint the client checks occasionally (or even a simple periodic poll) is simpler and avoids holding an open connection unnecessarily
-- One-way server-to-client updates only (no client-to-server messages needed) — **Server-Sent Events (SSE)**, a simpler one-directional protocol built on plain HTTP, is often a better fit and easier to scale
-- Systems where horizontal scaling simplicity matters more than real-time delivery — REST's statelessness means any server can handle any request; WebSocket connections are stateful and tied to a specific server instance, complicating load balancing
+  // Listen for message packets from this specific client connection
+  ws.on('message', (rawPayload) => {
+    const payload = JSON.parse(rawPayload);
+    console.log(`Received: ${payload.text}`);
 
-## Common mistakes
+    // Instantly push data back over the SAME socket line
+    ws.send(JSON.stringify({ 
+      sender: 'server', 
+      text: `Echo: "${payload.text}"` 
+    }));
+  });
 
-- **Using WebSocket where simple polling or SSE would do**: holding an open connection per client has real server resource cost (memory, file descriptors) — don't reach for WebSocket by default; use it when true two-way, low-latency communication is actually needed.
-- **Not handling reconnection**: network drops happen — production WebSocket clients need reconnect logic (often with exponential backoff) to recover gracefully, which isn't automatic.
-- **Forgetting WebSocket is stateful**: unlike REST's stateless requests (any server instance can handle any request), a WebSocket connection lives on one specific server. Scaling WebSocket servers horizontally requires extra infrastructure (sticky sessions, or a shared pub/sub layer like Redis to broadcast messages across server instances).
-- **Skipping authentication on the initial handshake**: since there's no per-message "request" to attach fresh credentials to the way REST attaches headers, WebSocket apps typically authenticate once during the handshake (e.g. a token in the connection URL or an initial message) and must handle what happens if that session should later be revoked.
+  // Welcome push immediately on connection
+  ws.send(JSON.stringify({ sender: 'server', text: 'Connected to Real-Time Core!' }));
+});
+```
 
-## Edge cases / Important details
+---
 
-- **WebSocket vs Server-Sent Events (SSE)**: SSE is one-way only (server → client), built on plain HTTP (no special upgrade/protocol), and automatically reconnects in the browser. Use SSE when you only need server-to-client push; use WebSocket when the client also needs to send messages back on the same connection.
-- A WebSocket connection can remain open for hours or days — unlike REST requests, which complete in milliseconds to seconds.
+## 🌐 Scaling WebSockets: The Horizontal Architecture
 
-## Related concepts
-- [[API]] — the general concept; see the overview note for how WebSocket compares to REST, GraphQL, SOAP, and gRPC
-- [[REST APIs]] — the request-response style WebSocket deliberately departs from
-- [[GraphQL]] — GraphQL **subscriptions** (real-time updates) are commonly transported over WebSocket
-- [[JSON]] — the typical message format sent over a WebSocket connection, though it's not required (binary frames are also supported)
+Because WebSockets are **stateful** (a connection is tied to a specific physical server memory), scaling across multiple instances requires a **Pub/Sub message broker**:
 
-## Open Questions / To Explore Later
-- Server-Sent Events (SSE) in more depth, as the simpler one-way alternative
-- Scaling WebSocket servers (sticky sessions, Redis pub/sub for broadcasting across instances)
-- Socket.IO and other libraries that add reconnection/fallback on top of raw WebSocket
+```mermaid
+flowchart TD
+    ClientA["📱 Client A (Connected to Server 1)"]
+    ClientB["💻 Client B (Connected to Server 2)"]
+    
+    LB["Load Balancer (Sticky Sessions / IP Hash)"]
+    
+    subgraph WebSockets["WebSocket Server Fleet"]
+        WS1["WebSocket Server Instance #1"]
+        WS2["WebSocket Server Instance #2"]
+    end
+
+    Broker[("📡 Redis Pub/Sub / RabbitMQ Backplane")]
+
+    ClientA <==>|Persistent WS| WS1
+    ClientB <==>|Persistent WS| WS2
+
+    WS1 <-->|"1. Client A sends message -> Publishes to channel"| Broker
+    Broker <-->|"2. Broadcasts message to all server nodes"| WS2
+    WS2 -->|"3. Pushes to Client B!"| ClientB
+```
+
+---
+
+## 📊 Comparison: WebSocket vs. SSE vs. Long Polling
+
+| Feature | WebSocket | Server-Sent Events (SSE) | Long Polling |
+| :--- | :--- | :--- | :--- |
+| **Communication** | Bi-directional (Full-Duplex) | Uni-directional (Server → Client) | Simulated (Request/Response) |
+| **Transport** | TCP (Upgraded from HTTP) | HTTP/1.1 or HTTP/2 | Standard HTTP |
+| **Data Format** | Text (JSON/UTF-8) & Binary (Buffers) | UTF-8 Text only | Text / JSON |
+| **Auto-Reconnect** | Manual implementation | Built into browser `EventSource` | Manual implementation |
+| **Firewall / Proxy Friendly** | Sometimes blocked by corporate proxies | 100% standard HTTP (Never blocked) | 100% standard HTTP |
+| **Best For** | Gaming, live chat, shared whiteboard | Live score tickers, notification feeds | Legacy fallback systems |
+
+---
+
+## 🔗 Related Vault Concepts
+- [[API]] — Master API architecture comparison
+- [[REST APIs]] — The stateless alternative for standard CRUD
+- [[GraphQL]] — Uses WebSocket for GraphQL Subscriptions
+- [[System Design MOC]] — Scaling real-time distributed chat systems

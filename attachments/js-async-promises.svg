@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" height="100%">
+  <rect width="900" height="360" rx="16" fill="#022c22" stroke="#10b981" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">PROMISE LIFECYCLE &amp; ASYNC/AWAIT</text>
+
+  <g transform="translate(50, 90)">
+    <circle cx="110" cy="105" r="80" fill="#064e3b" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,6"/>
+    <text x="110" y="95" text-anchor="middle" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">PENDING</text>
+    <text x="110" y="125" text-anchor="middle" fill="#fde68a" font-family="monospace" font-size="12">Initial state</text>
+  </g>
+
+  <!-- Fulfilled -->
+  <g transform="translate(350, 70)">
+    <path d="M -80 120 L 30 50" stroke="#34d399" stroke-width="3"/>
+    <polygon points="35,46 25,48 28,58" fill="#34d399"/>
+    <rect width="220" height="100" rx="10" fill="#064e3b" stroke="#34d399" stroke-width="2"/>
+    <text x="110" y="35" text-anchor="middle" fill="#6ee7b7" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">FULFILLED</text>
+    <text x="110" y="65" text-anchor="middle" fill="#a7f3d0" font-family="monospace" font-size="12">.then((val) =&gt; ...)</text>
+    <text x="110" y="85" text-anchor="middle" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11">resolve(value) called</text>
+  </g>
+
+  <!-- Rejected -->
+  <g transform="translate(350, 200)">
+    <path d="M -80 -10 L 30 50" stroke="#f87171" stroke-width="3"/>
+    <polygon points="35,54 28,42 25,52" fill="#f87171"/>
+    <rect width="220" height="100" rx="10" fill="#450a0a" stroke="#f87171" stroke-width="2"/>
+    <text x="110" y="35" text-anchor="middle" fill="#fca5a5" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">REJECTED</text>
+    <text x="110" y="65" text-anchor="middle" fill="#fecaca" font-family="monospace" font-size="12">.catch((err) =&gt; ...)</text>
+    <text x="110" y="85" text-anchor="middle" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="11">reject(error) called</text>
+  </g>
+
+  <!-- Async Await Flow Right -->
+  <g transform="translate(620, 80)">
+    <rect width="230" height="220" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <rect width="230" height="36" rx="12" fill="#0284c7"/>
+    <text x="115" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">ASYNC / AWAIT SYNTAX</text>
+    <text x="15" y="70" fill="#38bdf8" font-family="monospace" font-size="11">async function getData() {</text>
+    <text x="25" y="92" fill="#fde047" font-family="monospace" font-size="11">  try {</text>
+    <text x="35" y="114" fill="#a7f3d0" font-family="monospace" font-size="11">    const res = await</text>
+    <text x="45" y="132" fill="#a7f3d0" font-family="monospace" font-size="11">      fetch(url);</text>
+    <text x="35" y="154" fill="#cbd5e1" font-family="monospace" font-size="11">    return res.json();</text>
+    <text x="25" y="176" fill="#fca5a5" font-family="monospace" font-size="11">  } catch (e) { ... }</text>
+    <text x="15" y="198" fill="#38bdf8" font-family="monospace" font-size="11">}</text>
+  </g>
+</svg>

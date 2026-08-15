@@ -12,16 +12,32 @@ created: 2026-08-08
 
 Starting point: branch diverged from `main` at commit B. Feature branch has C, D; `main` moved on to E.
 
-**Merge** keeps the fork and adds a merge commit M:
-```
-   C─D
-  /    \
-A─B─E───M
+### Visual Comparison
+
+#### 1. Git Merge (Preserves History & Creates Merge Commit)
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    branch feature
+    checkout feature
+    commit id: "C"
+    commit id: "D"
+    checkout main
+    commit id: "E"
+    merge feature id: "M (Merge)"
 ```
 
-**Rebase** replays C and D on top of E as new commits C', D' — a straight line, no merge commit:
-```
-A─B─E─C'─D'
+#### 2. Git Rebase (Replays Commits Linearly)
+```mermaid
+gitGraph
+    commit id: "A"
+    commit id: "B"
+    commit id: "E"
+    branch feature
+    checkout feature
+    commit id: "C' (rebased)"
+    commit id: "D' (rebased)"
 ```
 
 | | Merge | Rebase |
@@ -32,7 +48,7 @@ A─B─E─C'─D'
 
 ## Commands
 
-```
+```bash
 git switch feature
 git rebase main                          # replay feature's commits on main
 

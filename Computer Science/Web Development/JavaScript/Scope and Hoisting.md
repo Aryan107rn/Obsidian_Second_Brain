@@ -1,17 +1,28 @@
 ---
-tags: [javascript, fundamentals, web-development, computer-science, placement-prep]
-aliases: [Hoisting, Temporal Dead Zone, Lexical Scope]
+tags: [javascript, fundamentals, web-development, computer-science, placement-prep, interview-favorite]
+aliases: [Hoisting, Temporal Dead Zone, Lexical Scope, TDZ]
 created: 2026-08-08
+updated: 2026-08-14
 ---
 
 # Scope and Hoisting
 
 ## Types of Scope
 
-1. **Global scope** — accessible everywhere.
-2. **Function scope** — variables declared with `var` are visible throughout the entire function.
-3. **Block scope** — variables declared with `let`/`const` are visible only within the nearest `{ }`.
-4. **Lexical scope** — a function's access to variables is determined by *where it is written* in the code, not where it's called from.
+1. **Global scope** — Accessible everywhere in the application.
+2. **Function scope** — Variables declared with `var` are visible throughout the entire function body.
+3. **Block scope** — Variables declared with `let`/`const` are visible only within the nearest `{ }`.
+4. **Lexical scope** — A function's access to variables is determined by *where it is written* in source code, not where it is invoked.
+
+---
+
+## 🖼️ JavaScript Scope Hierarchy & Hoisting (TDZ)
+
+![[js-scope-hoisting.svg|960]]
+
+---
+
+## Lexical Scope Example
 
 ```javascript
 function outer() {
@@ -23,62 +34,57 @@ function outer() {
 }
 ```
 
-## Hoisting
+---
 
-JavaScript moves **declarations** (not initializations) to the top of their scope during the compile phase.
+## Hoisting & The Temporal Dead Zone (TDZ)
+
+JavaScript moves **declarations** (not initializations) to the top of their scope during the compilation phase:
 
 ```javascript
-console.log(fn());  // "Hi!" — function declarations are fully hoisted
+console.log(fn());  // "Hi!" — function declarations are fully hoisted (name + body)
 function fn() { return "Hi!"; }
 
-console.log(varHoist); // undefined — declaration hoisted, value not
+console.log(varHoist); // undefined — declaration hoisted, initialized to undefined
 var varHoist = 5;
 
-console.log(letHoist); // ReferenceError — Temporal Dead Zone
+console.log(letHoist); // ReferenceError — Temporal Dead Zone (TDZ)
 let letHoist = 5;
 
-console.log(fnExpr()); // TypeError — fnExpr is undefined at this point
+console.log(fnExpr()); // TypeError: fnExpr is not a function (fnExpr is undefined)
 var fnExpr = function() { return "Hi"; };
 ```
 
-### Temporal Dead Zone (TDZ)
+---
 
-`let` and `const` ARE hoisted, but they stay in an uninitialized "dead zone" from the start of the block until their declaration line is executed. Accessing them there throws a `ReferenceError`.
+## Declaration vs Expression Hoisting Comparison
 
-## Function Declaration vs Expression vs Arrow Function Hoisting
+| Syntax Type | Hoisted? | Callable Before Definition? | Error If Called Early |
+| :--- | :--- | :---: | :--- |
+| `function foo() {}` | Fully hoisted (name + body) | ✅ Yes | None (Executes normally) |
+| `var foo = function() {}` | Declaration hoisted as `undefined` | ❌ No | `TypeError: foo is not a function` |
+| `let foo = function() {}` | Hoisted but uninitialized (in TDZ) | ❌ No | `ReferenceError: Cannot access 'foo'` |
+| `const foo = () => {}` | Hoisted but uninitialized (in TDZ) | ❌ No | `ReferenceError: Cannot access 'foo'` |
 
-| Type | Hoisted? | Callable before definition? |
-|---|---|---|
-| `function foo(){}` | Fully hoisted (name + body) | Yes |
-| `var foo = function(){}` | Only `var foo` hoisted (as `undefined`) | No — TypeError |
-| `let foo = function(){}` | In TDZ | No — ReferenceError |
-| `const foo = () => {}` | In TDZ | No — ReferenceError |
+---
 
-## Classic Closure + Loop Hoisting Trap
+## Classic `var` vs `let` Loop Trap
 
 ```javascript
 for (var i = 0; i < 3; i++) {
   setTimeout(() => console.log(i), 0);
 }
-// 3, 3, 3 — var is function-scoped, all callbacks share the same i
+// Output: 3, 3, 3 (Single shared function-scoped variable)
 
 for (let j = 0; j < 3; j++) {
   setTimeout(() => console.log(j), 0);
 }
-// 0, 1, 2 — let creates a new binding per iteration
+// Output: 0, 1, 2 (Fresh block-scoped binding per iteration)
 ```
 
-This is one of the **most asked placement interview questions** — see [[Closures]] for the full explanation.
+---
 
-## Key Takeaways
-
-- Hoisting moves declarations, not assignments, to the top of scope.
-- `var` → hoisted + initialized to `undefined`. `let`/`const` → hoisted but in TDZ until declared.
-- Function declarations are fully hoisted (safe to call before defined); function expressions/arrow functions are not.
-- The `var` vs `let` loop question is extremely common — know it cold.
-
-## Related Concepts
-- [[Closures]] — why the loop + `var` trap happens
-- [[Variables and Data Types]] — `var`/`let`/`const` comparison table
-- [[Functions in JavaScript]] — function declarations vs expressions
-- [[JS Interview Questions and Tricky Outputs]]
+## 🔗 Related Concepts
+- [[Closures]] — Preserving variables across lexical scopes
+- [[Variables and Data Types]] — In-depth `var`, `let`, `const` comparison
+- [[Functions in JavaScript]] — Function declarations vs. arrow functions
+- [[JS Interview Questions and Tricky Outputs]] — Tricky output prediction

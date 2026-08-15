@@ -5,6 +5,33 @@ A sequence of nodes where each node stores data + a pointer to the next node. Un
 
 **When to apply linked lists over arrays:** frequent insertions/deletions at arbitrary positions, unknown/unbounded size, or when you specifically need O(1) splice/merge operations (no shifting cost).
 
+## Visualizing Node Structures & Types
+
+```mermaid
+flowchart LR
+    subgraph Singly["1. Singly Linked List (One-directional)"]
+        direction LR
+        S1["[ Val: 1 | Next ]"] --> S2["[ Val: 2 | Next ]"] --> S3["[ Val: 3 | Next ]"] --> S_Null["nullptr"]
+    end
+```
+
+```mermaid
+flowchart LR
+    subgraph Doubly["2. Doubly Linked List (Bi-directional O(1) Deletion)"]
+        direction LR
+        D_Null1["nullptr"] <--> D1["[ Prev | Val: 1 | Next ]"] <--> D2["[ Prev | Val: 2 | Next ]"] <--> D3["[ Prev | Val: 3 | Next ]"] <--> D_Null2["nullptr"]
+    end
+```
+
+```mermaid
+flowchart LR
+    subgraph Circular["3. Circular Linked List (Tail loops to Head)"]
+        direction LR
+        C1["[ Val: 1 | Next ]"] --> C2["[ Val: 2 | Next ]"] --> C3["[ Val: 3 | Next ]"]
+        C3 -->|tail points back to head| C1
+    end
+```
+
 ## Node structure
 ```cpp
 struct Node {
@@ -51,6 +78,19 @@ Node* deleteHead(Node* head) {
 ## Pattern 2: Reverse a Linked List
 **When to apply:** whenever a problem needs the list processed back-to-front, or as a subroutine (e.g. palindrome check, reverse in groups, add two numbers).
 
+```mermaid
+flowchart LR
+    subgraph Reversal["Pointer Reversal Step: head->next = prev"]
+        direction LR
+        P["prev (nullptr)"]
+        H["curr / head"]
+        N["next (preserved)"]
+        H -->|1. Flip pointer| P
+        H -.->|2. Advance prev| H_New["prev = curr"]
+        N -.->|3. Advance curr| N_New["curr = next"]
+    end
+```
+
 **Iterative** (preferred — O(1) space):
 ```cpp
 Node* reverseList(Node* head) {
@@ -79,6 +119,15 @@ Node* reverseRecursive(Node* head) {
 
 ## Pattern 3: Slow-Fast Pointers (Floyd's Algorithm) — Find Middle
 **When to apply:** need the middle node in a single pass, without knowing the length upfront (avoids a separate length-counting pass).
+
+```mermaid
+flowchart TD
+    subgraph SlowFast["Slow (1x) vs Fast (2x) Pointer Progression"]
+        direction LR
+        N1["Node 1<br/>(Start: S, F)"] --> N2["Node 2"] --> N3["Node 3<br/>(Step 1: S)"] --> N4["Node 4"] --> N5["Node 5<br/>(Step 2: S / Middle)"] --> N6["Node 6"] --> N7["Node 7<br/>(Step 3: F / End)"]
+    end
+```
+
 ```cpp
 Node* findMiddle(Node* head) {
     Node* slow = head; Node* fast = head;
@@ -94,6 +143,17 @@ Node* findMiddle(Node* head) {
 
 ## Pattern 4: Cycle Detection (Floyd's Tortoise and Hare)
 **When to apply:** need to detect if a list has a cycle, and optionally find where the cycle begins — without extra space (hashset would work too but costs O(n) space).
+
+```mermaid
+flowchart LR
+    Head["Head (Distance L)"] --> A["..."]
+    A --> Entry["Cycle Entry (Distance 0)"]
+    Entry --> C1["Node C1"]
+    C1 --> Meet["Meeting Point M (Distance d)"]
+    Meet --> C2["Node C2 (Distance C-d)"]
+    C2 --> Entry
+```
+
 ```cpp
 bool hasCycle(Node* head) {
     Node* slow = head; Node* fast = head;
@@ -245,6 +305,19 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
 
 ## Pattern 12: Clone a Linked List with Random Pointer
 **When to apply:** each node has an extra `random` pointer to any node in the list (or null) — need a deep copy.
+
+```mermaid
+flowchart LR
+    subgraph Interleaving["Interleaving Trick: A -> A' -> B -> B'"]
+        direction LR
+        A["A (Orig)"] --> A_prime["A' (Clone)"]
+        A_prime --> B["B (Orig)"]
+        B --> B_prime["B' (Clone)"]
+        A -.->|random| B
+        A_prime ==>|A'.random = A.random.next| B_prime
+    end
+```
+
 ```cpp
 struct RNode { int val; RNode *next, *random; };
 
@@ -280,6 +353,22 @@ RNode* copyRandomList(RNode* head) {
 ## Pattern 14: LRU Cache (Doubly Linked List + Hash Map)
 **When to apply:** need O(1) get/put with eviction of the least-recently-used item — classic combination pattern, not just "linked list" but demonstrates DLL's key strength (O(1) removal from middle).
 **Intuition:** DLL keeps items ordered by recency (head = most recent, tail = least recent); hashmap maps key → node pointer for O(1) lookup. On access, unlink node and move to head (O(1) because DLL). On overflow, remove tail.
+
+```mermaid
+flowchart LR
+    subgraph LRU["LRU Cache: Hash Map + Doubly Linked List"]
+        direction TB
+        subgraph Map["Hash Map (Key -> Node Pointer)"]
+            K1["Key: 'A'"] --> N1
+            K2["Key: 'B'"] --> N2
+            K3["Key: 'C'"] --> N3
+        end
+        subgraph List["Doubly Linked List (Recency Order)"]
+            Head["Head (MRU)"] <--> N1["[ A: Val1 ]"] <--> N2["[ B: Val2 ]"] <--> N3["[ C: Val3 ]"] <--> Tail["Tail (LRU)"]
+        end
+    end
+```
+
 - Time: O(1) get/put, Space: O(capacity)
 - **Remember:** This is why doubly linked lists exist — O(1) removal of an arbitrary known node (no need to find its predecessor, unlike singly linked lists which need O(n) to find the predecessor for removal).
 
@@ -333,7 +422,7 @@ Node* rotateRight(Node* head, int k) {
 - Cycle detection: applying Floyd's without checking `fast && fast->next` in the loop condition — causes null pointer dereference.
 
 ## Related concepts
-[[Arrays]]
-[[Sorting Techniques]]
-[[Binary Search]]
-[[CPP Complete Revision]]
+- [[Arrays]]
+- [[Sorting Techniques]]
+- [[Binary Search]]
+- [[CPP Complete Revision]]

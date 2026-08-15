@@ -1,97 +1,109 @@
 ---
-tags: [api, web-development, backend, networking, computer-science, moc]
-aliases: [APIs, Types of APIs]
+tags: [api, web-development, backend, networking, computer-science, moc, master-guide]
+aliases: [APIs, Types of APIs, API MOC, API Architecture]
 created: 2026-08-09
-updated: 2026-08-09
+updated: 2026-08-14
 ---
 
-# API
+# API — Architecture, Protocols & Master Guide
 
-## What is it?
+An **API (Application Programming Interface)** is a formalized software contract that enables two independent systems to exchange data and execute logic without either system needing to understand the underlying implementation, database schema, or memory layout of the other.
 
-An **API (Application Programming Interface)** is a contract that lets two pieces of software communicate without either one needing to know how the other is built internally. When you check the weather in an app, the app isn't storing weather data itself — it sends a request to a weather API and gets a response back. The API defines *what* requests are allowed and *what shape* the responses take, hiding all the internal implementation.
+---
 
-APIs come in different flavors depending on two independent questions:
+## 🖼️ System Architecture Diagram
 
-1. **How is it built?** — the architecture/protocol (REST, GraphQL, SOAP, gRPC, WebSocket)
-2. **Who can access it?** — the scope (public, internal, partner, composite)
+![[api-architecture-diagram.svg|960]]
+
+---
+
+## 🍽️ The Core Mental Model (The Restaurant Analogy)
+
+To understand why APIs exist and how they work, consider a restaurant:
+
+```mermaid
+flowchart LR
+    subgraph FrontHouse["1. Customer (Client)"]
+        User["Browser / Mobile App<br/><b>Menu Viewer</b>"]
+    end
+
+    subgraph Interface["2. Waiter (The API)"]
+        API["<b>API Contract</b><br/>1. Takes Order (Request)<br/>2. Delivers Dish (Response)<br/>3. Hides Kitchen Details"]
+    end
+
+    subgraph BackHouse["3. Kitchen (Server & Database)"]
+        Server["Cooks / Database<br/><b>Business Logic & Storage</b>"]
+    end
+
+    FrontHouse -->|"Places Order (Request)"| Interface
+    Interface -->|"Passes Order to Kitchen"| BackHouse
+    BackHouse -->|"Cooks Food (Data Prep)"| Interface
+    Interface -->|"Serves Food (Response)"| FrontHouse
+```
+
+> [!NOTE]
+> **Why this matters:** The customer never walks into the kitchen to chop onions (direct database access). As long as the menu (API documentation) remains unchanged, the chef can reorganize the kitchen, upgrade appliances, or change recipes internally without confusing the customer.
+
+---
+
+## 🧭 The Two Independent Dimensions of APIs
+
+Every API in the software industry is classified across two **independent axes**:
 
 ```mermaid
 flowchart TD
-    API[API]
-    API --> P["By Protocol<br/>(how it's built)"]
-    API --> S["By Scope<br/>(who can use it)"]
+    API["<b>API Classification</b>"]
+    API --> P["<b>Axis 1: By Protocol & Style</b><br/>(How messages travel & format)"]
+    API --> S["<b>Axis 2: By Scope & Access</b><br/>(Who is authorized to call it)"]
 
-    P --> REST
-    P --> GraphQL
-    P --> SOAP
-    P --> gRPC
-    P --> WebSocket
+    P --> REST["[[REST APIs]]<br/>HTTP + JSON"]
+    P --> GQL["[[GraphQL]]<br/>Single Endpoint + Flexible Queries"]
+    P --> GRPC["[[gRPC]]<br/>HTTP/2 + Protocol Buffers"]
+    P --> WS["[[WebSocket]]<br/>Full-Duplex Persistent TCP"]
+    P --> SOAP["[[SOAP]]<br/>XML + Strict WSDL"]
 
-    S --> Public["Open / Public"]
-    S --> Internal["Internal / Private"]
-    S --> Partner["Partner"]
-    S --> Composite["Composite"]
+    S --> Pub["<b>Public / Open:</b> Anyone (Stripe, Twitter)"]
+    S --> Priv["<b>Private / Internal:</b> Microservice-to-microservice"]
+    S --> Part["<b>Partner:</b> B2B contracted access"]
+    S --> Comp["<b>Composite:</b> Aggregates multiple API calls"]
 ```
 
-A REST API can be public or private; a public API can be REST or GraphQL. These two classifications are independent axes, not a single hierarchy.
+---
 
-## Why does it exist?
+## ⚖️ Comprehensive Protocol Comparison Matrix
 
-Without APIs, every piece of software that wanted to use another service's data or functionality would need to understand that service's internal database, code, and infrastructure — and any internal change would break every consumer. An API is a stable, documented boundary: the internals can change freely as long as the contract (the API) stays the same.
+| Protocol | Transport | Serialization | Communication Style | Performance | Best Used For | Dedicated Note |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **REST** | HTTP/1.1 or HTTP/2 | JSON, XML, Text | Request / Response (Stateless) | ⭐⭐⭐ | Standard CRUD web services, public APIs | [[REST APIs]] |
+| **GraphQL** | HTTP (POST) | JSON | Request / Response (Client-shaped) | ⭐⭐⭐ | Complex frontend dashboards, mobile apps | [[GraphQL]] |
+| **gRPC** | HTTP/2 | Protobuf (Binary) | Unary & Bi-directional Streaming | ⭐⭐⭐⭐⭐ | Internal high-throughput microservices | [[gRPC]] |
+| **WebSocket** | TCP (Upgraded HTTP) | Text / Binary frames | Persistent Full-Duplex Bi-directional | ⭐⭐⭐⭐ | Real-time chat, multiplayer games, live tickers | [[WebSocket]] |
+| **SOAP** | HTTP, SMTP, TCP | XML (Strict Envelope) | Request / Response | ⭐⭐ | Legacy banking, insurance, enterprise transactions | [[SOAP]] |
 
 ---
 
-## Classification by architecture / protocol
+## 🎯 How to Choose the Right API Style
 
-Each style is covered in full depth, with its own diagrams, in its own note:
+```mermaid
+flowchart TD
+    Start["What is your primary requirement?"] --> Q1{"Who is the consumer?"}
+    
+    Q1 -->|Browser / Mobile App / Public| Q2{"Data structure requirements?"}
+    Q1 -->|Internal Microservices| Q3{"Low latency & high throughput needed?"}
+    Q1 -->|Real-time 2-way continuous push| WS_Pick["👉 Choose <b>WebSocket</b>"]
 
-- [[REST APIs]] — resources manipulated via HTTP methods (`GET`/`POST`/`PUT`/`PATCH`/`DELETE`), stateless, JSON. The default for general-purpose public and internal web APIs.
-- [[GraphQL]] — client specifies exactly what data shape it wants in a single query, over one endpoint. Solves REST's over-fetching/under-fetching problem; best for complex nested data and multiple client types.
-- [[SOAP]] — strict, XML-based protocol with a formal WSDL contract and built-in security/transaction standards. Common in banking, insurance, and government/legacy enterprise systems.
-- [[gRPC]] — high-performance RPC framework using binary Protocol Buffers over HTTP/2. Built for fast internal microservice-to-microservice communication, not public/browser-facing APIs.
-- [[WebSocket]] — a persistent, two-way connection instead of request-response. Built for real-time push: chat, live dashboards, multiplayer games, collaborative editing.
+    Q2 -->|Standard CRUD / Universal Caching| REST_Pick["👉 Choose <b>REST APIs</b>"]
+    Q2 -->|Deeply nested relationships / Overfetching problem| GQL_Pick["👉 Choose <b>GraphQL</b>"]
 
-### Choosing between them
-
-| Need | Choice |
-|---|---|
-| Public-facing, general-purpose | [[REST APIs\|REST]] |
-| Flexible/nested data, many client types | [[GraphQL]] |
-| Enterprise/legacy system, strict contracts | [[SOAP]] |
-| Fast internal microservice-to-microservice calls | [[gRPC]] |
-| Real-time, two-way updates | [[WebSocket]] |
+    Q3 -->|Yes (Speed & typed contracts matter)| GRPC_Pick["👉 Choose <b>gRPC</b>"]
+    Q3 -->|Legacy enterprise / Formal WSDL contract required| SOAP_Pick["👉 Choose <b>SOAP</b>"]
+```
 
 ---
 
-## Classification by access / scope
-
-This is an orthogonal axis — it describes *who* can call the API, regardless of which protocol above it uses.
-
-| Type | Who can use it | Example |
-|---|---|---|
-| **Open / Public API** | Anyone, often with an API key | Google Maps API, OpenWeather API |
-| **Internal / Private API** | Only within the same company/system | A company's internal service-to-service API |
-| **Partner API** | Specific external businesses with an agreement | An airline exposing booking APIs to travel agencies |
-| **Composite API** | Combines multiple underlying API calls into one request, reducing round trips | A "checkout" endpoint that internally calls inventory, payment, and shipping APIs at once |
-
----
-
-## Common mistakes
-
-- Treating "REST" and "API" as synonyms — REST is one style among several.
-- Choosing GraphQL by default for its flexibility without accounting for its weaker HTTP-level cacheability and added server complexity.
-- Using gRPC for a public-facing API where browser clients need direct access (poor native browser support without a grpc-web proxy).
-- Building a WebSocket connection for data that only changes occasionally — polling a REST endpoint is often simpler and sufficient.
-- Assuming SOAP is obsolete — it's still the standard in much of banking, insurance, and government backend integration.
-
-## Related Concepts
-- [[REST APIs]], [[GraphQL]], [[SOAP]], [[gRPC]], [[WebSocket]] — each architecture style in depth
-- [[HTTP]] — the transport protocol REST, GraphQL, SOAP (usually), and the WebSocket handshake are built on
-- [[JSON]] — dominant data format for REST/GraphQL payloads
-- [[Client-Server Architecture]]
-
-## Open Questions / To Explore Later
-- Authentication patterns across API types (API keys, OAuth, JWT)
-- Rate limiting and API versioning strategies
-- Building a small GraphQL vs REST example against the same dataset
+## 🔗 Deep-Dive Vault Notes
+- [[REST APIs]] — Resources, HTTP verbs, status codes, and idempotency (Featuring ![[nodejs.svg|16]] Express & ![[fastapi-rest.svg|16]] FastAPI implementations)
+- ![[graphql-logo.png|16]] [[GraphQL]] — Schema definition language, resolvers, and avoiding N+1 queries
+- ![[grpc-logo.svg|16]] [[gRPC]] — Protocol Buffers, `.proto` compilation, and HTTP/2 streaming
+- ![[websocket.svg|16]] [[WebSocket]] — Handshake upgrade, duplex messaging, and connection management
+- [[SOAP]] — XML Envelopes, WSDL contracts, and enterprise WS-Security

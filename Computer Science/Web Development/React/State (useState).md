@@ -2,6 +2,7 @@
 tags: [react, javascript, frontend, web-development, computer-science, hooks]
 aliases: [useState, React State]
 created: 2026-08-09
+updated: 2026-08-14
 ---
 
 # State (useState)
@@ -9,6 +10,14 @@ created: 2026-08-09
 ## What is it?
 
 **State** is data a component owns and manages itself, which can change over time — e.g. a counter value, whether a modal is open, or text typed into an input. Unlike [[Components and Props|props]], a component *can* update its own state, and doing so is what triggers React to re-render it.
+
+---
+
+## 🖼️ useState Render & Update Lifecycle
+
+![[react-usestate-lifecycle.svg|960]]
+
+---
 
 ## Why does it exist?
 
@@ -56,9 +65,11 @@ function addTodo(text) {
 
 ## Edge cases / Important details
 
-- State setters (like `setCount`) are **asynchronous** in effect — React may batch multiple `setState` calls together and apply them in one re-render, so reading the state variable immediately after calling its setter still shows the old value within that same function.
-- A component re-renders whenever its own state changes, or whenever its parent re-renders (which by default re-renders all of that parent's children too, unless optimized with `React.memo`, `useMemo`, or `useCallback` — advanced topics, not yet covered).
-- Function components run their **entire function body** on every render — anything expensive inside the function body (not inside `useEffect` or `useMemo`) re-runs every time.
+- State setters (like `setCount`) are **asynchronous** in effect — React batches multiple `setState` calls together and applies them in one re-render, so reading the state variable immediately after calling its setter still shows the old value within that same function.
+- **Functional updates** should be used when the next state depends on the previous state:
+  ```jsx
+  setCount((prev) => prev + 1); // Guarantees correct value even in batched updates
+  ```
 
 ## Related concepts
 

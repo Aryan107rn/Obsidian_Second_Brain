@@ -2,11 +2,20 @@
 tags: [javascript, moc, web-development, computer-science, placement-prep]
 aliases: [JS MOC, JavaScript Index, JavaScript Revision Notes]
 created: 2026-08-09
+updated: 2026-08-14
 ---
 
 # JavaScript MOC (Map of Content)
 
-Complete placement-ready JavaScript revision path — fundamentals → async → ES6+ → DOM → interview drill sheet. Work through in order for first-time learning, or jump directly to a topic for revision.
+Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scope & closures $\to$ objects & OOP $\to$ async runtime $\to$ DOM $\to$ interview drill sheet.
+
+---
+
+## 🖼️ JavaScript Engine & Async Runtime Architecture
+
+![[js-event-loop-architecture.svg|960]]
+
+---
 
 ## 1. Fundamentals
 - [[Variables and Data Types]] — `var`/`let`/`const`, primitives vs reference types, `typeof`
@@ -40,12 +49,9 @@ Complete placement-ready JavaScript revision path — fundamentals → async →
 ## 8. Interview Prep
 - [[JS Interview Questions and Tricky Outputs]] — ranked Q&A drill sheet + predict-the-output practice
 
-## How to Use This MOC
+---
 
-1. **First pass:** read sections 1–7 in order — each builds on the last (e.g. closures need scope, `this` needs functions).
-2. **Revision pass:** jump straight to any note; each is self-contained with its own examples and a "Key Takeaways" section.
-3. **Pre-interview:** run through [[JS Interview Questions and Tricky Outputs]] alone as a rapid-recall check — it links back to every deep-dive note for anything you can't answer confidently.
-
-## Related Areas
-- [[REST APIs]] — how JS (fetch/async-await) talks to servers
-- [[Git and GitHub]] — version control for JS projects
+## 🔗 Related Areas
+- [[React]] — Declarative UI library built with JavaScript
+- [[REST APIs]] & [[GraphQL]] — Connecting frontend JS to backend servers
+- [[Git and GitHub]] — Version control workflows

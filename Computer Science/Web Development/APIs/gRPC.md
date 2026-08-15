@@ -1,136 +1,189 @@
 ---
-tags: [api, grpc, web-development, backend, networking, computer-science, microservices]
-aliases: [gRPC API, Google Remote Procedure Call]
+tags: [api, grpc, web-development, backend, networking, computer-science, microservices, placement-prep, interview-favorite]
+aliases: [gRPC API, Google Remote Procedure Call, Protobuf, Protocol Buffers]
 created: 2026-08-09
-updated: 2026-08-09
+updated: 2026-08-14
 ---
 
-# gRPC
+# ![[grpc-logo.svg|40]] gRPC — High-Performance RPC & Microservices Architecture
 
-## What is it?
+**gRPC** (gRPC Remote Procedure Call) is an open-source, high-performance universal RPC framework developed by Google. In gRPC, a client application can directly call a method on a server application running on a completely different machine as if it were a local function call in memory.
 
-**gRPC** (gRPC Remote Procedure Call) is a high-performance framework, created by Google, for calling functions on a remote server as if they were local function calls. Instead of thinking in terms of URLs and HTTP verbs like [[REST APIs|REST]], you define a **service** with named methods, and calling a remote method looks almost identical to calling a regular function in your code.
+---
 
-## Why does it exist?
+## 🖼️ gRPC Binary RPC Architecture
 
-As companies split large applications into many small **microservices**, those services need to call each other constantly, often thousands of times per second, purely internally (never touched by a browser or end user directly). For this specific use case, REST/JSON has real overhead:
+![[grpc-architecture-diagram.svg|960]]
 
-- JSON is text-based and larger than a binary format for the same data.
-- REST's variety of URLs/methods doesn't map cleanly onto a formal, typed contract between services.
-- HTTP/1.1 (which REST traditionally runs on) opens a new connection per request more often, adding latency at scale.
+---
 
-gRPC was built specifically to make internal, service-to-service calls as fast and strongly-typed as possible, trading away REST's human-readability and universal browser support (which internal services don't need anyway).
-
-## How does it work?
-
-### From .proto file to working code
+## 🧠 The Core Mental Model (Local vs. Remote Function Calls)
 
 ```mermaid
 flowchart LR
-    P[".proto file<br/>defines service + messages"] --> C["protoc compiler"]
-    C --> SC["Generated client stub"]
-    C --> SS["Generated server stub"]
-    SC <-->|"HTTP/2, protobuf binary"| SS
+    subgraph Local["Traditional Local Call (In-Process)"]
+        direction TB
+        App1["App Code"] -->|invokes| Func1["calculateTotal(orderId)"]
+        Func1 -->|memory return| App1
+    end
+
+    subgraph Remote["gRPC Remote Call (Cross-Network / Microservice)"]
+        direction TB
+        ClientApp["Client Service (Go)"] -->|calls local stub| Stub["Stub: OrderService.CalculateTotal()"]
+        Stub -->|"HTTP/2 + Protobuf binary"| Server["Remote Server (Java / C++)"]
+        Server -->|binary response| Stub
+        Stub -->|unmarshaled object| ClientApp
+    end
 ```
 
-### Protocol Buffers (protobuf)
+---
 
-Instead of JSON, gRPC uses **Protocol Buffers**, a compact binary serialization format. You define your service and message types in a `.proto` file:
-
-```protobuf
-syntax = "proto3";
-
-message User {
-  string id = 1;
-  string name = 2;
-}
-
-message GetUserRequest {
-  string id = 1;
-}
-
-service UserService {
-  rpc GetUser(GetUserRequest) returns (User);
-}
-```
-
-A compiler (`protoc`) reads this file and **generates client and server code** in your target language (Go, Python, Java, C++, etc.) — you get a strongly typed `getUser(request)` function to call, with no manual URL-building or JSON-parsing.
-
-### HTTP/2 transport
-
-gRPC runs over **HTTP/2**, which supports:
-- **Multiplexing** — many requests and responses share a single connection simultaneously, instead of REST's typical one-request-per-connection pattern.
-- **Streaming** — data can flow continuously in either direction without waiting for a full request/response cycle to complete.
-
-### Four call types
+## ⚙️ The Protobuf Compilation Workflow
 
 ```mermaid
 flowchart TD
-    subgraph U["Unary — one request, one response"]
-        U1[Client] -->|request| U2[Server]
-        U2 -->|response| U1
-    end
-    subgraph SS["Server streaming — one request, many responses"]
-        S1[Client] -->|request| S2[Server]
-        S2 -.->|response 1..N| S1
-    end
-    subgraph CS["Client streaming — many requests, one response"]
-        C1[Client] -.->|request 1..N| C2[Server]
-        C2 -->|response| C1
-    end
-    subgraph BS["Bidirectional streaming — both stream at once"]
-        B1[Client] -.->|requests| B2[Server]
-        B2 -.->|responses| B1
-    end
+    Proto[".proto Contract File<br/>(service & message definitions)"]
+    
+    Compiler["<b>protoc</b> (Protocol Buffer Compiler)"]
+    
+    Proto --> Compiler
+    
+    Compiler -->|--go_out| GoStub["Go Client Stub & Interface"]
+    Compiler -->|--python_out| PyStub["Python Client Stub"]
+    Compiler -->|--java_out| JavaServer["Java Backend Server Base"]
+    Compiler -->|--cpp_out| CppEngine["C++ Low-Latency Engine"]
+
+    GoStub <==|"Binary Wire Protocol (HTTP/2)"| JavaServer
+    PyStub <==|"Binary Wire Protocol (HTTP/2)"| CppEngine
 ```
 
-| Type | Description | Example use |
-|---|---|---|
-| Unary | One request, one response (like a typical REST call) | `GetUser(id)` → one `User` |
-| Server streaming | One request, a stream of responses | Client asks for logs; server streams them as they arrive |
-| Client streaming | A stream of requests, one final response | Client uploads a stream of sensor readings; server returns one summary |
-| Bidirectional streaming | Both sides stream simultaneously | Real-time chat or live collaborative editing between services |
+---
 
-## Example
+## 🚀 Concrete gRPC Example: Contract & Stub Usage
 
-Client code (Python-style pseudocode, after protobuf code generation):
-```python
-channel = grpc.insecure_channel('user-service:50051')
-stub = UserServiceStub(channel)
+To understand why gRPC is so powerful, see how service contracts are designed and compiled.
 
-response = stub.GetUser(GetUserRequest(id="5"))
-print(response.name)
+### 1. The Strict Interface Contract (`users.proto`)
+```protobuf
+syntax = "proto3";
+
+package users;
+
+// Define the service contract
+service UserService {
+  // Remote Procedure: receives a request and returns a response
+  rpc GetUser (UserRequest) returns (UserResponse);
+}
+
+// Request payload structure (numbered positions denote binary serialization indices)
+message UserRequest {
+  int32 user_id = 1;
+}
+
+// Response payload structure
+message UserResponse {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+}
 ```
 
-Notice there's no URL, no manual JSON parsing, no HTTP verb choice — `GetUser(...)` is called like a normal function, and the framework handles serialization, the network call, and deserialization behind the scenes.
+### 2. Utilizing Compiled Client Stubs (Go Client Code)
+Once `protoc` is run on the `.proto` file, a local client stub is compiled, enabling static type safety and local-like function calls:
 
-## When to use
+```go
+package main
 
-- Internal, service-to-service communication in a microservices architecture, where every caller is another backend service (not a browser)
-- Performance-critical paths where the smaller binary payload and HTTP/2 multiplexing meaningfully reduce latency at high request volume
-- Systems where a strongly typed contract (the `.proto` file) between services is valuable — changes are caught at compile time, not at runtime
-- Streaming use cases — continuous data flows in either or both directions
+import (
+	"context"
+	"log"
+	"google.golang.org/grpc"
+	pb "myproject/generated/users" // Generated packages
+)
 
-## When not to use
+func main() {
+	// 1. Establish high-performance, persistent HTTP/2 connection
+	conn, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("failed to connect: %v", err)
+	}
+	defer conn.Close()
 
-- Public-facing APIs consumed directly by web browsers — browsers can't natively speak gRPC's HTTP/2 framing; you'd need a translation proxy (**grpc-web**), adding complexity
-- APIs where human-readability matters for debugging (support engineers reading raw request/response bodies) — protobuf's binary format isn't readable without tooling, unlike JSON
-- Simple APIs with low request volume, where REST's simplicity and wide tooling support outweigh gRPC's performance benefits
-- Teams without protobuf/codegen tooling already in place — there's real setup investment
+	// 2. Instantiate the generated Client Stub
+	client := pb.NewUserServiceClient(conn)
 
-## Common mistakes
+	// 3. Call the remote server directly, exactly like a local function!
+	req := &pb.UserRequest{UserId: 42}
+	res, err := client.GetUser(context.Background(), req)
+	if err != nil {
+		log.Fatalf("could not fetch user: %v", err)
+	}
 
-- **Calling gRPC directly from a browser**: browsers can't use raw HTTP/2 trailers the way gRPC needs; you need **grpc-web**, a proxy layer, to bridge browser JS to a gRPC backend.
-- **Treating protobuf files as an afterthought**: the `.proto` file is the actual contract between services — changes to it (especially removing/renumbering fields) can silently break other services still using the old generated code.
-- **Assuming gRPC is always faster in practice**: for small payloads or low-traffic APIs, the difference vs REST/JSON is often negligible, while gRPC's tooling and debugging overhead is real and immediate.
-- **Skipping field number discipline in `.proto` files**: protobuf identifies fields by their assigned number, not name — reusing a number for a different field after removing an old one can corrupt data for anyone on an older generated client.
+	// 4. Access fields with type-safe generated getters
+	log.Printf("Successfully retrieved User: %s (%s)", res.GetName(), res.GetEmail())
+}
+```
 
-## Related concepts
-- [[API]] — the general concept; see the overview note for how gRPC compares to REST, GraphQL, SOAP, and WebSocket
-- [[REST APIs]] — the more common choice for public-facing APIs; gRPC targets internal service-to-service calls instead
-- [[JSON]] — what gRPC deliberately avoids in favor of the more compact protobuf binary format
+---
 
-## Open Questions / To Explore Later
-- grpc-web and browser integration in more depth
-- Protobuf schema evolution rules (safe vs breaking changes)
-- gRPC vs message queues (Kafka, RabbitMQ) for async service communication
+## 🌊 The 4 gRPC Communication Modes
+
+```mermaid
+sequenceDiagram
+    autonumber
+    box LightYellow 1. Unary RPC (Classic Request-Response)
+    participant C1 as Client
+    participant S1 as Server
+    end
+    C1->>S1: Single Request
+    S1-->>C1: Single Response
+
+    box LightCyan 2. Server Streaming (Single Request -> Stream of Responses)
+    participant C2 as Client
+    participant S2 as Server
+    end
+    C2->>S2: Subscribe(Topic: "StockPrices")
+    S2-->>C2: Price Update #1
+    S2-->>C2: Price Update #2
+    S2-->>C2: Price Update #3
+
+    box LightPink 3. Client Streaming (Stream of Requests -> Single Response)
+    participant C3 as Client
+    participant S3 as Server
+    end
+    C3->>S3: Chunk 1 (Video Upload)
+    C3->>S3: Chunk 2
+    C3->>S3: Chunk 3
+    S3-->>C3: Upload Complete (MD5 Hash)
+
+    box LightGreen 4. Bi-directional Streaming (Full-Duplex Streams)
+    participant C4 as Client
+    participant S4 as Server
+    end
+    C4->>S4: Audio Chunk 1
+    S4-->>C4: Real-time Transcript 1
+    C4->>S4: Audio Chunk 2
+    S4-->>C4: Real-time Transcript 2
+```
+
+---
+
+## 📊 gRPC vs. REST: Quick Comparison
+
+| Feature | gRPC | REST (HTTP/1.1 + JSON) |
+| :--- | :--- | :--- |
+| **Protocol / Transport** | HTTP/2 (Binary framing) | HTTP/1.1 or HTTP/2 (Text-based) |
+| **Payload Format** | Protocol Buffers (Binary) | JSON (Human-readable text) |
+| **Contract** | Strict `.proto` schema (Enforced at compile-time)| OpenAPI / Swagger (Optional, loose) |
+| **Streaming** | Native 4-way streaming | Server-Sent Events or WebSockets needed |
+| **Performance / CPU** | 7x to 10x faster serialization | Higher CPU parsing & serialization cost |
+| **Browser Compatibility** | Requires `grpc-web` proxy | Supported natively by all browsers |
+| **Primary Use Case** | Internal microservices, IoT, mobile backends | Public web APIs, external third parties |
+
+---
+
+## 🔗 Related Vault Concepts
+- [[API]] — Master overview and API selection guide
+- [[REST APIs]] — The public-facing alternative to gRPC
+- [[WebSocket]] — For browser-native bi-directional communication
+- [[System Design MOC]] — Microservices architecture and high-throughput networking

@@ -2,80 +2,102 @@
 tags: [javascript, async, web-development, computer-science, placement-prep, interview-favorite]
 aliases: [Call Stack, Microtask Queue, Macrotask Queue, Event Loop JS]
 created: 2026-08-09
+updated: 2026-08-14
 ---
 
 # Event Loop, Call Stack & Task Queues
 
-JavaScript runs on a **single thread** with **one Call Stack** — yet it handles timers, network requests, and UI events without freezing. The **event loop** is the mechanism that makes this possible.
+JavaScript is a **single-threaded** language with **one Call Stack** — meaning it can execute only one line of code at a time. Yet, it handles long-running timers, network requests, and user clicks without freezing the browser UI. The **Event Loop** is the coordinator that makes this asynchronous concurrency possible.
 
-## The Pieces
+---
 
-- **Call Stack** — where synchronous code executes, top to bottom, LIFO (last in, first out). Every function call pushes a frame; returning pops it.
-- **Web APIs (browser) / libuv (Node)** — where the *actual waiting* happens for `setTimeout`, `fetch`, DOM events, file I/O. These run **outside** the call stack, so they don't block it.
-- **Microtask Queue** — holds callbacks from `Promise.then/.catch/.finally`, `queueMicrotask`, and `async/await` continuations.
-- **Macrotask (Callback) Queue** — holds callbacks from `setTimeout`, `setInterval`, DOM events, I/O.
-- **Event Loop** — a loop that constantly checks: *"Is the Call Stack empty? If yes, pull in the next task — always drain microtasks first."*
+## 🖼️ Visual Architecture: Follow the Numbered Steps (1 → 2 → 3 → 4)
 
-```mermaid
-flowchart LR
-    A[Call Stack<br/>runs sync code, LIFO] -->|async call handed off| B[Web APIs / Node APIs<br/>setTimeout, fetch, DOM events]
-    B -->|callback ready| C[Microtask Queue<br/>Promises, async/await]
-    B -->|callback ready| D[Macrotask Queue<br/>setTimeout, setInterval, I/O]
-    C -->|drained fully, first priority| E[Event Loop]
-    D -->|one task per tick| E
-    E -->|pushes next task ONLY when stack is empty| A
-```
+![[js-event-loop-architecture.svg|960]]
 
-## The Event Loop Algorithm (simplified)
+---
 
-1. Run all synchronous code (Call Stack executes top to bottom).
-2. When the stack is empty: **drain the entire microtask queue** (run every pending microtask, even ones added during this draining).
-3. Take **ONE** task from the macrotask queue and run it.
-4. Drain the microtask queue again.
-5. Repeat from step 3 (render/paint may happen here in browsers).
+## 🧩 The 4 Main Components Explained Simply
 
-**Rule of thumb:** microtasks always run before the next macrotask — even a `setTimeout(fn, 0)` waits behind every pending Promise callback.
+| Component | Role | How It Works |
+| :--- | :--- | :--- |
+| **1. Call Stack (LIFO)** | Code Execution | Where your JavaScript code runs line by line (Last-In, First-Out). Synchronous functions are pushed onto the stack and popped off when they return. |
+| **2. Web APIs / libuv** | Background Waiting | Where async tasks (*waiting for 3s timer*, *downloading an HTTP response*, *listening for clicks*) wait **outside** the main JavaScript thread so they don't freeze the page. |
+| **3A. Microtask Queue (VIP 🥇)** | High Priority Queue | Holds callbacks from `Promise.then()`, `Promise.catch()`, `async/await` continuations, and `queueMicrotask`. |
+| **3B. Macrotask Queue** | Standard Priority Queue | Holds callbacks from `setTimeout()`, `setInterval()`, DOM events, and I/O. |
+| **4. The Event Loop 🔄** | The Gatekeeper | A continuous loop that watches: *"Is the Call Stack empty? If yes, drain the entire Microtask queue first, then take ONE task from the Macrotask queue."* |
 
-## Worked Example (a classic placement question)
+---
+
+## 🚦 The 3 Golden Rules of Event Loop Execution
+
+1. **Synchronous code always runs first**: No callback from any queue can enter the Call Stack until the stack is **100% empty**.
+2. **Microtasks have VIP Priority (Full Drain)**: When the stack empties, the Event Loop executes **ALL pending Microtasks** (even if microtasks schedule more microtasks) before touching the Macrotask queue.
+3. **One Macrotask per tick**: The Event Loop takes only **ONE** task from the Macrotask queue, pushes it to the Call Stack, and then immediately checks and drains the Microtask queue again.
+
+---
+
+## 🧪 Step-by-Step Traced Example (Classic Placement Interview Question)
 
 ```javascript
 console.log("1");
-setTimeout(() => console.log("2"), 0);
-Promise.resolve().then(() => console.log("3"));
+
+setTimeout(() => {
+  console.log("2");
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log("3");
+});
+
 console.log("4");
 
-// Output: 1, 4, 3, 2
+// 🎯 Final Output Order: 1, 4, 3, 2
 ```
 
-**Trace:**
-1. `console.log("1")` → sync, runs immediately → prints `1`
-2. `setTimeout(...)` → handed off to Web API, its callback goes to the **macrotask** queue once the 0ms timer expires
-3. `Promise.resolve().then(...)` → callback goes to the **microtask** queue
-4. `console.log("4")` → sync, runs immediately → prints `4`
-5. Call stack is now empty → event loop drains microtasks → prints `3`
-6. Microtask queue empty → event loop takes one macrotask → prints `2`
+### Detailed Trace:
 
-## Microtask vs Macrotask — Priority Table
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Stack as 1. Call Stack
+    participant Web as 2. Web APIs
+    participant Micro as 3A. Microtask Queue (VIP)
+    participant Macro as 3B. Macrotask Queue
+    participant Console as 🖥️ Output
 
-| Queue | Contains | Priority |
-|---|---|---|
-| Microtask queue | `Promise.then/.catch/.finally`, `queueMicrotask`, `async/await` continuations | Runs first — **fully drained** after each macrotask |
-| Macrotask (callback) queue | `setTimeout`, `setInterval`, DOM events, I/O | Runs **one at a time**, only after microtasks are empty |
+    Note over Stack: Step 1: Run Synchronous Code
+    Stack->>Console: console.log("1") -> Prints "1"
+    Stack->>Web: setTimeout(cb2, 0) handed to Web API
+    Web->>Macro: 0ms elapsed -> cb2 queued in Macrotask
+    Stack->>Micro: Promise.then(cb3) queued in Microtask
+    Stack->>Console: console.log("4") -> Prints "4"
+    Note over Stack: Call Stack is now completely EMPTY!
 
-## Why This Matters in Practice
+    Note over Stack,Micro: Step 2: Event Loop drains VIP Microtask Queue
+    Micro->>Stack: cb3 pushed to Stack
+    Stack->>Console: console.log("3") -> Prints "3"
+    Note over Micro: Microtask Queue is now EMPTY!
 
-- A `Promise.resolve().then()` will **always** fire before a `setTimeout(fn, 0)`, regardless of the order they were written — a frequent gotcha in "predict the output" questions.
-- Long chains of `.then()` or `await` can starve macrotasks (like rendering) if they keep scheduling more microtasks — a real performance pitfall, not just a trivia fact.
-- Understanding this is essential for reasoning about race conditions in async code.
+    Note over Stack,Macro: Step 3: Event Loop takes ONE Macrotask
+    Macro->>Stack: cb2 pushed to Stack
+    Stack->>Console: console.log("2") -> Prints "2"
+```
 
-## Key Takeaways
+---
 
-- JS is single-threaded; async operations are delegated to Web APIs/Node APIs, not the JS thread itself.
-- The event loop only moves work onto the Call Stack when the stack is empty.
-- Microtasks (Promises) always fully drain before the next macrotask (setTimeout/setInterval) runs.
-- Practice tracing `console.log` + `setTimeout` + `Promise` output order — it's one of the most-asked JS interview formats.
+## ⚖️ Microtasks vs. Macrotasks Cheat Sheet
 
-## Related Concepts
-- [[Asynchronous JavaScript]] — Promises and async/await, the source of microtasks
-- [[Functions in JavaScript]] — callbacks queued by the event loop
-- [[JS Interview Questions and Tricky Outputs]] — more output-prediction practice
+| Feature | Microtasks (Promises) | Macrotasks (Timers / I/O) |
+| :--- | :--- | :--- |
+| **Examples** | `Promise.then()`, `await`, `queueMicrotask` | `setTimeout()`, `setInterval()`, DOM Events |
+| **Priority** | 🥇 **Highest** (VIP) | 🥈 Standard |
+| **Execution Amount** | **All** pending items in one go | **One** task at a time per tick |
+| **Starvation Risk** | ⚠️ Yes: Recursive microtasks will starve rendering and timers! | ❌ No: Yields to microtasks and rendering |
+
+---
+
+## 🔗 Related Concepts
+- [[Asynchronous JavaScript]] — Promises, async/await, and microtask scheduling
+- [[Functions in JavaScript]] — Callback functions executed by the event loop
+- [[JS Interview Questions and Tricky Outputs]] — Output-prediction problems and edge cases

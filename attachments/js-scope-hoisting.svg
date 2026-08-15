@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="100%" height="100%">
+  <rect width="900" height="360" rx="16" fill="#1c1917" stroke="#eab308" stroke-width="2"/>
+  <text x="450" y="42" text-anchor="middle" fill="#fde047" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">JAVASCRIPT SCOPE HIERARCHY &amp; HOISTING (TDZ)</text>
+
+  <!-- Global Scope Outer -->
+  <g transform="translate(50, 70)">
+    <rect width="400" height="250" rx="12" fill="#292524" stroke="#3b82f6" stroke-width="2"/>
+    <text x="20" y="30" fill="#60a5fa" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">1. GLOBAL SCOPE (window / global)</text>
+    <text x="30" y="58" fill="#93c5fd" font-family="monospace" font-size="11">var a = 1; let b = 2;</text>
+    
+    <!-- Function Scope Inner -->
+    <g transform="translate(20, 75)">
+      <rect width="360" height="155" rx="10" fill="#1c1917" stroke="#a855f7" stroke-width="2"/>
+      <text x="15" y="25" fill="#c084fc" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">2. FUNCTION SCOPE: fn()</text>
+      <text x="25" y="50" fill="#e9d5ff" font-family="monospace" font-size="11">var c = 3;</text>
+      
+      <!-- Block Scope Inner -->
+      <g transform="translate(15, 65)">
+        <rect width="330" height="75" rx="8" fill="#0c0a09" stroke="#10b981" stroke-width="2"/>
+        <text x="15" y="25" fill="#34d399" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">3. BLOCK SCOPE: if (...) { ... }</text>
+        <text x="25" y="50" fill="#a7f3d0" font-family="monospace" font-size="11">let x = 10; const y = 20; (Block isolated!)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Hoisting & TDZ Box Right -->
+  <g transform="translate(480, 70)">
+    <rect width="370" height="250" rx="12" fill="#292524" stroke="#ef4444" stroke-width="2"/>
+    <rect width="370" height="36" rx="12" fill="#991b1b"/>
+    <text x="185" y="24" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">HOISTING &amp; TEMPORAL DEAD ZONE</text>
+    
+    <text x="20" y="70" fill="#f87171" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">var hoisting:</text>
+    <text x="20" y="92" fill="#fca5a5" font-family="monospace" font-size="11">console.log(x); // undefined (declaration hoisted)</text>
+    <text x="20" y="112" fill="#fca5a5" font-family="monospace" font-size="11">var x = 5;</text>
+
+    <path d="M 20 130 L 350 130" stroke="#44403c" stroke-width="1"/>
+
+    <text x="20" y="155" fill="#fbbf24" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">let / const (Temporal Dead Zone - TDZ):</text>
+    <text x="20" y="178" fill="#fde68a" font-family="monospace" font-size="11">// TDZ START: cannot access before declaration</text>
+    <text x="20" y="198" fill="#ef4444" font-family="monospace" font-size="11">console.log(y); // ReferenceError!</text>
+    <text x="20" y="218" fill="#4ade80" font-family="monospace" font-size="11">let y = 10;     // TDZ ENDS HERE</text>
+  </g>
+</svg>
