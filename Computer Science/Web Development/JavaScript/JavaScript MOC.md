@@ -2,7 +2,7 @@
 tags: [javascript, moc, web-development, computer-science, placement-prep]
 aliases: [JS MOC, JavaScript Index, JavaScript Revision Notes]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # JavaScript MOC (Map of Content)
@@ -14,6 +14,30 @@ Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scop
 ## 🖼️ JavaScript Engine & Async Runtime Architecture
 
 ![[js-event-loop-architecture.svg|960]]
+
+## 🧭 JavaScript Learning Flow
+
+```mermaid
+flowchart TD
+    Fundamentals["Variables, Types, Operators"] --> Scope["Scope + Hoisting"]
+    Scope --> Functions["Functions + Closures + this"]
+    Functions --> Objects["Objects + Prototypes"]
+    Objects --> Collections["Arrays, Maps, Sets"]
+    Collections --> Async["Promises + async/await"]
+    Async --> Runtime["Event Loop"]
+    Runtime --> DOM["DOM + Events"]
+    DOM --> Patterns["Coding Patterns"]
+    Patterns --> Interviews["Tricky Outputs + Interview Prep"]
+
+    classDef base fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef core fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef async fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef practice fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Fundamentals base
+    class Scope,Functions,Objects,Collections core
+    class Async,Runtime async
+    class DOM,Patterns,Interviews practice
+```
 
 ---
 
@@ -45,8 +69,6 @@ Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scop
 ## 7. Patterns, Errors & Memory
 - [[Common Coding Patterns]] — currying, debounce, throttle, memoization
 - [[Error Handling and Memory]] — try/catch/custom errors, modules, JSON, garbage collection, storage APIs
-
-## 8. Interview Prep
 
 ## 8. Interview Prep
 - [[JS Interview Questions and Tricky Outputs]] — ranked Q&A drill sheet + predict-the-output practice

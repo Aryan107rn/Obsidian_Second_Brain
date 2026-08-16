@@ -2,7 +2,7 @@
 tags: [api, rest, web-development, backend, networking, computer-science, placement-prep, interview-favorite]
 aliases: [REST, RESTful API, Representational State Transfer, HTTP REST]
 created: 2026-08-08
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # REST APIs — Comprehensive Architecture & Design Guide
@@ -21,14 +21,27 @@ A **REST API** (Representational State Transfer) is an architectural style desig
 
 ```mermaid
 flowchart TD
-    subgraph Constraints["Fielding's 6 Constraints for True RESTful Systems"]
-        C1["<b>1. Client-Server Separation</b><br/>UI concerns are separated from data storage"]
-        C2["<b>2. Statelessness</b><br/>No client session context stored on server between calls"]
-        C3["<b>3. Cacheability</b><br/>Responses must explicitly define if/how they can be cached"]
-        C4["<b>4. Uniform Interface</b><br/>Resources identified via URIs; standardized HTTP verbs"]
-        C5["<b>5. Layered System</b><br/>Client cannot tell if connected to end-server or proxy/cache"]
-        C6["<b>6. Code on Demand (Optional)</b><br/>Servers can extend client logic by sending executable code"]
-    end
+    REST["RESTful System"]
+    REST --> C1["Client-server separation"]
+    REST --> C2["Stateless requests"]
+    REST --> C3["Cacheable responses"]
+    REST --> C4["Uniform interface"]
+    REST --> C5["Layered system"]
+    REST --> C6["Code on demand optional"]
+
+    C1 --> D1["UI and storage evolve independently"]
+    C2 --> D2["Each request carries required context"]
+    C3 --> D3["Responses declare cache behavior"]
+    C4 --> D4["Resources use URIs and HTTP verbs"]
+    C5 --> D5["Proxy or cache layers can sit between"]
+    C6 --> D6["Server may send executable client logic"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef rule fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef detail fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:1px
+    class REST root
+    class C1,C2,C3,C4,C5,C6 rule
+    class D1,D2,D3,D4,D5,D6 detail
 ```
 
 ---
@@ -36,28 +49,29 @@ flowchart TD
 ## 🔄 HTTP Verbs: Safety vs. Idempotency
 
 ```mermaid
-flowchart LR
-    subgraph SafeZone["Safe Methods (Read-Only)"]
-        direction TB
-        GET["GET"]
-        HEAD["HEAD"]
-        OPTIONS["OPTIONS"]
-        SafeNote["• Do NOT mutate server state<br/>• Safe to pre-fetch or cache"]
-    end
+flowchart TD
+    Methods["HTTP Methods"] --> Safe["Safe: read-only"]
+    Methods --> Idem["Idempotent: repeat-safe state"]
+    Methods --> NonIdem["Non-idempotent: repeat changes state"]
 
-    subgraph IdempotentZone["Idempotent Methods (f(f(x)) = f(x))"]
-        direction TB
-        PUT["PUT (Full Replace)"]
-        DELETE["DELETE (Remove)"]
-        IdemNote["• Calling 1 time or 100 times<br/>  produces identical server state"]
-    end
+    Safe --> GET["GET"]
+    Safe --> HEAD["HEAD"]
+    Safe --> OPTIONS["OPTIONS"]
 
-    subgraph NonIdempotentZone["Non-Idempotent (State Mutating)"]
-        direction TB
-        POST["POST (Create / Append)"]
-        PATCH["PATCH (Partial Update*)"]
-        NonIdemNote["• Calling N times creates N resources<br/>  or applies N relative increments"]
-    end
+    Idem --> PUT["PUT: full replace"]
+    Idem --> DELETE["DELETE: remove"]
+
+    NonIdem --> POST["POST: create or append"]
+    NonIdem --> PATCH["PATCH: partial update, context-dependent"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef safe fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef idem fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef risk fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    class Methods root
+    class Safe,GET,HEAD,OPTIONS safe
+    class Idem,PUT,DELETE idem
+    class NonIdem,POST,PATCH risk
 ```
 
 ### Complete HTTP Methods Matrix
@@ -85,13 +99,38 @@ flowchart LR
 flowchart TD
     Code["HTTP Response Status Code"]
     
-    Code --> 2xx["<b>2xx: Success</b><br/>• <b>200 OK:</b> Standard success (GET/PUT/PATCH)<br/>• <b>201 Created:</b> Resource created (POST)<br/>• <b>204 No Content:</b> Succeeded, empty body (DELETE)"]
+    Code --> S2["2xx Success"]
+    S2 --> OK["200 OK"]
+    S2 --> Created["201 Created"]
+    S2 --> NoContent["204 No Content"]
     
-    Code --> 3xx["<b>3xx: Redirection</b><br/>• <b>301 Moved Permanently:</b> Permanent redirect<br/>• <b>304 Not Modified:</b> Cached copy is valid"]
+    Code --> S3["3xx Redirection"]
+    S3 --> Moved["301 Moved Permanently"]
+    S3 --> NotModified["304 Not Modified"]
     
-    Code --> 4xx["<b>4xx: Client Error</b><br/>• <b>400 Bad Request:</b> Malformed syntax / validation failure<br/>• <b>401 Unauthorized:</b> Missing / invalid authentication token<br/>• <b>403 Forbidden:</b> Authenticated, but lacking permission<br/>• <b>404 Not Found:</b> Resource does not exist<br/>• <b>409 Conflict:</b> State conflict (e.g. duplicate email)<br/>• <b>429 Too Many Requests:</b> Rate limit exceeded"]
+    Code --> S4["4xx Client Error"]
+    S4 --> Bad["400 Bad Request"]
+    S4 --> Auth["401 Unauthorized"]
+    S4 --> Forbidden["403 Forbidden"]
+    S4 --> Missing["404 Not Found"]
+    S4 --> Limit["429 Too Many Requests"]
     
-    Code --> 5xx["<b>5xx: Server Error</b><br/>• <b>500 Internal Error:</b> Unhandled server crash<br/>• <b>502 Bad Gateway:</b> Upstream service failure<br/>• <b>503 Service Unavailable:</b> Overloaded or maintenance<br/>• <b>504 Gateway Timeout:</b> Upstream server timed out"]
+    Code --> S5["5xx Server Error"]
+    S5 --> Crash["500 Internal Error"]
+    S5 --> Gateway["502 Bad Gateway"]
+    S5 --> Unavailable["503 Service Unavailable"]
+    S5 --> Timeout["504 Gateway Timeout"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef success fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef redirect fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef client fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef server fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    class Code root
+    class S2,OK,Created,NoContent success
+    class S3,Moved,NotModified redirect
+    class S4,Bad,Auth,Forbidden,Missing,Limit client
+    class S5,Crash,Gateway,Unavailable,Timeout server
 ```
 
 ---
@@ -123,6 +162,15 @@ flowchart TD
     S1 <--> DB
     S2 <--> DB
     S3 <--> DB
+
+    classDef client fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef lb fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef data fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
+    class Client client
+    class LB lb
+    class S1,S2,S3 server
+    class DB,Cache data
 ```
 
 ---

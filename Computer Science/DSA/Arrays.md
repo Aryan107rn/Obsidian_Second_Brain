@@ -1,3 +1,9 @@
+---
+tags: [dsa, arrays, patterns, cpp, placement-prep]
+aliases: [Array Patterns, Array Interview Patterns]
+updated: 2026-08-16
+---
+
 # Arrays
 
 ## Concept
@@ -9,6 +15,40 @@ Contiguous block of memory holding same-type elements, accessed via index in O(1
 - Insert/delete at arbitrary index: O(n) (shifting); at end: O(1) amortized.
 
 ---
+
+## 🧭 Array Pattern Decision Flow
+
+```mermaid
+flowchart TD
+    Problem["Array Problem"] --> Sorted{"Sorted / monotonic?"}
+    Sorted -->|Yes| Pair{"Pair, triplet, boundary, or target?"}
+    Pair -->|Pair / triplet| TwoPointer["Two Pointer"]
+    Pair -->|Boundary / search| Binary["Binary Search / Bounds"]
+
+    Problem --> Contiguous{"Contiguous subarray?"}
+    Contiguous -->|Fixed / non-negative condition| Window["Sliding Window"]
+    Contiguous -->|Negative numbers or range queries| Prefix["Prefix Sum + HashMap"]
+    Contiguous -->|Max/min subarray sum| Kadane["Kadane's Algorithm"]
+
+    Problem --> Partition{"Small fixed value set?"}
+    Partition -->|0/1/2 or categories| Dutch["Dutch National Flag"]
+
+    Problem --> Frequency{"Majority / frequency guarantee?"}
+    Frequency -->|More than n/2| Moore["Moore's Voting"]
+
+    Problem --> Order{"Need kth, not full sort?"}
+    Order -->|Average fast| Quickselect["Quickselect"]
+    Order -->|Worst-case safer| Heap["Heap of size k"]
+
+    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
+    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef fallback fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    class Problem start
+    class Sorted,Pair,Contiguous,Partition,Frequency,Order decision
+    class TwoPointer,Binary,Window,Prefix,Kadane,Dutch,Moore,Quickselect pattern
+    class Heap fallback
+```
 
 ## Pattern 1: Two Pointer
 **When to apply:** Array is **sorted** (or can be sorted without losing needed info) and you're looking for a pair/triplet matching a target, or comparing from both ends.

@@ -3,17 +3,17 @@
 ## 1. Data Type Ranges
 Critical for avoiding overflow bugs in DSA — always check constraints against these.
 
-| Type | Size | Range |
-|---|---|---|
-| `char` | 1 byte | -128 to 127 (signed) |
-| `short` | 2 bytes | -32,768 to 32,767 |
-| `int` | 4 bytes | -2,147,483,648 to 2,147,483,647 (~2.1 × 10⁹) |
-| `unsigned int` | 4 bytes | 0 to 4,294,967,295 |
-| `long` | 4/8 bytes (platform-dependent) | at least int range |
-| `long long` | 8 bytes | -9.2×10¹⁸ to 9.2×10¹⁸ |
-| `unsigned long long` | 8 bytes | 0 to 1.8×10¹⁹ |
-| `float` | 4 bytes | ~7 decimal digits precision |
-| `double` | 8 bytes | ~15-16 decimal digits precision |
+| Type                 | Size                           | Range                                        |
+| -------------------- | ------------------------------ | -------------------------------------------- |
+| `char`               | 1 byte                         | -128 to 127 (signed)                         |
+| `short`              | 2 bytes                        | -32,768 to 32,767                            |
+| `int`                | 4 bytes                        | -2,147,483,648 to 2,147,483,647 (~2.1 × 10⁹) |
+| `unsigned int`       | 4 bytes                        | 0 to 4,294,967,295                           |
+| `long`               | 4/8 bytes (platform-dependent) | at least int range                           |
+| `long long`          | 8 bytes                        | -9.2×10¹⁸ to 9.2×10¹⁸                        |
+| `unsigned long long` | 8 bytes                        | 0 to 1.8×10¹⁹                                |
+| `float`              | 4 bytes                        | ~7 decimal digits precision                  |
+| `double`             | 8 bytes                        | ~15-16 decimal digits precision              |
 
 **Remember:**
 - `int` overflows around 2×10⁹ — if a problem has n up to 10⁵ and you're summing/multiplying, sums can exceed `int` range (e.g. 10⁵ × 10⁵ = 10¹⁰) → use `long long`.

@@ -71,31 +71,26 @@ Instead of a complex timeline, let's track the **exact state** of the Call Stack
 ### 📊 Visual Execution Flow
 
 ```mermaid
-graph TD
-    subgraph Phase 1: Synchronous Execution
-        S1["1. Run console.log('1')"] -->|Prints '1'| S2["2. setTimeout(cb2, 0)"]
-        S2 -->|Registers cb2 in Macrotask Queue| S3["3. Promise.then(cb3)"]
-        S3 -->|Registers cb3 in Microtask Queue| S4["4. Run console.log('4')"]
-        S4 -->|Prints '4'| S5["Call Stack is EMPTY"]
-    end
+flowchart TD
+    S1["1. console.log('1')"] --> S2["2. setTimeout callback registered"]
+    S2 --> S3["3. Promise.then callback queued"]
+    S3 --> S4["4. console.log('4')"]
+    S4 --> S5["Call stack empty"]
 
-    subgraph Phase 2: Draining Microtasks (VIP)
-        S5 -->|Event Loop executes all microtasks| M1["5. Run cb3 from Microtask Queue"]
-        M1 -->|Prints '3'| M2["Microtask Queue is EMPTY"]
-    end
+    S5 --> M1["5. Run microtask callback"]
+    M1 --> M2["Microtask queue empty"]
 
-    subgraph Phase 3: Executing Macrotasks
-        M2 -->|Event Loop executes ONE macrotask| T1["6. Run cb2 from Macrotask Queue"]
-        T1 -->|Prints '2'| T2["All Queues and Stack EMPTY"]
-    end
+    M2 --> T1["6. Run macrotask callback"]
+    T1 --> T2["All queues empty"]
 
-    style S1 fill:#ecf0f1,stroke:#2c3e50,stroke-width:2px
-    style S4 fill:#ecf0f1,stroke:#2c3e50,stroke-width:2px
-    style M1 fill:#f1c40f,stroke:#d35400,stroke-width:2px
-    style T1 fill:#3498db,stroke:#2980b9,stroke-width:2px
-    style S5 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
-    style M2 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
-    style T2 fill:#2ecc71,stroke:#27ae60,stroke-width:2px
+    classDef sync fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef empty fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef micro fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef macro fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
+    class S1,S2,S3,S4 sync
+    class S5,M2,T2 empty
+    class M1 micro
+    class T1 macro
 ```
 
 ---

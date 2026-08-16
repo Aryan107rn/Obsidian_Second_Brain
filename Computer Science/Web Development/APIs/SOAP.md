@@ -2,7 +2,7 @@
 tags: [api, soap, web-development, backend, networking, computer-science, enterprise, placement-prep, interview-favorite]
 aliases: [SOAP API, Simple Object Access Protocol, WSDL, WS-Security]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # SOAP — Architecture, WSDL Contracts & Enterprise Messaging
@@ -21,15 +21,23 @@ updated: 2026-08-14
 
 ```mermaid
 flowchart TD
-    subgraph REST_Model["REST: A Lightweight Postcard"]
-        direction TB
-        R1["• Quick to write and read (JSON)<br/>• Plain text visible to mail carriers<br/>• Standard HTTP mailbox delivery"]
-    end
+    APIStyle["API message style"]
+    APIStyle --> REST["REST postcard"]
+    REST --> REST1["Lightweight JSON"]
+    REST --> REST2["Uses standard HTTP semantics"]
 
-    subgraph SOAP_Model["SOAP: A Sealed, Notarized Legal Envelope"]
-        direction TB
-        S1["• Heavy formal XML Envelope<br/>• Tamper-proof digital seal (WS-Security)<br/>• Formal certified receipt (WS-ReliableMessaging)<br/>• Transport agnostic (can travel by truck, plane, or courier)"]
-    end
+    APIStyle --> SOAP["SOAP legal envelope"]
+    SOAP --> SOAP1["Formal XML envelope"]
+    SOAP --> SOAP2["Message-level security"]
+    SOAP --> SOAP3["Reliable enterprise standards"]
+    SOAP --> SOAP4["Transport independent"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef rest fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef soap fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    class APIStyle root
+    class REST,REST1,REST2 rest
+    class SOAP,SOAP1,SOAP2,SOAP3,SOAP4 soap
 ```
 
 ---
@@ -40,16 +48,23 @@ Every SOAP payload is strictly enclosed within an XML **Envelope**:
 
 ```mermaid
 flowchart TD
-    subgraph Envelope["<soap:Envelope> (The Root XML Wrapper)"]
-        direction TB
-        subgraph Header["<soap:Header> (Optional Metadata Layer)"]
-            H1["• Authentication & WS-Security (SAML, X.509 Tokens)<br/>• Distributed Transaction IDs (WS-AtomicTransaction)<br/>• Message Routing & Routing Rules (WS-Addressing)"]
-        end
-        subgraph Body["<soap:Body> (Mandatory Payload Layer)"]
-            B1["• The Actual Request / Response Data<br/>• OR &lt;soap:Fault&gt; (Standardized Error Structure)"]
-        end
-        Header --> Body
-    end
+    Envelope["SOAP Envelope: root XML wrapper"]
+    Envelope --> Header["SOAP Header: optional metadata"]
+    Header --> Auth["Authentication and WS-Security"]
+    Header --> Txn["Transaction and routing IDs"]
+
+    Envelope --> Body["SOAP Body: mandatory payload"]
+    Body --> Payload["Actual request or response data"]
+    Body --> Fault["SOAP Fault for standardized errors"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef header fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef body fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef fault fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    class Envelope root
+    class Header,Auth,Txn header
+    class Body,Payload body
+    class Fault fault
 ```
 
 ---
@@ -127,15 +142,26 @@ A WSDL document acts as the strict, machine-readable contract describing all dat
 
 ```mermaid
 flowchart TD
-    WS["<b>The WS-* Standards Suite</b>"]
+    WS["WS-* Standards Suite"]
     
-    WS --> Sec["<b>WS-Security</b><br/>Message-level encryption and digital signatures.<br/>Payload remains encrypted even through intermediary proxy servers."]
+    WS --> Sec["WS-Security"]
+    Sec --> SecDetail["Encryption and digital signatures"]
     
-    WS --> Rel["<b>WS-ReliableMessaging</b><br/>Guaranteed end-to-end delivery (Exactly-Once delivery semantics) despite network failures."]
+    WS --> Rel["WS-ReliableMessaging"]
+    Rel --> RelDetail["Guaranteed end-to-end delivery"]
     
-    WS --> Atom["<b>WS-AtomicTransaction</b><br/>Distributed ACID transactions across multi-vendor enterprise systems (Two-Phase Commit)."]
+    WS --> Atom["WS-AtomicTransaction"]
+    Atom --> AtomDetail["Distributed ACID transactions"]
     
-    WS --> Addr["<b>WS-Addressing</b><br/>Includes routing and endpoint references inside XML headers independent of transport protocol."]
+    WS --> Addr["WS-Addressing"]
+    Addr --> AddrDetail["Transport-independent routing metadata"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef standard fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef detail fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:1px
+    class WS root
+    class Sec,Rel,Atom,Addr standard
+    class SecDetail,RelDetail,AtomDetail,AddrDetail detail
 ```
 
 ---

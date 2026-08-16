@@ -2,7 +2,7 @@
 tags: [api, websocket, web-development, backend, networking, computer-science, realtime, placement-prep, interview-favorite]
 aliases: [WebSockets, WS, WSS, Full Duplex]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # ![[websocket.svg|40]] WebSocket — Full-Duplex Real-Time Networking
@@ -20,45 +20,33 @@ updated: 2026-08-14
 ## ⚡ The Real-Time Dilemma: 4 Approaches Compared
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    box LightYellow 1. Short Polling (Wasteful & Delayed)
-    participant C1 as Client
-    participant S1 as Server
-    end
-    C1->>S1: GET /messages (Any new data?)
-    S1-->>C1: 200 OK: "No"
-    Note over C1: Wait 3s...
-    C1->>S1: GET /messages (Any new data?)
-    S1-->>C1: 200 OK: "No"
+flowchart TD
+    RealTime["Real-time communication choices"]
 
-    box LightBlue 2. Long Polling (Hangs open until event)
-    participant C2 as Client
-    participant S2 as Server
-    end
-    C2->>S2: GET /messages (Hanging request)
-    Note over S2: Waits until new message arrives...
-    S2-->>C2: 200 OK: { message: "Hello" }
-    C2->>S2: GET /messages (Immediately opens next hanging request)
+    RealTime --> Short["Short polling"]
+    Short --> ShortFlow["Client asks repeatedly"]
+    ShortFlow --> ShortTrade["Simple but delayed and wasteful"]
 
-    box LightGreen 3. Server-Sent Events (SSE - One-Way Push)
-    participant C3 as Client
-    participant S3 as Server
-    end
-    C3->>S3: GET /events (text/event-stream)
-    S3-->>C3: Stream Open
-    S3-->>C3: Event 1 (Push)
-    S3-->>C3: Event 2 (Push)
+    RealTime --> Long["Long polling"]
+    Long --> LongFlow["Request stays open until event"]
+    LongFlow --> LongTrade["Better latency, still request-based"]
 
-    box LightPink 4. WebSocket (Full-Duplex Two-Way Pipe)
-    participant C4 as Client
-    participant S4 as Server
-    end
-    C4->>S4: HTTP Upgrade Handshake
-    S4-->>C4: 101 Switching Protocols
-    Note over C4,S4: Bi-directional Persistent TCP Pipe
-    C4->>S4: Client Frame (2-6 bytes overhead)
-    S4-->>C4: Server Push Frame (Instant!)
+    RealTime --> SSE["Server-Sent Events"]
+    SSE --> SSEFlow["Server pushes one-way stream"]
+    SSEFlow --> SSETrade["Good for feeds and notifications"]
+
+    RealTime --> WS["WebSocket"]
+    WS --> WSFlow["HTTP upgrade creates persistent TCP pipe"]
+    WSFlow --> WSTrade["Best for two-way low-latency traffic"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef weak fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    classDef mid fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef good fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class RealTime root
+    class Short,ShortFlow,ShortTrade weak
+    class Long,LongFlow,LongTrade,SSE,SSEFlow,SSETrade mid
+    class WS,WSFlow,WSTrade good
 ```
 
 ---
@@ -126,8 +114,8 @@ Because WebSockets are **stateful** (a connection is tied to a specific physical
 
 ```mermaid
 flowchart TD
-    ClientA["📱 Client A (Connected to Server 1)"]
-    ClientB["💻 Client B (Connected to Server 2)"]
+    ClientA["Client A connected to server 1"]
+    ClientB["Client B connected to server 2"]
     
     LB["Load Balancer (Sticky Sessions / IP Hash)"]
     
@@ -136,14 +124,23 @@ flowchart TD
         WS2["WebSocket Server Instance #2"]
     end
 
-    Broker[("📡 Redis Pub/Sub / RabbitMQ Backplane")]
+    Broker[("Redis Pub/Sub or RabbitMQ backplane")]
 
     ClientA <==>|Persistent WS| WS1
     ClientB <==>|Persistent WS| WS2
 
-    WS1 <-->|"1. Client A sends message -> Publishes to channel"| Broker
-    Broker <-->|"2. Broadcasts message to all server nodes"| WS2
-    WS2 -->|"3. Pushes to Client B!"| ClientB
+    WS1 <-->|"publish message"| Broker
+    Broker <-->|"broadcast to nodes"| WS2
+    WS2 -->|"push to Client B"| ClientB
+
+    classDef client fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef lb fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef broker fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
+    class ClientA,ClientB client
+    class LB lb
+    class WS1,WS2 server
+    class Broker broker
 ```
 
 ---

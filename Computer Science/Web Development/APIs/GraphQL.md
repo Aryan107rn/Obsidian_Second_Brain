@@ -2,7 +2,7 @@
 tags: [api, graphql, web-development, backend, networking, computer-science, placement-prep, interview-favorite]
 aliases: [GraphQL API, GQL, GraphQL Schema]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # ![[graphql-logo.png|40]] GraphQL — Architecture, Schema Design & Performance
@@ -21,15 +21,21 @@ updated: 2026-08-14
 
 ```mermaid
 flowchart TD
-    subgraph REST_Model["REST: Fixed Set Menu (Cafeteria)"]
-        direction TB
-        R_Req["Request <code>GET /user/5</code>"] --> R_Resp["Returns fixed tray: Name, Age, Email, Bio, Address, Past 50 Logins...<br/><b>(Over-fetching!)</b>"]
-    end
+    Problem["Client needs user name and avatar"]
+    Problem --> RESTReq["REST: GET /user/5"]
+    RESTReq --> RESTResp["Server returns fixed full user payload"]
+    RESTResp --> Over["Over-fetching: extra fields downloaded"]
 
-    subgraph GQL_Model["GraphQL: À La Carte Custom Order"]
-        direction TB
-        G_Req["Query: <code>{ user(id: 5) { name avatar } }</code>"] --> G_Resp["Returns ONLY: <code>{ name, avatar }</code><br/><b>(Zero Over-fetching!)</b>"]
-    end
+    Problem --> GQLReq["GraphQL: query selected fields"]
+    GQLReq --> GQLResp["Server returns only name and avatar"]
+    GQLResp --> Fit["Payload matches client need"]
+
+    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef rest fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    classDef gql fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Problem start
+    class RESTReq,RESTResp,Over rest
+    class GQLReq,GQLResp,Fit gql
 ```
 
 ---
@@ -37,19 +43,25 @@ flowchart TD
 ## ⚔️ REST vs. GraphQL: The Two Classic Fetching Problems
 
 ```mermaid
-flowchart LR
-    subgraph Problem1["1. Over-fetching (Too Much Data)"]
-        direction TB
-        C1["Mobile App"] -->|wants only name & avatar| S1["REST Server (/users/42)"]
-        S1 -->|returns 45 fields including addresses & tax info| C1
-    end
+flowchart TD
+    RESTIssues["Classic REST fetching issues"]
+    RESTIssues --> OverFetch["Over-fetching"]
+    RESTIssues --> UnderFetch["Under-fetching"]
 
-    subgraph Problem2["2. Under-fetching (Too Many Round Trips)"]
-        direction TB
-        C2["Dashboard"] -->|Trip 1: GET /users/42| S2["REST Server"]
-        C2 -->|Trip 2: GET /users/42/posts| S2
-        C2 -->|Trip 3: GET /posts/101/comments| S2
-    end
+    OverFetch --> Mobile["Mobile app wants name and avatar"]
+    Mobile --> LargePayload["Server returns many unused fields"]
+
+    UnderFetch --> Dashboard["Dashboard needs user, posts, comments"]
+    Dashboard --> Trip1["Request 1: user"]
+    Dashboard --> Trip2["Request 2: posts"]
+    Dashboard --> Trip3["Request 3: comments"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef issue fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    classDef detail fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    class RESTIssues root
+    class OverFetch,UnderFetch issue
+    class Mobile,LargePayload,Dashboard,Trip1,Trip2,Trip3 detail
 ```
 
 ---
@@ -60,19 +72,24 @@ The **#1 most critical performance pitfall** in GraphQL backend architecture is 
 
 ```mermaid
 flowchart TD
-    subgraph Naive["Naive Execution: 1 + N Database Queries"]
-        direction TB
-        Q1["1 Query to get 100 Users:<br/><code>SELECT * FROM users LIMIT 100;</code>"]
-        Q2["100 Individual queries for each user's orders:<br/><code>SELECT * FROM orders WHERE user_id = 1;</code><br/><code>SELECT * FROM orders WHERE user_id = 2;</code><br/>... <code>(100 separate DB round trips!)</code>"]
-        Q1 --> Q2
-    end
+    Query["GraphQL query: users with orders"]
+    Query --> Naive["Naive resolver path"]
+    Naive --> Users1["1 query: fetch 100 users"]
+    Users1 --> OrdersN["100 queries: fetch orders per user"]
+    OrdersN --> Slow["N+1 round trips"]
 
-    subgraph DataLoaderFix["DataLoader Solution: 1 + 1 Batched Queries"]
-        direction TB
-        B1["1 Query to get 100 Users:<br/><code>SELECT * FROM users LIMIT 100;</code>"]
-        B2["DataLoader collects all 100 User IDs in tick and fires ONE query:<br/><code>SELECT * FROM orders WHERE user_id IN (1, 2, 3, ... 100);</code>"]
-        B1 --> B2
-    end
+    Query --> Batched["DataLoader path"]
+    Batched --> Users2["1 query: fetch 100 users"]
+    Users2 --> BatchIDs["Collect all user IDs in one tick"]
+    BatchIDs --> Orders1["1 query: fetch all matching orders"]
+    Orders1 --> Fast["1+1 round trips"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef bad fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
+    classDef good fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Query root
+    class Naive,Users1,OrdersN,Slow bad
+    class Batched,Users2,BatchIDs,Orders1,Fast good
 ```
 
 > [!IMPORTANT]

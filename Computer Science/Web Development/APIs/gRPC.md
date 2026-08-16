@@ -2,7 +2,7 @@
 tags: [api, grpc, web-development, backend, networking, computer-science, microservices, placement-prep, interview-favorite]
 aliases: [gRPC API, Google Remote Procedure Call, Protobuf, Protocol Buffers]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # ![[grpc-logo.svg|40]] gRPC — High-Performance RPC & Microservices Architecture
@@ -20,20 +20,27 @@ updated: 2026-08-14
 ## 🧠 The Core Mental Model (Local vs. Remote Function Calls)
 
 ```mermaid
-flowchart LR
-    subgraph Local["Traditional Local Call (In-Process)"]
-        direction TB
-        App1["App Code"] -->|invokes| Func1["calculateTotal(orderId)"]
-        Func1 -->|memory return| App1
-    end
+flowchart TD
+    Idea["Function-call mental model"]
+    Idea --> Local["Local call"]
+    Local --> App["App code"]
+    App --> Func["calculateTotal(orderId)"]
+    Func --> Memory["Returns in memory"]
 
-    subgraph Remote["gRPC Remote Call (Cross-Network / Microservice)"]
-        direction TB
-        ClientApp["Client Service (Go)"] -->|calls local stub| Stub["Stub: OrderService.CalculateTotal()"]
-        Stub -->|"HTTP/2 + Protobuf binary"| Server["Remote Server (Java / C++)"]
-        Server -->|binary response| Stub
-        Stub -->|unmarshaled object| ClientApp
-    end
+    Idea --> Remote["gRPC remote call"]
+    Remote --> Client["Client service"]
+    Client --> Stub["Generated client stub"]
+    Stub --> Wire["HTTP/2 plus Protobuf"]
+    Wire --> Server["Remote service"]
+    Server --> Response["Binary response"]
+    Response --> Client
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef local fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef remote fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Idea root
+    class Local,App,Func,Memory local
+    class Remote,Client,Stub,Wire,Server,Response remote
 ```
 
 ---
@@ -42,9 +49,9 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Proto[".proto Contract File<br/>(service & message definitions)"]
+    Proto[".proto contract file"]
     
-    Compiler["<b>protoc</b> (Protocol Buffer Compiler)"]
+    Compiler["protoc compiler"]
     
     Proto --> Compiler
     
@@ -53,8 +60,15 @@ flowchart TD
     Compiler -->|--java_out| JavaServer["Java Backend Server Base"]
     Compiler -->|--cpp_out| CppEngine["C++ Low-Latency Engine"]
 
-    GoStub <==|"Binary Wire Protocol (HTTP/2)"| JavaServer
-    PyStub <==|"Binary Wire Protocol (HTTP/2)"| CppEngine
+    GoStub <==>|"HTTP/2 binary protocol"| JavaServer
+    PyStub <==>|"HTTP/2 binary protocol"| CppEngine
+
+    classDef contract fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef compiler fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef output fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Proto contract
+    class Compiler compiler
+    class GoStub,PyStub,JavaServer,CppEngine output
 ```
 
 ---
@@ -129,41 +143,30 @@ func main() {
 ## 🌊 The 4 gRPC Communication Modes
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    box LightYellow 1. Unary RPC (Classic Request-Response)
-    participant C1 as Client
-    participant S1 as Server
-    end
-    C1->>S1: Single Request
-    S1-->>C1: Single Response
+flowchart TD
+    Modes["gRPC communication modes"]
+    Modes --> Unary["Unary RPC"]
+    Unary --> UnaryFlow["One request, one response"]
 
-    box LightCyan 2. Server Streaming (Single Request -> Stream of Responses)
-    participant C2 as Client
-    participant S2 as Server
-    end
-    C2->>S2: Subscribe(Topic: "StockPrices")
-    S2-->>C2: Price Update #1
-    S2-->>C2: Price Update #2
-    S2-->>C2: Price Update #3
+    Modes --> ServerStream["Server streaming"]
+    ServerStream --> ServerFlow["One request, many responses"]
 
-    box LightPink 3. Client Streaming (Stream of Requests -> Single Response)
-    participant C3 as Client
-    participant S3 as Server
-    end
-    C3->>S3: Chunk 1 (Video Upload)
-    C3->>S3: Chunk 2
-    C3->>S3: Chunk 3
-    S3-->>C3: Upload Complete (MD5 Hash)
+    Modes --> ClientStream["Client streaming"]
+    ClientStream --> ClientFlow["Many requests, one response"]
 
-    box LightGreen 4. Bi-directional Streaming (Full-Duplex Streams)
-    participant C4 as Client
-    participant S4 as Server
-    end
-    C4->>S4: Audio Chunk 1
-    S4-->>C4: Real-time Transcript 1
-    C4->>S4: Audio Chunk 2
-    S4-->>C4: Real-time Transcript 2
+    Modes --> Bidi["Bidirectional streaming"]
+    Bidi --> BidiFlow["Both sides stream continuously"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef unary fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef client fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    classDef bidi fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
+    class Modes root
+    class Unary,UnaryFlow unary
+    class ServerStream,ServerFlow server
+    class ClientStream,ClientFlow client
+    class Bidi,BidiFlow bidi
 ```
 
 ---

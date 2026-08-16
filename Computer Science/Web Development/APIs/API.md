@@ -2,7 +2,7 @@
 tags: [api, web-development, backend, networking, computer-science, moc, master-guide]
 aliases: [APIs, Types of APIs, API MOC, API Architecture]
 created: 2026-08-09
-updated: 2026-08-14
+updated: 2026-08-16
 ---
 
 # API — Architecture, Protocols & Master Guide
@@ -22,23 +22,27 @@ An **API (Application Programming Interface)** is a formalized software contract
 To understand why APIs exist and how they work, consider a restaurant:
 
 ```mermaid
-flowchart LR
-    subgraph FrontHouse["1. Customer (Client)"]
-        User["Browser / Mobile App<br/><b>Menu Viewer</b>"]
-    end
+flowchart TD
+    User["Client: browser or mobile app"]
+    API["API contract: request, validation, response"]
+    Server["Server: business logic"]
+    DB["Database or external service"]
 
-    subgraph Interface["2. Waiter (The API)"]
-        API["<b>API Contract</b><br/>1. Takes Order (Request)<br/>2. Delivers Dish (Response)<br/>3. Hides Kitchen Details"]
-    end
+    User -->|"1. Sends request"| API
+    API -->|"2. Calls server logic"| Server
+    Server -->|"3. Reads or writes data"| DB
+    DB -->|"4. Returns data"| Server
+    Server -->|"5. Builds response"| API
+    API -->|"6. Sends response"| User
 
-    subgraph BackHouse["3. Kitchen (Server & Database)"]
-        Server["Cooks / Database<br/><b>Business Logic & Storage</b>"]
-    end
-
-    FrontHouse -->|"Places Order (Request)"| Interface
-    Interface -->|"Passes Order to Kitchen"| BackHouse
-    BackHouse -->|"Cooks Food (Data Prep)"| Interface
-    Interface -->|"Serves Food (Response)"| FrontHouse
+    classDef client fill:#DBEAFE,stroke:#2563EB,color:#0F172A,stroke-width:2px
+    classDef api fill:#FEF3C7,stroke:#D97706,color:#0F172A,stroke-width:2px
+    classDef server fill:#DCFCE7,stroke:#16A34A,color:#0F172A,stroke-width:2px
+    classDef data fill:#FCE7F3,stroke:#DB2777,color:#0F172A,stroke-width:2px
+    class User client
+    class API api
+    class Server server
+    class DB data
 ```
 
 > [!NOTE]
@@ -52,20 +56,29 @@ Every API in the software industry is classified across two **independent axes**
 
 ```mermaid
 flowchart TD
-    API["<b>API Classification</b>"]
-    API --> P["<b>Axis 1: By Protocol & Style</b><br/>(How messages travel & format)"]
-    API --> S["<b>Axis 2: By Scope & Access</b><br/>(Who is authorized to call it)"]
+    Root["API Classification"]
+    Root --> Protocol["Protocol and style"]
+    Root --> Access["Scope and access"]
 
-    P --> REST["[[REST APIs]]<br/>HTTP + JSON"]
-    P --> GQL["[[GraphQL]]<br/>Single Endpoint + Flexible Queries"]
-    P --> GRPC["[[gRPC]]<br/>HTTP/2 + Protocol Buffers"]
-    P --> WS["[[WebSocket]]<br/>Full-Duplex Persistent TCP"]
-    P --> SOAP["[[SOAP]]<br/>XML + Strict WSDL"]
+    Protocol --> REST["REST: HTTP plus JSON"]
+    Protocol --> GQL["GraphQL: client-shaped query"]
+    Protocol --> GRPC["gRPC: HTTP/2 plus Protobuf"]
+    Protocol --> WS["WebSocket: persistent two-way pipe"]
+    Protocol --> SOAP["SOAP: XML plus WSDL contract"]
 
-    S --> Pub["<b>Public / Open:</b> Anyone (Stripe, Twitter)"]
-    S --> Priv["<b>Private / Internal:</b> Microservice-to-microservice"]
-    S --> Part["<b>Partner:</b> B2B contracted access"]
-    S --> Comp["<b>Composite:</b> Aggregates multiple API calls"]
+    Access --> Pub["Public: open external consumers"]
+    Access --> Priv["Private: internal services"]
+    Access --> Part["Partner: contracted B2B access"]
+    Access --> Comp["Composite: combines multiple APIs"]
+
+    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef axis fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
+    classDef proto fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    classDef access fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
+    class Root root
+    class Protocol,Access axis
+    class REST,GQL,GRPC,WS,SOAP proto
+    class Pub,Priv,Part,Comp access
 ```
 
 ---
@@ -88,15 +101,22 @@ flowchart TD
 flowchart TD
     Start["What is your primary requirement?"] --> Q1{"Who is the consumer?"}
     
-    Q1 -->|Browser / Mobile App / Public| Q2{"Data structure requirements?"}
-    Q1 -->|Internal Microservices| Q3{"Low latency & high throughput needed?"}
-    Q1 -->|Real-time 2-way continuous push| WS_Pick["👉 Choose <b>WebSocket</b>"]
+    Q1 -->|Browser, mobile, or public| Q2{"Data shape requirement?"}
+    Q1 -->|Internal microservices| Q3{"Low latency and typed contract?"}
+    Q1 -->|Real-time two-way push| WS_Pick["Choose WebSocket"]
 
-    Q2 -->|Standard CRUD / Universal Caching| REST_Pick["👉 Choose <b>REST APIs</b>"]
-    Q2 -->|Deeply nested relationships / Overfetching problem| GQL_Pick["👉 Choose <b>GraphQL</b>"]
+    Q2 -->|Standard CRUD and HTTP caching| REST_Pick["Choose REST"]
+    Q2 -->|Nested client-shaped data| GQL_Pick["Choose GraphQL"]
 
-    Q3 -->|Yes (Speed & typed contracts matter)| GRPC_Pick["👉 Choose <b>gRPC</b>"]
-    Q3 -->|Legacy enterprise / Formal WSDL contract required| SOAP_Pick["👉 Choose <b>SOAP</b>"]
+    Q3 -->|Yes| GRPC_Pick["Choose gRPC"]
+    Q3 -->|Formal WSDL contract required| SOAP_Pick["Choose SOAP"]
+
+    classDef question fill:#E0F2FE,stroke:#0284C7,color:#0F172A,stroke-width:2px
+    classDef pick fill:#DCFCE7,stroke:#16A34A,color:#0F172A,stroke-width:2px
+    classDef start fill:#F3E8FF,stroke:#9333EA,color:#0F172A,stroke-width:2px
+    class Start start
+    class Q1,Q2,Q3 question
+    class WS_Pick,REST_Pick,GQL_Pick,GRPC_Pick,SOAP_Pick pick
 ```
 
 ---
@@ -107,3 +127,26 @@ flowchart TD
 - ![[grpc-logo.svg|16]] [[gRPC]] — Protocol Buffers, `.proto` compilation, and HTTP/2 streaming
 - ![[websocket.svg|16]] [[WebSocket]] — Handshake upgrade, duplex messaging, and connection management
 - [[SOAP]] — XML Envelopes, WSDL contracts, and enterprise WS-Security
+
+## 🧠 API Selection Cheat Flow
+
+```mermaid
+flowchart TD
+    Need["Need system communication"] --> Realtime{"Continuous real-time updates?"}
+    Realtime -->|Yes| WebSocket["Use WebSocket"]
+    Realtime -->|No| Consumer{"Main consumer?"}
+    Consumer -->|Public / Browser / Mobile| Shape{"Client needs flexible nested data?"}
+    Shape -->|Yes| GraphQL["Use GraphQL"]
+    Shape -->|No| REST["Use REST"]
+    Consumer -->|Internal services| Perf{"Strict latency + typed contract?"}
+    Perf -->|Yes| GRPC["Use gRPC"]
+    Perf -->|No| RESTInternal["REST is acceptable"]
+    Consumer -->|Legacy enterprise| SOAPPick["Use SOAP when WSDL/XML contract is required"]
+
+    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#0F172A,stroke-width:2px
+    classDef choice fill:#DCFCE7,stroke:#16A34A,color:#0F172A,stroke-width:2px
+    classDef start fill:#F3E8FF,stroke:#9333EA,color:#0F172A,stroke-width:2px
+    class Need start
+    class Realtime,Consumer,Shape,Perf decision
+    class WebSocket,GraphQL,REST,GRPC,RESTInternal,SOAPPick choice
+```
