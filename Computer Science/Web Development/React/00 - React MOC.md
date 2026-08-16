@@ -2,7 +2,7 @@
 tags: [react, javascript, frontend, web-development, computer-science, moc]
 aliases: [React.js, ReactJS, React Roadmap]
 created: 2026-08-09
-updated: 2026-08-16
+updated: 2026-08-17
 ---
 
 # React — Declarative UI & Component Architecture (MOC)
@@ -39,7 +39,7 @@ flowchart TD
 
 ---
 
-## 🗺️ Step-by-Step Curriculum Roadmap (01 ──> 16)
+## 🗺️ Step-by-Step Curriculum Roadmap (01 ──> 17)
 
 These notes are structured sequentially. If you are learning React from scratch, follow them in numeric order. If you are preparing for interviews, pay special attention to the **Placement & Interview Q&A** section at the bottom of each file.
 
@@ -79,7 +79,11 @@ These notes are structured sequentially. If you are learning React from scratch,
 * **[[13 - Error Boundaries]]**
   * *Focus:* Catching render-time errors with `getDerivedStateFromError`/`componentDidCatch`, what error boundaries do NOT catch (async, event handlers), and why they still require a class component.
 
-### 🛠️ Chapter 6: Practical Engineering & Debugging
+### 🎨 Chapter 6: Styling
+* **[[17 - Tailwind CSS with React]]**
+  * *Focus:* Utility-first CSS philosophy, Vite + Tailwind v4 setup, responsive/state/dark-mode variants, conditional class composition with `clsx`, and the dynamic-class-name build-time pitfall.
+
+### 🛠️ Chapter 7: Practical Engineering & Debugging
 * **[[10 - Practical Project Guide - Todo List and Beyond]]**
   * *Focus:* A fully detailed walkthrough combining state, hooks, local storage sync, filter operations, and component refactoring into an advanced project, including key clean folder structures.
 * **[[16 - Testing Basics (React Testing Library)]]**
@@ -102,3 +106,4 @@ This folder was created with two simultaneous goals:
 * [[Package Managers and Build Tools]] — Bundlers (Vite, Webpack), runtime, and JSX compilation tools
 * [[REST APIs]] & [[WebSocket]] — Connecting React frontends to dynamic backend servers
 * [[CSS]] & [[HTML]] — Styling and layout fundamentals for React JSX outputs
+* [[17 - Tailwind CSS with React]] — Utility-first styling approach used in modern React projects
