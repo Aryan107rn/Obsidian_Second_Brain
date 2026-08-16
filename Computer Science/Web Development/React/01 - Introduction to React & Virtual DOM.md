@@ -107,7 +107,7 @@ function Button({ isLoading }) {
 }
 ```
 * **Benefit:** The UI is purely a function of state: `UI = f(state)`. If `isLoading` is true, the UI is *guaranteed* to look correct, with zero manual DOM manipulation.
-
+df -h /
 ---
 
 ## 💼 Placement & Interview Q&A

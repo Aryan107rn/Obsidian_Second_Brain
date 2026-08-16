@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/C++/C++ Fundamentals.md",
-                "mode": "source",
+                "file": "Computer Science/Web Development/React/04 - State & useState Hook.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "C++ Fundamentals"
+              "title": "04 - State & useState Hook"
             }
           }
         ]
@@ -203,11 +203,12 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -229,6 +230,15 @@
   },
   "active": "4d9f735655bf383a",
   "lastOpenFiles": [
+    "Computer Science/Web Development/React/03 - Components & Props.md",
+    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
+    "Computer Science/C++/C++ Built-in Functions for DSA.md",
+    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
+    "Computer Science/Web Development/Node.js and Express.js",
+    "Computer Science/Web Development/React/00 - React MOC.md",
+    "Computer Science/Web Development/APIs/GraphQL.md",
+    "Computer Science/System Design/System Design MOC.md",
+    "Computer Science/C++/C++ Fundamentals.md",
     "Computer Science/C++/C++ Core Language Features.md",
     "Computer Science/C++/OOP in CPP.md",
     "Computer Science/C++/CPP Complete Revision.md",
@@ -239,7 +249,6 @@
     "Computer Science/Web Development/APIs/SOAP.md",
     "Computer Science/Web Development/APIs/REST APIs.md",
     "Computer Science/Web Development/APIs/gRPC.md",
-    "Computer Science/Web Development/APIs/GraphQL.md",
     "Computer Science/Web Development/APIs/API.md",
     "Computer Science/Web Development/Git/Git and GitHub.md",
     "Computer Science/Web Development/Git/Git Basics.md",
@@ -252,16 +261,10 @@
     "attachments/graphql-logo.png",
     "attachments/git-feature-branch-workflow.png",
     "attachments/git-workflow-architecture.svg",
-    "Computer Science/System Design/System Design MOC.md",
     "attachments/dynamic-programming-memoization.png",
     "Computer Science/Web Development/JavaScript/JavaScript MOC.md",
     "Computer Science/Web Development/Git/Merge Conflicts.md",
     "Computer Science/Web Development/Git/GitHub Basics.md",
-    "Computer Science/Web Development/Git/Git Undoing Changes.md",
-    "Computer Science/Web Development/Git/Git Tags.md",
-    "Computer Science/Web Development/Git and GitHub.md",
-    "Computer Science/Web Development/React/16 - Testing Basics (React Testing Library).md",
-    "Computer Science/Web Development/React/15 - Lazy Loading, Suspense & Code Splitting.md",
     "attachments/linux-filesystem-hierarchy.svg",
     "attachments/js-async-promises.svg",
     "attachments/js-scope-hoisting.svg",
@@ -274,7 +277,6 @@
     "Untitled 1.canvas",
     "Untitled.canvas",
     "Excalidraw",
-    "Untitled",
-    "Computer Science/Templates"
+    "Untitled"
   ]
 }
