@@ -7,6 +7,33 @@ Arranging elements in a defined order (ascending/descending). Every algorithm tr
 
 ---
 
+
+
+## 🧭 Choosing a Sort Algorithm
+
+```mermaid
+flowchart TD
+    Q["Sorting Problem"] --> Stable{"Need stability?"}
+    Stable -->|"Yes, guaranteed O(n log n)"| Merge["Merge Sort"]
+    Stable -->|"Yes, small / nearly-sorted input"| Insertion["Insertion Sort"]
+
+    Q --> Space{"Need O(1) space AND\nworst-case O(n log n)?"}
+    Space -->|Yes| Heap["Heap Sort"]
+
+    Q --> Range{"Integers/strings in a\nsmall known range?"}
+    Range -->|Yes| NonComp["Counting / Radix / Bucket Sort"]
+
+    Q --> General{"General purpose,\naverage speed matters most?"}
+    General -->|Yes| Quick["Quick Sort (randomized pivot)"]
+
+    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
+    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Q start
+    class Stable,Space,Range,General decision
+    class Merge,Insertion,Heap,NonComp,Quick pattern
+```
+
 ## 1. Selection Sort
 **When to apply:** Swap cost is expensive (e.g. flash memory writes) and minimizing swaps matters more than speed on tiny inputs.
 **Intuition:** Find the minimum in the unsorted part, swap it to the front. Repeat.

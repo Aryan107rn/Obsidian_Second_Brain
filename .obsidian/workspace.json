@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "a10411294998f66a",
+        "id": "02644b4735530862",
         "type": "tabs",
         "children": [
           {
-            "id": "4d9f735655bf383a",
+            "id": "8d93e54daba61fdb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/React/04 - State & useState Hook.md",
-                "mode": "preview",
+                "file": "Computer Science/Computer Science MOC.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04 - State & useState Hook"
+              "title": "Computer Science MOC"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 51.66959578207382,
+        "dimension": 57.205623901581724,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 48.33040421792619,
+        "dimension": 42.794376098418276,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 378.0690116882324
+    "width": 345.15559005737305
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -203,7 +203,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -228,34 +228,44 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "4d9f735655bf383a",
+  "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
-    "Computer Science/Web Development/React/17 - Tailwind CSS with React.md",
-    "Computer Science/Web Development/React/03 - Components & Props.md",
-    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
-    "Computer Science/C++/C++ Built-in Functions for DSA.md",
-    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
-    "Computer Science/Web Development/Node.js and Express.js",
-    "Computer Science/Web Development/React/00 - React MOC.md",
-    "Computer Science/Web Development/APIs/GraphQL.md",
+    "Computer Science/DSA/Binary Search.md",
+    "Computer Science/Computer Science MOC.md",
+    "Computer Science/C++/C++ MOC.md",
+    "Computer Science/DSA/Backtracking.md",
+    "Computer Science/DSA/Algorithms/Sieve of Eratosthenes.md",
+    "Computer Science/DSA/Algorithms/Rat in a Maze.md",
+    "Computer Science/DSA/Algorithms/Merge K Sorted Lists.md",
+    "Computer Science/DSA/Algorithms/Maximum Product Subarray.md",
+    "Computer Science/DSA/Algorithms/Manacher's Algorithm.md",
+    "Computer Science/DSA/Algorithms/Kadane's Algorithm.md",
+    "Computer Science/DSA/Algorithms/Hash Collision Resolution.md",
+    "Computer Science/DSA/Algorithms/Euclidean Algorithm (GCD).md",
+    "Computer Science/DSA/Algorithms/Binary Search Variants.md",
     "Computer Science/System Design/System Design MOC.md",
-    "Computer Science/C++/C++ Fundamentals.md",
-    "Computer Science/C++/C++ Core Language Features.md",
-    "Computer Science/C++/OOP in CPP.md",
-    "Computer Science/C++/CPP Complete Revision.md",
-    "README.md",
-    "Untitled.base",
-    "Computer Science/Web Development/Linux.md",
-    "Computer Science/Web Development/APIs/WebSocket.md",
-    "Computer Science/Web Development/APIs/SOAP.md",
-    "Computer Science/Web Development/APIs/REST APIs.md",
-    "Computer Science/Web Development/APIs/gRPC.md",
-    "Computer Science/Web Development/APIs/API.md",
-    "Computer Science/Web Development/Git/Git and GitHub.md",
-    "Computer Science/Web Development/Git/Git Basics.md",
-    "Computer Science/Web Development/Git/Git Rebase.md",
-    "Computer Science/Web Development/Git/Git Stash.md",
-    "Computer Science/Web Development/Git/Git Branching.md",
+    "Computer Science/DSA/DSA A2Z Sheet MOC.md",
+    "Computer Science/DSA/Algorithms/Difference Array.md",
+    "Computer Science/DSA/Algorithms/Dynamic Programming.md",
+    "Computer Science/DSA/Arrays.md",
+    "Computer Science/DSA/Linked List.md",
+    "Computer Science/Web Development/React/00 - React MOC.md",
+    "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
+    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
+    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
+    "Computer Science/Web Development/React/03 - Components & Props.md",
+    "Computer Science/Web Development/React/04 - State & useState Hook.md",
+    "Computer Science/Web Development/React/08 - React Router & Navigation.md",
+    "Computer Science/DSA/Recursion",
+    "Computer Science/DSA/Backtracking",
+    "gemini-scribe/Scheduled-Tasks/scheduled-tasks-state.json",
+    "gemini-scribe/Scheduled-Tasks/Runs",
+    "gemini-scribe/Scheduled-Tasks",
+    "gemini-scribe/Skills",
+    "gemini-scribe/Prompts",
+    "gemini-scribe/Background-Tasks",
+    "gemini-scribe/Agent-Sessions",
+    "gemini-scribe",
     "attachments/rest-architecture-diagram.svg",
     "attachments/react-useeffect-lifecycle.svg",
     "attachments/js-prototype-chain.svg",
@@ -263,20 +273,10 @@
     "attachments/git-feature-branch-workflow.png",
     "attachments/git-workflow-architecture.svg",
     "attachments/dynamic-programming-memoization.png",
-    "Computer Science/Web Development/JavaScript/JavaScript MOC.md",
-    "Computer Science/Web Development/Git/Merge Conflicts.md",
     "attachments/linux-filesystem-hierarchy.svg",
     "attachments/js-async-promises.svg",
     "attachments/js-scope-hoisting.svg",
-    "attachments",
-    "Computer Science/System Design",
-    "Computer Science/DSA/Algorithms",
-    "Computer Science/Web Development/APIs",
-    "Computer Science/Web Development/Git",
-    "Computer Science/Web Development/React",
     "Untitled 1.canvas",
-    "Untitled.canvas",
-    "Excalidraw",
-    "Untitled"
+    "Untitled.canvas"
   ]
 }

@@ -111,5 +111,6 @@ npx create-next-app@latest my-app
 ## Related concepts
 
 - [[00 - React MOC]] — the library these tools set up and serve
+- [[01a - React Installation & Project Setup]] — specific guide for setting up React projects with Vite/Parcel/CRA and package managers
 - [[ES6+ Modern Features]] — the `import`/`export` module syntax bundlers process
 - [[JavaScript MOC]]

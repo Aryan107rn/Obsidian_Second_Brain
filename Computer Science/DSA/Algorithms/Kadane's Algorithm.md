@@ -33,6 +33,25 @@ current_sum = max(nums[i], current_sum + nums[i])
 
 Take whichever is bigger. Separately track `best_sum` = the best `current_sum` seen so far across the whole array — this is the actual answer, since the best subarray might end at any index, not necessarily the last one.
 
+
+
+```mermaid
+flowchart TD
+    Elem["Current element nums[i]"] --> Check{"current_sum + nums[i]\n>\nnums[i] alone?"}
+    Check -->|"Yes — previous run still helps"| Extend["Extend: current_sum += nums[i]"]
+    Check -->|"No — previous run was dragging us down"| Restart["Restart: current_sum = nums[i]"]
+    Extend --> Update["best_sum = max(best_sum, current_sum)"]
+    Restart --> Update
+    Update --> Next["Move to next element"]
+
+    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
+    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class Check decision
+    class Extend,Restart,Update,Next pattern
+```
+
+This is the entire algorithm distilled into one repeated decision — every element asks "extend or restart?", and `best_sum` just remembers the best answer seen across all of those decisions.
+
 ## Why this works — it's really 1-D DP
 
 Define `dp[i]` = the maximum sum of a subarray that *ends at index i*. Then:
@@ -97,4 +116,4 @@ Whenever a problem asks for the maximum (or minimum, with sign flipped) sum of a
 
 ## Related concepts
 - [[Dynamic Programming]] — Kadane's is a space-optimized 1-D DP; understanding it is a good bridge into the general DP mental model.
-- [[Recursion and Backtracking]] — background for how DP evolves from plain recursion.
+- [[Recursion]] — background for how DP evolves from plain recursion.

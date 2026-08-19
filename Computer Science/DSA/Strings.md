@@ -7,6 +7,39 @@ A string is essentially an array of characters, so most array patterns (two poin
 
 ---
 
+
+
+## 🧭 String Pattern Decision Flow
+
+```mermaid
+flowchart TD
+    P["String Problem"] --> Sym{"Symmetry check\nor reversal?"}
+    Sym -->|Yes| TwoPtr["Two Pointer"]
+
+    P --> Sub{"Longest/shortest substring\nunder a condition?"}
+    Sub -->|Yes| Window["Sliding Window"]
+
+    P --> Freq{"Character frequency\nor anagram check?"}
+    Freq -->|Yes| Hash["Frequency Counting"]
+
+    P --> Match{"Find pattern occurrences\nin text?"}
+    Match -->|"Guaranteed O(n+m)"| KMP["KMP / Z-Algorithm"]
+    Match -->|"Hashing, multi-pattern"| RK["Rabin-Karp"]
+
+    P --> Prefix{"Prefix queries /\nautocomplete?"}
+    Prefix -->|Yes| Trie["Trie"]
+
+    P --> Compare{"Compare structural\nsimilarity of two strings?"}
+    Compare -->|Yes| DP["LCS / DP"]
+
+    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
+    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
+    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class P start
+    class Sym,Sub,Freq,Match,Prefix,Compare decision
+    class TwoPtr,Window,Hash,KMP,RK,Trie,DP pattern
+```
+
 ## Pattern 1: Two Pointer (Palindrome check, reverse)
 **When to apply:** checking symmetry, comparing from both ends, or in-place reversal.
 ```cpp

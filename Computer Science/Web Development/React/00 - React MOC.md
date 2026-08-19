@@ -46,6 +46,8 @@ These notes are structured sequentially. If you are learning React from scratch,
 ### 🏁 Chapter 1: The Foundations of Rendering
 * **[[01 - Introduction to React & Virtual DOM]]**
   * *Focus:* Library vs. Framework, SPA architecture, Declarative vs. Imperative code comparisons, Virtual DOM, Reconciliation, Diffing Algorithm, and the React Fiber engine.
+* **[[01a - React Installation & Project Setup]]**
+  * *Focus:* Package Managers (npm, pnpm, yarn), Build Tools & Bundlers (Vite, CRA, Parcel), Step-by-Step CLI commands, and a modern Decision Matrix for setups.
 * **[[02 - JSX & Building Blocks]]**
   * *Focus:* JavaScript XML syntax extension, compilation via SWC/Babel to `createElement`, JSX rules (fragments, tag requirements), and embedding expressions.
 * **[[03 - Components & Props]]**

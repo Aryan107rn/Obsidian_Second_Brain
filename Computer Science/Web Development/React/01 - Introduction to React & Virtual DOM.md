@@ -129,6 +129,7 @@ df -h /
 ---
 
 ## 🔗 Related Concepts
+- [[01a - React Installation & Project Setup]] — Setting up your first React application and package managers
 - [[02 - JSX & Building Blocks]] — How we write declarative markup in React
 - [[03 - Components & Props]] — Breaking down the declarative UI into reusable building blocks
 - [[04 - State & useState Hook]] — The reactive variables that trigger VDOM updates

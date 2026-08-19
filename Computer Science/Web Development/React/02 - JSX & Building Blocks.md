@@ -159,4 +159,5 @@ function Notification({ count }) {
 - [[01 - Introduction to React & Virtual DOM]] — The Virtual DOM tree built by JSX evaluations
 - [[03 - Components & Props]] — Components are functions returning JSX
 - [[04 - State & useState Hook]] — Hooking up state triggers fresh JSX evaluations
+- [[01a - React Installation & Project Setup]] — Setting up your React project and build systems
 - [[Package Managers and Build Tools]] — The bundling software hosting Babel/SWC transpilation steps
