@@ -11,14 +11,10 @@
             "id": "8d93e54daba61fdb",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Computer Science/Computer Science MOC.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Computer Science MOC"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -33,7 +29,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 57.205623901581724,
+        "dimension": 59.713945172824786,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +78,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 42.794376098418276,
+        "dimension": 40.286054827175214,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -230,32 +226,32 @@
   },
   "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
-    "Computer Science/DSA/Binary Search.md",
-    "Computer Science/Computer Science MOC.md",
+    "Computer Science/C++/03 - OOP in CPP.md",
+    "Computer Science/C++/04 - Templates Exceptions and Modern CPP Features.md",
+    "Computer Science/C++/05 - STL Containers.md",
+    "Computer Science/C++/07 - C++ Built-in Functions for DSA.md",
+    "Computer Science/C++/08 - DSA Patterns with STL.md",
     "Computer Science/C++/C++ MOC.md",
+    "Computer Science/C++/06 - STL Algorithms and Iterators.md",
+    "Computer Science/C++/02 - Pointers References and Memory Management.md",
+    "Computer Science/C++/01 - Data Types and Fundamentals.md",
+    "Computer Science/C++/00 - C++ MOC.md",
+    "Computer Science/C++/C++ Fundamentals.md",
+    "Computer Science/C++/C++ Core Language Features.md",
+    "Computer Science/C++/OOP in CPP.md",
+    "Computer Science/Web Development/React/09 - Global State Management & Context API.md",
+    "Computer Science/Web Development/React/08 - React Router & Navigation.md",
+    "Computer Science/C++/CPP Complete Revision.md",
+    "Computer Science/C++/C++ Built-in Functions for DSA.md",
+    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
+    "Computer Science/Web Development/React/00 - React MOC.md",
+    "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
+    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
+    "Computer Science/Computer Science MOC.md",
+    "Computer Science/DSA/Binary Search.md",
     "Computer Science/DSA/Backtracking.md",
     "Computer Science/DSA/Algorithms/Sieve of Eratosthenes.md",
     "Computer Science/DSA/Algorithms/Rat in a Maze.md",
-    "Computer Science/DSA/Algorithms/Merge K Sorted Lists.md",
-    "Computer Science/DSA/Algorithms/Maximum Product Subarray.md",
-    "Computer Science/DSA/Algorithms/Manacher's Algorithm.md",
-    "Computer Science/DSA/Algorithms/Kadane's Algorithm.md",
-    "Computer Science/DSA/Algorithms/Hash Collision Resolution.md",
-    "Computer Science/DSA/Algorithms/Euclidean Algorithm (GCD).md",
-    "Computer Science/DSA/Algorithms/Binary Search Variants.md",
-    "Computer Science/System Design/System Design MOC.md",
-    "Computer Science/DSA/DSA A2Z Sheet MOC.md",
-    "Computer Science/DSA/Algorithms/Difference Array.md",
-    "Computer Science/DSA/Algorithms/Dynamic Programming.md",
-    "Computer Science/DSA/Arrays.md",
-    "Computer Science/DSA/Linked List.md",
-    "Computer Science/Web Development/React/00 - React MOC.md",
-    "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
-    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
-    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
-    "Computer Science/Web Development/React/03 - Components & Props.md",
-    "Computer Science/Web Development/React/04 - State & useState Hook.md",
-    "Computer Science/Web Development/React/08 - React Router & Navigation.md",
     "Computer Science/DSA/Recursion",
     "Computer Science/DSA/Backtracking",
     "gemini-scribe/Scheduled-Tasks/scheduled-tasks-state.json",
