@@ -26,7 +26,7 @@ Computer Science/
 ## 📘 DSA (Interview Prep)
 Start here → [[DSA A2Z Sheet MOC]] — tracks coverage against Striver's A2Z sheet, shows what's done and what's queued.
 
-**Topic notes:** [[Arrays]] · [[Sorting Techniques]] · [[Binary Search]] · [[Strings]] · [[Linked List]] · [[Recursion]] · [[Backtracking]] · [[Hashing]] · [[Dynamic Programming]]
+**Topic notes:** [[Arrays]] · [[Sorting Techniques]] · [[Binary Search]] · [[Strings]] · [[Linked List]] · [[Recursion & Backtracking]] · [[Hashing]] · [[Dynamic Programming]]
 
 **Named algorithms:** see the `Algorithms/` folder — [[Kadane's Algorithm]], [[Sieve of Eratosthenes]], [[Euclidean Algorithm (GCD)]], [[Merge K Sorted Lists]], [[Manacher's Algorithm]], and others cross-referenced in the A2Z MOC.
 

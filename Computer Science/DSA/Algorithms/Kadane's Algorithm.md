@@ -116,4 +116,4 @@ Whenever a problem asks for the maximum (or minimum, with sign flipped) sum of a
 
 ## Related concepts
 - [[Dynamic Programming]] — Kadane's is a space-optimized 1-D DP; understanding it is a good bridge into the general DP mental model.
-- [[Recursion]] — background for how DP evolves from plain recursion.
+- [[Recursion & Backtracking|Recursion]] — background for how DP evolves from plain recursion.

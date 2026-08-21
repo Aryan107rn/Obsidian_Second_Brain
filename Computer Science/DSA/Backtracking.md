@@ -2,7 +2,7 @@
 
 ## What is it?
 
-Backtracking is a refinement of [[Recursion]] for exploring **all** possible configurations (subsets, permutations, combinations, paths, placements). At each step you try a choice, recurse deeper with that choice in effect, and then **undo the choice** ("backtrack") before trying the next option. It's brute-force search with early pruning of invalid branches.
+Backtracking is a refinement of [[Recursion & Backtracking|Recursion]] for exploring **all** possible configurations (subsets, permutations, combinations, paths, placements). At each step you try a choice, recurse deeper with that choice in effect, and then **undo the choice** ("backtrack") before trying the next option. It's brute-force search with early pruning of invalid branches.
 
 ## Why does it exist?
 
@@ -203,5 +203,5 @@ Fill a grid respecting row/column/box constraints — same family as N-Queens bu
 - A greedy locally-optimal choice is provably always safe → greedy is simpler and faster than exploring all configurations.
 
 ## Related concepts
-- [[Recursion]] — backtracking is recursion with an explicit "make choice → recurse → undo choice" structure.
+- [[Recursion & Backtracking|Recursion]] — backtracking is recursion with an explicit "make choice → recurse → undo choice" structure.
 - [[Dynamic Programming]] — when backtracking's subproblems overlap and only a count/optimum (not every configuration) is needed, DP is the faster tool.

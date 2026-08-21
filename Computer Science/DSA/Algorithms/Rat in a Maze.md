@@ -4,7 +4,7 @@
 A classic grid-backtracking problem: find (all, or one) path for a rat to travel from the top-left to bottom-right of a maze, moving only through open cells, avoiding blocked ones.
 
 ## Why it's a distinct pattern from N-Queens
-N-Queens ([[Backtracking]] Pattern 6) places one item per row with global constraints (columns, diagonals). Rat in a Maze instead **moves cell-to-cell** and must track a visited-set to avoid revisiting cells in the current path — the general template for **grid/graph path-finding backtracking problems** (word search, path with obstacles, etc.).
+N-Queens ([[Recursion & Backtracking|Backtracking]] Pattern 6) places one item per row with global constraints (columns, diagonals). Rat in a Maze instead **moves cell-to-cell** and must track a visited-set to avoid revisiting cells in the current path — the general template for **grid/graph path-finding backtracking problems** (word search, path with obstacles, etc.).
 
 ## How it works
 At each cell, try each allowed direction (typically down and right, or all 4 directions depending on the problem). If the move is valid (in bounds, not blocked, not already visited in the current path), mark it visited, recurse, then **unmark** it on the way back (backtrack) so other paths can use that cell.
@@ -46,4 +46,4 @@ Grid traversal problems needing **all paths** or path existence under movement/o
 - Confusing "find one path" (return `bool`, short-circuit on first success — see Backtracking Pattern 7's boolean-signal style) with "find all paths" (accumulate into `result`, don't short-circuit) — using the wrong return-type style for the actual requirement.
 
 ## Related concepts
-- [[Backtracking]] — this is the grid/graph specialization of the same "choose → recurse → undo" template (Pattern 1), applied to movement instead of inclusion/exclusion.
+- [[Recursion & Backtracking|Backtracking]] — this is the grid/graph specialization of the same "choose → recurse → undo" template (Pattern 1), applied to movement instead of inclusion/exclusion.

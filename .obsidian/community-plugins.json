@@ -1,6 +1,5 @@
 [
   "vault-as-mcp",
-  "mcp-tools-istefox",
   "templater-obsidian",
   "dataview",
   "omnisearch",
@@ -15,5 +14,6 @@
   "mermaid-icons",
   "beauty-diagram",
   "mermaid-flow",
-  "beautiful-mermaid-renderer"
+  "beautiful-mermaid-renderer",
+  "mcp-tools-istefox"
 ]

@@ -48,4 +48,4 @@ Any problem needing GCD/LCM — simplifying fractions, finding a common period, 
 - Off-by-one: `gcd(a, 0) = a`, not `gcd(a,0) = 0` — a common transcription error.
 
 ## Related concepts
-- [[Recursion]] — this is a clean textbook example of the "shrink toward base case" recursive structure (Pattern 1).
+- [[Recursion & Backtracking|Recursion]] — this is a clean textbook example of the "shrink toward base case" recursive structure (Pattern 1).

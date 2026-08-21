@@ -22,8 +22,7 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 - ✅ [[Linked List]]
 
 ## Step 7 — Recursion & Backtracking
-- ✅ [[Recursion]]
-- ✅ [[Backtracking]]
+- ✅ [[Recursion & Backtracking]]
 
 ## Step 8 — Bit Manipulation
 - ⬜ Bit Manipulation (AND/OR/XOR tricks, bitmasking, subsets via bitmask)
@@ -78,7 +77,7 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 
 ## Named-Algorithm Coverage (cross-referenced against your algorithm list)
 
-Most named algorithms you listed already live as **patterns inside topic notes** (e.g. Kadane's, Two Pointer, Sliding Window in [[Arrays]]; KMP, Rabin-Karp, Trie in [[Strings]]; N-Queens, Subsets in [[Backtracking]]). The following got **dedicated notes** in `Algorithms/` since they weren't covered anywhere:
+Most named algorithms you listed already live as **patterns inside topic notes** (e.g. Kadane's, Two Pointer, Sliding Window in [[Arrays]]; KMP, Rabin-Karp, Trie in [[Strings]]; N-Queens, Subsets in [[Recursion & Backtracking|Backtracking]]). The following got **dedicated notes** in `Algorithms/` since they weren't covered anywhere:
 
 - ✅ [[Sieve of Eratosthenes]]
 - ✅ [[Difference Array]]

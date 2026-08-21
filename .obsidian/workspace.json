@@ -11,10 +11,14 @@
             "id": "8d93e54daba61fdb",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Computer Science/DSA/Arrays.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Arrays"
             }
           }
         ]
@@ -94,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 345.15559005737305
+    "width": 332.5546684265137
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -224,18 +228,23 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "8d93e54daba61fdb",
+  "active": "614972a4b8f98990",
   "lastOpenFiles": [
-    "Computer Science/C++/03 - OOP in CPP.md",
+    "Computer Science/DSA/Arrays.md",
     "Computer Science/C++/04 - Templates Exceptions and Modern CPP Features.md",
-    "Computer Science/C++/05 - STL Containers.md",
-    "Computer Science/C++/07 - C++ Built-in Functions for DSA.md",
-    "Computer Science/C++/08 - DSA Patterns with STL.md",
-    "Computer Science/C++/C++ MOC.md",
-    "Computer Science/C++/06 - STL Algorithms and Iterators.md",
+    "Computer Science/DSA/Recursion.md",
+    "Computer Science/DSA/Hashing.md",
+    "Computer Science/DSA/Backtracking.md",
+    "Computer Science/C++/03 - OOP in CPP.md",
     "Computer Science/C++/02 - Pointers References and Memory Management.md",
     "Computer Science/C++/01 - Data Types and Fundamentals.md",
     "Computer Science/C++/00 - C++ MOC.md",
+    "Computer Science/C++/08 - DSA Patterns with STL.md",
+    "Computer Science/C++/07 - C++ Built-in Functions for DSA.md",
+    "Computer Science/C++/06 - STL Algorithms and Iterators.md",
+    "Computer Science/C++/05 - STL Containers.md",
+    "Computer Science/DSA/Linked List.md",
+    "Computer Science/C++/C++ MOC.md",
     "Computer Science/C++/C++ Fundamentals.md",
     "Computer Science/C++/C++ Core Language Features.md",
     "Computer Science/C++/OOP in CPP.md",
@@ -247,11 +256,6 @@
     "Computer Science/Web Development/React/00 - React MOC.md",
     "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
     "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
-    "Computer Science/Computer Science MOC.md",
-    "Computer Science/DSA/Binary Search.md",
-    "Computer Science/DSA/Backtracking.md",
-    "Computer Science/DSA/Algorithms/Sieve of Eratosthenes.md",
-    "Computer Science/DSA/Algorithms/Rat in a Maze.md",
     "Computer Science/DSA/Recursion",
     "Computer Science/DSA/Backtracking",
     "gemini-scribe/Scheduled-Tasks/scheduled-tasks-state.json",

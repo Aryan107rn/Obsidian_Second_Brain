@@ -174,6 +174,6 @@ long long fib(int n) {
 - **Forgetting to memoize inside recursion** — writing the recursive solution but forgetting to check/store in the cache turns it back into plain (slow) recursion.
 
 ## Related concepts
-- [[Recursion]] — DP with memoization is recursion + caching; understanding plain recursion is a prerequisite.
-- [[Backtracking]] — when subproblems overlap and only an optimum/count is needed (not every configuration), DP replaces backtracking for speed.
+- [[Recursion & Backtracking|Recursion]] — DP with memoization is recursion + caching; understanding plain recursion is a prerequisite.
+- [[Recursion & Backtracking|Backtracking]] — when subproblems overlap and only an optimum/count is needed (not every configuration), DP replaces backtracking for speed.
 - [[Kadane's Algorithm]] — a concrete, space-optimized 1-D DP example; good first worked problem for seeing the DP mental model in action.

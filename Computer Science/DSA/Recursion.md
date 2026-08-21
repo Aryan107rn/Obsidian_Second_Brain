@@ -126,7 +126,7 @@ Full tree traversal/recursion patterns belong in a dedicated Trees note (queued 
 - Splitting in half each call for a log-time solution → **Divide and conquer (Pattern 3)**
 - Recursion recomputing the same subproblem repeatedly → **Memoization / top-down DP (Pattern 4)**
 - Naturally nested/self-similar structure (trees, nested lists) → **Structural recursion (Pattern 5)**
-- Need to generate/enumerate **all** valid configurations under constraints → not this note, see [[Backtracking]]
+- Need to generate/enumerate **all** valid configurations under constraints → not this note, see [[Recursion & Backtracking|Backtracking]]
 
 ## Common mistakes
 
@@ -137,7 +137,7 @@ Full tree traversal/recursion patterns belong in a dedicated Trees note (queued 
 - Integer overflow when halving/negating bounds near `INT_MIN`/`INT_MAX` in divide-and-conquer recursion (see Pattern 3).
 
 ## Related concepts
-- [[Backtracking]] — a specialized form of recursion for exhaustively exploring configurations, with explicit "undo" steps.
+- [[Recursion & Backtracking|Backtracking]] — a specialized form of recursion for exhaustively exploring configurations, with explicit "undo" steps.
 - [[Dynamic Programming]] — memoized recursion generalized into a full technique (top-down and bottom-up).
 - [[Linked List]] — recursive reversal/traversal directly uses Pattern 2.
 - [[Arrays]], [[Strings]] — many recursive patterns operate on these structures.
