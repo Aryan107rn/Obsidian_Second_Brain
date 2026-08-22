@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/DSA/Arrays.md",
+                "file": "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Arrays"
+              "title": "01 - Introduction to React & Virtual DOM"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 59.713945172824786,
+        "dimension": 58.76042908224076,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 40.286054827175214,
+        "dimension": 41.23957091775924,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 332.5546684265137
+    "width": 330.80012130737305
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -228,14 +228,24 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "614972a4b8f98990",
+  "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
+    "Pasted image 20260822152721.png",
+    "Computer Science/Web Development/React/04 - State & useState Hook.md",
+    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
+    "Pasted image 20260822145332.png",
+    "Computer Science/Web Development/React/00 - React MOC.md",
+    "Computer Science/DSA/Recursion & Backtracking.md",
+    "Computer Science/DSA/Sorting Techniques.md",
+    "Computer Science/Linux.md",
+    "Computer Science/Computer Science MOC.md",
+    "Branching Strategies.md",
+    "Computer Science/C++/03 - OOP in CPP.md",
+    "Computer Science/DSA/Backtracking.md",
     "Computer Science/DSA/Arrays.md",
     "Computer Science/C++/04 - Templates Exceptions and Modern CPP Features.md",
     "Computer Science/DSA/Recursion.md",
     "Computer Science/DSA/Hashing.md",
-    "Computer Science/DSA/Backtracking.md",
-    "Computer Science/C++/03 - OOP in CPP.md",
     "Computer Science/C++/02 - Pointers References and Memory Management.md",
     "Computer Science/C++/01 - Data Types and Fundamentals.md",
     "Computer Science/C++/00 - C++ MOC.md",
@@ -247,15 +257,6 @@
     "Computer Science/C++/C++ MOC.md",
     "Computer Science/C++/C++ Fundamentals.md",
     "Computer Science/C++/C++ Core Language Features.md",
-    "Computer Science/C++/OOP in CPP.md",
-    "Computer Science/Web Development/React/09 - Global State Management & Context API.md",
-    "Computer Science/Web Development/React/08 - React Router & Navigation.md",
-    "Computer Science/C++/CPP Complete Revision.md",
-    "Computer Science/C++/C++ Built-in Functions for DSA.md",
-    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
-    "Computer Science/Web Development/React/00 - React MOC.md",
-    "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
-    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
     "Computer Science/DSA/Recursion",
     "Computer Science/DSA/Backtracking",
     "gemini-scribe/Scheduled-Tasks/scheduled-tasks-state.json",
@@ -275,7 +276,6 @@
     "attachments/dynamic-programming-memoization.png",
     "attachments/linux-filesystem-hierarchy.svg",
     "attachments/js-async-promises.svg",
-    "attachments/js-scope-hoisting.svg",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]

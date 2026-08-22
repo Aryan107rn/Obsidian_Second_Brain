@@ -13,6 +13,7 @@ created: 2026-08-15
 ### ⚔️ Library vs. Framework
 * **React is a Library:** It focus solely on the "View" layer of an application. It does not dictate how you do routing, global state management, or API fetching. You have the freedom to choose your own tools (e.g., React Router, Zustand, Axios).
 * **Frameworks (e.g., Angular, NestJS):** Provide a complete, opinionated, out-of-the-box solution (routing, HTTP client, state management, forms) with strict conventions.
+* ![[Pasted image 20260822145332.png]]
 
 ### 🌐 SPA vs. MPA
 * **Single Page Application (SPA):** React typically builds SPAs. The browser loads a single HTML file and dynamically updates the page using JavaScript as the user interacts. Transitions are instantaneous, with no full-page reloads.
@@ -55,7 +56,7 @@ graph TD
     Patch --> Commit[5. Apply Changes to Real DOM in one batch]
     Commit --> Paint[6. Browser Repaints Screen]
 ```
-
+![[Pasted image 20260822152721.png]]
 #### The Heuristic Diffing Algorithm ($O(N)$ Complexity)
 Normally, comparing two trees has a complexity of $O(N^3)$. React implements an incredibly smart $O(N)$ heuristic algorithm based on two assumptions:
 1. **Two elements of different types will produce different trees:** If a `<div>` is replaced by a `<span>`, React destroys the entire old subtree and builds a new one from scratch.

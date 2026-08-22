@@ -4,7 +4,7 @@ aliases: [React.js, ReactJS, React Roadmap]
 created: 2026-08-09
 updated: 2026-08-17
 ---
-
+                          
 # React — Declarative UI & Component Architecture (MOC)
 
 Welcome to the **Complete, Structured React Guide**. This curriculum is designed from top to bottom to give you both the deep theoretical foundation required to ace frontend placements/interviews, and the practical software engineering knowledge required to architect and build robust, modern production applications.
