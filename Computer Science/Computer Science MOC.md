@@ -38,6 +38,7 @@ Start here → [[C++ MOC]] — language fundamentals, memory management, OOP, an
 ## 🌐 Web Development
 
 - [[JavaScript MOC]] — core language, async, closures, event loop
+- [[TypeScript MOC]] — static types, type-level programming, generics, compiler mechanics
 - [[00 - React MOC|React MOC]] — components through advanced hooks, testing, Tailwind
 - [[Git and GitHub|Git & GitHub MOC]] — version control workflow, branching, rebase, stash
 - [[API|API MOC]] — REST, GraphQL, gRPC, WebSocket, SOAP — architecture and protocol comparison

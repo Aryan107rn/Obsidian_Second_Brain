@@ -17,6 +17,7 @@ flowchart TD
     CS --> Web["Web Development"]
     CS --> Sys["System Design"]
     Web --> JS["JavaScript"]
+    Web --> TS["TypeScript"]
     Web --> React["React"]
     Web --> APIs["APIs"]
     Web --> Git["Git"]
@@ -40,6 +41,7 @@ flowchart TD
 
 - [[Computer Science/System Design/System Design MOC|System Design MOC]]
 - [[Computer Science/Web Development/JavaScript/JavaScript MOC|JavaScript MOC]]
+- [[Computer Science/Web Development/TypeScript/TypeScript MOC|TypeScript MOC]]
 - [[Computer Science/Web Development/React/00 - React MOC|React MOC]]
 - [[Computer Science/Web Development/APIs/API|API Master Guide]]
 
