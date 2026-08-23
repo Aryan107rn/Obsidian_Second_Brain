@@ -114,6 +114,7 @@ class BankAccount {
 ---
 
 ## 🔗 Related Concepts
+
 - [[Closures]] — Alternative pattern for data privacy
 - [[this Keyword]] — How execution context works inside methods
 - [[Objects Destructuring Spread Rest]] — Shallow copying vs. prototype linking

@@ -11,12 +11,14 @@ created: 2026-08-08
 ## The 4 Binding Rules (in order of precedence)
 
 ### 1. Default Binding (plain function call)
+
 ```javascript
 function show() { console.log(this); }
 show(); // `window`/`global` in non-strict mode, `undefined` in strict mode
 ```
 
 ### 2. Implicit Binding (called as a method)
+
 ```javascript
 const obj = {
   name: "Alice",
@@ -26,6 +28,7 @@ obj.greet(); // "Alice" — `this` = the object before the dot
 ```
 
 ### 3. Explicit Binding (`call`, `apply`, `bind`)
+
 ```javascript
 function greet(greeting) { console.log(`${greeting}, ${this.name}`); }
 const person = { name: "Bob" };
@@ -37,6 +40,7 @@ bound("Hey");                          // "Hey, Bob" — bind returns a new func
 ```
 
 ### 4. `new` Binding (constructor call)
+
 ```javascript
 function Person(name) { this.name = name; }
 const p = new Person("Carol");
@@ -97,6 +101,7 @@ fn(); // undefined — `this` lost because it's now a plain function call
 - `bind()` returns a new function; `call()`/`apply()` invoke immediately.
 
 ## Related Concepts
+
 - [[Closures]] — arrow functions rely on lexical scoping like closures do
 - [[Functions in JavaScript]] — regular vs arrow function differences
 - [[ES6 Classes and OOP]] — `this` inside class methods

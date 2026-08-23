@@ -23,6 +23,7 @@ In traditional websites, navigating between pages requires fetching an entirely 
 ## 🛠️ Setting Up React Router (v6+)
 
 Install the package via npm/pnpm first:
+
 ```bash
 npm install react-router-dom
 ```
@@ -39,6 +40,7 @@ graph TD
 ```
 
 ### Complete Code Implementation
+
 ```jsx
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 
@@ -51,7 +53,7 @@ export default function App() {
       <nav>
         {/* Link prevents page refresh, unlike <a href> */}
         <Link to="/">Home</Link>
-        
+
         {/* NavLink automatically adds an "active" class when URL matches 'to' */}
         <NavLink to="/about" className={({ isActive }) => isActive ? "active-link" : ""}>
           About
@@ -75,6 +77,7 @@ export default function App() {
 Real-world projects require routes that adapt to dynamic data (e.g., fetching a product based on its ID in the URL `/product/123`).
 
 ### 1. URL Parameters (`useParams`)
+
 Define parameters in the path with a colon prefix (`:parameterName`).
 
 ```jsx
@@ -93,6 +96,7 @@ export function ProductDetail() {
 ```
 
 ### 2. Query Parameters (`useSearchParams`)
+
 Used for optional routing data like search queries, page pagination, and filters (e.g. `/shop?category=shoes&sort=price`).
 
 ```jsx
@@ -114,6 +118,7 @@ export function SearchPage() {
 ```
 
 ### 3. Programmatic Navigation (`useNavigate`)
+
 Sometimes, you need to redirect users to a new page automatically after an action (e.g., redirecting to the `/dashboard` after a successful login).
 
 ```jsx
@@ -195,7 +200,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      
+
       {/* Protected Layout Area */}
       <Route element={<ProtectedRoute isAuthenticated={userLoggedIn} />}>
         <Route path="/dashboard" element={<Dashboard />} />
@@ -211,20 +216,25 @@ export function App() {
 ## 💼 Placement & Interview Q&A
 
 ### Q1: How does client-side routing work under the hood without reloading the browser page?
+
 **Answer:** It uses the HTML5 **History API** (`history.pushState` and `history.replaceState`) and the `popstate` event. These features allow JavaScript to manipulate the browser’s address bar URL programmatically without forcing a server request. The router listens for URL changes and immediately swaps out the visible React component tree in memory.
 
 ### Q2: What is the purpose of the `<Outlet />` component?
+
 **Answer:** The `<Outlet />` component is a placeholder component used in parent layouts. It tells React Router exactly where to render child components of a nested route. Without `<Outlet />`, the child routes of a nested path will not render on screen.
 
 ### Q3: What is the difference between `<Link>` and a traditional HTML `<a>` tag in React?
-**Answer:** 
+
+**Answer:**
 * A traditional `<a>` tag triggers a default browser reload behavior, clearing the current React application state and re-fetching the index HTML.
 * The `<Link>` (and `<NavLink>`) component intercepts the default click event, blocks the browser reload, and updates the URL smoothly, maintaining the React in-memory state.
 
 ### Q4: What is the difference between `Link` and `NavLink`?
+
 **Answer:** Both route to a destination. However, `<NavLink>` is a specialized subclass of `<Link>` that has access to the current routing match. It allows developers to dynamically apply custom styling or CSS active-classes (`.active`) to highlight which link corresponds to the currently active page.
 
 ### Q5: How do you handle redirection programmatically vs. declaratively in React Router?
+
 **Answer:**
 * **Programmatically:** Use the `useNavigate` hook inside click or submit event handler functions. Excellent for action-driven redirects (e.g., `navigate("/home")`).
 * **Declaratively:** Use the `<Navigate to="/path" />` component within rendering code. Excellent for state-driven conditions (e.g., checking authentication inside a Protected Route structure and returning a redirect component).
@@ -232,6 +242,7 @@ export function App() {
 ---
 
 ## 🔗 Related Concepts
+
 - [[03 - Components & Props]] — Passing configuration to guarded route layouts
 - [[05 - Hooks & useEffect Hook]] — Query parameters trigger effects
 - [[09 - Global State Management & Context API]] — Storing authentication state parsed by router guards

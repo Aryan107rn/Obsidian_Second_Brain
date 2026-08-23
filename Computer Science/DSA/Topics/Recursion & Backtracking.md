@@ -1,8 +1,7 @@
 ---
 aliases: [Recursion, Backtracking]
 ---
-flowchart TD
-Start --> Stop
+
 # Recursion & Backtracking
 
 ## What is it?
@@ -69,13 +68,17 @@ flowchart TD
 
 Every ⚠️ node is the **same subproblem recomputed from scratch**. This is *why* memoization exists (Pattern 4 below), and it's the same branching shape backtracking uses to enumerate answers — except backtracking's branches are *choices*, not overlapping subproblems.
 
-**Rule of thumb:** if a function calls itself once → think "stack of frames." If it calls itself in a loop or multiple times → think "tree" and ask whether the branches overlap (→ memoize) or need to each be explored fully (→ backtrack).
+> [!tip] Rule of thumb
+> if a function calls itself once → think "stack of frames." If it calls itself in a loop or multiple times → think "tree" and ask whether the branches overlap (→ memoize) or need to each be explored fully (→ backtrack).
 
 ---
 
 # PART A — Plain Recursion (returns one answer)
 
 ## Pattern 1 — Basic structure
+
+> [!info] Difficulty
+> Easy
 
 ```cpp
 int factorial(int n) {
@@ -87,6 +90,9 @@ int factorial(int n) {
 
 ## Pattern 2 — Reduce problem size by 1 (arrays/strings)
 
+> [!info] Difficulty
+> Easy
+
 "Solve for the first element + recurse on the rest."
 
 ```cpp
@@ -97,7 +103,8 @@ int sumArray(vector<int>& a, int i) {
 ```
 Time O(n), Space O(n) call stack. Generalizes directly to [[Linked List]] reversal.
 
-**Reverse a Stack using recursion** (no extra stack/array allowed):
+**Reverse a Stack using recursion** (no extra stack/array allowed) — **Difficulty: Medium**:
+
 ```cpp
 void insertAtBottom(stack<int>& st, int x) {
     if (st.empty()) { st.push(x); return; }
@@ -113,7 +120,8 @@ void reverseStack(stack<int>& st) {
 }
 ```
 
-**Sort a Stack using recursion** — same skeleton, `insertAtBottom` becomes "insert in sorted position":
+**Sort a Stack using recursion** — same skeleton, `insertAtBottom` becomes "insert in sorted position" — **Difficulty: Medium**:
+
 ```cpp
 void insertSorted(stack<int>& st, int x) {
     if (st.empty() || st.top() <= x) { st.push(x); return; }
@@ -129,7 +137,8 @@ void sortStack(stack<int>& st) {
 }
 ```
 
-**Recursive Implementation of atoi()** — recurse over digit characters, carrying the accumulated value:
+**Recursive Implementation of atoi()** — **Difficulty: Medium** — recurse over digit characters, carrying the accumulated value:
+
 ```cpp
 long atoiHelper(string& s, int i, long acc, int sign) {
     if (i == s.size() || !isdigit(s[i])) return acc * sign;
@@ -148,7 +157,11 @@ int myAtoi(string s) {
 
 ## Pattern 3 — Divide and conquer (halve instead of shrink by 1)
 
+> [!info] Difficulty
+> Medium
+
 **Pow(x, n)** — turns O(n) recursion into O(log n) by splitting in half each call:
+
 ```cpp
 double power(double x, long long n) {
     if (n == 0) return 1;
@@ -163,7 +176,8 @@ double myPow(double x, int n) {
 }
 ```
 
-**Count Good Numbers** — same fast-exponentiation idea, combined with combinatorics (even indices: 5 even-digit choices `{0,2,4,6,8}`; odd indices: 4 prime-digit choices `{2,3,5,7}`):
+**Count Good Numbers** — **Difficulty: Medium** — same fast-exponentiation idea, combined with combinatorics (even indices: 5 even-digit choices `{0,2,4,6,8}`; odd indices: 4 prime-digit choices `{2,3,5,7}`):
+
 ```cpp
 const int MOD = 1e9 + 7;
 long long power(long long x, long long n) {
@@ -180,7 +194,11 @@ int countGoodNumbers(long long n) {
 
 ## Pattern 4 — Memoization (recursion + caching)
 
+> [!info] Difficulty
+> Easy
+
 Use when a recursive call **recomputes the same subproblem repeatedly** — see the fib(4) tree above; every ⚠️ node becomes an O(1) cache lookup instead.
+
 ```cpp
 unordered_map<int, long long> memo;
 long long fib(int n) {
@@ -192,6 +210,9 @@ long long fib(int n) {
 O(n) with memo vs O(2ⁿ) without. This is literally top-down DP — see [[Dynamic Programming]].
 
 ## Pattern 5 — Recursion on trees (preview)
+
+> [!info] Difficulty
+> Easy
 
 ```cpp
 int height(TreeNode* root) {
@@ -258,7 +279,8 @@ void f(vector<int>& a, int idx, /* accumulated state */, /* result */) {
 }
 ```
 
-**Count all subsequences with sum K:**
+**Count all subsequences with sum K** — **Difficulty: Medium**:
+
 ```cpp
 int countSubseqSumK(vector<int>& a, int idx, int target) {
     if (idx == a.size()) return target == 0 ? 1 : 0;
@@ -268,7 +290,8 @@ int countSubseqSumK(vector<int>& a, int idx, int target) {
 }
 ```
 
-**Check if a subsequence with sum K exists** (short-circuit, boolean signal — same idea as Sudoku's `bool` return below):
+**Check if a subsequence with sum K exists** — **Difficulty: Medium** (short-circuit, boolean signal — same idea as Sudoku's `bool` return below):
+
 ```cpp
 bool subseqSumKExists(vector<int>& a, int idx, int target) {
     if (idx == a.size()) return target == 0;
@@ -278,7 +301,8 @@ bool subseqSumKExists(vector<int>& a, int idx, int target) {
 }
 ```
 
-**Subsets I** (no duplicates — same take/not-take, but *every* node is a valid answer, not just leaves):
+**Subsets I** (no duplicates — same take/not-take, but *every* node is a valid answer, not just leaves) — **Difficulty: Medium**:
+
 ```cpp
 void subsets(vector<int>& nums, int idx, vector<int>& path, vector<vector<int>>& result) {
     if (idx == nums.size()) { result.push_back(path); return; }
@@ -290,7 +314,8 @@ void subsets(vector<int>& nums, int idx, vector<int>& path, vector<vector<int>>&
 ```
 O(2ⁿ · n) time, O(n) recursion depth. Same "include or exclude" idea underlies 0/1 Knapsack DP.
 
-**Subsets II** (array has duplicates — need unique subsets only): sort first, then at each recursion level skip a duplicate value if it's not the *first* occurrence at that level.
+**Subsets II** (array has duplicates — need unique subsets only) — **Difficulty: Medium**: sort first, then at each recursion level skip a duplicate value if it's not the *first* occurrence at that level.
+
 ```cpp
 void subsetsII(vector<int>& nums, int idx, vector<int>& path, vector<vector<int>>& result) {
     result.push_back(path);
@@ -304,7 +329,8 @@ void subsetsII(vector<int>& nums, int idx, vector<int>& path, vector<vector<int>
 // call with nums sorted first
 ```
 
-**Combination Sum I** (reuse elements freely, sums to target):
+**Combination Sum I** (reuse elements freely, sums to target) — **Difficulty: Medium**:
+
 ```cpp
 void combinationSum(vector<int>& c, int target, int idx, vector<int>& path, vector<vector<int>>& result) {
     if (target == 0) { result.push_back(path); return; }
@@ -317,7 +343,8 @@ void combinationSum(vector<int>& c, int target, int idx, vector<int>& path, vect
 ```
 **Key lever:** staying at `idx` (vs `idx+1`) is what controls whether reuse is allowed.
 
-**Combination Sum II** (each element used once, array has duplicates, no duplicate combinations):
+**Combination Sum II** (each element used once, array has duplicates, no duplicate combinations) — **Difficulty: Medium**:
+
 ```cpp
 void combinationSum2(vector<int>& c, int target, int idx, vector<int>& path, vector<vector<int>>& result) {
     if (target == 0) { result.push_back(path); return; }
@@ -331,7 +358,8 @@ void combinationSum2(vector<int>& c, int target, int idx, vector<int>& path, vec
 // call with c sorted first
 ```
 
-**Combination Sum III** (exactly `k` numbers from 1–9 summing to `target`, each used once):
+**Combination Sum III** (exactly `k` numbers from 1–9 summing to `target`, each used once) — **Difficulty: Medium**:
+
 ```cpp
 void combinationSum3(int k, int target, int idx, vector<int>& path, vector<vector<int>>& result) {
     if ((int)path.size() == k) { if (target == 0) result.push_back(path); return; }
@@ -344,6 +372,9 @@ void combinationSum3(int k, int target, int idx, vector<int>& path, vector<vecto
 ```
 
 ## Permutations (order matters — different structure from take/not-take)
+
+> [!info] Difficulty
+> Medium
 
 ```cpp
 void permute(vector<int>& nums, vector<bool>& used, vector<int>& path, vector<vector<int>>& result) {
@@ -362,7 +393,11 @@ O(n! · n) time. `used[]` prevents repeats within one permutation. (Alternative:
 
 ## Generate Parentheses
 
+> [!info] Difficulty
+> Medium
+
 Track how many `(` and `)` are placed; a `)` is only legal while `close < open`.
+
 ```cpp
 void generate(int open, int close, int n, string& cur, vector<string>& result) {
     if ((int)cur.size() == 2 * n) { result.push_back(cur); return; }
@@ -371,9 +406,26 @@ void generate(int open, int close, int n, string& cur, vector<string>& result) {
 }
 ```
 
+```mermaid
+flowchart TD
+    Start["open=0, close=0, n=2"] --> A["'(' → open=1,close=0"]
+    A --> B["'(' → open=2,close=0"]
+    A --> C["')' → open=1,close=1"]
+    B --> D["')' → open=2,close=1"]
+    C --> E["'(' → open=2,close=1"]
+    D --> F["')' → '(())' ✅"]
+    E --> G["')' → '()()' ✅"]
+    classDef leaf fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
+    class F,G leaf
+```
+
 ## Generate Binary Strings Without Consecutive 1s
 
+> [!info] Difficulty
+> Medium
+
 Extra state to carry: the **last character placed**, since it constrains the next choice.
+
 ```cpp
 void generate(int n, char last, string& cur, vector<string>& result) {
     if ((int)cur.size() == n) { result.push_back(cur); return; }
@@ -390,7 +442,11 @@ void generate(int n, char last, string& cur, vector<string>& result) {
 
 ## Letter Combinations of a Phone Number
 
+> [!info] Difficulty
+> Medium
+
 Not a take/not-take binary choice — a `for` loop over *all mapped letters* at the current digit (cartesian product).
+
 ```cpp
 void combine(string& digits, int idx, string& cur, unordered_map<char,string>& m, vector<string>& result) {
     if (idx == (int)digits.size()) { result.push_back(cur); return; }
@@ -404,7 +460,11 @@ void combine(string& digits, int idx, string& cur, unordered_map<char,string>& m
 
 ## Palindrome Partitioning
 
+> [!info] Difficulty
+> Medium
+
 Choice = "where does the next partition end?" — try every possible cut, only recurse into cuts that are palindromes.
+
 ```cpp
 bool isPalin(string& s, int l, int r) { while (l < r) if (s[l++] != s[r--]) return false; return true; }
 void partition(string& s, int idx, vector<string>& path, vector<vector<string>>& result) {
@@ -420,6 +480,9 @@ void partition(string& s, int idx, vector<string>& path, vector<vector<string>>&
 ```
 
 ## 🧭 Word Search — grid backtracking (mark → recurse → unmark)
+
+> [!info] Difficulty
+> Medium
 
 ```mermaid
 flowchart TD
@@ -452,7 +515,11 @@ bool dfs(vector<vector<char>>& board, string& word, int i, int j, int k) {
 
 ## Word Break
 
+> [!info] Difficulty
+> Medium
+
 String segmentation: try every prefix as a "word," recurse on the rest. Memoize on `idx` — it's backtracking with **overlapping subproblems**, so plain recursion times out without a cache.
+
 ```cpp
 bool wordBreak(string& s, unordered_set<string>& dict, int idx, vector<int>& memo) {
     if (idx == (int)s.size()) return true;
@@ -467,7 +534,11 @@ bool wordBreak(string& s, unordered_set<string>& dict, int idx, vector<int>& mem
 
 ## N-Queens (constraint satisfaction)
 
+> [!info] Difficulty
+> Hard
+
 Place N non-attacking queens, one per row. The general pattern for board-placement problems with row/column/diagonal constraints.
+
 ```cpp
 bool isSafe(vector<string>& board, int row, int col, int n) {
     for (int i = 0; i < row; i++) if (board[i][col] == 'Q') return false;
@@ -490,11 +561,18 @@ void solveNQueens(vector<string>& board, int row, int n, vector<vector<string>>&
 
 ## Rat in a Maze
 
+> [!info] Difficulty
+> Medium
+
 Same "choose → recurse → undo" template applied to grid movement instead of inclusion/exclusion — see the dedicated [[Rat in a Maze]] note for the full walkthrough (visited-grid, 4-directional moves, path collection).
 
 ## M-Coloring Problem
 
+> [!info] Difficulty
+> Medium–Hard
+
 Assign one of `m` colors to each graph vertex so no edge connects same-colored vertices — same constraint-satisfaction shape as N-Queens, but constraint = adjacency instead of row/col/diagonal.
+
 ```cpp
 bool isSafeColor(vector<vector<int>>& graph, vector<int>& color, int node, int c, int n) {
     for (int i = 0; i < n; i++) if (graph[node][i] && color[i] == c) return false;
@@ -515,7 +593,11 @@ bool solve(vector<vector<int>>& graph, vector<int>& color, int node, int m, int 
 
 ## Sudoku Solver
 
+> [!info] Difficulty
+> Hard
+
 Same grid-constraint family as N-Queens, but returns `bool` instead of `void` — needed because we want *the first* complete solution, not every possibility, so a dead end must signal failure back up the call stack to try a different digit at the *previous* cell.
+
 ```cpp
 bool solveSudoku(vector<vector<char>>& board) {
     for (int i = 0; i < 9; i++) for (int j = 0; j < 9; j++) {
@@ -536,7 +618,11 @@ bool solveSudoku(vector<vector<char>>& board) {
 
 ## Expression Add Operators (hard)
 
+> [!info] Difficulty
+> Hard
+
 Insert `+ - *` between digits of a string to reach a target. Trickiest part: multiplication has higher precedence, so you must track `lastOperand` to "undo and redo" the last term when the next op is `*`.
+
 ```cpp
 void solve(string& num, long target, int idx, string path, long value, long lastOperand, vector<string>& result) {
     if (idx == (int)num.size()) { if (value == target) result.push_back(path); return; }
@@ -558,6 +644,7 @@ void solve(string& num, long target, int idx, string path, long value, long last
 ## Pruning — what makes backtracking tractable
 
 Check constraints as early as possible instead of generating a full invalid path and discarding it at the end.
+
 ```cpp
 if (target < 0) return;   // prune immediately, don't recurse deeper into a doomed branch
 ```
@@ -567,29 +654,29 @@ The gap between a backtracking solution that passes and one that times out is al
 
 ## Quick reference — pattern → trigger
 
-| Trigger in the problem | Pattern |
-|---|---|
-| Smaller subproblem + combine step | Basic recursion (Part A, 1–2) |
-| Halve the problem each call | Divide and conquer (Part A, 3) |
-| Same subproblem recomputed repeatedly | Memoization → top-down DP (Part A, 4) |
-| Naturally nested structure (trees, lists) | Structural recursion (Part A, 5) |
-| ALL subsets / include-exclude over indices | Take/not-take (Subsets I/II) |
-| ALL combinations summing to target, reuse OK | Combination Sum (stay at idx) |
-| ALL combinations, no reuse, has dupes | Combination Sum II (i+1, skip dup) |
-| Exactly k numbers 1–9 summing to target | Combination Sum III |
-| Count / check existence only, not enumerate | Return int/bool instead of collecting paths |
-| ALL orderings of elements | Permutations (`used[]` tracking) |
-| Balanced bracket sequences | Generate Parentheses (open/close counters) |
-| Binary strings with an adjacency constraint | Track `last` character as extra state |
-| Digit → letters mapping, all combos | Cartesian-product loop (Phone Number) |
-| Break string into palindromic pieces | Try every cut point + palindrome check |
-| Find word by moving through a grid | Mark/unmark visited cells (Word Search) |
-| Segment string into dictionary words | Backtracking + memo on failed indices |
-| Board placement, row/col/diagonal constraints | N-Queens style |
-| Grid movement, path must avoid revisits | Rat in a Maze style |
-| Graph vertex coloring | M-Coloring |
-| Fill grid, need first valid solution only | Return `bool`, short-circuit (Sudoku) |
-| Build expression to hit a target value | String-building backtracking + operand tracking |
+| Trigger in the problem | Pattern | Typical Difficulty |
+|---|---|---|
+| Smaller subproblem + combine step | Basic recursion (Part A, 1–2) | Easy |
+| Halve the problem each call | Divide and conquer (Part A, 3) | Medium |
+| Same subproblem recomputed repeatedly | Memoization → top-down DP (Part A, 4) | Easy–Medium |
+| Naturally nested structure (trees, lists) | Structural recursion (Part A, 5) | Easy |
+| ALL subsets / include-exclude over indices | Take/not-take (Subsets I/II) | Medium |
+| ALL combinations summing to target, reuse OK | Combination Sum (stay at idx) | Medium |
+| ALL combinations, no reuse, has dupes | Combination Sum II (i+1, skip dup) | Medium |
+| Exactly k numbers 1–9 summing to target | Combination Sum III | Medium |
+| Count / check existence only, not enumerate | Return int/bool instead of collecting paths | Medium |
+| ALL orderings of elements | Permutations (`used[]` tracking) | Medium |
+| Balanced bracket sequences | Generate Parentheses (open/close counters) | Medium |
+| Binary strings with an adjacency constraint | Track `last` character as extra state | Medium |
+| Digit → letters mapping, all combos | Cartesian-product loop (Phone Number) | Medium |
+| Break string into palindromic pieces | Try every cut point + palindrome check | Medium |
+| Find word by moving through a grid | Mark/unmark visited cells (Word Search) | Medium |
+| Segment string into dictionary words | Backtracking + memo on failed indices | Medium |
+| Board placement, row/col/diagonal constraints | N-Queens style | Hard |
+| Grid movement, path must avoid revisits | Rat in a Maze style | Medium |
+| Graph vertex coloring | M-Coloring | Medium–Hard |
+| Fill grid, need first valid solution only | Return `bool`, short-circuit (Sudoku) | Hard |
+| Build expression to hit a target value | String-building backtracking + operand tracking | Hard |
 
 ## Common mistakes
 
@@ -607,7 +694,8 @@ The gap between a backtracking solution that passes and one that times out is al
 - Only the **count or optimal value** is needed (not actual configurations) **and** subproblems overlap → [[Dynamic Programming]] is far faster — plain backtracking re-explores identical states.
 - A greedy locally-optimal choice is provably always safe → greedy beats exploring everything.
 
-## Related concepts
+## Related Concepts
+
 - [[Dynamic Programming]] — memoized recursion generalized into a full technique (top-down + bottom-up).
 - [[Linked List]] — recursive reversal/traversal uses the "reduce by 1" pattern directly.
 - [[Rat in a Maze]] — grid-movement backtracking, dedicated walkthrough.

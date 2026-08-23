@@ -35,6 +35,7 @@ Object.isFrozen(person);        // true
 ## Destructuring
 
 ### Object Destructuring
+
 ```javascript
 const user = { name: "Bob", age: 30, address: { city: "LA" } };
 
@@ -47,6 +48,7 @@ const { address: { city } } = user; // nested destructuring
 ```
 
 ### Array Destructuring
+
 ```javascript
 const [first, second, ...rest] = [1, 2, 3, 4, 5];
 console.log(first, second, rest); // 1 2 [3, 4, 5]
@@ -57,6 +59,7 @@ console.log(a, b); // 2 1
 ```
 
 ### Destructuring in Function Parameters
+
 ```javascript
 function printUser({ name, age = 18 }) {
   console.log(`${name} is ${age}`);
@@ -88,7 +91,8 @@ const { a, ...others } = { a: 1, b: 2, c: 3 };
 console.log(others); // { b: 2, c: 3 }
 ```
 
-**Rule of thumb:** spread is used where values are *expected* (array/object literal, function call); rest is used in *destructuring patterns* or function parameter lists.
+> [!tip] Rule of thumb
+> spread is used where values are *expected* (array/object literal, function call); rest is used in *destructuring patterns* or function parameter lists.
 
 ## Shallow Copy Gotcha
 
@@ -108,6 +112,7 @@ For a true deep copy: `structuredClone(original)` (modern) or `JSON.parse(JSON.s
 - `structuredClone()` is the modern built-in for deep cloning.
 
 ## Related Concepts
+
 - [[Variables and Data Types]] — reference vs value copying
 - [[Array Methods]] — spread used heavily with arrays
 - [[Functions in JavaScript]] — rest parameters, default parameters

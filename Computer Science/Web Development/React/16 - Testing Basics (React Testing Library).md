@@ -94,12 +94,14 @@ Walking through it:
 ## Interview Q&A
 
 ### Q1: What's the core philosophy behind React Testing Library, and why does it matter?
+
 **Answer:** RTL encourages testing components the way an actual user interacts with them — querying by visible text, labels, and accessible roles — rather than testing internal implementation details like state variables or class names. This matters because implementation-coupled tests break on harmless refactors (even when user-facing behavior hasn't changed), producing false failures and eroding trust in the test suite. Behavior-focused tests only fail when something a real user would notice actually breaks.
 
 ### Q2: Why prefer `userEvent` over `fireEvent` for simulating interactions?
+
 **Answer:** `fireEvent` dispatches a single, raw DOM event (e.g. just a `click` event), while `userEvent` simulates the complete sequence of events a real browser interaction produces (e.g. for a click: pointer move, mouse down, focus, mouse up, click). This means `userEvent` can catch bugs that only manifest through that full realistic sequence — e.g. issues with focus handling — that a raw `fireEvent` call would miss entirely.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[03 - Components & Props]] — what's being rendered and tested

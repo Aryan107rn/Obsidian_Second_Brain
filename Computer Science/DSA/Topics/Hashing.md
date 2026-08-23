@@ -8,7 +8,7 @@ Hashing is a technique that lets you check "does this value exist?", "how many t
 
 Arrays give O(1) access **by index**, but answering "is X present?" or "how many times does X occur?" requires scanning the whole array — O(n) per query. A hash table trades a bit of space for near-instant lookup **by value**. This single trade — turning O(n) search into O(1) search — is why hashing appears in an enormous fraction of DSA problems, especially ones with an O(n²) brute force that can drop to O(n).
 
-Internally, a hash function converts a key into an array index; collisions (two keys mapping to the same index) are handled via chaining or open addressing. In interviews you rarely need to implement this — just know that lookups are O(1) *average case*, but can degrade to O(n) worst case under heavy collisions (rarely relevant in practice).
+Internally, a hash function converts a key into an array index; collisions (two keys mapping to the same index) are handled via chaining or open addressing — see [[Hash Collision Resolution]] for the internals. In interviews you rarely need to implement this — just know that lookups are O(1) *average case*, but can degrade to O(n) worst case under heavy collisions (rarely relevant in practice).
 
 ## 🧭 Hashing Pattern Decision Flow
 
@@ -60,6 +60,9 @@ flowchart TD
 
 ## Pattern 1 — Frequency Counting
 
+> [!info] Difficulty
+> Easy
+
 Store `value → count` in one pass. Answers questions about how often something occurs.
 
 ```cpp
@@ -67,9 +70,13 @@ unordered_map<int,int> freq;
 for (int x : nums) freq[x]++;
 ```
 
-**Example — Valid Anagram:** build a frequency map from string A, then decrement while scanning string B. If every count returns to zero, they're anagrams.
+> [!example] Example — Valid Anagram
+> build a frequency map from string A, then decrement while scanning string B. If every count returns to zero, they're anagrams.
 
 ## Pattern 2 — Existence Check ("have I seen this before?")
+
+> [!info] Difficulty
+> Easy
 
 When you don't care about count, just presence, use a hash **set** — cheaper and clearer than a map.
 
@@ -81,9 +88,13 @@ for (int x : nums) {
 }
 ```
 
-**Example — Contains Duplicate:** exactly the snippet above.
+> [!example] Example — Contains Duplicate
+> exactly the snippet above.
 
 ## Pattern 3 — Complement / Two Sum Pattern
+
+> [!info] Difficulty
+> Easy–Medium
 
 **The single most important hashing pattern for interviews.** Instead of checking every pair (O(n²)), store what's been seen and check whether its **complement** (`target - current`) already exists — one O(n) pass.
 
@@ -99,6 +110,9 @@ for (int i = 0; i < nums.size(); i++) {
 This generalizes: **3Sum** fixes one number, then runs two-sum on the rest; **4Sum** fixes two.
 
 ## Pattern 4 — Prefix Sum + Hash Map (Subarray Sum Problems)
+
+> [!info] Difficulty
+> Medium
 
 **Key insight:** if `prefixSum[j] - prefixSum[i] = k`, then the subarray strictly between `i` and `j` sums to `k`. So while scanning, store `prefixSum → number of times seen`, and at each step check whether `prefixSum - k` has occurred before.
 
@@ -118,6 +132,9 @@ for (int x : nums) {
 
 ## Pattern 5 — Grouping by a Computed Key
 
+> [!info] Difficulty
+> Medium
+
 Compute a canonical "signature" per item and bucket items sharing that signature.
 
 ```cpp
@@ -129,9 +146,13 @@ for (string& s : strs) {
 }
 ```
 
-**Example — Group Anagrams:** words with the same sorted-letter signature are anagrams of each other.
+> [!example] Example — Group Anagrams
+> words with the same sorted-letter signature are anagrams of each other.
 
 ## Pattern 6 — Sliding Window + Hash Map
+
+> [!info] Difficulty
+> Medium–Hard
 
 Combines a hash map (frequency inside the *current window*) with two pointers. Expand the window from the right; when a constraint is violated, shrink from the left until valid again.
 
@@ -152,15 +173,23 @@ for (int right = 0; right < s.size(); right++) {
 
 ## Pattern 7 — Hashing in Graph/Tree Problems
 
+> [!info] Difficulty
+> Medium
+
 A hash map/set tracks **visited nodes** (avoiding infinite loops on cycles) or maps **original → cloned** nodes.
 
-**Example — Clone Graph:** `unordered_map<Node*, Node*> oldToNew` maps each original node to its clone, so if a node is revisited via a different path, you reuse the existing clone instead of creating a duplicate (which would break the graph structure).
+> [!example] Example — Clone Graph
+> `unordered_map<Node*, Node*> oldToNew` maps each original node to its clone, so if a node is revisited via a different path, you reuse the existing clone instead of creating a duplicate (which would break the graph structure).
 
 ## Pattern 8 — Custom Hashing (Non-Trivial Keys)
+
+> [!info] Difficulty
+> Medium
 
 C++'s `unordered_map`/`unordered_set` hash primitives (`int`, `string`) out of the box, but **not** `pair<int,int>` or custom structs — you'll get a compile error without a custom hash function.
 
 **Workaround (when bounds are known):** encode the compound key into a single integer.
+
 ```cpp
 // Hashing a 2D point (x, y) where 0 <= x, y < 100000
 long long key = (long long)x * 100000 + y;
@@ -168,6 +197,7 @@ unordered_map<long long, int> pointCount;
 ```
 
 **Proper way (custom hash struct, for general pairs):**
+
 ```cpp
 struct PairHash {
     size_t operator()(const pair<int,int>& p) const {
@@ -194,6 +224,8 @@ Interviewers sometimes specifically probe this — knowing default hashers don't
 - When you need sorted order of keys — use `map`/`set` (ordered) or sort explicitly instead.
 - When two-pointer or sliding window alone (without needing frequency tracking) already solves the problem in O(n) — don't add hashing complexity you don't need.
 
-## Related concepts
+## Related Concepts
+
 - [[Kadane's Algorithm]] — a different O(n) single-pass technique (no hashing), useful contrast for recognizing when hashing is/isn't the right tool.
 - [[Dynamic Programming]] — some DP problems use a hash map instead of an array for memoization when the state space is sparse or non-integer.
+- [[Hash Collision Resolution]] — what happens internally when two keys collide.

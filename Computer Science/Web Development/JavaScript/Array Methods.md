@@ -26,6 +26,7 @@ nums.reduce((acc, n) => acc + n, 0); // 15 — folds array into single value
 ```
 
 ### `reduce` — the swiss-army knife (build map/filter from it, group data, flatten, etc.)
+
 ```javascript
 // Sum
 nums.reduce((sum, n) => sum + n, 0); // 15
@@ -110,6 +111,7 @@ Array.prototype.myMap = function (callback) {
 - `Array.from`/spread are the modern way to convert iterables/array-likes to real arrays.
 
 ## Related Concepts
+
 - [[Functions in JavaScript]] — array methods are higher-order functions
 - [[Objects Destructuring Spread Rest]] — spread syntax used heavily with arrays
 - [[Common Coding Patterns]] — array manipulation shows up in most coding-round questions

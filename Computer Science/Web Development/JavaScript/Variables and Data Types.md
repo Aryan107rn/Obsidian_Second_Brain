@@ -92,11 +92,13 @@ Boolean("0")     // true — non-empty string is always truthy!
 - Primitives copy by value; objects copy by reference — this trips up interview candidates on "output" questions.
 
 ## Related Concepts
+
 - [[Scope and Hoisting]] — how `var`/`let`/`const` behave before their declaration line
 - [[Operators and Type Coercion]] — `==` vs `===` and implicit conversions
 - [[Objects Destructuring Spread Rest]] — working with reference types
 - [[JS Interview Questions and Tricky Outputs]]
 
 ## Open Questions / To Explore Later
+
 - Deep dive into IEEE 754 floating point precision issues (`0.1 + 0.2 !== 0.3`)
 - `Symbol` use cases in library design

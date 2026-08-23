@@ -33,8 +33,6 @@ current_sum = max(nums[i], current_sum + nums[i])
 
 Take whichever is bigger. Separately track `best_sum` = the best `current_sum` seen so far across the whole array — this is the actual answer, since the best subarray might end at any index, not necessarily the last one.
 
-
-
 ```mermaid
 flowchart TD
     Elem["Current element nums[i]"] --> Check{"current_sum + nums[i]\n>\nnums[i] alone?"}
@@ -98,22 +96,27 @@ int maxSubArray(vector<int>& nums) {
 ```
 
 ## Complexity
+
 - **Time:** O(n) — single pass.
 - **Space:** O(1) — two variables, no array.
 
-## When to use it
+## When To Use It
+
 Whenever a problem asks for the maximum (or minimum, with sign flipped) sum of a **contiguous** subarray or sub-segment. Recognize the pattern from phrases like "maximum sum subarray," "best contiguous run," "max profit over a window of consecutive days."
 
-## When NOT to use it
+## When Not To Use It
+
 - If the problem allows **non-contiguous** selection (any subset, not consecutive elements) — that's a different, simpler problem: just sum all positive numbers.
 - If the problem needs the subarray with additional constraints (e.g. fixed length, or "at most k negative numbers allowed") — those need a modified sliding-window or DP approach, not vanilla Kadane's.
 
-## Common mistakes / edge cases
+## Common Mistakes And Edge Cases
+
 - **All-negative arrays**: e.g. `[-3, -1, -2]`. Correct answer is `-1` (least negative single element), **not** `0`. Don't clamp `current_sum` to 0 unless the problem explicitly allows an empty subarray — doing so silently breaks all-negative inputs.
 - **Off-by-one initialization**: start both `current_sum` and `best_sum` at `nums[0]`, and loop from index `1` — starting both at `0` breaks the all-negative case.
 - **Needing the actual subarray (not just its sum)**: track a `start` index that resets to the current position whenever `current_sum` restarts, and a `best_start`/`best_end` pair updated alongside `best_sum`.
 - Don't confuse this with "maximum subsequence sum" (non-contiguous) — different problem entirely.
 
-## Related concepts
+## Related Concepts
+
 - [[Dynamic Programming]] — Kadane's is a space-optimized 1-D DP; understanding it is a good bridge into the general DP mental model.
 - [[Recursion & Backtracking|Recursion]] — background for how DP evolves from plain recursion.

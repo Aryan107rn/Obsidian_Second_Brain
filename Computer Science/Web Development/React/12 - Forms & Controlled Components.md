@@ -99,12 +99,14 @@ Note `defaultValue` instead of `value` — this just sets the *initial* DOM valu
 ## Interview Q&A
 
 ### Q1: What's the fundamental difference between controlled and uncontrolled components?
+
 **Answer:** In a controlled component, the input's displayed value comes from React state — every render, React explicitly sets `value`, so the input can never diverge from state. In an uncontrolled component, the DOM node holds its own value internally, and React only reads it on demand via a ref. Controlled components make React the single source of truth; uncontrolled components let the DOM be the source of truth.
 
 ### Q2: Why does React warn "a component is changing an uncontrolled input to be controlled"?
+
 **Answer:** This happens when an input's `value` prop starts as `undefined` or `null` (making it uncontrolled) and later becomes a defined string (making it controlled) across re-renders. React can't switch an input's control mode mid-lifetime cleanly, so it warns. Fix by always initializing state to a defined empty value (`""`) rather than `undefined`.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[04 - State & useState Hook]] — controlled inputs are driven by `useState`

@@ -1,6 +1,7 @@
 # Linked List
 
-## Concept
+## Core Concept
+
 A sequence of nodes where each node stores data + a pointer to the next node. Unlike arrays, memory isn't contiguous — no random access (O(n) to reach index i), but O(1) insertion/deletion once you're at the right node (no shifting needed).
 
 **When to apply linked lists over arrays:** frequent insertions/deletions at arbitrary positions, unknown/unbounded size, or when you specifically need O(1) splice/merge operations (no shifting cost).
@@ -33,6 +34,7 @@ flowchart LR
 ```
 
 ## Node structure
+
 ```cpp
 struct Node {
     int val;
@@ -47,6 +49,7 @@ struct DNode {           // doubly linked list
 ```
 
 ## Types
+
 - **Singly linked list:** each node points only forward. Traversal one-directional.
 - **Doubly linked list:** each node has `next` and `prev`. O(1) deletion given only a node pointer (no need to find predecessor), enables backward traversal. Used internally by `std::list`, LRU caches.
 - **Circular linked list:** last node points back to head instead of `nullptr`. Used for round-robin scheduling, circular buffers.
@@ -54,7 +57,13 @@ struct DNode {           // doubly linked list
 ---
 
 ## Pattern 1: Traversal & Basic Insert/Delete
-**When to apply:** foundational — almost every other pattern builds on this.
+
+> [!info] Difficulty
+> Easy
+
+> [!tip] When to apply
+> foundational — almost every other pattern builds on this.
+
 ```cpp
 void traverse(Node* head) {
     while (head) { cout << head->val << " "; head = head->next; }
@@ -72,11 +81,20 @@ Node* deleteHead(Node* head) {
     return head;
 }
 ```
-- Time: O(n) traversal, O(1) head insert/delete.
-- **Remember:** Always return/update the head pointer after head-modifying operations — the caller's original head reference becomes stale otherwise.
+
+> [!example] Complexity
+> O(n) traversal, O(1) head insert/delete.
+
+> [!warning] Remember
+> Always return/update the head pointer after head-modifying operations — the caller's original head reference becomes stale otherwise.
 
 ## Pattern 2: Reverse a Linked List
-**When to apply:** whenever a problem needs the list processed back-to-front, or as a subroutine (e.g. palindrome check, reverse in groups, add two numbers).
+
+> [!info] Difficulty
+> Easy–Medium
+
+> [!tip] When to apply
+> whenever a problem needs the list processed back-to-front, or as a subroutine (e.g. palindrome check, reverse in groups, add two numbers).
 
 ```mermaid
 flowchart LR
@@ -92,6 +110,7 @@ flowchart LR
 ```
 
 **Iterative** (preferred — O(1) space):
+
 ```cpp
 Node* reverseList(Node* head) {
     Node* prev = nullptr;
@@ -105,6 +124,7 @@ Node* reverseList(Node* head) {
 }
 ```
 **Recursive** (O(n) space due to call stack — good to know but avoid for huge lists, risk of stack overflow):
+
 ```cpp
 Node* reverseRecursive(Node* head) {
     if (!head || !head->next) return head;
@@ -114,11 +134,20 @@ Node* reverseRecursive(Node* head) {
     return newHead;
 }
 ```
-- Time: O(n), Space: O(1) iterative / O(n) recursive.
-- **Remember:** In the recursive version, you must set `head->next->next = head` then `head->next = nullptr` — forgetting the second line creates a cycle.
+
+> [!example] Complexity
+> O(n), Space: O(1) iterative / O(n) recursive.
+
+> [!warning] Remember
+> In the recursive version, you must set `head->next->next = head` then `head->next = nullptr` — forgetting the second line creates a cycle.
 
 ## Pattern 3: Slow-Fast Pointers (Floyd's Algorithm) — Find Middle
-**When to apply:** need the middle node in a single pass, without knowing the length upfront (avoids a separate length-counting pass).
+
+> [!info] Difficulty
+> Easy
+
+> [!tip] When to apply
+> need the middle node in a single pass, without knowing the length upfront (avoids a separate length-counting pass).
 
 ```mermaid
 flowchart TD
@@ -138,11 +167,20 @@ Node* findMiddle(Node* head) {
     return slow;   // middle (2nd middle for even-length list)
 }
 ```
-- Time: O(n) single pass, Space: O(1)
-- **Remember:** Fast moves 2x speed — when fast reaches the end, slow is at the middle. For even-length lists, this lands on the second middle node (adjust the `while` condition to `fast->next && fast->next->next` if you need the first middle).
+
+> [!example] Complexity
+> O(n) single pass, Space: O(1)
+
+> [!warning] Remember
+> Fast moves 2x speed — when fast reaches the end, slow is at the middle. For even-length lists, this lands on the second middle node (adjust the `while` condition to `fast->next && fast->next->next` if you need the first middle).
 
 ## Pattern 4: Cycle Detection (Floyd's Tortoise and Hare)
-**When to apply:** need to detect if a list has a cycle, and optionally find where the cycle begins — without extra space (hashset would work too but costs O(n) space).
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> need to detect if a list has a cycle, and optionally find where the cycle begins — without extra space (hashset would work too but costs O(n) space).
 
 ```mermaid
 flowchart LR
@@ -176,11 +214,21 @@ Node* detectCycleStart(Node* head) {
     return nullptr;
 }
 ```
-- Time: O(n), Space: O(1)
-- **Remember:** Why resetting `slow` to `head` finds the cycle start: the distance from head to cycle start equals the distance from the meeting point to the cycle start (provable via the math of when slow/fast meet) — this is the same core idea as the "find duplicate number" array pattern.
+
+> [!example] Complexity
+> O(n), Space: O(1)
+
+> [!warning] Remember
+> Why resetting `slow` to `head` finds the cycle start: the distance from head to cycle start equals the distance from the meeting point to the cycle start (provable via the math of when slow/fast meet) — this is the same core idea as the "find duplicate number" array pattern.
 
 ## Pattern 5: Merge Two Sorted Linked Lists
-**When to apply:** classic building block for merge sort on linked lists, and standalone "merge k lists" problems (do pairwise or use a heap).
+
+> [!info] Difficulty
+> Easy
+
+> [!tip] When to apply
+> classic building block for merge sort on linked lists, and standalone "merge k lists" problems (do pairwise or use a heap).
+
 ```cpp
 Node* mergeTwoLists(Node* l1, Node* l2) {
     Node dummy(0);
@@ -194,11 +242,21 @@ Node* mergeTwoLists(Node* l1, Node* l2) {
     return dummy.next;
 }
 ```
-- Time: O(n+m), Space: O(1) — pure pointer rewiring.
-- **Remember:** The **dummy node** trick avoids special-casing "what if the merged list is empty at the start" — always start with a dummy and return `dummy.next`. Use this trick constantly in linked list problems.
+
+> [!example] Complexity
+> O(n+m), Space: O(1) — pure pointer rewiring.
+
+> [!warning] Remember
+> The **dummy node** trick avoids special-casing "what if the merged list is empty at the start" — always start with a dummy and return `dummy.next`. Use this trick constantly in linked list problems.
 
 ## Pattern 6: Merge Sort on Linked List
-**When to apply:** need to sort a linked list — merge sort is preferred over quicksort here because linked lists don't have random access (no O(1) pivot access), and merge sort naturally works with sequential access, achieving O(1) extra space (unlike array merge sort's O(n)).
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> need to sort a linked list — merge sort is preferred over quicksort here because linked lists don't have random access (no O(1) pivot access), and merge sort naturally works with sequential access, achieving O(1) extra space (unlike array merge sort's O(n)).
+
 ```cpp
 Node* sortList(Node* head) {
     if (!head || !head->next) return head;
@@ -209,10 +267,18 @@ Node* sortList(Node* head) {
     return mergeTwoLists(sortList(head), sortList(mid));
 }
 ```
-- Time: O(n log n), Space: O(log n) recursion stack.
+
+> [!example] Complexity
+> O(n log n), Space: O(log n) recursion stack.
 
 ## Pattern 7: Remove Nth Node From End
-**When to apply:** need the nth-from-end node in one pass without first computing list length.
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> need the nth-from-end node in one pass without first computing list length.
+
 ```cpp
 Node* removeNthFromEnd(Node* head, int n) {
     Node dummy(0); dummy.next = head;
@@ -223,11 +289,21 @@ Node* removeNthFromEnd(Node* head, int n) {
     return dummy.next;
 }
 ```
-- Time: O(n) single pass, Space: O(1)
-- **Remember:** Gap-of-n technique — advance one pointer n steps first, then move both together; when the lead pointer hits the end, the trailing pointer is exactly n from the end. Same gap-pointer idea generalizes to many "kth from end" problems.
+
+> [!example] Complexity
+> O(n) single pass, Space: O(1)
+
+> [!warning] Remember
+> Gap-of-n technique — advance one pointer n steps first, then move both together; when the lead pointer hits the end, the trailing pointer is exactly n from the end. Same gap-pointer idea generalizes to many "kth from end" problems.
 
 ## Pattern 8: Palindrome Check
-**When to apply:** need to check if list reads the same forward and backward, ideally in O(1) space.
+
+> [!info] Difficulty
+> Easy–Medium
+
+> [!tip] When to apply
+> need to check if list reads the same forward and backward, ideally in O(1) space.
+
 ```cpp
 bool isPalindrome(Node* head) {
     Node* mid = findMiddle(head);
@@ -242,11 +318,21 @@ bool isPalindrome(Node* head) {
     return result;
 }
 ```
-- Time: O(n), Space: O(1)
-- **Remember:** Combines Pattern 3 (find middle) + Pattern 2 (reverse) — this composability is why those two patterns are worth memorizing cold.
+
+> [!example] Complexity
+> O(n), Space: O(1)
+
+> [!warning] Remember
+> Combines Pattern 3 (find middle) + Pattern 2 (reverse) — this composability is why those two patterns are worth memorizing cold.
 
 ## Pattern 9: Reverse in Groups of K
-**When to apply:** reverse the list in fixed-size chunks (e.g. K=3: reverse first 3, next 3, ...) — common as a "hard" interview variant of basic reversal.
+
+> [!info] Difficulty
+> Hard
+
+> [!tip] When to apply
+> reverse the list in fixed-size chunks (e.g. K=3: reverse first 3, next 3, ...) — common as a "hard" interview variant of basic reversal.
+
 ```cpp
 Node* reverseKGroup(Node* head, int k) {
     Node* node = head;
@@ -265,11 +351,21 @@ Node* reverseKGroup(Node* head, int k) {
     return prev;   // new head of this group
 }
 ```
-- Time: O(n), Space: O(n/k) recursion stack.
-- **Remember:** Must first verify k nodes actually exist before reversing — otherwise you'd reverse a partial final group, which is usually incorrect per problem spec.
+
+> [!example] Complexity
+> O(n), Space: O(n/k) recursion stack.
+
+> [!warning] Remember
+> Must first verify k nodes actually exist before reversing — otherwise you'd reverse a partial final group, which is usually incorrect per problem spec.
 
 ## Pattern 10: Intersection Point of Two Linked Lists
-**When to apply:** two lists may merge at some node and share a tail — find that node in O(1) space without knowing list lengths upfront.
+
+> [!info] Difficulty
+> Easy–Medium
+
+> [!tip] When to apply
+> two lists may merge at some node and share a tail — find that node in O(1) space without knowing list lengths upfront.
+
 ```cpp
 Node* getIntersectionNode(Node* headA, Node* headB) {
     Node* a = headA; Node* b = headB;
@@ -280,11 +376,21 @@ Node* getIntersectionNode(Node* headA, Node* headB) {
     return a;   // intersection node, or nullptr if none
 }
 ```
-- Time: O(m+n), Space: O(1)
-- **Remember:** The elegant trick: switching heads equalizes the total distance both pointers travel (m+n for each), so they arrive at the intersection point simultaneously. If no intersection, both hit `nullptr` at the same time and loop exits.
+
+> [!example] Complexity
+> O(m+n), Space: O(1)
+
+> [!warning] Remember
+> The elegant trick: switching heads equalizes the total distance both pointers travel (m+n for each), so they arrive at the intersection point simultaneously. If no intersection, both hit `nullptr` at the same time and loop exits.
 
 ## Pattern 11: Add Two Numbers (represented as linked lists, digit by digit)
-**When to apply:** numbers stored digit-by-digit in linked list nodes (common for arbitrary-precision arithmetic without overflow) — need to add them.
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> numbers stored digit-by-digit in linked list nodes (common for arbitrary-precision arithmetic without overflow) — need to add them.
+
 ```cpp
 Node* addTwoNumbers(Node* l1, Node* l2) {
     Node dummy(0); Node* tail = &dummy;
@@ -300,11 +406,20 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
     return dummy.next;
 }
 ```
-- Time: O(max(m,n)), Space: O(max(m,n)) for result.
-- **Remember:** Dummy node trick again + don't forget the final leftover carry (e.g. 5+5=10 needs one more node).
+
+> [!example] Complexity
+> O(max(m,n)), Space: O(max(m,n)) for result.
+
+> [!warning] Remember
+> Dummy node trick again + don't forget the final leftover carry (e.g. 5+5=10 needs one more node).
 
 ## Pattern 12: Clone a Linked List with Random Pointer
-**When to apply:** each node has an extra `random` pointer to any node in the list (or null) — need a deep copy.
+
+> [!info] Difficulty
+> Medium–Hard
+
+> [!tip] When to apply
+> each node has an extra `random` pointer to any node in the list (or null) — need a deep copy.
 
 ```mermaid
 flowchart LR
@@ -341,18 +456,40 @@ RNode* copyRandomList(RNode* head) {
     return newHead;
 }
 ```
-- Time: O(n), Space: O(1) extra (excluding output) — beats the naive O(n) hashmap approach on space.
-- **Remember:** The interleaving trick (`original -> clone -> original -> clone`) lets you access "the clone of X's random target" as `X->random->next` without a hashmap. This is a distinctive, reusable trick worth remembering by name.
+
+> [!example] Complexity
+> O(n), Space: O(1) extra (excluding output) — beats the naive O(n) hashmap approach on space.
+
+> [!warning] Remember
+> The interleaving trick (`original -> clone -> original -> clone`) lets you access "the clone of X's random target" as `X->random->next` without a hashmap. This is a distinctive, reusable trick worth remembering by name.
 
 ## Pattern 13: Flatten a Multilevel Linked List
-**When to apply:** nodes have both `next` and `child` pointers (child points to a separate sub-list) — need to flatten into a single-level list.
-**Intuition:** Recursively/iteratively flatten each child list and splice it in place between the current node and its next.
-- Time: O(n) total nodes, Space: O(d) recursion depth (d = nesting depth) or O(1) with iterative stack-based approach.
-- **Remember:** Use a stack (iterative DFS) to avoid deep recursion on heavily nested lists; push `next` before descending into `child` so `child` is processed first (LIFO order matches desired traversal).
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> nodes have both `next` and `child` pointers (child points to a separate sub-list) — need to flatten into a single-level list.
+
+> [!note] Intuition
+> Recursively/iteratively flatten each child list and splice it in place between the current node and its next.
+
+> [!example] Complexity
+> O(n) total nodes, Space: O(d) recursion depth (d = nesting depth) or O(1) with iterative stack-based approach.
+
+> [!warning] Remember
+> Use a stack (iterative DFS) to avoid deep recursion on heavily nested lists; push `next` before descending into `child` so `child` is processed first (LIFO order matches desired traversal).
 
 ## Pattern 14: LRU Cache (Doubly Linked List + Hash Map)
-**When to apply:** need O(1) get/put with eviction of the least-recently-used item — classic combination pattern, not just "linked list" but demonstrates DLL's key strength (O(1) removal from middle).
-**Intuition:** DLL keeps items ordered by recency (head = most recent, tail = least recent); hashmap maps key → node pointer for O(1) lookup. On access, unlink node and move to head (O(1) because DLL). On overflow, remove tail.
+
+> [!info] Difficulty
+> Medium–Hard
+
+> [!tip] When to apply
+> need O(1) get/put with eviction of the least-recently-used item — classic combination pattern, not just "linked list" but demonstrates DLL's key strength (O(1) removal from middle).
+
+> [!note] Intuition
+> DLL keeps items ordered by recency (head = most recent, tail = least recent); hashmap maps key → node pointer for O(1) lookup. On access, unlink node and move to head (O(1) because DLL). On overflow, remove tail.
 
 ```mermaid
 flowchart LR
@@ -369,12 +506,23 @@ flowchart LR
     end
 ```
 
-- Time: O(1) get/put, Space: O(capacity)
-- **Remember:** This is why doubly linked lists exist — O(1) removal of an arbitrary known node (no need to find its predecessor, unlike singly linked lists which need O(n) to find the predecessor for removal).
+> [!example] Complexity
+> O(1) get/put, Space: O(capacity)
+
+> [!warning] Remember
+> This is why doubly linked lists exist — O(1) removal of an arbitrary known node (no need to find its predecessor, unlike singly linked lists which need O(n) to find the predecessor for removal).
 
 ## Pattern 15: Rotate List by K Positions
-**When to apply:** rotate the list right (or left) by k positions.
-**Intuition:** Find length, make it circular (tail->next = head), find the new tail at position `(length - k % length - 1)`, break the circle there.
+
+> [!info] Difficulty
+> Medium
+
+> [!tip] When to apply
+> rotate the list right (or left) by k positions.
+
+> [!note] Intuition
+> Find length, make it circular (tail->next = head), find the new tail at position `(length - k % length - 1)`, break the circle there.
+
 ```cpp
 Node* rotateRight(Node* head, int k) {
     if (!head || !head->next) return head;
@@ -391,12 +539,17 @@ Node* rotateRight(Node* head, int k) {
     return newHead;
 }
 ```
-- Time: O(n), Space: O(1)
-- **Remember:** `k %= len` first — same overflow-avoidance idea as array rotation.
+
+> [!example] Complexity
+> O(n), Space: O(1)
+
+> [!warning] Remember
+> `k %= len` first — same overflow-avoidance idea as array rotation.
 
 ---
 
 ## When to apply — quick reference
+
 - Need middle in one pass → **Slow-fast pointers**
 - Detect/locate a cycle → **Floyd's cycle detection**
 - Reverse whole list or subroutine for other problems → **Iterative reversal**
@@ -413,6 +566,7 @@ Node* rotateRight(Node* head, int k) {
 - Rotate by k → **Circular trick + break point**
 
 ## Common mistakes
+
 - Losing the head pointer after in-place modifications — always track/return the (possibly new) head.
 - Recursive reversal: forgetting to set `head->next = nullptr`, creating a cycle.
 - Off-by-one in slow-fast pointer for middle: first-middle vs second-middle depends on the `while` condition — be explicit about which one the problem wants.
@@ -421,7 +575,8 @@ Node* rotateRight(Node* head, int k) {
 - Memory leaks: `delete`-ing nodes properly when actually removing them (matters more in production C++ than in interviews, but worth mentioning).
 - Cycle detection: applying Floyd's without checking `fast && fast->next` in the loop condition — causes null pointer dereference.
 
-## Related concepts
+## Related Concepts
+
 - [[Arrays]]
 - [[Sorting Techniques]]
 - [[Binary Search]]

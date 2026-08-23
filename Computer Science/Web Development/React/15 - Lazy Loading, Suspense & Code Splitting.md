@@ -89,12 +89,14 @@ See [[08 - React Router & Navigation]] for the routing pieces (`Routes`, `Route`
 ## Interview Q&A
 
 ### Q1: What's the difference between `React.lazy` and `Suspense`?
+
 **Answer:** `React.lazy` defines *what* to load lazily — it wraps a dynamic `import()` so the component's code is split into a separate chunk and fetched only when rendered. `Suspense` defines *what to show while waiting* — it's the fallback UI mechanism that displays until the lazy component's code finishes downloading. They're used together: `lazy` creates the lazily-loaded component, `Suspense` catches its loading state.
 
 ### Q2: Why is route-based code splitting usually the highest-value place to apply this?
+
 **Answer:** Because a user typically only interacts with one or a few routes per session — code for routes they never visit is pure waste if bundled upfront. Splitting per-route means the initial bundle only contains what's needed to render the first page, dramatically improving initial load time, while other routes load on-demand exactly when the user navigates to them.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[08 - React Router & Navigation]] — the most common pairing for code splitting

@@ -98,23 +98,23 @@ flowchart TD
 ```mermaid
 flowchart TD
     Code["HTTP Response Status Code"]
-    
+
     Code --> S2["2xx Success"]
     S2 --> OK["200 OK"]
     S2 --> Created["201 Created"]
     S2 --> NoContent["204 No Content"]
-    
+
     Code --> S3["3xx Redirection"]
     S3 --> Moved["301 Moved Permanently"]
     S3 --> NotModified["304 Not Modified"]
-    
+
     Code --> S4["4xx Client Error"]
     S4 --> Bad["400 Bad Request"]
     S4 --> Auth["401 Unauthorized"]
     S4 --> Forbidden["403 Forbidden"]
     S4 --> Missing["404 Not Found"]
     S4 --> Limit["429 Too Many Requests"]
-    
+
     Code --> S5["5xx Server Error"]
     S5 --> Crash["500 Internal Error"]
     S5 --> Gateway["502 Bad Gateway"]
@@ -141,13 +141,13 @@ flowchart TD
 flowchart TD
     Client["Client (Sends Request + JWT Token)"]
     LB["Load Balancer (Round Robin)"]
-    
+
     subgraph AppCluster["Stateless Backend Pool"]
         S1["Server Instance #1"]
         S2["Server Instance #2"]
         S3["Server Instance #3"]
     end
-    
+
     DB[(Shared Database)]
     Cache[(Shared Redis Session Cache)]
 
@@ -192,6 +192,7 @@ flowchart TD
 To make REST concrete, here is how you build a standard `GET /users/:id` endpoint in two of the most popular modern ecosystems.
 
 ### ![[nodejs.svg|24]] Node.js (Express)
+
 ```javascript
 const express = require('express');
 const app = express();
@@ -206,7 +207,7 @@ const users = {
 app.get('/users/:id', (req, res) => {
   const userId = req.params.id;
   const user = users[userId];
-  
+
   if (user) {
     res.status(200).json(user); // 200 OK with JSON payload
   } else {
@@ -218,6 +219,7 @@ app.listen(PORT, () => console.log(`REST Server running on port ${PORT}`));
 ```
 
 ### ![[fastapi-rest.svg|24]] Python (FastAPI)
+
 ```python
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
@@ -225,23 +227,26 @@ from pydantic import BaseModel
 app = FastAPI()
 
 # Resource Schema
+
 class User(BaseModel):
     id: int
     name: str
     email: str
 
 # Mock database
+
 users = {
     42: User(id=42, name="Alice", email="alice@example.com")
 }
 
 # REST Endpoint: GET resource by ID
+
 @app.get("/users/{user_id}", response_model=User, status_code=status.HTTP_200_OK)
 def get_user(user_id: int):
     user = users.get(user_id)
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, 
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="User not found"
         )
     return user
@@ -250,6 +255,7 @@ def get_user(user_id: int):
 ---
 
 ## 🔗 Related Vault Concepts
+
 - [[API]] — The overarching classification guide (REST vs GraphQL vs gRPC vs WebSocket)
 - [[GraphQL]] — How GraphQL solves REST over-fetching and under-fetching
 - [[gRPC]] — The binary high-performance RPC alternative for microservices

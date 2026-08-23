@@ -55,6 +55,7 @@ console.log(counterB()); // 1 — separate closure, own `count`
 ## Practical Uses
 
 ### 1. Data Privacy / Encapsulation (Module Pattern)
+
 ```javascript
 function createBankAccount(balance) {
   return {
@@ -70,6 +71,7 @@ console.log(acc.getBalance()); // 150
 ```
 
 ### 2. Function Factories
+
 ```javascript
 function multiplyBy(factor) {
   return (num) => num * factor;
@@ -81,6 +83,7 @@ console.log(triple(5)); // 15
 ```
 
 ### 3. Memoization (see [[Common Coding Patterns]])
+
 ### 4. `setTimeout` / event handler callbacks retaining state
 
 ## The Classic `var` in Loop Interview Question
@@ -109,6 +112,7 @@ for (var i = 0; i < 3; i++) {
 **Why:** `var` is function-scoped — there is only ONE `i` shared by every callback. By the time `setTimeout` fires, the loop has finished and `i` is 3.
 
 **Fix 1 — use `let` (block scope creates a new `i` per iteration):**
+
 ```javascript
 for (let i = 0; i < 3; i++) {
   setTimeout(() => console.log(i), 100);
@@ -117,6 +121,7 @@ for (let i = 0; i < 3; i++) {
 ```
 
 **Fix 2 — force a new scope with an IIFE (the pre-ES6 solution):**
+
 ```javascript
 for (var i = 0; i < 3; i++) {
   (function (capturedI) {
@@ -134,6 +139,7 @@ for (var i = 0; i < 3; i++) {
 - The `var`/`let` loop question is asked in nearly every JS interview — be able to explain AND fix it two ways.
 
 ## Related Concepts
+
 - [[Scope and Hoisting]] — lexical scope is the foundation closures rely on
 - [[Functions in JavaScript]] — IIFEs, function factories
 - [[Common Coding Patterns]] — debounce, throttle, currying, memoization all use closures

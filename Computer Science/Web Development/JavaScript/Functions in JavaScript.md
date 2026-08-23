@@ -120,6 +120,7 @@ function old() {
 - Prefer pure functions where possible for predictability and testability.
 
 ## Related Concepts
+
 - [[this Keyword]] — biggest reason to choose arrow vs regular function
 - [[Closures]] — function factories and IIFEs
 - [[Array Methods]] — built-in higher-order functions

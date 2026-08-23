@@ -86,9 +86,11 @@ user.sayHi?.();                    // calls only if sayHi exists
 - Optional chaining (`?.`) avoids manual `&&` chains for nested property access.
 
 ## Related Concepts
+
 - [[Variables and Data Types]] — the types being compared/coerced
 - [[JS Interview Questions and Tricky Outputs]] — coercion is a favorite topic
 - [[ES6+ Modern Features]] — `??` and `?.` are ES2020 additions
 
 ## Open Questions / To Explore Later
+
 - The full [Abstract Equality Comparison Algorithm](https://tc39.es) behind `==`

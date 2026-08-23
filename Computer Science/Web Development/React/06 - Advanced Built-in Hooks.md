@@ -13,6 +13,7 @@ While `useState` and `useEffect` form the backbone of most React applications, R
 ## 🔌 1. `useContext` — Global Shared State
 
 ### The Problem: Prop Drilling
+
 When multiple components at different depths of your component tree need access to the same piece of data (like current user, active UI theme, or language localization), you have to pass that data as props through every single intermediate component. This is called **prop drilling** and makes components rigid and hard to reuse.
 
 ```
@@ -20,6 +21,7 @@ App ──(user)──> Header ──(user)──> Navbar ──(user)──> Us
 ```
 
 ### The Solution: `useContext`
+
 `useContext` allows you to establish a direct "teleportation" channel for data, bypassing props entirely.
 
 ```
@@ -30,6 +32,7 @@ App [UserContext.Provider value={user}]
 ```
 
 #### Code Implementation
+
 ```jsx
 import { createContext, useContext, useState } from "react";
 
@@ -68,6 +71,7 @@ export function ThemeButton() {
 `useRef` returns a mutable object with a single `.current` property. It has **two main use cases**:
 
 ### Use Case A: Accessing DOM Elements (Focus, Scroll, Measurements)
+
 Sometimes you need to interact directly with a raw browser DOM element (e.g., to focus an input programmatically).
 
 ```jsx
@@ -91,9 +95,11 @@ export function AutoFocusInput() {
 ```
 
 ### Use Case B: Storing Mutable Values Across Renders Without Re-rendering
+
 If you store a value in `useState`, updating it triggers a component re-render. If you store a value in `useRef` (by changing `ref.current = newValue`), **it does NOT trigger a re-render**. The value persists across renders.
 
 #### Example: Track how many times a component renders
+
 ```jsx
 import { useState, useRef } from "react";
 
@@ -123,6 +129,7 @@ By default, on **every single render** of a component:
 2. All functions defined inside the component are **re-created** (allocated fresh memory addresses).
 
 ### 🥇 `useMemo` — Memoize Expensive Calculations
+
 `useMemo` caches (memoizes) the **result** of a heavy function so it doesn't run again unless its dependencies change.
 
 ```jsx
@@ -145,6 +152,7 @@ export function ExpensiveComponent({ items }) {
 ---
 
 ### 🥈 `useCallback` — Memoize Function Instances
+
 `useCallback` caches the **function instance itself**, preventing it from being re-created on every render.
 * **Why does this matter?** In JS, functions are objects, compared by reference (`fun1 === fun2` is false even if they do the same thing).
 * If you pass a function as a prop to a child component, the child will see it as a **new prop** on every render, forcing the child to re-render, even if the child is wrapped in `React.memo`.
@@ -192,6 +200,7 @@ flowchart LR
 ```
 
 ### Implementation Example: Shopping Cart
+
 ```jsx
 import { useReducer } from "react";
 
@@ -243,19 +252,23 @@ export function ShoppingCart() {
 ## 💼 Placement & Interview Q&A
 
 ### Q1: What is the difference between `useRef` and `useState`?
+
 **Answer:** Both persist their stored value across renders. However:
 1. Updating a `useState` variable triggers a **re-render** of the component. Updating a `useRef` (`ref.current = val`) does **not** trigger a re-render.
 2. `useState` is used for holding data that determines what is painted on the screen. `useRef` is used for "behind the scenes" storage (DOM nodes, timer IDs, previous state references).
 
 ### Q2: How do you choose between `useMemo` and `useCallback`?
-**Answer:** 
+
+**Answer:**
 * `useMemo` is used to cache the **evaluated value** of an expensive calculation. It is for performance optimization of computations.
 * `useCallback` is used to cache the **function definition itself** (retains reference identity) to prevent unnecessary re-rendering of child components that depend on reference-equality of functional props.
 
 ### Q3: Why is passing a function without `useCallback` to a memoized child component problematic?
+
 **Answer:** In JS, functions are objects, compared by reference. When the parent component re-renders, any standard inline function is re-created with a new memory address. Thus, the child component (even if wrapped in `React.memo`) detects a "new" prop reference and forces a re-render, rendering `React.memo` useless.
 
 ### Q4: When should you use `useReducer` instead of `useState`?
+
 **Answer:** Use `useReducer` when:
 1. The state logic is complex, containing multiple sub-properties (e.g., dynamic forms, checkout carts).
 2. The next state depends on the previous state (e.g., undo/redo).
@@ -265,6 +278,7 @@ export function ShoppingCart() {
 ---
 
 ## 🔗 Related Concepts
+
 - [[04 - State & useState Hook]] — The foundational hook for state
 - [[05 - Hooks & useEffect Hook]] — The foundational hook for side effects
 - [[07 - Custom Hooks]] — Bundling built-in hooks to share reusable stateful logic

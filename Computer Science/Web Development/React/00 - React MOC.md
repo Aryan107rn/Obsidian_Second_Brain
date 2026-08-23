@@ -4,7 +4,7 @@ aliases: [React.js, ReactJS, React Roadmap]
 created: 2026-08-09
 updated: 2026-08-17
 ---
-                          
+
 # React — Declarative UI & Component Architecture (MOC)
 
 Welcome to the **Complete, Structured React Guide**. This curriculum is designed from top to bottom to give you both the deep theoretical foundation required to ace frontend placements/interviews, and the practical software engineering knowledge required to architect and build robust, modern production applications.
@@ -44,6 +44,7 @@ flowchart TD
 These notes are structured sequentially. If you are learning React from scratch, follow them in numeric order. If you are preparing for interviews, pay special attention to the **Placement & Interview Q&A** section at the bottom of each file.
 
 ### 🏁 Chapter 1: The Foundations of Rendering
+
 * **[[01 - Introduction to React & Virtual DOM]]**
   * *Focus:* Library vs. Framework, SPA architecture, Declarative vs. Imperative code comparisons, Virtual DOM, Reconciliation, Diffing Algorithm, and the React Fiber engine.
 * **[[01a - React Installation & Project Setup]]**
@@ -54,12 +55,14 @@ These notes are structured sequentially. If you are learning React from scratch,
   * *Focus:* Component nesting hierarchies, unidirectional top-down data flow, immutable read-only props, prop destructuring, children prop, and components as pure functions.
 
 ### 🔄 Chapter 2: Local Reactivity & Side Effects
+
 * **[[04 - State & useState Hook]]**
   * *Focus:* Component memory, `useState` hook, state batching (React 18 automatic batching), functional updates vs standard setters, and immutable state updates (spread operators).
 * **[[05 - Hooks & useEffect Hook]]**
   * *Focus:* Introduction to standard React hooks, rules of hooks, the `useEffect` lifecycle hook (Mount, Update, Unmount), the dependency array, and clean-up functions for network aborts, timers, and listeners.
 
 ### 🚀 Chapter 3: Advanced Hooks & Optimization
+
 * **[[06 - Advanced Built-in Hooks]]**
   * *Focus:* Accessing raw DOM nodes and persistent mutable state with `useRef`, prop-drilling avoidance with `useContext`, performance optimization using `useMemo` and `useCallback`, and complex state machines with `useReducer`.
 * **[[07 - Custom Hooks]]**
@@ -68,6 +71,7 @@ These notes are structured sequentially. If you are learning React from scratch,
   * *Focus:* Skipping unnecessary re-renders with `React.memo`, shallow prop comparison, and why it must be paired with `useMemo`/`useCallback` to actually work.
 
 ### 🏛️ Chapter 4: Single Page Application Architecture
+
 * **[[08 - React Router & Navigation]]**
   * *Focus:* Client-side routing mechanics via HTML5 History API, setting up dynamic routes (`useParams`), query queries (`useSearchParams`), programmatic redirects (`useNavigate`), layouts (`<Outlet />`), and Auth-guarded Protected Routes.
 * **[[09 - Global State Management & Context API]]**
@@ -76,16 +80,19 @@ These notes are structured sequentially. If you are learning React from scratch,
   * *Focus:* `React.lazy` + `Suspense` for on-demand chunk loading, route-based code splitting, and when splitting helps vs. hurts.
 
 ### 🧩 Chapter 5: User Input & Resilience
+
 * **[[12 - Forms & Controlled Components]]**
   * *Focus:* Controlled vs. uncontrolled inputs, the state ↔ input sync loop, `preventDefault`, and why file inputs can't be controlled.
 * **[[13 - Error Boundaries]]**
   * *Focus:* Catching render-time errors with `getDerivedStateFromError`/`componentDidCatch`, what error boundaries do NOT catch (async, event handlers), and why they still require a class component.
 
 ### 🎨 Chapter 6: Styling
+
 * **[[17 - Tailwind CSS with React]]**
   * *Focus:* Utility-first CSS philosophy, Vite + Tailwind v4 setup, responsive/state/dark-mode variants, conditional class composition with `clsx`, and the dynamic-class-name build-time pitfall.
 
 ### 🛠️ Chapter 7: Practical Engineering & Debugging
+
 * **[[10 - Practical Project Guide - Todo List and Beyond]]**
   * *Focus:* A fully detailed walkthrough combining state, hooks, local storage sync, filter operations, and component refactoring into an advanced project, including key clean folder structures.
 * **[[16 - Testing Basics (React Testing Library)]]**
@@ -104,6 +111,7 @@ This folder was created with two simultaneous goals:
 ---
 
 ## 🔗 Connected Concepts
+
 * [[JavaScript MOC]] — The underlying engine powering React
 * [[Package Managers and Build Tools]] — Bundlers (Vite, Webpack), runtime, and JSX compilation tools
 * [[REST APIs]] & [[WebSocket]] — Connecting React frontends to dynamic backend servers

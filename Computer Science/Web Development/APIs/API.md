@@ -100,7 +100,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     Start["What is your primary requirement?"] --> Q1{"Who is the consumer?"}
-    
+
     Q1 -->|Browser, mobile, or public| Q2{"Data shape requirement?"}
     Q1 -->|Internal microservices| Q3{"Low latency and typed contract?"}
     Q1 -->|Real-time two-way push| WS_Pick["Choose WebSocket"]
@@ -122,6 +122,7 @@ flowchart TD
 ---
 
 ## 🔗 Deep-Dive Vault Notes
+
 - [[REST APIs]] — Resources, HTTP verbs, status codes, and idempotency (Featuring ![[nodejs.svg|16]] Express & ![[fastapi-rest.svg|16]] FastAPI implementations)
 - ![[graphql-logo.png|16]] [[GraphQL]] — Schema definition language, resolvers, and avoiding N+1 queries
 - ![[grpc-logo.svg|16]] [[gRPC]] — Protocol Buffers, `.proto` compilation, and HTTP/2 streaming

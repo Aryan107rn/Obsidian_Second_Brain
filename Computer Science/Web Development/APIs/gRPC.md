@@ -50,11 +50,11 @@ flowchart TD
 ```mermaid
 flowchart TD
     Proto[".proto contract file"]
-    
+
     Compiler["protoc compiler"]
-    
+
     Proto --> Compiler
-    
+
     Compiler -->|--go_out| GoStub["Go Client Stub & Interface"]
     Compiler -->|--python_out| PyStub["Python Client Stub"]
     Compiler -->|--java_out| JavaServer["Java Backend Server Base"]
@@ -78,6 +78,7 @@ flowchart TD
 To understand why gRPC is so powerful, see how service contracts are designed and compiled.
 
 ### 1. The Strict Interface Contract (`users.proto`)
+
 ```protobuf
 syntax = "proto3";
 
@@ -103,6 +104,7 @@ message UserResponse {
 ```
 
 ### 2. Utilizing Compiled Client Stubs (Go Client Code)
+
 Once `protoc` is run on the `.proto` file, a local client stub is compiled, enabling static type safety and local-like function calls:
 
 ```go
@@ -186,6 +188,7 @@ flowchart TD
 ---
 
 ## 🔗 Related Vault Concepts
+
 - [[API]] — Master overview and API selection guide
 - [[REST APIs]] — The public-facing alternative to gRPC
 - [[WebSocket]] — For browser-native bi-directional communication

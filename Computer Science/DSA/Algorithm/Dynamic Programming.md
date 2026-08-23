@@ -34,8 +34,6 @@ fib(5)
 
 `fib(2)` gets computed 3 times, `fib(3)` gets computed 2 times, and the blowup gets exponentially worse as `n` grows. Plain recursive Fibonacci is **O(2ⁿ)** time. If we cache the answer for each `n` the first time it's computed, every later call becomes an O(1) lookup, and total work drops to **O(n)**.
 
-
-
 ## 🧭 Visualizing Overlapping Subproblems
 
 ```mermaid
@@ -126,7 +124,8 @@ long long fib(int n) {
 - Computes every subproblem up to `n`, even ones that might not strictly be needed.
 - Requires figuring out the correct *iteration order* — trickier to get right initially than memoization.
 
-**Rule of thumb:** think through the recursive (memoized) solution first — easier to reason about correctness. Convert to tabulation afterward for the more efficient final version if stack depth or performance matters.
+> [!tip] Rule of thumb
+> think through the recursive (memoized) solution first — easier to reason about correctness. Convert to tabulation afterward for the more efficient final version if stack depth or performance matters.
 
 ### Space optimization
 
@@ -151,7 +150,8 @@ long long fib(int n) {
 - **Transition (recurrence relation)**: the formula expressing how to compute the current state's answer from smaller states' answers (e.g. `dp[i] = dp[i-1] + dp[i-2]`).
 - **Base case**: the smallest subproblem(s) whose answer is known directly, without further recursion (e.g. `dp[0] = 0`, `dp[1] = 1`).
 
-**Finding the correct state is the hard part of DP.** Most of the difficulty in a new DP problem is figuring out exactly what to put in `dp[...]` — get the state definition right, and the recurrence often follows naturally.
+> [!important] Key idea
+> Most of the difficulty in a new DP problem is figuring out exactly what to put in `dp[...]` — get the state definition right, and the recurrence often follows naturally.
 
 ## When to use DP
 
@@ -173,7 +173,8 @@ long long fib(int n) {
 - **Wrong iteration order in tabulation** — filling `dp[i]` before the states it depends on have been computed yields garbage. Always fill dependencies before dependents.
 - **Forgetting to memoize inside recursion** — writing the recursive solution but forgetting to check/store in the cache turns it back into plain (slow) recursion.
 
-## Related concepts
+## Related Concepts
+
 - [[Recursion & Backtracking|Recursion]] — DP with memoization is recursion + caching; understanding plain recursion is a prerequisite.
 - [[Recursion & Backtracking|Backtracking]] — when subproblems overlap and only an optimum/count is needed (not every configuration), DP replaces backtracking for speed.
 - [[Kadane's Algorithm]] — a concrete, space-optimized 1-D DP example; good first worked problem for seeing the DP mental model in action.

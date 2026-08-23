@@ -89,108 +89,164 @@ The **shell** reads what you type and runs it. `bash` is the most common default
 ## Command Reference
 
 ### Navigation
+
 ```bash
 pwd          # print working directory
+
 ls -la       # list ALL files (incl. hidden), long format
+
 cd path      # change directory
+
 cd ..        # up one level
+
 cd ~         # go home
+
 cd -         # go to previous directory
 ```
 Files starting with `.` (e.g. `.bashrc`) are hidden by convention — `ls -a` reveals them.
 
 ### File & Directory Operations
+
 ```bash
 touch f           # create empty file, or update its timestamp
+
 mkdir d           # create a directory
+
 mkdir -p a/b/c    # create nested dirs, no error if they exist
+
 cp a b            # copy file a to b
+
 cp -r dirA dirB   # copy a directory recursively
+
 mv a b            # move OR rename
+
 rm f              # delete a file — permanent, no recycle bin
+
 rm -rf d          # delete a directory and everything inside — permanent
 ```
 
 ### Locating Things
+
 ```bash
 which cmd     # full path of the executable that would run for "cmd"
+
 whereis cmd   # binary, source, and man page locations for "cmd"
+
 type cmd      # is "cmd" a binary, a shell builtin, or an alias?
+
 find . -name "*.log"   # search by filename, walking the filesystem live
+
 locate "*.log"          # search a prebuilt index — much faster, can be stale
+
 diff a.txt b.txt        # show line-by-line differences between two files
 ```
 `find` is always accurate but slower (it walks disk in real time); `locate` is fast but reads from an index that's updated periodically (`sudo updatedb` refreshes it).
 
 ### Viewing & Editing Files
+
 ```bash
 cat f          # dump whole file to screen
+
 less f         # scrollable viewer for long files (q to quit)
+
 head -n 20 f   # first 20 lines
+
 tail -n 20 f   # last 20 lines
+
 tail -f f      # follow a file live as lines are appended (great for logs)
+
 nano f         # simple beginner-friendly editor
+
 vim f          # powerful, steeper learning curve
 ```
 
 ### Searching
+
 ```bash
 grep "text" f            # search for "text" inside file f
+
 grep -r "text" .         # search recursively through a directory
+
 grep -i "text" f         # case-insensitive
+
 grep -rn "text" .        # recursive + show line numbers
+
 find . -type d            # find only directories
+
 find . -mtime -1          # files modified in the last 1 day
 ```
 `grep` searches file **contents**; `find` searches file **names/metadata** — a common beginner mix-up.
 
 ### Text Processing
+
 The classic Unix approach: small tools, each doing one thing, chained together with pipes.
 
 ```bash
 cut -d',' -f1 file.csv     # print the 1st column of a comma-separated file
+
 sort file.txt               # sort lines alphabetically
+
 sort -n file.txt             # sort lines numerically
+
 sort -r file.txt             # sort in reverse
+
 uniq file.txt                # remove adjacent duplicate lines (sort first!)
+
 uniq -c file.txt             # also count how many times each line repeats
+
 wc -l file.txt                # count lines
+
 wc -w file.txt                # count words
 
 sed 's/foo/bar/' f            # replace the FIRST "foo" per line with "bar"
+
 sed 's/foo/bar/g' f           # replace ALL occurrences ("g" = global)
+
 sed -i 's/foo/bar/g' f        # edit the file in place instead of printing
 
 awk '{print $1}' f            # print the 1st whitespace-separated field of each line
+
 awk -F',' '{print $2}' f      # use comma as the field separator, print 2nd field
+
 awk '{sum += $1} END {print sum}' f   # sum a column
 ```
 `sed` is for find/replace on a stream of text; `awk` is for working with columns/fields. A very common combo: `cat access.log | grep "ERROR" | awk '{print $1}' | sort | uniq -c`.
 
 ### Redirection & Pipes
+
 ```bash
 ls > out.txt          # send stdout to a file, OVERWRITING it
+
 ls >> out.txt         # send stdout to a file, APPENDING to it
+
 sort < unsorted.txt   # feed a file in as a command's input
 
 cmd 2> errors.txt      # redirect only stderr (error output) to a file
+
 cmd > out.txt 2>&1     # redirect stdout to a file, AND send stderr to the same place
+
 cmd &> both.txt        # shorthand: redirect both stdout and stderr
 
 find . -name "*.tmp" | xargs rm     # pipe a list of filenames into rm as arguments
+
 echo "hello" | xargs -I{} echo "{} world"   # {} substitutes the piped value
 ```
 Every process has two separate output streams: **stdout** (normal output, stream `1`) and **stderr** (errors, stream `2`). `grep error app.log > results.txt` only redirects stdout — error messages from `grep` itself would still print to your terminal unless you also redirect stream `2`.
 `xargs` exists because pipes (`|`) pass data as *input*, but many commands (like `rm`) expect filenames as *arguments*, not input — `xargs` bridges that gap.
 
 ### Permissions & Ownership
+
 Every file has an **owner**, a **group**, and permission bits for **owner/group/others**, each with read (`r`), write (`w`), execute (`x`).
 
 ```bash
 ls -l              # shows permissions, e.g. -rwxr-xr-x
+
 chmod 755 f        # set permissions via octal notation
+
 chmod u+x f        # symbolic: add execute for the owner (u)
+
 chown user f       # change owner
+
 chown user:group f # change owner AND group
 ```
 Octal: each digit = `r(4) + w(2) + x(1)`, in order **owner, group, others**.
@@ -204,139 +260,212 @@ Octal: each digit = `r(4) + w(2) + x(1)`, in order **owner, group, others**.
 - **sticky bit** (`chmod 1777 d`) — on a shared directory (e.g. `/tmp`), users can only delete/rename their *own* files, even though everyone can write there
 
 ### Disks & Mounting
+
 ```bash
 lsblk             # list block devices (disks/partitions) as a tree
+
 df -h              # disk space usage per mounted filesystem
+
 sudo fdisk -l      # detailed partition info per disk (needs root)
+
 sudo mount /dev/sdb1 /mnt/data   # attach a partition to a folder in the tree
+
 sudo umount /mnt/data             # detach it safely
 ```
 A drive isn't usable until it's **mounted** — attached to some folder in the single `/` tree. Unlike Windows drive letters, you choose the mount point yourself.
 
 ### Process Management
+
 ```bash
 ps aux         # snapshot of all running processes
+
 top            # live, auto-refreshing process monitor (q to quit)
+
 htop           # nicer interactive version of top
+
 kill PID       # ask a process to terminate gracefully (SIGTERM)
+
 kill -9 PID    # force-kill immediately (SIGKILL) — last resort
+
 command &      # run in background, get prompt back immediately
+
 nohup command & # run in background, survives closing the terminal
+
 jobs           # list background jobs in this shell session
+
 fg / bg        # bring a job to foreground / resume in background
 ```
 
 ### Package Management
+
 ```bash
+
 # Debian / Ubuntu
+
 sudo apt update            # refresh the list of available packages
+
 sudo apt install x         # install package x
+
 sudo apt remove x          # remove package x
+
 sudo apt upgrade           # upgrade all installed packages
 
 # Fedora / RHEL
+
 sudo dnf install x
 sudo dnf remove x
 
 # Arch
+
 sudo pacman -S x           # install
+
 sudo pacman -R x           # remove
+
 sudo pacman -Syu           # sync and upgrade everything
 ```
 Always `update`/`sync` before installing on Debian systems — the local package list goes stale.
 
 ### Archiving & Compression
+
 ```bash
 tar -czvf out.tar.gz dir/   # Create, gZip, Verbose, File — compress a folder
+
 tar -xzvf out.tar.gz        # eXtract a .tar.gz archive
+
 zip -r out.zip dir/         # zip a folder
+
 unzip out.zip                # extract a .zip
 ```
 
 ### Networking
+
 ```bash
 ping host                 # test connectivity/latency
+
 curl url                   # fetch a URL's content, test APIs from the terminal
+
 curl -I url                 # fetch only response headers
+
 wget url                    # download a file from a URL
+
 ssh user@host              # open a secure remote shell
+
 scp file user@host:/path   # securely copy a file to/from a remote machine
+
 ip addr                     # show network interfaces and their IP addresses
+
 ss -tulpn                   # show listening ports and the process using each
 ```
 `ip addr` and `ss` are the modern replacements for the older `ifconfig` and `netstat` (still seen in tutorials, but deprecated on most current distros).
 
 ### System Info & Admin
+
 ```bash
 sudo cmd       # run one command with administrator privileges
+
 df -h          # disk space usage, human-readable
+
 du -sh dir     # total size of a folder, human-readable
+
 free -h        # RAM usage
+
 history        # your past commands in this shell
+
 man cmd        # manual page for a command
+
 uname -a       # kernel and system info
+
 whoami         # current logged-in user
 ```
 
 ### Users & Groups
+
 ```bash
 sudo useradd -m alice        # create user alice with a home directory
+
 sudo passwd alice            # set/change alice's password
+
 sudo usermod -aG group alice # add alice to an additional group
+
 sudo userdel -r alice        # delete user and their home directory
+
 groups alice                 # list groups alice belongs to
 ```
 
 ### Services (systemd)
+
 Most modern distros manage background services (web servers, databases, etc.) with **systemd**.
+
 ```bash
 sudo systemctl start nginx     # start a service now
+
 sudo systemctl stop nginx      # stop it
+
 sudo systemctl restart nginx   # restart it
+
 sudo systemctl enable nginx    # start automatically on boot
+
 sudo systemctl status nginx    # check if it's running, recent logs
+
 journalctl -u nginx -f         # follow that service's logs live
 ```
 
 ### Scheduling Jobs (cron)
+
 **cron** runs commands automatically on a recurring schedule.
+
 ```bash
 crontab -e     # open your personal crontab in an editor
+
 crontab -l     # list your current scheduled jobs
 ```
 A crontab line has 5 time fields, then the command:
+
 ```
+
 # minute hour day-of-month month day-of-week   command
+
   0       3    *             *     *            /home/alice/backup.sh
+
 # ↑ runs backup.sh at 3:00 AM every day
+
   */15    *    *             *     *            /home/alice/check.sh
+
 # ↑ runs check.sh every 15 minutes
 ```
 
 ### Basic Shell Scripting
+
 A shell script is just a text file of commands, run top to bottom.
+
 ```bash
 #!/bin/bash
+
 # ^ "shebang" — tells the OS which interpreter runs this file
 
 name="World"                    # no spaces around =
+
 echo "Hello, $name"              # $ reads a variable's value
 
 if [ -f "$name.txt" ]; then      # -f checks "does this file exist"
+
   echo "found it"
 else
   echo "missing"
 fi
 
 for f in *.log; do               # loop over every .log file
+
   echo "processing $f"
 done
 ```
 Make it runnable with `chmod +x script.sh`, then run with `./script.sh`.
 
 ### Shell Customization
+
 ```bash
 alias ll='ls -la'          # define a shortcut command for this session
+
 alias gs='git status'
 ```
 Aliases typed at the prompt only last for the current session. To make them (and environment variables) permanent, add them to your shell's startup file:
@@ -346,7 +475,9 @@ Aliases typed at the prompt only last for the current session. To make them (and
 
 ```bash
 export PATH="$HOME/scripts:$PATH"   # persist a PATH addition by putting this line in .bashrc
+
 export EDITOR=vim                    # set your default editor system-wide
+
 PS1='\u@\h:\w\$ '                    # customize the prompt: user@host:path$
 ```
 
@@ -390,6 +521,7 @@ PS1='\u@\h:\w\$ '                    # customize the prompt: user@host:path$
 - `locate`'s index can be stale right after creating a new file — run `sudo updatedb` to refresh it, or use `find` for guaranteed-current results.
 
 ## Related Concepts
+
 - [[Git and GitHub]] — Git commands run in this same shell environment
 - [[Package Managers and Build Tools]] — deeper dive on installing software
 - [[System Design MOC]] — Linux as server/cloud infrastructure

@@ -1,7 +1,9 @@
 # 06 - STL Algorithms and Iterators
 
 ## Iterators — Quick Reference
+
 An iterator is a generalized pointer that lets algorithms traverse any container the same way, regardless of its internal structure.
+
 ```cpp
 v.begin(), v.end();        // forward range
 v.rbegin(), v.rend();      // reverse range
@@ -13,6 +15,7 @@ distance(it1, it2);         // number of elements between two iterators
 A range-based for loop (`for (auto& x : v)`) is the idiomatic modern equivalent for most simple traversals.
 
 ## Key `<algorithm>` Functions
+
 | Function | Purpose | Complexity |
 |---|---|---|
 | `sort(begin, end)` | sort ascending | O(n log n) |
@@ -32,9 +35,11 @@ A range-based for loop (`for (auto& x : v)`) is the idiomatic modern equivalent 
 | `swap(a, b)` | swap two values | O(1) |
 | `clamp(val, lo, hi)` | bound value within [lo, hi] | O(1) |
 
-**Trap:** `lower_bound`/`upper_bound`/`binary_search` require the range to be sorted first — using them on unsorted data gives silently wrong results (no error thrown).
+> [!warning] Trap
+> `lower_bound`/`upper_bound`/`binary_search` require the range to be sorted first — using them on unsorted data gives silently wrong results (no error thrown).
 
 ## `<numeric>` Functions
+
 ```cpp
 accumulate(v.begin(), v.end(), 0);                          // sum
 accumulate(v.begin(), v.end(), 1, multiplies<int>());       // product
@@ -44,10 +49,12 @@ iota(v.begin(), v.end(), 0);                                  // fill with 0,1,2
 ```
 
 ## Common Mistakes
+
 - Calling `lower_bound`/`upper_bound` on an unsorted vector.
 - Calling `unique()` without sorting first — it only collapses **adjacent** duplicates.
 - Forgetting `next_permutation` needs the range sorted ascending first to generate *all* permutations starting from the smallest.
 
 ## Related Concepts
+
 [[05 - STL Containers]]
 [[07 - C++ Built-in Functions for DSA]]

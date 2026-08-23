@@ -110,7 +110,7 @@ const DataLoader = require('dataloader');
 const batchGetOrdersByUserIds = async (userIds) => {
   // Query DB once for all matching orders
   const orders = await db.query('SELECT * FROM orders WHERE user_id IN (?)', [userIds]);
-  
+
   // Map and group results to preserve correct ordering relative to inputs
   return userIds.map(id => orders.filter(order => order.user_id === id));
 };
@@ -122,8 +122,8 @@ const orderLoader = new DataLoader(batchGetOrdersByUserIds);
 const resolvers = {
   User: {
     orders: (user, args, context) => {
-      // Instead of calling the database directly inside this field resolver, 
-      // we load through orderLoader. This schedules all user IDs 
+      // Instead of calling the database directly inside this field resolver,
+      // we load through orderLoader. This schedules all user IDs
       // queried in this turn to be batched and executed at once.
       return orderLoader.load(user.id);
     }
@@ -148,6 +148,7 @@ const resolvers = {
 ---
 
 ## 🔗 Related Vault Concepts
+
 - [[API]] — Overall API architectural styles comparison
 - [[REST APIs]] — The traditional resource-based alternative
 - [[WebSocket]] — Used as the transport layer for real-time GraphQL Subscriptions

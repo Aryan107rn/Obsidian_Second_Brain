@@ -79,6 +79,7 @@ localStorage.clear();
 - Cookies travel with every HTTP request automatically; Web Storage APIs do not — pick based on whether the server needs the data.
 
 ## Related Concepts
+
 - [[Asynchronous JavaScript]] — try/catch with async/await
 - [[Closures]] — a common accidental source of memory leaks
 - [[DOM and Events]] — event listener cleanup

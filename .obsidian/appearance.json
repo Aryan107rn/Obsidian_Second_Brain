@@ -2,5 +2,8 @@
   "cssTheme": "Minimal",
   "accentColor": "",
   "theme": "system",
-  "baseFontSize": 16
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "readable-study-notes"
+  ]
 }

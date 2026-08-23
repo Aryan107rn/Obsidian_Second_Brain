@@ -74,7 +74,9 @@ You don't usually interact with Babel yourself in a modern Vite project — it's
 ## Example: starting a project
 
 ```bash
+
 # Vite + npm (most common recommendation today)
+
 npm create vite@latest my-app -- --template react
 cd my-app
 npm install
@@ -82,7 +84,9 @@ npm run dev
 ```
 
 ```bash
+
 # Vite + pnpm (faster installs)
+
 pnpm create vite my-app --template react
 cd my-app
 pnpm install
@@ -90,7 +94,9 @@ pnpm dev
 ```
 
 ```bash
+
 # Next.js, when you need SSR / routing / framework features
+
 npx create-next-app@latest my-app
 ```
 
@@ -108,7 +114,7 @@ npx create-next-app@latest my-app
 - Starting a new project with Create React App — it's deprecated and no longer maintained.
 - Assuming you always need Next.js — most simple client-side apps don't need SSR/routing baked in; plain Vite + React is lighter and sufficient.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]] — the library these tools set up and serve
 - [[01a - React Installation & Project Setup]] — specific guide for setting up React projects with Vite/Parcel/CRA and package managers

@@ -32,7 +32,7 @@ Covered in depth in [[05 - Hooks & useEffect Hook]]: hooks must run in the same 
 
 Covered in depth in [[03 - Components & Props]]: props flow one-way, parent to child; a component must never write to its own `props`.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[04 - State & useState Hook]]

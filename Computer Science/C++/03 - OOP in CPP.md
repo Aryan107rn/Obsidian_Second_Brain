@@ -1,9 +1,11 @@
 # 03 - OOP in CPP
 
 ## What is it?
+
 Object-Oriented Programming organizes code around **objects** — bundles of data (attributes) and behavior (methods) — instead of a sequence of standalone functions. A `class` is the blueprint; an object is an instance of it.
 
 ## Class Basics
+
 ```cpp
 class Rectangle {
 private:
@@ -26,6 +28,7 @@ public:
    - **Run-time** (dynamic): virtual functions / overriding.
 
 ## Full Example (all four pillars together)
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -63,6 +66,7 @@ int main() {
 ```
 
 ## Function Overloading vs Overriding
+
 | Overloading | Overriding |
 |---|---|
 | Same name, different parameters, same scope | Same name/signature, base class vs derived class |
@@ -70,6 +74,7 @@ int main() {
 | No `virtual` needed | Requires `virtual` in the base class |
 
 ## Static & Friend
+
 ```cpp
 class Counter {
     static int count;                        // one copy shared across all objects, not per-instance
@@ -81,6 +86,7 @@ int Counter::count = 0;  // static members must be defined outside the class
 ```
 
 ## Multiple Inheritance & the Diamond Problem
+
 ```cpp
 class A { public: int x; };
 class B : virtual public A {};
@@ -90,10 +96,12 @@ class D : public B, public C {};  // without 'virtual', D would contain two sepa
 `virtual` inheritance ensures `D` has exactly one shared `A` subobject instead of two conflicting copies.
 
 ## Common Mistakes
+
 - Forgetting `virtual` on a base class destructor when objects are deleted through a base pointer → the derived class's destructor never runs → memory leak. This is one of the most common interview traps.
 - Confusing `class` (private by default) with `struct` (public by default).
 - No `.equals()` method exists in C++ — equality is done via an overloaded `operator==`.
 
 ## Related Concepts
+
 [[02 - Pointers References and Memory Management]]
 [[04 - Templates Exceptions and Modern CPP Features]]

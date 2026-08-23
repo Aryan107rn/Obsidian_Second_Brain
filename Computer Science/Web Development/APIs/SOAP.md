@@ -74,6 +74,7 @@ flowchart TD
 To demystify the abstract XML structure of SOAP, see these actual definitions:
 
 ### 1. Simple SOAP Request Payload Example
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
@@ -94,13 +95,14 @@ To demystify the abstract XML structure of SOAP, see these actual definitions:
 ```
 
 ### 2. Standard WSDL (Web Services Description Language) Structure
+
 A WSDL document acts as the strict, machine-readable contract describing all data structures, operations, and network bindings for the web service:
 
 ```xml
 <definitions name="StockService"
              targetNamespace="http://example.com/stock"
              xmlns="http://schemas.xmlsoap.org/wsdl/">
-             
+
   <!-- 1. Types: Abstract data types and schema definitions (XML schemas) -->
   <types>
     <!-- Declares GetStockPrice and GetStockPriceResponse structures -->
@@ -143,16 +145,16 @@ A WSDL document acts as the strict, machine-readable contract describing all dat
 ```mermaid
 flowchart TD
     WS["WS-* Standards Suite"]
-    
+
     WS --> Sec["WS-Security"]
     Sec --> SecDetail["Encryption and digital signatures"]
-    
+
     WS --> Rel["WS-ReliableMessaging"]
     Rel --> RelDetail["Guaranteed end-to-end delivery"]
-    
+
     WS --> Atom["WS-AtomicTransaction"]
     Atom --> AtomDetail["Distributed ACID transactions"]
-    
+
     WS --> Addr["WS-Addressing"]
     Addr --> AddrDetail["Transport-independent routing metadata"]
 
@@ -183,6 +185,7 @@ flowchart TD
 ---
 
 ## 🔗 Related Vault Concepts
+
 - [[API]] — The comprehensive taxonomy of all API architectures
 - [[REST APIs]] — The modern lightweight alternative that replaced SOAP in mainstream web apps
 - [[gRPC]] — The modern binary RPC alternative for high-performance enterprise systems

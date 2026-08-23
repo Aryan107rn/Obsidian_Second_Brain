@@ -12,7 +12,7 @@ By default, if any component throws a JavaScript error during rendering, React d
 
 **Error boundaries** are components that catch JavaScript errors anywhere in their child component tree, log them, and display a fallback UI instead of crashing the whole app.
 
-## How it works
+## How It Works
 
 An error boundary is defined using two specific **class component** lifecycle methods — this is one of the few places in modern React where you still need a class, because there is no Hook equivalent for this (as of React 18/19, no `useErrorBoundary` Hook exists).
 
@@ -81,12 +81,14 @@ Error boundaries rely on `getDerivedStateFromError` and `componentDidCatch`, whi
 ## Interview Q&A
 
 ### Q1: What errors does an error boundary NOT catch?
+
 **Answer:** Errors in event handlers, asynchronous code (`setTimeout`, promises, `async/await`, including inside `useEffect`), server-side rendering, and errors thrown within the error boundary itself.
 
 ### Q2: Why can't you write an error boundary using Hooks?
+
 **Answer:** Error boundaries rely on the class lifecycle methods `getDerivedStateFromError` and `componentDidCatch`, which hook into React's reconciler-level error handling. As of the current React version, there is no Hook equivalent for this specific capability, making this one of the few remaining legitimate uses of class components in modern React.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[01 - Introduction to React & Virtual DOM]] — rendering and the component tree these boundaries interrupt

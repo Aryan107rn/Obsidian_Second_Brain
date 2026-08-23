@@ -12,7 +12,7 @@ By default, when a parent component re-renders, **every one of its child compone
 
 `React.memo` lets a component **skip re-rendering** if its props are unchanged from the previous render.
 
-## How it works
+## How It Works
 
 `React.memo` wraps a component and returns a new, memoized version:
 
@@ -95,12 +95,14 @@ Note the inverted logic versus typical equality checks: this function returns `t
 ## Interview Q&A
 
 ### Q1: Does `React.memo` prevent a component from ever re-rendering?
+
 **Answer:** No. It only skips re-renders caused by the parent re-rendering with unchanged (shallowly-equal) props. If the memoized component has its own internal state (`useState`) or consumes context (`useContext`) that changes, it re-renders normally regardless of `React.memo`.
 
 ### Q2: Why does wrapping a component in `React.memo` sometimes have no effect at all?
+
 **Answer:** Usually because the parent passes a new object, array, or function literal as a prop on every render (e.g. inline `{...}`, `[...]`, or arrow functions). `React.memo`'s default shallow comparison checks reference equality, and a fresh literal is always a new reference — so the comparison always finds "different props" even if the actual values are identical. Fixing this requires wrapping those props with `useMemo`/`useCallback` in the parent so the same reference is reused when values don't change.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[06 - Advanced Built-in Hooks]] — `useMemo` and `useCallback`, which `React.memo` typically depends on to be effective

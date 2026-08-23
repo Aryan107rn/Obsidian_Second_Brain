@@ -113,6 +113,7 @@ const huge = 9007199254740993n; // BigInt — safe beyond Number's precision lim
 - Generators pause/resume execution with `yield` — the conceptual ancestor of `async/await`.
 
 ## Related Concepts
+
 - [[Operators and Type Coercion]] — falsy values relevant to `??` vs `||`
 - [[Asynchronous JavaScript]] — generators as a precursor to async/await
 - [[Array Methods]] — `Set` for deduping arrays

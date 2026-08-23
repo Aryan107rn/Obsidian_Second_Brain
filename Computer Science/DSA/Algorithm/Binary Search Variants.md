@@ -19,7 +19,9 @@ double ternarySearch(double lo, double hi, function<double(double)> f) {
     return (lo + hi) / 2;
 }
 ```
-- Time: O(log₃/₂ n) — slightly more comparisons per step than binary search, same asymptotic order.
+
+> [!example] Complexity
+> O(log₃/₂ n) — slightly more comparisons per step than binary search, same asymptotic order.
 - **Common mistake:** using ternary search on a sorted array to find a *value* (not a peak) — that's just binary search with extra steps; ternary search is for unimodal optimization, not membership search.
 
 ## Exponential Search
@@ -36,7 +38,9 @@ int exponentialSearch(vector<int>& a, int target) {
     return binarySearch(a, target, i / 2, min(i, (int)a.size() - 1));   // standard binary search on the found range
 }
 ```
-- Time: O(log p) to find the range (p = position of target), then O(log p) for the binary search itself — still O(log n) overall.
+
+> [!example] Complexity
+> O(log p) to find the range (p = position of target), then O(log p) for the binary search itself — still O(log n) overall.
 - **When it beats plain binary search:** unbounded/streaming input, or when the target is expected to be near the front (search cost scales with the target's position, not the full array size).
 
 ## Interpolation Search
@@ -58,7 +62,9 @@ int interpolationSearch(vector<int>& a, int target) {
     return -1;
 }
 ```
-- Time: O(log log n) average on uniformly distributed data, **O(n) worst case** on skewed distributions (e.g. exponentially spaced values).
+
+> [!example] Complexity
+> O(log log n) average on uniformly distributed data, **O(n) worst case** on skewed distributions (e.g. exponentially spaced values).
 - **Common mistake:** using this blindly on non-uniform data — the worst case is genuinely bad, unlike binary search's guaranteed O(log n).
 
 ## Fibonacci Search
@@ -67,12 +73,14 @@ int interpolationSearch(vector<int>& a, int target) {
 
 **How it works:** Use the smallest Fibonacci number ≥ n to define the initial range, and narrow using Fibonacci offsets instead of `mid = (low+high)/2`.
 
-- Time: O(log n), same order as binary search.
+> [!example] Complexity
+> O(log n), same order as binary search.
 - **When it's actually chosen today:** rare in modern practice (division is cheap on modern CPUs) — mostly asked to test theoretical understanding, or used in specific embedded/legacy contexts.
 
 ---
 
 ## Quick reference — which variant to reach for
+
 | Situation | Use |
 |---|---|
 | Sorted array, find exact value | Standard [[Binary Search]] |
@@ -81,5 +89,6 @@ int interpolationSearch(vector<int>& a, int target) {
 | Uniformly distributed sorted values | Interpolation Search |
 | Division-expensive environment (rare today) | Fibonacci Search |
 
-## Related concepts
+## Related Concepts
+
 - [[Binary Search]] — the base technique all four of these adapt for a specific constraint.

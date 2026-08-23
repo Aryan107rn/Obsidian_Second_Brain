@@ -67,11 +67,12 @@ function addTodo(text) {
 
 - State setters (like `setCount`) are **asynchronous** in effect — React batches multiple `setState` calls together and applies them in one re-render, so reading the state variable immediately after calling its setter still shows the old value within that same function.
 - **Functional updates** should be used when the next state depends on the previous state:
+
   ```jsx
   setCount((prev) => prev + 1); // Guarantees correct value even in batched updates
   ```
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]] — state is one of React's two core data sources (alongside props)
 - [[03 - Components & Props]] — state is owned by a component, unlike props which are received

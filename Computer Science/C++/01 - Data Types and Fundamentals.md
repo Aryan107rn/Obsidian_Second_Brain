@@ -1,10 +1,13 @@
 # 01 - Data Types and Fundamentals
 
 ## What is C++?
+
 C++ is a **compiled, statically-typed** language. *Compiled* means source code is fully translated into machine code before the program runs (unlike Python/JS, which are interpreted line-by-line). *Statically-typed* means every variable's type is fixed and checked at compile time, not runtime. This combination is why C++ is fast and used for performance-critical software — the compiler does all type-checking and translation up front, so at runtime the CPU just executes raw instructions with no interpreter overhead.
 
 ## The Compilation Model
+
 A `.cpp` file can't just be "run" — it goes through four stages:
+
 ```
 source.cpp → preprocessor → compiler → assembler (.o file) → linker → executable
 ```
@@ -27,6 +30,7 @@ int main() {
 ```
 
 ## Data Type Sizes & Ranges (CRITICAL for DSA)
+
 A variable is a named, typed slot of memory — C++ requires the type upfront so the compiler knows how many bytes to reserve and how to interpret the bits stored there.
 
 | Type | Size (64-bit) | Range | Header for limits |
@@ -43,6 +47,7 @@ A variable is a named, typed slot of memory — C++ requires the type upfront so
 | `double` | 8 bytes | ~±1.7×10³⁰⁸, 15-16 sig digits | `<cfloat>` |
 
 **Getting limits programmatically:**
+
 ```cpp
 #include <climits>
 INT_MAX, INT_MIN, LLONG_MAX, LLONG_MIN, UINT_MAX, ULLONG_MAX
@@ -56,7 +61,9 @@ sizeof(arr)/sizeof(arr[0]);      // element count of a static C-array
 ```
 
 ## Integer Overflow & Common Traps
+
 A 4-byte `int` can only hold roughly ±2.1 billion. Exceeding that range doesn't throw an error — it silently **wraps around**:
+
 ```cpp
 int x = 2147483647;   // INT_MAX
 x = x + 1;             // becomes -2147483648 — no warning, no crash
@@ -66,12 +73,15 @@ x = x + 1;             // becomes -2147483648 — no warning, no crash
 - Division/modulo with negatives truncates **toward zero** (not floor): `-7/2 == -3`, `-7%2 == -1`.
 
 ## const
+
 Declaring a variable `const` prevents reassignment after initialization — documents intent and lets the compiler catch accidental modification as a compile error instead of a runtime bug.
+
 ```cpp
 const double PI = 3.14159;
 ```
 
 ## Operators
+
 - **Arithmetic:** `+ - * / %` — `%` only works on integers. **Integer division truncates**: `7 / 2` gives `3`, not `3.5`, because both operands are `int`. At least one operand must be floating-point to get a decimal result: `7.0 / 2` → `3.5`. One of the most common beginner mistakes in C++.
 - **Relational:** `== != < > <= >=` — return `bool`.
 - **Logical:** `&& || !` — short-circuit evaluation (if the left side of `&&` is false, the right side isn't evaluated at all).
@@ -80,6 +90,7 @@ const double PI = 3.14159;
 **Common mistake:** `if (x = 5)` instead of `if (x == 5)` — this *compiles* (assigns 5 to x; the assignment expression evaluates to 5, which is truthy) but silently does the wrong thing every time. Don't ignore compiler warnings about this.
 
 ## Control Flow
+
 ```cpp
 if (score >= 90) grade = 'A';
 else if (score >= 80) grade = 'B';
@@ -91,6 +102,7 @@ do { } while (condition);            // condition checked AFTER — body always 
 ```
 
 ## Functions
+
 ```cpp
 int add(int a, int b) {   // return type | name | parameters
     return a + b;
@@ -99,12 +111,14 @@ int add(int a, int b) {   // return type | name | parameters
 See [[02 - Pointers References and Memory Management]] for pass-by-value vs pass-by-reference — critical for both correctness and performance with large objects.
 
 ## Arrays and Strings (C-style basics)
+
 ```cpp
 int nums[5] = {1, 2, 3, 4, 5};   // fixed-size C-style array — size baked in, can't grow/shrink
 string name = "Alex";              // dynamic, resizable, has built-in methods
 name += " Smith";                  // concatenation works naturally, unlike C-style char arrays
 ```
 **Edge case — no bounds checking:** a C-style array doesn't know its own size at runtime, and an out-of-range index doesn't throw:
+
 ```cpp
 int nums[5] = {1,2,3,4,5};
 cout << nums[10];   // compiles and runs — reads garbage/undefined memory, not a reliable crash
@@ -112,6 +126,7 @@ cout << nums[10];   // compiles and runs — reads garbage/undefined memory, not
 This is a major source of real-world bugs (buffer overflows). Modern C++ prefers `vector` (dynamic, part of STL) and `array` (fixed-size but bounds-checkable via `.at()`) over raw C-style arrays — see [[05 - STL Containers]].
 
 ## Fast I/O
+
 ```cpp
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
@@ -119,6 +134,7 @@ cin.tie(NULL);
 ```
 
 ## Common Mistakes
+
 - Confusing `=` and `==` in conditions.
 - Expecting `7 / 2` to give `3.5` (integer division truncates).
 - Forgetting C-style arrays have no bounds checking.
@@ -127,5 +143,6 @@ cin.tie(NULL);
 - Assuming `%` behaves like floor-mod with negative numbers (it doesn't in C++).
 
 ## Related Concepts
+
 [[02 - Pointers References and Memory Management]]
 [[07 - C++ Built-in Functions for DSA]]

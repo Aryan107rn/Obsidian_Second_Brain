@@ -56,6 +56,7 @@ flowchart TD
 To illustrate the full-duplex communication cycle, here is how a connection is established and used:
 
 ### 1. The Client-Side Browser Connection
+
 ```javascript
 // 1. Establish persistent connection to WebSocket Server
 const socket = new WebSocket('ws://localhost:8080');
@@ -80,6 +81,7 @@ socket.onclose = () => {
 ```
 
 ### 2. The Server-Side Handler (Node.js - `ws` library)
+
 ```javascript
 const WebSocket = require('ws');
 
@@ -95,9 +97,9 @@ wss.on('connection', (ws) => {
     console.log(`Received: ${payload.text}`);
 
     // Instantly push data back over the SAME socket line
-    ws.send(JSON.stringify({ 
-      sender: 'server', 
-      text: `Echo: "${payload.text}"` 
+    ws.send(JSON.stringify({
+      sender: 'server',
+      text: `Echo: "${payload.text}"`
     }));
   });
 
@@ -116,9 +118,9 @@ Because WebSockets are **stateful** (a connection is tied to a specific physical
 flowchart TD
     ClientA["Client A connected to server 1"]
     ClientB["Client B connected to server 2"]
-    
+
     LB["Load Balancer (Sticky Sessions / IP Hash)"]
-    
+
     subgraph WebSockets["WebSocket Server Fleet"]
         WS1["WebSocket Server Instance #1"]
         WS2["WebSocket Server Instance #2"]
@@ -159,6 +161,7 @@ flowchart TD
 ---
 
 ## 🔗 Related Vault Concepts
+
 - [[API]] — Master API architecture comparison
 - [[REST APIs]] — The stateless alternative for standard CRUD
 - [[GraphQL]] — Uses WebSocket for GraphQL Subscriptions

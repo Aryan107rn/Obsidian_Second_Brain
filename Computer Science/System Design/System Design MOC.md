@@ -61,12 +61,14 @@ flowchart TD
 ## Tier 1 — Must know (core interview readiness)
 
 ### Fundamentals & Requirements
+
 - ⬜ Functional vs non-functional requirements
 - ⬜ Architecture styles (monolith, microservices, event-driven, layered, hexagonal, serverless)
 - ⬜ Scaling (vertical/horizontal, stateless vs stateful, autoscaling)
 - ⬜ Back-of-the-envelope estimation (QPS, storage, bandwidth)
 
 ### Networking & APIs
+
 - ⬜ Core networking (TCP/UDP, HTTP/HTTPS, TLS, DNS)
 - ⬜ HTTP deep dive (methods, status codes, HTTP/1.1 vs 2 vs 3)
 - ⬜ REST API design (resources, pagination — offset/cursor/keyset, versioning, rate limiting)
@@ -76,6 +78,7 @@ flowchart TD
 - ⬜ Long polling / SSE / polling comparison
 
 ### Databases
+
 - ⬜ SQL fundamentals (joins, transactions, indexes)
 - ⬜ Database internals (B-trees, LSM trees, ACID, isolation levels, locking)
 - ⬜ SQL vs NoSQL decision framework
@@ -84,11 +87,13 @@ flowchart TD
 - ⬜ Consistency models (strong, eventual, causal, quorum)
 
 ### Caching & Load Balancing
+
 - ⬜ Caching (strategies, eviction, cache stampede/penetration/avalanche)
 - ⬜ Load balancing (L4 vs L7, algorithms, consistent hashing)
 - ⬜ CDN
 
 ### Messaging & Reliability
+
 - ⬜ Message queues (Kafka, RabbitMQ, SQS concepts)
 - ⬜ Kafka deep dive (partitions, consumer groups, delivery guarantees)
 - ⬜ Message delivery semantics & idempotency
@@ -158,4 +163,5 @@ flowchart TD
 When we cover a topic in chat and you ask to save it, the note gets created in this folder and the corresponding checkbox above is updated to ✅ with a link, e.g. `- ✅ [[Caching]]`. Notes here follow the same depth/structure rules as the rest of the vault (beginner-friendly, complete, diagrams where useful).
 
 ## Related
+
 - System design is a separate track from DSA prep — per the roadmap: "System design does not replace DSA."

@@ -120,6 +120,7 @@ fastSquare(5); // instant — cached
 - All three patterns are direct applications of [[Closures]] — the returned function "remembers" `timer`/`cache`/`inThrottle` across calls.
 
 ## Related Concepts
+
 - [[Closures]] — the mechanism that makes all of these work
 - [[Functions in JavaScript]] — higher-order functions, `apply`
 - [[Array Methods]] — built-in HOFs (`map`/`filter`/`reduce`)

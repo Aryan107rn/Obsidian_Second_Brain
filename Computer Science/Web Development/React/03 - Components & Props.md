@@ -81,7 +81,7 @@ Each `<Greeting />` call is independent and renders with its own `name`. Props a
 - **Treating props as mutable**: `props.name = "new"` inside a component is a bug. If a child needs to change something, the parent must pass down a function (often paired with [[04 - State & useState Hook|state]]) that the child calls — the parent still owns the update.
 - Forgetting that each rendered instance of a component (e.g. two `<Greeting />` calls) is fully independent — they don't share data unless explicitly passed the same props or state.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]] — components are React's core building block
 - [[02 - JSX & Building Blocks]] — what components return to describe their UI

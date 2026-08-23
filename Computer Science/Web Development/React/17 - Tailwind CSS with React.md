@@ -24,7 +24,7 @@ Tailwind's answer: don't write custom CSS at all for most things. Use a fixed, p
 
 **Why this pairs especially well with React specifically:** React already co-locates a component's logic and markup in one file. Tailwind extends that same co-location to styling — the component's JSX, behavior, AND appearance all live in one place instead of being split across `.jsx` and `.css` files that you have to keep mentally in sync.
 
-## How it works
+## How It Works
 
 Tailwind scans your source files for class names you've actually used and generates a CSS file containing only those utilities (via a build step, using PostCSS). This means:
 - The framework ships thousands of possible utility classes, but your final CSS bundle only contains the ones you referenced — unused utilities are never generated.
@@ -59,6 +59,7 @@ Import `index.css` once in your app's entry point (`main.jsx`), and every compon
 ## Key concepts
 
 ### Utility classes map directly to CSS properties
+
 ```jsx
 <div className="flex items-center justify-between p-4 bg-gray-100 rounded-lg shadow-md">
 ```
@@ -71,7 +72,9 @@ Import `index.css` once in your app's entry point (`main.jsx`), and every compon
 - `shadow-md` → a medium box-shadow preset
 
 ### Responsive design via breakpoint prefixes
+
 Tailwind is **mobile-first**: an unprefixed utility applies at all sizes, and a prefixed one overrides it starting at that breakpoint and up.
+
 ```jsx
 <div className="w-full md:w-1/2 lg:w-1/3">
   {/* full width on mobile, half width from tablet (md: ≥768px), a third from desktop (lg: ≥1024px) */}
@@ -80,12 +83,14 @@ Tailwind is **mobile-first**: an unprefixed utility applies at all sizes, and a 
 Common breakpoints: `sm` (640px), `md` (768px), `lg` (1024px), `xl` (1280px), `2xl` (1536px).
 
 ### State variants — hover, focus, and beyond
+
 ```jsx
 <button className="bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 disabled:opacity-50">
 ```
 `hover:`, `focus:`, `active:`, `disabled:` prefixes apply a utility only in that state — no separate `:hover` CSS block needed.
 
 ### Dark mode
+
 ```jsx
 <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
 ```
@@ -105,6 +110,7 @@ The standard fix is the `clsx` (or `classnames`) library, which conditionally jo
 ```bash
 npm install clsx
 ```
+
 ```jsx
 import clsx from 'clsx';
 
@@ -118,7 +124,9 @@ import clsx from 'clsx';
 **Why this matters more in Tailwind than in traditional CSS:** with traditional CSS you'd just conditionally toggle one class name (`.active`) and let the CSS file define what it means. With Tailwind, every visual variation is a *list* of utility classes, so merging/toggling several of them at once is common enough to need a dedicated helper.
 
 ### Extracting repeated utility strings into a component
+
 When the same long utility string is reused across a codebase, don't copy-paste it — extract it into a React component so the styling lives in exactly one place, same as you would with any other repeated JSX:
+
 ```jsx
 function Card({ children }) {
   return <div className="p-6 bg-white rounded-lg shadow-md border border-gray-200">{children}</div>;
@@ -141,6 +149,7 @@ This is Tailwind's answer to reusability — reuse the *component*, not a hand-r
 ## Common mistakes
 
 - **Constructing class names dynamically with string interpolation**, e.g. `` `text-${color}-500` ``. Tailwind's build step works by *scanning source files for literal class name strings* — if the class name is assembled at runtime, the scanner never sees the full string `text-red-500` in your source, so it doesn't generate that CSS, and the style silently doesn't apply. Fix: use a lookup object mapping known values to full literal class strings.
+
 ```jsx
 // Broken - Tailwind can't see this string at build time
 <div className={`text-${color}-500`}>
@@ -153,7 +162,8 @@ const colorMap = { red: 'text-red-500', blue: 'text-blue-500' };
 - Fighting specificity by adding custom CSS on top of utilities instead of composing more utilities or extracting a component — defeats the purpose of the utility-first approach.
 - Not extracting repeated utility strings into components, leading to the same design tweak (e.g. changing a shadow) needing to be hunted down and changed in dozens of files.
 
-## Related concepts
+## Related Concepts
+
 - [[03 - Components & Props]] — component extraction is how Tailwind achieves style reuse
 - [[JavaScript MOC]] — template literals and conditional expressions used to build class strings
 - [[02 - JSX & Building Blocks]] — `className` mechanics in JSX

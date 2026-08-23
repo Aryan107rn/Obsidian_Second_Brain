@@ -107,6 +107,7 @@ flowchart TD
 ---
 
 ## 🔗 Related Concepts
+
 - [[Asynchronous JavaScript]] — Promises, async/await, and microtask scheduling
 - [[Functions in JavaScript]] — Callback functions executed by the event loop
 - [[JS Interview Questions and Tricky Outputs]] — Output-prediction problems and edge cases

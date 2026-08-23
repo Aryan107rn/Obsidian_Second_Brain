@@ -122,4 +122,5 @@ fn();
 - Always practice tracing output order for mixed `sync`/`Promise`/`setTimeout` code — it's the single most common "gotcha" format.
 
 ## Related Concepts
+
 All topic notes above — this page is the index/drill-sheet for [[JavaScript MOC]].

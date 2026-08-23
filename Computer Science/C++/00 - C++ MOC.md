@@ -14,6 +14,7 @@ Central index for C++ — read top to bottom for first-time learning, or jump to
 8. [[08 - DSA Patterns with STL]] — which container/technique to reach for, with code
 
 ## Coverage Status
+
 - ✅ Core language fundamentals
 - ✅ Memory management
 - ✅ OOP
@@ -21,4 +22,5 @@ Central index for C++ — read top to bottom for first-time learning, or jump to
 - ✅ DSA-specific built-ins and patterns
 
 ## Related
+
 [[DSA A2Z Sheet MOC]]

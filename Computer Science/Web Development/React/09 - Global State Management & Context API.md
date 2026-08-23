@@ -75,7 +75,7 @@ export function AuthProvider({ children }) {
 // 3. Custom Hook for clean consumption + Safety Guard
 export function useAuth() {
   const context = useContext(AuthContext);
-  
+
   // Safety Guard: Throws error if used outside Provider
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
@@ -85,6 +85,7 @@ export function useAuth() {
 ```
 
 ### Usage in Application
+
 ```jsx
 // src/App.js
 import { AuthProvider } from "./context/AuthContext";
@@ -103,20 +104,24 @@ export default function App() {
 
 ## ⚠️ The Performance Bottleneck of Context API
 
-A common mistake is treating Context API as a generic state manager for highly active data (e.g. coordinates of a dragging slider or typing updates). 
+A common mistake is treating Context API as a generic state manager for highly active data (e.g. coordinates of a dragging slider or typing updates).
 
 ### The Re-render Issue
-When a Context Provider's `value` changes, **every single component that calls `useContext` for that context will re-render**. 
+
+When a Context Provider's `value` changes, **every single component that calls `useContext` for that context will re-render**.
 
 If your value object contains:
+
 ```javascript
 value={{ user, login, logout, activeTheme }}
 ```
 If only `activeTheme` changes, any component that only uses `user` (and doesn't care about the theme) is still forced to re-render.
 
 ### How to Mitigate Context Re-renders
+
 1. **Split Contexts:** Create separate contexts for slow-changing variables (e.g. `AuthContext` vs. fast-changing UI interactions like `ThemeContext` or `CartContext`).
 2. **Memoize Provider Values:** Wrap values in `useMemo` so reference comparisons do not fail on unrelated re-renders.
+
 ```jsx
 const providerValue = useMemo(() => ({ user, login, logout }), [user]);
 ```
@@ -128,6 +133,7 @@ const providerValue = useMemo(() => ({ user, login, logout }), [user]);
 For highly interactive, state-heavy, large-scale applications, external state managers are preferred because they support **selective rendering** (re-rendering *only* when the specific sliced state you are listening to changes).
 
 ### 🥇 Zustand (Highly Recommended)
+
 Zustand is a fast, lightweight, and extremely developer-friendly state manager. It requires zero boilerplate compared to Redux, does not use providers, and uses selectors for performance.
 
 ```jsx
@@ -156,6 +162,7 @@ export function AddButton() {
 ---
 
 ### 🥈 Redux Toolkit (RTK)
+
 Redux is an architectural standard in older or enterprise-level applications. **Redux Toolkit (RTK)** is the modern, official way to write Redux, eliminating historical boilerplate code.
 
 * **Slices:** Bundles state, actions, and reducers together.
@@ -187,16 +194,20 @@ export const store = configureStore({
 ## 💼 Placement & Interview Q&A
 
 ### Q1: Is the Context API a State Management Tool?
+
 **Answer:** **No.** This is a critical interview clarification. Context is a **dependency injection** mechanism. It is simply a way to transport data from point A to point B without manual prop drilling. The *state management* is still handled by React's standard `useState` or `useReducer` hooks inside the provider.
 
 ### Q2: Why is Zustand or Redux preferred over Context API for fast-updating state?
-**Answer:** Because of **rendering performance**. Context API lacks "state selectors." If any part of the Context's value object is updated, *all* consumer components re-render. 
+
+**Answer:** Because of **rendering performance**. Context API lacks "state selectors." If any part of the Context's value object is updated, *all* consumer components re-render.
 Zustand and Redux allow components to write **selectors** (e.g. `useCartStore(state => state.items)`). The component will *only* re-render if the specifically selected slice of state changes, preventing unnecessary rendering sweeps across the application.
 
 ### Q3: Why is throwing an error inside a Context hook if `context === null` a good practice?
+
 **Answer:** It acts as a fail-safe. If someone tries to use the custom context hook (`useAuth()`) in a component that is not nested inside the provider (`<AuthProvider>`), React will throw a clear, descriptive error during development instead of failing silently with cryptic `Cannot read properties of null` runtime errors.
 
 ### Q4: What is "Prop Drilling" and how can it be avoided?
+
 **Answer:** Prop drilling is the process of passing props down several levels of a component tree to a deeply nested child that needs it, forcing intermediate components to take props they don't use. It can be avoided using:
 1. **Context API** (Injecting dependency directly to child).
 2. **Zustand or Redux stores**.
@@ -205,6 +216,7 @@ Zustand and Redux allow components to write **selectors** (e.g. `useCartStore(st
 ---
 
 ## 🔗 Related Concepts
+
 - [[03 - Components & Props]] — Understanding prop drilling and composition
 - [[04 - State & useState Hook]] — Context providers use state under-the-hood
 - [[06 - Advanced Built-in Hooks]] — `useContext` and performance hooks

@@ -40,7 +40,7 @@ Notes on what's happening:
 - `setTodos([...todos, input])` creates a **new array** rather than mutating `todos` — see [[04 - State & useState Hook#Common mistakes]] for why this matters.
 - `key={i}` uses the array index as a key, which is acceptable here since items are only ever appended, not reordered — see [[11 - React Common Mistakes & Tricky Interview Questions]] for when this becomes a problem.
 
-## Related concepts
+## Related Concepts
 
 - [[00 - React MOC]]
 - [[04 - State & useState Hook]]

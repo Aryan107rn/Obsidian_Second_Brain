@@ -78,6 +78,7 @@ const [user, settings] = await Promise.all([
 ---
 
 ## 🔗 Related Concepts
+
 - [[Event Loop]] — Microtask queues and execution priority
 - [[Functions in JavaScript]] — Higher-order callback functions
 - [[Error Handling and Memory]] — Error catching with `try...catch` and async functions

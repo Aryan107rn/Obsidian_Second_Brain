@@ -84,6 +84,7 @@ for (let j = 0; j < 3; j++) {
 ---
 
 ## 🔗 Related Concepts
+
 - [[Closures]] — Preserving variables across lexical scopes
 - [[Variables and Data Types]] — In-depth `var`, `let`, `const` comparison
 - [[Functions in JavaScript]] — Function declarations vs. arrow functions

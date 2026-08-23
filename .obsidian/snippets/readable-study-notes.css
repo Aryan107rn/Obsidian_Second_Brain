@@ -1,0 +1,85 @@
+/*
+Readable study-note styling for Obsidian.
+Focus: better spacing, clearer key terms, readable code, and scannable callouts.
+*/
+
+.markdown-reading-view .markdown-preview-section,
+.markdown-source-view.mod-cm6 .cm-content {
+  line-height: 1.72;
+}
+
+.markdown-reading-view p,
+.markdown-reading-view ul,
+.markdown-reading-view ol,
+.markdown-reading-view table,
+.markdown-reading-view pre,
+.markdown-reading-view blockquote {
+  margin-top: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+
+.markdown-reading-view h1,
+.markdown-reading-view h2,
+.markdown-reading-view h3 {
+  letter-spacing: 0;
+}
+
+.markdown-reading-view h1 {
+  margin-bottom: 1rem;
+}
+
+.markdown-reading-view h2 {
+  margin-top: 2.1rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.markdown-reading-view h3 {
+  margin-top: 1.55rem;
+}
+
+.markdown-reading-view strong,
+.markdown-source-view.mod-cm6 .cm-strong {
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.markdown-reading-view mark,
+.markdown-source-view.mod-cm6 .cm-highlight {
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--color-yellow) 30%, transparent);
+  border-radius: 4px;
+  padding: 0.05rem 0.22rem;
+}
+
+.markdown-reading-view code,
+.markdown-source-view.mod-cm6 .cm-inline-code {
+  color: var(--code-normal);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 0.08rem 0.28rem;
+}
+
+.markdown-reading-view pre code {
+  border: 0;
+  padding: 0;
+}
+
+.markdown-reading-view .callout {
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--callout-color) 35%, transparent);
+  margin: 1rem 0;
+}
+
+.markdown-reading-view .callout-title {
+  font-weight: 700;
+}
+
+.markdown-reading-view table {
+  width: 100%;
+}
+
+.markdown-reading-view th {
+  color: var(--text-accent);
+}

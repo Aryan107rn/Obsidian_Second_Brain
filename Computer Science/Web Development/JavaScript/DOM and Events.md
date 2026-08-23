@@ -86,6 +86,7 @@ li.remove();               // modern shorthand
 - Always pair `setInterval` with `clearInterval` to avoid leaking timers that keep running after they're no longer needed.
 
 ## Related Concepts
+
 - [[Event Loop]] — how timer/event callbacks get scheduled
 - [[Common Coding Patterns]] — debounce/throttle are commonly applied to DOM events (scroll, input)
 - [[Error Handling and Memory]] — forgotten listeners as a memory-leak source
