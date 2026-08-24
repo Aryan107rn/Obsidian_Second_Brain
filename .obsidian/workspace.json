@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 82.45614035087719,
+        "dimension": 58.56014047410009,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 17.543859649122805,
+        "dimension": 41.43985952589991,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -228,8 +228,17 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "8d93e54daba61fdb",
+  "active": "f2339277baec7b99",
   "lastOpenFiles": [
+    "Computer Science/DSA/Time & Space Complexity Cheat Sheet.md",
+    "Computer Science/Web Development/TypeScript/TS Interview Questions and Tricky Types.md",
+    "Computer Science/Web Development/TypeScript/TS Integration and Build Tooling.md",
+    "Computer Science/Web Development/TypeScript/Type Assertions and Ambient Declarations.md",
+    "Computer Science/Web Development/TypeScript/Advanced Type Manipulation.md",
+    "Computer Science/Web Development/TypeScript/Generics and Utility Types.md",
+    "Computer Science/Web Development/TypeScript/Classes and OOP in TypeScript.md",
+    "Computer Science/Web Development/TypeScript/Type Aliases and Interfaces.md",
+    "Computer Science/Web Development/TypeScript/Union Intersection and Type Narrowing.md",
     "Computer Science/Web Development/TypeScript/Functions in TypeScript.md",
     "Computer Science/Web Development/TypeScript/Primitive and Special Types.md",
     "Computer Science/Web Development/TypeScript/Introduction and Compiler Config.md",
@@ -248,17 +257,8 @@
     "Computer Science/Web Development/Git/Git Tags.md",
     "Computer Science/Web Development/Git/Git and GitHub.md",
     "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
     "Pasted image 20260822145332.png",
     "Pasted image 20260822152721.png",
-    "Computer Science/Web Development/React/01 - Introduction to React & Virtual DOM.md",
-    "Computer Science/DSA/imp question/13. Roman to Integer.md",
-    "Computer Science/DSA/Topics/Strings.md",
-    "Computer Science/DSA/Topics/Sorting Techniques.md",
-    "Computer Science/DSA/Topics/Recursion & Backtracking.md",
-    "Computer Science/DSA/Topics/Matrix.md",
-    "Computer Science/DSA/Topics/Linked List.md",
-    "Computer Science/DSA/Topics/Hashing.md",
     "Computer Science/DSA/imp question",
     "Computer Science/DSA/Algorithm",
     "Computer Science/DSA/Topics",
