@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/React/04 - State & useState Hook.md",
-                "mode": "preview",
+                "file": "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04 - State & useState Hook"
+              "title": "04 - File Handling in Node.js (fs module)"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 58.56014047410009,
+        "dimension": 74.3207712532866,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 41.43985952589991,
+        "dimension": 25.67922874671341,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -228,9 +228,26 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "f2339277baec7b99",
+  "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
+    "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
+    "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
+    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
+    "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
     "Computer Science/DSA/Time & Space Complexity Cheat Sheet.md",
+    "Computer Science/Web Development/Backend/Node and Express",
+    "Computer Science/Web Development/Backend",
+    "Computer Science/DSA/DSA A2Z Sheet MOC.md",
+    "Computer Science/Web Development/JavaScript/Array Methods.md",
+    "Computer Science/Web Development/JavaScript/DOM and Events.md",
+    "Computer Science/Web Development/JavaScript/Common Coding Patterns.md",
+    "Computer Science/Web Development/JavaScript/Closures.md",
+    "Computer Science/DSA/Topics/Matrix.md",
+    "Computer Science/DSA/Topics/Binary Search.md",
+    "Computer Science/DSA/Topics/Arrays.md",
+    "Computer Science/DSA/Topics/Recursion & Backtracking.md",
+    "Computer Science/Web Development/React/04 - State & useState Hook.md",
     "Computer Science/Web Development/TypeScript/TS Interview Questions and Tricky Types.md",
     "Computer Science/Web Development/TypeScript/TS Integration and Build Tooling.md",
     "Computer Science/Web Development/TypeScript/Type Assertions and Ambient Declarations.md",
@@ -241,22 +258,7 @@
     "Computer Science/Web Development/TypeScript/Union Intersection and Type Narrowing.md",
     "Computer Science/Web Development/TypeScript/Functions in TypeScript.md",
     "Computer Science/Web Development/TypeScript/Primitive and Special Types.md",
-    "Computer Science/Web Development/TypeScript/Introduction and Compiler Config.md",
-    "Computer Science/Web Development/TypeScript/TypeScript MOC.md",
     "Computer Science/Web Development/TypeScript",
-    "Computer Science/Web Development/React/03 - Components & Props.md",
-    "Computer Science/Web Development/React/02 - JSX & Building Blocks.md",
-    "Computer Science/Web Development/React/01a - React Installation & Project Setup.md",
-    "Computer Science/Web Development/Git/01 - Git Basics.md",
-    "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
-    "Computer Science/Web Development/Git/02 - Git Branching.md",
-    "Computer Science/Web Development/Git/04 - Git Rebase.md",
-    "Computer Science/Web Development/Git/05 - Git Stash.md",
-    "Computer Science/Web Development/Git/07 - Git Tags.md",
-    "Computer Science/Web Development/Git/08 - GitHub Basics.md",
-    "Computer Science/Web Development/Git/Git Tags.md",
-    "Computer Science/Web Development/Git/Git and GitHub.md",
-    "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
     "Pasted image 20260822145332.png",
     "Pasted image 20260822152721.png",
     "Computer Science/DSA/imp question",
@@ -266,8 +268,6 @@
     "Computer Science/DSA/Backtracking",
     "gemini-scribe/Scheduled-Tasks/scheduled-tasks-state.json",
     "gemini-scribe/Scheduled-Tasks/Runs",
-    "gemini-scribe/Scheduled-Tasks",
-    "gemini-scribe/Skills",
     "attachments/rest-architecture-diagram.svg",
     "attachments/react-useeffect-lifecycle.svg",
     "attachments/js-prototype-chain.svg",
