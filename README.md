@@ -42,8 +42,8 @@ flowchart TD
 - [[Computer Science/System Design/System Design MOC|System Design MOC]]
 - [[JavaScript MOC|JavaScript MOC]]
 - [[TypeScript MOC|TypeScript MOC]]
-- [[Computer Science/Web Development/React/00 - React MOC|React MOC]]
-- [[Computer Science/Web Development/APIs/API|API Master Guide]]
+- [[00 - React MOC|React MOC]]
+- [[API|API Master Guide]]
 
 ## 🔌 Connected Tooling
 
