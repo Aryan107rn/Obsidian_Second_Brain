@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/DSA/imp question/13. Roman to Integer.md",
-                "mode": "source",
+                "file": "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "13. Roman to Integer"
+              "title": "06 - Building an HTTP Server with the http Module"
             }
           }
         ]
@@ -228,25 +228,33 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "f2339277baec7b99",
+  "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Backend/Node and Express/05 - Node.js Event Loop Phases & libuv Thread Pool.md",
     "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
+    "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
+    "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
+    "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
+    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
+    "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Asynchronous JavaScript.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Array Methods.md",
+    "Computer Science/Web Development/Frontend/JavaScript/DOM and Events.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Common Coding Patterns.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Functions in JavaScript.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Variables and Data Types.md",
+    "Computer Science/Web Development/Frontend/JavaScript/JavaScript MOC.md",
+    "Computer Science/Web Development/Frontend/JavaScript/JS Interview Questions and Tricky Outputs.md",
+    "Computer Science/DSA/imp question/13. Roman to Integer.md",
     "Computer Science/Web Development/Backend/APIs",
     "Computer Science/Web Development/Frontend/React",
     "Computer Science/Web Development/Frontend/TypeScript",
     "Computer Science/Web Development/Frontend/JavaScript",
     "Computer Science/Web Development/Frontend",
-    "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
-    "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
-    "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
-    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
     "Computer Science/DSA/Time & Space Complexity Cheat Sheet.md",
     "Computer Science/Web Development/Backend/Node and Express",
     "Computer Science/Web Development/Backend",
     "Computer Science/DSA/DSA A2Z Sheet MOC.md",
-    "Computer Science/Web Development/Frontend/JavaScript/Array Methods.md",
-    "Computer Science/Web Development/Frontend/JavaScript/DOM and Events.md",
-    "Computer Science/Web Development/Frontend/JavaScript/Common Coding Patterns.md",
     "Computer Science/Web Development/Frontend/JavaScript/Closures.md",
     "Computer Science/DSA/Topics/Matrix.md",
     "Computer Science/DSA/Topics/Binary Search.md",
@@ -255,13 +263,6 @@
     "Computer Science/Web Development/Frontend/React/04 - State & useState Hook.md",
     "Computer Science/Web Development/Frontend/TypeScript/TS Interview Questions and Tricky Types.md",
     "Computer Science/Web Development/Frontend/TypeScript/TS Integration and Build Tooling.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Type Assertions and Ambient Declarations.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Advanced Type Manipulation.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Generics and Utility Types.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Classes and OOP in TypeScript.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Type Aliases and Interfaces.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Union Intersection and Type Narrowing.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Functions in TypeScript.md",
     "Computer Science/Web Development/TypeScript",
     "Pasted image 20260822145332.png",
     "Pasted image 20260822152721.png",
