@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
-                "mode": "preview",
+                "file": "Computer Science/Web Development/Backend/Node and Express/08 - HTTP Methods & Method-Based Routing in Node.js.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06 - Building an HTTP Server with the http Module"
+              "title": "08 - HTTP Methods & Method-Based Routing in Node.js"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 74.3207712532866,
+        "dimension": 64.06067677946325,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "f34bf2c405eac44f",
         "type": "tabs",
-        "dimension": 25.67922874671341,
+        "dimension": 35.93932322053676,
         "children": [
           {
             "id": "614972a4b8f98990",
@@ -230,13 +230,17 @@
   },
   "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Backend/Node and Express/07 - URL Structure & Parsing in Node.js.md",
+    "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
     "Computer Science/Web Development/Backend/Node and Express/05 - Node.js Event Loop Phases & libuv Thread Pool.md",
-    "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
+    "Computer Science/Web Development/Backend/Node and Express/08 - HTTP Methods & Method-Based Routing in Node.js.md",
     "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
     "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
     "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
     "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
-    "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
+    "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
+    "Computer Science/Web Development/Frontend/React/00 - React MOC.md",
+    "Pasted image 20260828204836.png",
     "Computer Science/Web Development/Frontend/JavaScript/Asynchronous JavaScript.md",
     "Computer Science/Web Development/Frontend/JavaScript/Array Methods.md",
     "Computer Science/Web Development/Frontend/JavaScript/DOM and Events.md",
@@ -260,9 +264,6 @@
     "Computer Science/DSA/Topics/Binary Search.md",
     "Computer Science/DSA/Topics/Arrays.md",
     "Computer Science/DSA/Topics/Recursion & Backtracking.md",
-    "Computer Science/Web Development/Frontend/React/04 - State & useState Hook.md",
-    "Computer Science/Web Development/Frontend/TypeScript/TS Interview Questions and Tricky Types.md",
-    "Computer Science/Web Development/Frontend/TypeScript/TS Integration and Build Tooling.md",
     "Computer Science/Web Development/TypeScript",
     "Pasted image 20260822145332.png",
     "Pasted image 20260822152721.png",
@@ -275,7 +276,6 @@
     "attachments/git-feature-branch-workflow.png",
     "attachments/git-workflow-architecture.svg",
     "attachments/dynamic-programming-memoization.png",
-    "attachments/linux-filesystem-hierarchy.svg",
     "Untitled 1.canvas",
     "Untitled.canvas"
   ]

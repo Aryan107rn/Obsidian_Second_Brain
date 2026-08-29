@@ -2,7 +2,7 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-08-28
+updated: 2026-08-29
 ---
 
 # Node.js & Express — Backend Development (MOC)
@@ -35,6 +35,12 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * **[[06 - Building an HTTP Server with the http Module]]**
   * *Focus:* `http.createServer(requestListener)` and why it takes a callback, `server.listen`, key `req`/`res` properties (`req.url`, `req.method`, `req.headers`, `res.end`, `res.writeHead`), manual routing via `switch` on `req.url`, and why this doesn't scale (motivating Express).
 
+### Chapter 5b: URLs, Query Strings & HTTP Methods
+* **[[07 - URL Structure & Parsing in Node.js]]**
+  * *Focus:* URL anatomy (protocol, domain, path, query params), why `req.url` is unparsed raw text, parsing with the WHATWG `URL` class vs the legacy `url` module, `.pathname` vs `.searchParams`.
+* **[[08 - HTTP Methods & Method-Based Routing in Node.js]]**
+  * *Focus:* Reading `req.method`, why routing needs path **and** method together, reading a POST body manually via streamed chunks, and why this manual approach motivates a framework.
+
 ### Chapter 6: Express.js (upcoming)
 *Not yet covered — will be added as topics are taught.*
 
@@ -43,3 +49,4 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * [[Event Loop]] — general call stack / microtask / macrotask model (prerequisite for Chapter 4)
 * [[Package Managers and Build Tools]] — npm/pnpm/yarn comparison from the frontend tooling side
 * [[Asynchronous JavaScript]] — promises/callbacks used throughout Node's async APIs
+* [[REST APIs]] — full HTTP verb semantics, idempotency, and status code conventions (deeper dive beyond Chapter 5b)

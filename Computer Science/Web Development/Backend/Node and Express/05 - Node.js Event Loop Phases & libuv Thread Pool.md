@@ -12,15 +12,8 @@ Node's approach: run your JS on a **single thread**, and whenever an operation w
 
 The general JS "microtask vs macrotask" model is a simplification. Under the hood, Node's event loop (powered by **libuv**, the same C library mentioned in [[01 - Introduction to Node.js & JavaScript Engines]]) actually cycles through distinct **phases**, each with its own callback queue:
 
-```mermaid
-flowchart LR
-    A["1. Timers\n(setTimeout / setInterval callbacks)"] --> B["2. Pending Callbacks\n(some system-level callbacks)"]
-    B --> C["3. Idle / Prepare\n(internal use only)"]
-    C --> D["4. Poll\n(fetch new I/O events, run I/O callbacks e.g. fs.readFile)"]
-    D --> E["5. Check\n(setImmediate callbacks)"]
-    E --> F["6. Close Callbacks\n(socket.on('close'), etc.)"]
-    F --> A
-```
+
+![[Pasted image 20260828204836.png]]
 
 | Phase | What runs here |
 |---|---|
