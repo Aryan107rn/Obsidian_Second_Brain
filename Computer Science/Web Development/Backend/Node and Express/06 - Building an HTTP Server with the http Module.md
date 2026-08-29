@@ -2,7 +2,50 @@
 
 *(Following Piyush Garg's Node.js playlist.)*
 
-## What is it?
+## What is an HTTP server, conceptually?
+
+Before touching code, hold this simple mental model: an HTTP server is just a program that sits and waits, and every time it receives a request, it processes it and sends something back.
+
+```
+Browser
+   │
+   │  GET /
+   ↓
+HTTP Server
+   │
+   │  "Hello World"
+   ↓
+Browser
+```
+
+**A "server" doesn't need to be a special physical machine.** During local development, your own laptop plays both roles at once — it runs the browser making the request *and* the Node.js process acting as the server answering it:
+
+```
+Your Laptop
+├── Browser          (the client)
+└── Node.js Process  (the server)
+```
+
+## `localhost` and ports — where the request actually goes
+
+Two terms you'll see constantly, and both are simpler than they sound:
+
+- **`localhost`** means *"this computer"* — it's a hostname that always resolves back to the machine you're currently on (technically the loopback address `127.0.0.1`), rather than pointing out to some server on the internet.
+- **A port** is a number that identifies *which specific service* on that computer should receive the connection. One computer can run many network services simultaneously — a Node app, a database, another dev server — so ports disambiguate which one a given request is meant for.
+
+```
+localhost:8000   →  port 8000 on this computer
+localhost:3000   →  port 3000 on this computer  (a different service)
+localhost:5432   →  port 5432 on this computer  (e.g. PostgreSQL's default port)
+```
+
+So when you write:
+```js
+server.listen(8000);
+```
+you're telling Node: *"start listening for incoming connections specifically on port 8000."* And when your browser opens `http://localhost:8000`, it's saying: *"on this computer, talk to whatever is listening on port 8000"* — which is your Node server.
+
+## What is the `http` module?
 
 **`http`** is one of Node's **core modules** (see [[03 - npm, package.json & Node Modules]]) — it lets you create a web server directly, with no framework, by handling raw HTTP requests and responses yourself.
 
@@ -24,7 +67,43 @@ const server = http.createServer((req, res) => {
 });
 ```
 
-### Why does `createServer` take a callback (the `requestListener`)?
+### What is a callback, really? (the "you give it, Node calls it" mental model)
+
+The function you pass in — `(req, res) => { ... }` — is a **callback**. The key idea to really absorb: **you don't call this function. Node calls it, whenever a request shows up.**
+
+```js
+// You:
+http.createServer(myFunction);
+
+// What Node does internally, conceptually:
+whenRequestArrives(() => {
+    myFunction(req, res);
+});
+```
+
+Visualized as a flow:
+
+```
+YOU
+ │
+ │  hand Node a function
+ ↓
+NODE
+ │
+ │  waits quietly, doing nothing yet
+ ↓
+an HTTP request arrives
+ │
+ ↓
+NODE calls the function YOU gave it
+ │
+ ↓
+your callback executes, using fresh req/res for this request
+```
+
+This is why it's literally called a "call-back" — Node calls your code *back* later, when the relevant event (a request) actually happens, rather than you calling it yourself right away.
+
+### Why does `createServer` take a callback at all?
 
 Because a server, once started, **keeps running indefinitely** and will receive an unknown number of requests over its lifetime — you can't just "run some code once" the way you would in a script. You need a function that gets **invoked automatically, once per request, with a fresh `req`/`res` pair each time**. That's exactly what a callback is for.
 
@@ -40,14 +119,14 @@ This is Node's standard **event-driven pattern** (the same `EventEmitter` patter
 ```js
 server.listen(8000, () => console.log('server started'));
 ```
-This binds the server to a specific **port** on your machine and starts accepting incoming connections on it. The callback fires once the server has successfully started listening — useful for confirming startup (logging, readiness checks). **One server, one port** — a single `http.Server` instance listens on exactly one port at a time.
+This binds the server to the port number discussed above and starts accepting incoming connections on it. The callback fires once the server has successfully started listening — useful for confirming startup (logging, readiness checks). **One server, one port** — a single `http.Server` instance listens on exactly one port at a time.
 
 ## Key `req` (request) properties — what you actually need
 
 | Property / Method | What it gives you |
 |---|---|
-| `req.url` | The path (+ query string) requested, **relative to the server root** — e.g. `/about` or `/search?q=node`. Not the full URL (no domain/protocol). |
-| `req.method` | The HTTP verb used: `'GET'`, `'POST'`, `'PUT'`, `'DELETE'`, etc. |
+| `req.url` | The path (+ query string) requested, **relative to the server root** — e.g. `/about` or `/search?q=node`. Not the full URL (no domain/protocol). Visiting `http://localhost:8000/` gives `"/"`; visiting `.../about` gives `"/about"`. |
+| `req.method` | The HTTP verb used: `'GET'`, `'POST'`, `'PUT'`, `'DELETE'`, etc. A normal browser page visit is a `GET`. |
 | `req.headers` | An object of all request headers, with lowercase keys (e.g. `req.headers['content-type']`). |
 | `req.on('data', chunk => ...)` | Fires repeatedly as the request **body** arrives, in `Buffer` chunks (bodies arrive as a stream, not a ready-made property — this is why frameworks like Express need body-parsing middleware to give you a convenient `req.body`). |
 | `req.on('end', () => ...)` | Fires once the entire body has been received — where you'd assemble the collected chunks into the final body. |
@@ -59,11 +138,52 @@ This binds the server to a specific **port** on your machine and starts acceptin
 | `res.writeHead(statusCode, headersObj)` | Sets the status code (e.g. `200`, `404`) and response headers **before** sending the body. Must be called before `res.write`/`res.end` if you need custom headers. |
 | `res.setHeader(name, value)` | Sets a single response header. |
 | `res.write(chunk)` | Sends part of the response body — can be called multiple times for streaming output. |
-| `res.end([data])` | **Finalizes and sends** the response, optionally with one last chunk of data. |
+| `res.end([data])` | **Finalizes and sends** the response, optionally with one last chunk of data. `res.end("Hello World")` means: finish the response and send `"Hello World"` back to the client. |
 
 **Common mistake:** forgetting to call `res.end()` — without it, the response is never sent, and the client (browser/Postman) hangs indefinitely waiting, because as far as it knows the server hasn't finished replying.
 
-## Your code, explained
+## The complete request/response flow
+
+This is the single most important mental model for everything above:
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant N as Node.js HTTP Server
+    participant CB as Your Callback (req, res)
+
+    B->>N: HTTP Request (GET /)
+    N->>N: Node receives the request
+    N->>CB: Node creates req + res, then calls your callback
+    CB->>CB: your code decides what to do<br/>(e.g. check req.url)
+    CB->>N: res.end("Hello World")
+    N->>B: HTTP Response
+```
+
+In words: browser sends a request → Node receives it → Node builds fresh `req`/`res` objects for this exact request → Node invokes **your** callback with them → your code runs and calls `res.end(...)` → Node sends that back as the HTTP response → the browser receives it.
+
+## Your first server
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+    res.end("Hello World");
+});
+
+server.listen(8000, () => {
+    console.log("Server started");
+});
+```
+
+Breaking down each line:
+- `require("http")` → get Node's HTTP module.
+- `http.createServer(...)` → create an HTTP server object.
+- `(req, res) => {}` → the callback Node will invoke for every incoming request.
+- `res.end("Hello World")` → send the response.
+- `server.listen(8000)` → start listening on port 8000.
+
+## A more realistic version: logging + async response
 
 ```javascript
 const http = require("http");
@@ -83,7 +203,7 @@ Walkthrough:
 - Every incoming request triggers the `requestListener` callback.
 - `Date.now()` timestamps the request, building a one-line log entry.
 - `fs.appendFile(...)` (see [[04 - File Handling in Node.js (fs module)]]) writes that line to `log.txt` **without erasing previous entries** (unlike `writeFile`, which would overwrite the file each time).
-- `res.end(...)` is called **inside** the `fs.appendFile` callback — correctly waiting for the (non-blocking, async) file write to finish before responding. If `res.end` were called outside/before this callback, the response could be sent before the log write even completes — not wrong here since the response doesn't depend on the log content, but it's the right pattern to know for cases where the response *does* depend on an async result.
+- `res.end(...)` is called **inside** the `fs.appendFile` callback — correctly waiting for the (non-blocking, async) file write to finish before responding.
 - **Improvement to note:** the `err` parameter in the `fs.appendFile` callback is never checked. In production code, you'd want:
   ```js
   fs.appendFile('log.txt', log, (err) => {
@@ -95,9 +215,37 @@ Walkthrough:
   });
   ```
 
-## Upgraded version: manual routing with `switch`
+## Basic manual routing with `req.url`
 
-Right now, every route returns the same response. To respond differently based on which path was requested, check `req.url`:
+Once you can read `req.url`, you can send different responses for different paths:
+
+```javascript
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+    if (req.url === "/") {
+        res.end("Home Page");
+    } else if (req.url === "/about") {
+        res.end("About Page");
+    } else {
+        res.end("404 Not Found");
+    }
+});
+
+server.listen(8000);
+```
+
+```
+GET /            →  Home Page
+GET /about       →  About Page
+GET /something   →  404 Not Found
+```
+
+This is **manual routing** — you, not a framework, decide what happens for each path.
+
+## Upgraded version: routing with `switch`
+
+The same idea scales a little more cleanly with `switch`, and this version also demonstrates combining it with the logging pattern from earlier:
 
 ```javascript
 const http = require("http");
@@ -143,10 +291,46 @@ server.listen(8000, () => console.log("server started"));
 - `res.writeHead(200, {...})` is set once, before the `switch`, since every matched case shares the same success status — only the `default` case overrides it to `404`.
 
 **Why this doesn't scale (and why Express exists):**
-- Real apps have dozens/hundreds of routes — an ever-growing `switch` becomes unmanageable.
-- `req.url` includes query strings (`/about?ref=email` won't match the `'/about'` case exactly) — production routing needs proper URL parsing (`new URL(req.url, 'http://localhost')`) to separate the path from the query.
+- Real apps have dozens/hundreds of routes — an ever-growing `switch`/`if-else` chain becomes unmanageable.
+- `req.url` includes query strings (`/about?ref=email` won't match the `'/about'` case exactly) — production routing needs proper URL parsing (see [[07 - URL Structure & Parsing in Node.js]]) to separate the path from the query.
 - There's no clean way to handle dynamic path segments (`/users/123`) with a plain `switch`.
+- Real routing also needs to check the HTTP method, not just the path (see [[08 - HTTP Methods & Method-Based Routing in Node.js]]) — `/signup` might need to behave differently for `GET` vs `POST`.
 - This exact pain point — matching methods + paths + dynamic segments cleanly — is precisely what a routing framework like Express solves. Understanding *why* you'd want it is easier having built this by hand first.
+
+## The full mental model, all together
+
+```
+                 YOUR COMPUTER
+┌─────────────────────────────────────┐
+│                                      │
+│   Browser                           │
+│      │                              │
+│      │ HTTP Request                 │
+│      ↓                              │
+│   localhost:8000                    │
+│      │                              │
+│      ↓                              │
+│   Node.js                           │
+│      │                              │
+│      ↓                              │
+│   HTTP Server                       │
+│      │                              │
+│      ↓                              │
+│   callback(req, res)                │
+│      │                              │
+│      ↓                              │
+│   Your code                         │
+│      │                              │
+│      ↓                              │
+│   res.end(...)                      │
+│      │                              │
+│      ↓                              │
+│   Browser receives response         │
+│                                      │
+└─────────────────────────────────────┘
+```
+
+**Self-check:** if asked *"what happens when I visit `localhost:8000/about`?"*, you should be able to say — browser sends an HTTP request → it resolves to port 8000 on this machine → Node's server receives it → Node invokes your callback with fresh `req`/`res` → your code checks `req.url === "/about"` → decides what to send → calls `res.end(...)` → the browser receives that as its response. If that whole chain is second nature, this foundation is solid.
 
 ## Common mistakes
 
@@ -159,3 +343,5 @@ server.listen(8000, () => console.log("server started"));
 [[04 - File Handling in Node.js (fs module)]]
 [[05 - Node.js Event Loop Phases & libuv Thread Pool]] — why blocking work in a request handler is dangerous
 [[03 - npm, package.json & Node Modules]] — `http` as a core module
+[[07 - URL Structure & Parsing in Node.js]]
+[[08 - HTTP Methods & Method-Based Routing in Node.js]]
