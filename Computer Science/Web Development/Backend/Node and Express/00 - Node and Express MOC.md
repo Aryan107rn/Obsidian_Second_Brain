@@ -2,7 +2,7 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-08-29
+updated: 2026-08-31
 ---
 
 # Node.js & Express — Backend Development (MOC)
@@ -33,7 +33,7 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 
 ### Chapter 5: Building a Server from Scratch
 * **[[06 - Building an HTTP Server with the http Module]]**
-  * *Focus:* `http.createServer(requestListener)` and why it takes a callback, `server.listen`, key `req`/`res` properties (`req.url`, `req.method`, `req.headers`, `res.end`, `res.writeHead`), manual routing via `switch` on `req.url`, and why this doesn't scale (motivating Express).
+  * *Focus:* What an HTTP server is conceptually, `localhost` and ports, `http.createServer(requestListener)` and why it takes a callback, `server.listen`, key `req`/`res` properties, manual routing via `if`/`switch` on `req.url`, and why this doesn't scale (motivating Express).
 
 ### Chapter 5b: URLs, Query Strings & HTTP Methods
 * **[[07 - URL Structure & Parsing in Node.js]]**
@@ -50,3 +50,4 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * [[Package Managers and Build Tools]] — npm/pnpm/yarn comparison from the frontend tooling side
 * [[Asynchronous JavaScript]] — promises/callbacks used throughout Node's async APIs
 * [[REST APIs]] — full HTTP verb semantics, idempotency, and status code conventions (deeper dive beyond Chapter 5b)
+* [[HTTP Versions & the QUERY Method]] — HTTP/1.1 vs HTTP/2, and the new `QUERY` method (RFC 10008, 2026)

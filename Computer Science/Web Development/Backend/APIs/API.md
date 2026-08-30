@@ -2,7 +2,7 @@
 tags: [api, web-development, backend, networking, computer-science, moc, master-guide]
 aliases: [APIs, Types of APIs, API MOC, API Architecture]
 created: 2026-08-09
-updated: 2026-08-16
+updated: 2026-08-31
 ---
 
 # API — Architecture, Protocols & Master Guide
@@ -93,6 +93,8 @@ flowchart TD
 | **WebSocket** | TCP (Upgraded HTTP) | Text / Binary frames | Persistent Full-Duplex Bi-directional | ⭐⭐⭐⭐ | Real-time chat, multiplayer games, live tickers | [[WebSocket]] |
 | **SOAP** | HTTP, SMTP, TCP | XML (Strict Envelope) | Request / Response | ⭐⭐ | Legacy banking, insurance, enterprise transactions | [[SOAP]] |
 
+> For the transport-layer distinction between HTTP/1.1 and HTTP/2 referenced above, plus the new `QUERY` method, see [[HTTP Versions & the QUERY Method]].
+
 ---
 
 ## 🎯 How to Choose the Right API Style
@@ -128,6 +130,7 @@ flowchart TD
 - ![[grpc-logo.svg|16]] [[gRPC]] — Protocol Buffers, `.proto` compilation, and HTTP/2 streaming
 - ![[websocket.svg|16]] [[WebSocket]] — Handshake upgrade, duplex messaging, and connection management
 - [[SOAP]] — XML Envelopes, WSDL contracts, and enterprise WS-Security
+- [[HTTP Versions & the QUERY Method]] — HTTP/1.1 vs HTTP/2 (multiplexing, HPACK, binary framing), and the new `QUERY` method (RFC 10008, 2026)
 
 ## 🧠 API Selection Cheat Flow
 

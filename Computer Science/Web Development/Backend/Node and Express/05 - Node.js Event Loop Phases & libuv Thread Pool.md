@@ -116,7 +116,7 @@ UV_THREADPOOL_SIZE=8 node server.js
 - Thinking "Node is single-threaded" means *everything* in Node runs on one thread — the JS call stack is single-threaded, but libuv can and does use multiple OS threads under the hood for the thread pool.
 - Doing CPU-heavy synchronous work directly in JS (e.g. a huge synchronous loop, `JSON.parse` on a massive string, sync crypto) — this blocks the *actual* single JS thread, and no thread pool helps here, because that work never leaves the main thread. This is the real danger case for Node servers: one slow synchronous computation freezes every other request being handled.
 - Confusing "the event loop has 6 phases" with "there are 6 kinds of macrotasks" — they're the same idea from two angles; each phase processes one category of callback.
-
+![[Pasted image 20260831005940.png]]
 ## Related concepts
 [[Event Loop]] — general call stack / microtask / macrotask model (read first if new to this topic)
 [[01 - Introduction to Node.js & JavaScript Engines]] — what libuv is and why Node embeds it

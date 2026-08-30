@@ -92,6 +92,9 @@ Same logic, but the framework handles the path+method matching internally instea
 - Trying to read the request body before the `'end'` event has fired — the data arrives in chunks over time; reading before it's fully received gives incomplete data.
 - Forgetting that `GET`/`DELETE` requests conventionally have **no body** — trying to parse a body from them is usually pointless (any data for these methods normally travels via the URL/query params or path instead).
 
+
+![[Pasted image 20260831010148.png|904]]
+
 ## Related concepts
 [[06 - Building an HTTP Server with the http Module]]
 [[07 - URL Structure & Parsing in Node.js]]
