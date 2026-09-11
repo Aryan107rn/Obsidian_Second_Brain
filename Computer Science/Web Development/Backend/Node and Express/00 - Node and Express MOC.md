@@ -2,12 +2,12 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-08-31
+updated: 2026-09-01
 ---
 
 # Node.js & Express — Backend Development (MOC)
 
-Backend curriculum covering the Node.js runtime, its module system, the `http` module, and eventually the Express framework built on top of it. Notes are numbered sequentially — follow in order if learning from scratch.
+Backend curriculum covering the Node.js runtime, its module system, the `http` module, and the Express framework built on top of it. Notes are numbered sequentially — follow in order if learning from scratch.
 
 *(Following Piyush Garg's Node.js YouTube playlist.)*
 
@@ -41,8 +41,9 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * **[[08 - HTTP Methods & Method-Based Routing in Node.js]]**
   * *Focus:* Reading `req.method`, why routing needs path **and** method together, reading a POST body manually via streamed chunks, and why this manual approach motivates a framework.
 
-### Chapter 6: Express.js (upcoming)
-*Not yet covered — will be added as topics are taught.*
+### Chapter 6: Express.js
+* **[[09 - Introduction to Express.js]]**
+  * *Focus:* `app.get(path, handler)` as the declarative replacement for manual method+path checks, `res.send()` vs `res.end()`, `req.query` (automatic query parsing — replaces manual `URL`/`searchParams` work), and why `app.listen()` is literally shorthand for `http.createServer(app).listen()`. Includes a full vanilla-`http`-vs-Express comparison table.
 
 ## 🔗 Connected Concepts
 * [[JavaScript MOC]] — the language Node executes
