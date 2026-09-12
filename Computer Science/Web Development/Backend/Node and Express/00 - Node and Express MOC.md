@@ -2,7 +2,7 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-09-01
+updated: 2026-09-02
 ---
 
 # Node.js & Express — Backend Development (MOC)
@@ -22,6 +22,8 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 ### Chapter 2: Modules & Package Management
 * **[[03 - npm, package.json & Node Modules]]**
   * *Focus:* `npm init`, anatomy of `package.json`, what a module is, core vs local vs third-party modules, CommonJS (`require`/`module.exports`) vs ES Modules (`import`/`export`) in Node.
+* **[[10 - Semantic Versioning & Dependency Management]]**
+  * *Focus:* MAJOR.MINOR.PATCH structure, caret `^` vs tilde `~` update ranges, why to avoid `@latest`, `package-lock.json`, and manual version locking.
 
 ### Chapter 3: Interacting with the System
 * **[[04 - File Handling in Node.js (fs module)]]**
