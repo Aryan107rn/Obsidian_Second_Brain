@@ -2,12 +2,12 @@
 tags: [api, rest, web-development, backend, networking, computer-science, placement-prep, interview-favorite]
 aliases: [REST, RESTful API, Representational State Transfer, HTTP REST]
 created: 2026-08-08
-updated: 2026-08-16
+updated: 2026-09-03
 ---
 
 # REST APIs — Comprehensive Architecture & Design Guide
 
-A **REST API** (Representational State Transfer) is an architectural style designed by Roy Fielding in 2000 for distributed hypermedia systems. It is not a rigid library or protocol, but rather a set of **design principles** that map operations on resources to standard [[HTTP]] methods.
+A **REST API** (Representational State Transfer) is an architectural style designed by Roy Fielding in 2000 for distributed hypermedia systems. It is not a rigid library or protocol, but rather a set of **design principles** that map operations on resources to standard [[HTTP]] methods. These principles are sometimes debated at the edges, but they remain the industry-standard best practices for building servers that stay scalable and maintainable as they grow.
 
 ---
 
@@ -43,6 +43,10 @@ flowchart TD
     class C1,C2,C3,C4,C5,C6 rule
     class D1,D2,D3,D4,D5,D6 detail
 ```
+
+### Client-Server Separation — the foundational rule
+
+This is the constraint everything else builds on: **the client (a browser, a mobile app, a smart-TV app, an IoT device) and the server must be completely independent of each other.** The server doesn't know or care what kind of client is calling it — a phone app and a web browser can hit the exact same endpoint. This independence is what lets a team redesign the entire frontend without touching the backend, or swap out the database without any client noticing, as long as the API contract (URIs, request/response shapes) stays the same.
 
 ---
 
@@ -90,6 +94,16 @@ flowchart TD
 > **PUT vs. PATCH Difference:**
 > - `PUT /users/42` replaces the **entire user object**. Any fields you omit are wiped or reset to defaults.
 > - `PATCH /users/42` updates **only the fields provided** in the payload (e.g. `{ "email": "new@site.com" }`), leaving other fields untouched.
+
+### ⚠️ Common anti-pattern: using `POST` for everything
+
+A frequent beginner mistake is routing **every** action — creating, updating, deleting — through `POST`, e.g. `POST /deleteUser` or `POST /updateEmail`. This technically "works" (the server can inspect the body and figure out what to do), but it defeats the entire purpose of having distinct HTTP verbs:
+
+- It breaks the **uniform interface** constraint — a client (or any tooling built around REST conventions, like API gateways or generic HTTP caches) can no longer infer intent from the method alone.
+- It throws away **safety and idempotency guarantees** — infrastructure that knows `DELETE` is idempotent can safely retry a failed request; it can't make that assumption about `POST /deleteUser`, since `POST` is never guaranteed safe to retry.
+- It makes the API harder to reason about for anyone consuming it — `DELETE /users/42` is self-explanatory; `POST /deleteUser` requires reading documentation or code to understand.
+
+**Using the specific method for its specific purpose is what makes an API "RESTful"** rather than just "an HTTP API that happens to use JSON."
 
 ---
 
@@ -175,6 +189,26 @@ flowchart TD
 
 ---
 
+## 🖥️ Data Format Choice: HTML (Server-Side Rendering) vs JSON
+
+A REST server has to decide **what shape of data to hand back**, and this decision is independent of the HTTP verbs/status codes above — it's about the response *body*.
+
+| Approach | What it means | Trade-off |
+|---|---|---|
+| **HTML (server-side rendering)** | The server renders a complete HTML page (using a template engine) and sends that finished markup directly to the browser. | **Faster for the browser to display** — it just paints the HTML it received, with little further processing needed. But the response is tied to *how it looks*, which makes it awkward for a non-browser client (a mobile app, a third-party integration) to consume — they'd have to parse HTML to extract the actual data. |
+| **JSON (raw data)** | The server sends only the underlying data as JSON, with no presentation baked in. | **Cross-platform by design** — a web frontend, a mobile app, and a desktop app can all consume the exact same endpoint and render the data however suits their own UI. This is why JSON became the default for modern APIs consumed by multiple kinds of clients (e.g. a React frontend, see [[React MOC]]). The trade-off is the client now has to do its own rendering work. |
+
+**In Express, this maps directly to two different response methods:**
+```js
+res.json(user);          // send raw data — client (e.g. React) renders it
+res.render('profile', { user });  // render a template server-side and send finished HTML
+```
+`res.render()` requires a configured template/view engine (e.g. EJS, Pug) — it's the Express-level entry point into full server-side rendering. `res.json()` (or the more general `res.send()` from [[09 - Introduction to Express.js]], which auto-detects and JSON-encodes objects) is the entry point into building a data-only API for a separate frontend to consume.
+
+**Practical takeaway:** choose JSON by default for any API that might have more than one kind of client (this is most real-world APIs today); reach for server-rendered HTML when you're building a traditional server-rendered website with no separate frontend app consuming the same data.
+
+---
+
 ## 📐 REST URI Design Rules & Best Practices
 
 | Best Practice Rule | ✅ Good URI Example | ❌ Bad / Anti-Pattern Example | Why? |
@@ -203,7 +237,7 @@ const users = {
   42: { id: 42, name: "Alice", email: "alice@example.com" }
 };
 
-// REST Endpoint: GET resource by ID
+// REST Endpoint: GET resource by ID — data-only response for a separate frontend (e.g. React)
 app.get('/users/:id', (req, res) => {
   const userId = req.params.id;
   const user = users[userId];
@@ -213,6 +247,13 @@ app.get('/users/:id', (req, res) => {
   } else {
     res.status(404).json({ error: "User not found" }); // 404 Not Found
   }
+});
+
+// Same resource, but server-rendered HTML instead (requires a configured view engine)
+app.get('/users/:id/profile-page', (req, res) => {
+  const user = users[req.params.id];
+  if (!user) return res.status(404).send("User not found");
+  res.render('profile', { user }); // renders e.g. views/profile.ejs with `user` in scope
 });
 
 app.listen(PORT, () => console.log(`REST Server running on port ${PORT}`));
@@ -260,3 +301,5 @@ def get_user(user_id: int):
 - [[GraphQL]] — How GraphQL solves REST over-fetching and under-fetching
 - [[gRPC]] — The binary high-performance RPC alternative for microservices
 - [[WebSocket]] — For real-time bi-directional messaging where REST polling is inefficient
+- [[09 - Introduction to Express.js]] — `res.send()`/`res.json()` mechanics referenced above
+- [[08 - HTTP Methods & Method-Based Routing in Node.js]] — reading `req.method` manually, before a framework enforces REST conventions for you
