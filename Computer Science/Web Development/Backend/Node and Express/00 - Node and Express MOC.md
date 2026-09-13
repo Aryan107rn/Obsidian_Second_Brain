@@ -2,7 +2,7 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-09-02
+updated: 2026-09-04
 ---
 
 # Node.js & Express — Backend Development (MOC)
@@ -46,6 +46,18 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 ### Chapter 6: Express.js
 * **[[09 - Introduction to Express.js]]**
   * *Focus:* `app.get(path, handler)` as the declarative replacement for manual method+path checks, `res.send()` vs `res.end()`, `req.query` (automatic query parsing — replaces manual `URL`/`searchParams` work), and why `app.listen()` is literally shorthand for `http.createServer(app).listen()`. Includes a full vanilla-`http`-vs-Express comparison table.
+
+### Chapter 7: Middleware & Handling Request Bodies
+* **[[11 - Middleware in Express.js (Fundamentals)]]**
+  * *Focus:* The `(req, res, next)` signature, why middleware exists (shared cross-route logic), the middleware chain, `app.use()` vs route-specific middleware, built-in vs third-party vs custom, and why registration order matters.
+* **[[12 - express.urlencoded, express.json & req.body]]**
+  * *Focus:* `x-www-form-urlencoded` vs `application/json` bodies, `express.urlencoded({extended})`, `express.json()`, and populating `req.body`.
+
+### Chapter 8: Testing & Persisting Data
+* **[[13 - API Testing with Postman]]**
+  * *Focus:* Why Postman is needed (browsers can't easily send PATCH/DELETE/custom-body POST), setting up requests, and analyzing status code, duration, and payload size.
+* **[[14 - Data Persistence with fs, Dynamic IDs & Validation]]**
+  * *Focus:* Building a `POST` endpoint backed by a JSON file, dynamic `length`-based ID assignment (and its pitfalls), persisting via `fs.writeFile`, validating `req.body` before processing, and the PATCH/DELETE homework pattern.
 
 ## 🔗 Connected Concepts
 * [[JavaScript MOC]] — the language Node executes
