@@ -2,7 +2,7 @@
 tags: [nodejs, expressjs, backend, web-development, computer-science, moc]
 aliases: [Node.js, NodeJS, Backend Development]
 created: 2026-08-27
-updated: 2026-09-04
+updated: 2026-09-05
 ---
 
 # Node.js & Express — Backend Development (MOC)
@@ -52,6 +52,10 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
   * *Focus:* The `(req, res, next)` signature, why middleware exists (shared cross-route logic), the middleware chain, `app.use()` vs route-specific middleware, built-in vs third-party vs custom, and why registration order matters.
 * **[[12 - express.urlencoded, express.json & req.body]]**
   * *Focus:* `x-www-form-urlencoded` vs `application/json` bodies, `express.urlencoded({extended})`, `express.json()`, and populating `req.body`.
+
+### Chapter 7b: HTTP Headers
+* **[[15 - HTTP Headers in Express.js]]**
+  * *Focus:* What headers are (the mail-package metadata analogy), inspecting them in browser DevTools/Postman, reading (`req.headers`/`req.get()`) and setting (`res.setHeader`/`res.set()`) headers in Express, the `X-` custom header convention (and that it's technically deprecated per RFC 6648), and how `Content-Type` drives which body-parsing middleware actually runs.
 
 ### Chapter 8: Testing & Persisting Data
 * **[[13 - API Testing with Postman]]**
