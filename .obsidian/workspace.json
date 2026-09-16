@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
-                "mode": "preview",
+                "file": "Computer Science/DSA/Topics/Bit Manipulation.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 - Introduction to Node.js & JavaScript Engines"
+              "title": "Bit Manipulation"
             }
           }
         ]
@@ -230,6 +230,8 @@
   },
   "active": "8d93e54daba61fdb",
   "lastOpenFiles": [
+    "Computer Science/DSA/Topics/Bit Manipulation.md",
+    "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
     "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
     "Computer Science/Web Development/Backend/Node and Express/14 - Data Persistence with fs, Dynamic IDs & Validation.md",
     "Computer Science/Web Development/Backend/Node and Express/13 - API Testing with Postman.md",
@@ -260,8 +262,6 @@
     "Computer Science/Web Development/Backend/Node and Express/08 - HTTP Methods & Method-Based Routing in Node.js.md",
     "Computer Science/Web Development/Backend/Node and Express/07 - URL Structure & Parsing in Node.js.md",
     "Computer Science/Web Development/Backend/Node and Express/06 - Building an HTTP Server with the http Module.md",
-    "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
-    "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
     "Pasted image 20260830114454.png",
     "Computer Science/Web Development/Backend/APIs",
     "Computer Science/Web Development/Frontend/React",

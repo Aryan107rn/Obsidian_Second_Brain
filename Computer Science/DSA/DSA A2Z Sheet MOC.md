@@ -35,7 +35,8 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 
 ## Step 8 — Bit Manipulation
 
-- ⬜ Bit Manipulation (AND/OR/XOR tricks, bitmasking, subsets via bitmask)
+## Step 8 — Bit Manipulation
+- ✅ [[Bit Manipulation]] (bitmasking, Brian Kernighan's, XOR single-number, power-of-2, subset enumeration, bitmask DP)
 
 ## Step 9 — Stack and Queues
 
