@@ -9,7 +9,6 @@ updated: 2026-09-05
 
 Backend curriculum covering the Node.js runtime, its module system, the `http` module, and the Express framework built on top of it. Notes are numbered sequentially — follow in order if learning from scratch.
 
-*(Following Piyush Garg's Node.js YouTube playlist.)*
 
 ## 🗺️ Roadmap
 
