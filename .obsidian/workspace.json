@@ -4,21 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "02644b4735530862",
+        "id": "758b2a4487a8fe85",
         "type": "tabs",
         "children": [
           {
-            "id": "8d93e54daba61fdb",
+            "id": "bf9ed67e5f5a0c40",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/DSA/Topics/Bit Manipulation.md",
+                "file": "Computer Science/Web Development/Backend/APIs/REST APIs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Bit Manipulation"
+              "title": "REST APIs"
+            }
+          },
+          {
+            "id": "a3cb731e4f95349e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Computer Science/DSA/Topics/Recursion & Backtracking.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Recursion & Backtracking"
             }
           }
         ]
@@ -98,7 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.87895584106445
+    "width": 336.3055000305176
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -228,9 +242,10 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "8d93e54daba61fdb",
+  "active": "bf9ed67e5f5a0c40",
   "lastOpenFiles": [
     "Computer Science/DSA/Topics/Bit Manipulation.md",
+    "Computer Science/DSA/Topics/Recursion & Backtracking.md",
     "Computer Science/Web Development/Backend/Node and Express/01 - Introduction to Node.js & JavaScript Engines.md",
     "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
     "Computer Science/Web Development/Backend/Node and Express/14 - Data Persistence with fs, Dynamic IDs & Validation.md",
@@ -239,7 +254,6 @@
     "Computer Science/DSA/Topics/Strings.md",
     "Computer Science/DSA/Topics/Arrays.md",
     "Computer Science/DSA/Topics/Binary Search.md",
-    "Computer Science/DSA/Topics/Recursion & Backtracking.md",
     "Computer Science/DSA/Topics/Matrix.md",
     "Computer Science/DSA/Topics/Sorting Techniques.md",
     "Computer Science/DSA/DSA A2Z Sheet MOC.md",
