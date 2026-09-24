@@ -33,6 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
+        "dimension": 72.90575916230367,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -74,6 +75,23 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
+            }
+          }
+        ]
+      },
+      {
+        "id": "005badf58240f358",
+        "type": "tabs",
+        "dimension": 27.094240837696336,
+        "children": [
+          {
+            "id": "5a62a79fa67fb599",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -210,8 +228,9 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "8113af05b04c5024",
+  "active": "5a62a79fa67fb599",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Databases/MongoDB.md",
     "Computer Science/Computer Science MOC.md",
     "Computer Science/Web Development/Git/08 - GitHub Basics.md",
     "Computer Science/Web Development/Git/07 - Git Tags.md",
@@ -222,7 +241,6 @@
     "Computer Science/Web Development/Git/02 - Git Branching.md",
     "Computer Science/Web Development/Git/01 - Git Basics.md",
     "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
-    "Computer Science/Web Development/Databases/MongoDB.md",
     "Pasted image 20260822145332.png",
     "Pasted image 20260831010148.png",
     "Pasted image 20260831005959.png",
