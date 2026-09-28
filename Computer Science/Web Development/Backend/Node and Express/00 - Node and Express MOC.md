@@ -69,3 +69,7 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * [[Asynchronous JavaScript]] — promises/callbacks used throughout Node's async APIs
 * [[REST APIs]] — full HTTP verb semantics, idempotency, and status code conventions (deeper dive beyond Chapter 5b)
 * [[HTTP Versions & the QUERY Method]] — HTTP/1.1 vs HTTP/2, and the new `QUERY` method (RFC 10008, 2026)
+### Chapter 9: Server-Side Rendering
+* **[[16 - Server-Side Rendering (SSR) & EJS]]**
+  * *Focus:* SSR vs CSR, why EJS exists as a template engine, `app.set('view engine', 'ejs')`, EJS tag syntax (`<% %>`, `<%= %>`, `<%- %>`), and the XSS risk of unescaped output on user input.
+
