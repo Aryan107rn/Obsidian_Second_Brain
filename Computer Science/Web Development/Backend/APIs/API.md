@@ -97,6 +97,11 @@ flowchart TD
 
 ---
 
+## 🔐 Security and Identity
+
+- [[Authentication and Authorization]] — authentication vs. authorization, sessions and tokens, and server-side permission checks
+- [[JWT]] — token structure, claim validation, and security trade-offs
+
 ## 🎯 How to Choose the Right API Style
 
 ```mermaid

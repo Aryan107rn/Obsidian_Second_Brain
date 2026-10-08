@@ -41,8 +41,8 @@ Start here → [[C++ MOC]] — language fundamentals, memory management, OOP, an
 - [[TypeScript MOC]] — static types, type-level programming, generics, compiler mechanics
 - [[00 - React MOC|React MOC]] — components through advanced hooks, testing, Tailwind
 - [[Git and GitHub|Git & GitHub MOC]] — version control workflow, branching, rebase, stash
-- [[API|API MOC]] — REST, GraphQL, gRPC, WebSocket, SOAP — architecture and protocol comparison
-- Node.js and Express.js — folder created, notes not yet written
+- [[API|API MOC]] — REST, GraphQL, gRPC, WebSocket, SOAP, and [[Authentication and Authorization|authN/authZ]] including [[JWT]]
+- [[00 - Node and Express MOC|Node.js and Express.js]] — backend runtime, HTTP, and middleware
 
 ## 🏗️ System Design
 
