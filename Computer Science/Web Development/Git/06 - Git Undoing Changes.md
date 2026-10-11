@@ -1,47 +1,87 @@
 ---
 tags: [git, version-control, command-line]
-aliases: [Git Undoing Changes, git restore, git reset, git revert]
+aliases: [Git Undoing Changes, git restore, git reset, git revert, git amend]
 created: 2026-08-16
+updated: 2026-10-10
 ---
 
 # 06 - Git Undoing Changes
 
-Git has different undo tools depending on **how far** a change has progressed — unstaged, staged, committed locally, or already pushed to a shared remote. Picking the right one matters: some rewrite history (dangerous if shared), some don't.
+Git has several undo tools because a change can be at different stages — edited, staged, committed locally, or already pushed. The right tool depends on **how far it has travelled** and **whether others have it**. Some tools rewrite history (safe only for private work); others add new commits (safe everywhere).
 
+## Pick the right tool
+```mermaid
+flowchart TD
+    S["I want to undo something"] --> Q1{"Is it committed?"}
+    Q1 -->|"No — just edited"| R1["git restore file"]
+    Q1 -->|"No — staged"| R2["git restore --staged file"]
+    Q1 -->|"Yes"| Q2{"Already pushed / shared?"}
+    Q2 -->|"No, local only"| Q3{"Keep the changes?"}
+    Q3 -->|"Yes, keep staged"| R3["git reset --soft HEAD~1"]
+    Q3 -->|"Yes, keep unstaged"| R4["git reset HEAD~1  (mixed)"]
+    Q3 -->|"No, discard"| R5["git reset --hard HEAD~1"]
+    Q2 -->|"Yes, shared"| R6["git revert commit"]
+    Q1 -->|"Just the last commit message / forgot a file"| R7["git commit --amend  (local only)"]
 ```
-git restore file                   # discard unstaged edits to one file
-git restore .                      # discard all unstaged edits
-git restore --staged file          # unstage a file (keeps the edits)
-git reset --soft HEAD~1            # undo last commit, keep changes staged
-git reset --hard HEAD~1            # undo last commit, discard changes entirely
-git revert HEAD                    # new commit that undoes the last one
+
+## Quick reference
+```bash
+# Working directory / staging area
+git restore file                  # discard unstaged edits to a file (cannot be undone!)
+git restore .                     # discard ALL unstaged edits
+git restore --staged file         # unstage, keep the edits
+git clean -n                      # DRY RUN: list untracked files that would be deleted
+git clean -fd                     # delete untracked files and folders (irreversible)
+
+# Last commit
+git commit --amend                         # edit the last commit's message
+git commit --amend --no-edit               # add newly staged changes to the last commit
+
+# Moving back through commits (rewrites history)
+git reset --soft  HEAD~1          # undo commit, keep changes STAGED
+git reset         HEAD~1          # (--mixed, default) undo commit, keep changes UNSTAGED
+git reset --hard  HEAD~1          # undo commit, DISCARD changes
+
+# Shared history (does not rewrite anything)
+git revert <hash>                 # new commit that reverses <hash>
+git revert -m 1 <merge-hash>      # reverse a merge commit (-m picks which parent is "mainline")
 ```
 
-## Which one do I use?
-
+## Situation table
 | Situation | Command |
 |---|---|
-| Edited a file, want to discard the edit | `git restore file` |
+| Edited a file, want the old version back | `git restore file` |
 | Staged a file by mistake | `git restore --staged file` |
-| Local commit is wrong, keep the edits | `git reset --soft HEAD~1` |
-| Local commit is wrong, discard everything | `git reset --hard HEAD~1` |
-| Commit is already pushed / shared | `git revert HEAD` |
+| Typo in last commit message (not pushed) | `git commit --amend` |
+| Forgot to include a file in last commit (not pushed) | `git add file` → `git commit --amend --no-edit` |
+| Local commit wrong, keep the work | `git reset --soft HEAD~1` |
+| Local commit wrong, throw it away | `git reset --hard HEAD~1` |
+| Bad commit already pushed / on `main` | `git revert <hash>` |
+
+## `reset`: soft vs mixed vs hard
+`reset` moves the current branch pointer back; the flag decides what happens to your files.
+| Mode | Branch pointer | Staging area | Working directory |
+|---|---|---|---|
+| `--soft` | moved back | **kept** (changes staged) | kept |
+| `--mixed` (default) | moved back | reset (changes unstaged) | kept |
+| `--hard` | moved back | reset | **reset — changes lost** |
 
 ## The Rule
-`reset --hard` **rewrites your local history** — safe only on commits **nobody else has pulled**. Once a commit is pushed and shared, use `git revert` instead: it adds a *new* commit that undoes the change, rather than erasing history other people may already depend on. This mirrors [[Git Rebase]]'s golden rule — never destructively rewrite history that other people have already based work on.
+`reset --hard`, `commit --amend`, and rebase all **rewrite history**. Do that only to commits **nobody else has pulled**. Once a commit is pushed and shared, use `git revert`: it adds a *new* commit that cancels the old one, leaving everyone's history intact. This is the same principle as the Golden Rule in [[04 - Git Rebase|Git Rebase]].
 
-## `reset` soft vs mixed vs hard (the full picture)
-- `--soft` — moves HEAD back, keeps changes **staged** (ready to re-commit).
-- `--mixed` (default if you omit the flag) — moves HEAD back, keeps changes **unstaged** (in working directory, but not staged).
-- `--hard` — moves HEAD back, **discards changes entirely**. Unrecoverable through normal means (technically recoverable briefly via `git reflog`, but don't rely on it).
+## Safety net: reflog
+Even after `reset --hard`, the old commits usually still exist for a while (Git doesn't delete them immediately). `git reflog` lists where HEAD has been, so you can find the lost hash and recover it — see [[10 - Git Reflog, Cherry-pick & Recovery|Reflog & Recovery]]. The exception: uncommitted edits destroyed by `git restore`/`reset --hard` or `git clean` were never in Git, so they are **not** recoverable.
 
 ## Common mistakes
-- Using `reset --hard` out of habit without checking if the commit was already pushed — can silently discard teammates' basis for their own work if force-pushed afterward.
-- Confusing `restore` (working-directory/staging level) with `reset` (commit level) — they operate at different stages of the four-stage flow.
-- Forgetting `git reflog` exists as a last-resort safety net — even after a `reset --hard`, the old commit is usually still recoverable for a while via reflog, since Git doesn't immediately garbage-collect it.
+- `reset --hard` out of habit without checking whether the commit was pushed — then force-pushing and breaking teammates' history.
+- Confusing `restore` (files/staging) with `reset` (branch pointer/commits) — they act at different stages of the [[01 - Git Basics|four-area flow]].
+- Running `git clean -fd` without `-n` first — permanently deletes untracked files.
+- Amending a commit that's already pushed — creates a diverged history and forces a force-push.
+- Forgetting reflog exists and giving up on "lost" commits.
 
 ## Related Concepts
-- [[Git & GitHub MOC]] — overview and full topic index
-- [[Git Basics]]
-- [[Git Stash]] — for parking work temporarily instead of undoing it
-- [[Git Rebase]] — shares the same "don't rewrite shared history" principle
+- [[00 - Git & GitHub MOC|Git & GitHub MOC]] — overview and full topic index
+- [[01 - Git Basics|Git Basics]]
+- [[04 - Git Rebase|Git Rebase]] — shares the "don't rewrite shared history" rule
+- [[05 - Git Stash|Git Stash]] — parks work instead of undoing it
+- [[10 - Git Reflog, Cherry-pick & Recovery|Reflog & Recovery]]

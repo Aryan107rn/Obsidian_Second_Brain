@@ -62,6 +62,20 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * **[[14 - Data Persistence with fs, Dynamic IDs & Validation]]**
   * *Focus:* Building a `POST` endpoint backed by a JSON file, dynamic `length`-based ID assignment (and its pitfalls), persisting via `fs.writeFile`, validating `req.body` before processing, and the PATCH/DELETE homework pattern.
 
+### Chapter 9: Server-Side Rendering
+* **[[16 - Server-Side Rendering (SSR) & EJS]]**
+  * *Focus:* SSR vs CSR, why EJS exists as a template engine, `app.set('view engine', 'ejs')`, EJS tag syntax (`<% %>`, `<%= %>`, `<%- %>`), and the XSS risk of unescaped output on user input.
+
+### Chapter 10: Authentication
+* **[[17 - Authentication Fundamentals & Password Hashing (bcrypt)]]**
+  * *Focus:* Authentication vs authorization, why plain-text passwords are never stored, hashing vs encryption, salting, bcrypt and cost factor, minimal signup/login, and **stateful (sessions) vs stateless (JWT) authentication** with diagrams, trade-offs and when to use each.
+* **[[18 - JWT (JSON Web Tokens)]]**
+  * *Focus:* Why JWT exists (stateless auth), header.payload.signature, signed-not-encrypted, HS256 vs RS256, `jsonwebtoken` sign/verify, `requireAuth` middleware, Bearer header, token storage, access + refresh tokens.
+* **[[19 - Zod - Schema Validation]]**
+  * *Focus:* Why server-side validation is mandatory, Zod schemas, `parse` vs `safeParse`, validation middleware, `z.infer`, common pitfalls.
+* **[[20 - Building Authentication from Scratch]]**
+  * *Focus:* End-to-end build: Zod + bcrypt + JWT + middleware in a structured Express project, Postman test table, and a production-readiness checklist.
+
 ## 🔗 Connected Concepts
 * [[JavaScript MOC]] — the language Node executes
 * [[Event Loop]] — general call stack / microtask / macrotask model (prerequisite for Chapter 4)
@@ -69,7 +83,5 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 * [[Asynchronous JavaScript]] — promises/callbacks used throughout Node's async APIs
 * [[REST APIs]] — full HTTP verb semantics, idempotency, and status code conventions (deeper dive beyond Chapter 5b)
 * [[HTTP Versions & the QUERY Method]] — HTTP/1.1 vs HTTP/2, and the new `QUERY` method (RFC 10008, 2026)
-### Chapter 9: Server-Side Rendering
-* **[[16 - Server-Side Rendering (SSR) & EJS]]**
-  * *Focus:* SSR vs CSR, why EJS exists as a template engine, `app.set('view engine', 'ejs')`, EJS tag syntax (`<% %>`, `<%= %>`, `<%- %>`), and the XSS risk of unescaped output on user input.
+* [[00 - Git & GitHub MOC]] — keep `.env` and `node_modules` out of version control
 
