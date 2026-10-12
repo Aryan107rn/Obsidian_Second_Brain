@@ -51,6 +51,76 @@ MongoDB solves this by letting each document have its own shape, and by keeping 
 | **mongosh** | MongoDB's official shell — a JavaScript-like CLI for running commands directly against a database. |
 | **Index** | A data structure that speeds up queries on specific fields, avoiding a full collection scan. |
 
+## MongoDB tools and deployment types
+
+MongoDB is the database system and document model; the names below refer to programs or services used to run, inspect, or connect to it.
+
+| Name | What it is | When you use it |
+|---|---|---|
+| **`mongod`** | The MongoDB database server process (the daemon). It listens for client connections, reads and writes database files, and manages indexes and replication. | Run a self-managed/local MongoDB server. It is not the shell or a client. |
+| **`mongosh`** | The interactive MongoDB Shell, a JavaScript/Node.js REPL that connects to a running deployment. | Run commands, test queries, and administer a deployment from a terminal. |
+| **MongoDB Compass** | MongoDB's desktop graphical interface. It connects to a deployment and lets you browse documents, build queries and aggregation pipelines, and inspect schemas/indexes. | Explore data visually or learn query behavior. Compass is a client; it does not itself host the database. |
+| **MongoDB Atlas** | MongoDB's managed cloud database service. MongoDB operates the infrastructure; you create a deployment and connect using a URI. | Host a database without managing server machines yourself. Atlas also provides related cloud services and UI tooling. |
+| **MongoDB driver** | A language-specific client library (for example, the Node.js driver) that lets application code communicate with MongoDB. | Access MongoDB from an application. Mongoose is an ODM built on the Node.js driver. |
+| **`mongos`** | A query router used in a sharded cluster. | Routes client operations to the correct shard; most application clients connect to the cluster endpoint/router. |
+
+Typical local flow: start `mongod` → connect `mongosh`, Compass, or an app driver to it. Typical Atlas flow: create an Atlas deployment → allow the client's network address and create a database user → copy the connection string → connect with `mongosh`, Compass, or a driver. Atlas account users and database users are separate identities.
+
+### Local server and shell
+
+Install the MongoDB Community Server to get a self-managed server (`mongod`); install `mongosh` separately when it is not bundled for your platform. Start the server using the platform's service manager or the documented command, then connect:
+
+```bash
+mongosh "mongodb://127.0.0.1:27017"
+```
+
+The default local port is `27017`. A server can host multiple databases. A database may not appear in `show dbs` until it contains data. `mongosh` can also connect to Atlas or another remote deployment; it does not start a server by itself.
+
+### Atlas connection checklist
+
+1. Create an Atlas project and database deployment (cluster).
+2. Create a **database user** with only the database permissions the app needs; this is separate from your Atlas website login.
+3. Add the client's public IP address to the project's IP access list (or configure approved private networking).
+4. Copy the connection URI from Atlas and replace placeholders. Use the URI as a secret; don't commit credentials or print them in logs.
+5. Connect using `mongosh`, Compass, or an application driver. If a password has reserved URI characters, URL-encode them. Keep production credentials in environment/secret configuration.
+
+A typical URI has this shape:
+
+```text
+mongodb+srv://<user>:<password>@<cluster-host>/<database>?retryWrites=true&w=majority
+```
+
+`mongodb+srv://` uses DNS SRV records to discover hosts and options; `mongodb://` is also used, especially for local deployments and explicit host lists. The URI identifies how to connect, not which client to use.
+
+## Data modeling and consistency
+
+MongoDB's flexible document model does not mean every application should leave data unvalidated. Choose document boundaries based on how the application reads and updates data:
+
+- **Embed** small related data that is usually read and changed with its parent (for example, a bounded address or a few line items). This can make a common read a single-document operation.
+- **Reference** data that is large, independently updated, shared by many parents, or unbounded (for example, users referenced by many posts). Fetch related documents separately or use aggregation `$lookup` where appropriate.
+- Unbounded arrays can make documents grow excessively; store large/high-volume child records in their own collection.
+- MongoDB guarantees atomicity for a single-document write. Multi-document transactions are available for operations that need all-or-nothing changes across documents, but good modeling can often keep writes within one document.
+
+Use collection schema validation when the database should reject documents that don't meet required rules, including writes that bypass Mongoose. Mongoose validation applies through Mongoose operations; it does not automatically constrain writes made directly by other clients.
+
+### Replica sets and sharding
+
+A **replica set** is a group of MongoDB servers that maintain the same data: one primary accepts writes and eligible secondary members replicate the oplog. Replica sets provide redundancy and automatic elections if the primary is unavailable; they are not a substitute for backups.
+
+**Sharding** distributes a collection's data across multiple shards to scale storage and workload horizontally. A shard key determines how documents are distributed and is an important design choice. Sharding adds operational and query-planning complexity; it is generally introduced for scale needs, not as a default for every app. Atlas manages much of this infrastructure for Atlas deployments.
+
+## More everyday query patterns
+
+```js
+db.users.find({ active: true }).sort({ createdAt: -1 }).limit(20)
+db.users.countDocuments({ active: true })
+db.users.updateOne({ email: "a@example.com" }, { $set: { active: true } }, { upsert: true })
+db.users.createIndex({ email: 1 }, { unique: true })
+db.sessions.createIndex({ expiresAt: 1 }, { expireAfterSeconds: 0 }) // TTL index
+```
+
+Use `explain("executionStats")` on a query to inspect its plan and examined documents. Indexes improve some reads and sorts but consume storage and make writes more expensive, so index based on measured query patterns. A unique index is the database-level enforcement for uniqueness; a Mongoose `unique: true` declaration requests an index and is not a validator by itself.
+
 ## How does it work? (Core syntax via `mongosh`)
 
 This is MongoDB's "raw" query language. Everything below runs in `mongosh` or via the native drivers; Mongoose (see below) is a layer built on top of this same language.
@@ -275,3 +345,7 @@ flowchart LR
 ## Related concepts
 - [[Express]] — routes call into Mongoose models
 - [[REST APIs]] — CRUD routes above form a REST API
+- [MongoDB Manual](https://www.mongodb.com/docs/manual/) — core server and data model documentation
+- [mongosh](https://www.mongodb.com/docs/mongodb-shell/) — command-line shell
+- [MongoDB Compass](https://www.mongodb.com/products/tools/compass) — desktop GUI client
+- [MongoDB Atlas](https://www.mongodb.com/atlas) — managed cloud database service

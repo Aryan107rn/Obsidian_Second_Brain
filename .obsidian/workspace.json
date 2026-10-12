@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/Git/02 - Git Branching.md",
+                "file": "Computer Science/Web Development/Databases/PostgreSQL.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02 - Git Branching"
+              "title": "PostgreSQL"
             }
           }
         ]
@@ -228,16 +228,18 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "900c9a5bf8abcb76",
+  "active": "5ea0d8a1b22c2016",
   "lastOpenFiles": [
-    "Computer Science/Web Development/Git/02 - Git Branching.md",
+    "Computer Science/Web Development/Databases/MongoDB.md",
+    "Computer Science/Web Development/Databases/PostgreSQL.md",
     "Computer Science/Web Development/Git/01 - Git Basics.md",
+    "Computer Science/Web Development/Git/04 - Git Rebase.md",
+    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
+    "Computer Science/Web Development/Git/02 - Git Branching.md",
     "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
     "Computer Science/Web Development/Git/07 - Git Tags.md",
     "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
     "Computer Science/Web Development/Git/05 - Git Stash.md",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
-    "Computer Science/Web Development/Git/04 - Git Rebase.md",
     "Computer Science/Web Development/Backend/APIs/gRPC.md",
     "Computer Science/Web Development/Backend/APIs/Authentication and Authorization.md",
     "Computer Science/Web Development/Backend/APIs/API.md",
@@ -255,8 +257,6 @@
     "Computer Science/C++/03 - OOP in CPP.md",
     "Computer Science/DSA/Topics/Bit Manipulation.md",
     "Computer Science/DSA/DSA A2Z Sheet MOC.md",
-    "Computer Science/Web Development/Databases/MongoDB.md",
-    "Computer Science/Web Development/Backend/Node and Express/16 - Server-Side Rendering (SSR) & EJS.md",
     "Pasted image 20260822145332.png",
     "Pasted image 20260831010148.png",
     "Pasted image 20260831005959.png",

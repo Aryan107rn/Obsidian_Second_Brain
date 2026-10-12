@@ -9,7 +9,6 @@ updated: 2026-10-10
 
 ## What is a merge conflict?
 A **merge conflict** happens when Git cannot automatically combine two sets of changes — usually because both branches edited the **same lines** of the same file (or one deleted a file the other edited). Git stops mid-merge and asks a human to decide.
-
 ## Why they happen
 ```mermaid
 flowchart TD
