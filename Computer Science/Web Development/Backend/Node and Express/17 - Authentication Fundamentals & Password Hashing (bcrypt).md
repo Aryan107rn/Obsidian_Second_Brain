@@ -141,7 +141,7 @@ The state is **inside the token**, signed so it can't be forged. The server stor
 Statelessness is one of REST's core constraints ([[REST APIs]]): each request is self-contained, so requests can be routed to any server instance behind a load balancer, servers can be added or removed freely, and no per-client memory is held. Stateful sessions can still scale, but only by moving the state into a shared store (Redis), which becomes another component that must stay available.
 
 ### Which should you use?
-- **Sessions** suit traditional server-rendered sites ([[16 - Server-Side Rendering (SSR) & EJS]]) and any app where instant logout / permission changes matter.
+- **Sessions** suit traditional server-rendered sites ([[16 - Server-Side Rendering (SSR) & EJS]]) and any app where instant logout / permission changes matter. Both models usually travel in a **cookie**: see [[21 - Cookies in Express]] for working examples of each.
 - **JWT** suits APIs consumed by SPAs, mobile apps, and multiple services, where stateless scaling matters.
 - **Reality check:** "stateless" JWT auth is rarely 100% stateless in practice. Once you add refresh-token revocation or a logout denylist, you've reintroduced some server-side state. Many teams use short-lived JWT access tokens plus a stateful, revocable refresh token as a hybrid.
 - Neither is "more secure" by default; each has its own pitfalls (session fixation/CSRF for cookies, token theft/no revocation for JWT).

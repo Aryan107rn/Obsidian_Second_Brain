@@ -214,7 +214,7 @@ Set the body type to **raw → JSON** in Postman, otherwise `express.json()` won
 - **Database:** swap the `users` array for MongoDB/PostgreSQL with a unique index on `email` (the in-memory array also resets on every restart, and `length + 1` IDs break after deletes — see [[14 - Data Persistence with fs, Dynamic IDs & Validation]]).
 - **HTTPS** everywhere; set secure headers (`helmet`).
 - **Rate limiting** on `/login` and `/signup` (`express-rate-limit`) against brute-force.
-- **Token storage:** httpOnly + Secure + SameSite cookie for browser clients, or access/refresh token pair ([[18 - JWT (JSON Web Tokens)]]).
+- **Token storage:** httpOnly + Secure + SameSite cookie for browser clients (full working example in [[21 - Cookies in Express]]), or access/refresh token pair ([[18 - JWT (JSON Web Tokens)]]).
 - **CORS** configured to your real frontend origin only.
 - Email verification and password reset flow.
 - Logging that never records passwords or tokens.

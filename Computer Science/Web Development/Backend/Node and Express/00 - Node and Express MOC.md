@@ -75,6 +75,8 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
   * *Focus:* Why server-side validation is mandatory, Zod schemas, `parse` vs `safeParse`, validation middleware, `z.infer`, common pitfalls.
 * **[[20 - Building Authentication from Scratch]]**
   * *Focus:* End-to-end build: Zod + bcrypt + JWT + middleware in a structured Express project, Postman test table, and a production-readiness checklist.
+* **[[21 - Cookies in Express]]**
+  * *Focus:* How cookies work (`Set-Cookie`/`Cookie` headers), `res.cookie`/`cookie-parser`, attributes (`httpOnly`, `secure`, `sameSite`, `maxAge`), five runnable examples (raw `http`, visit counter, signed cookies, JWT in an httpOnly cookie with logout, `express-session`), testing with DevTools/curl/Postman, cookies vs localStorage, XSS and CSRF.
 
 ## 🔗 Connected Concepts
 * [[JavaScript MOC]] — the language Node executes

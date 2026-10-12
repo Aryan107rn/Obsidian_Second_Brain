@@ -120,7 +120,7 @@ app.delete('/users/:id', requireAuth, requireRole('admin'), handler);
 | `localStorage` | Readable by any JS on the page → stolen via **XSS** |
 | **httpOnly cookie** (`Secure`, `SameSite`) | JS can't read it (blocks XSS theft) but needs **CSRF** protection |
 | Memory only | Safest from theft, lost on refresh |
-There's no perfect answer; httpOnly cookies are generally recommended for browser apps. (XSS also relates to EJS output escaping in [[16 - Server-Side Rendering (SSR) & EJS]].)
+There's no perfect answer; httpOnly cookies are generally recommended for browser apps. Cookie attributes, runnable examples (including a JWT-in-httpOnly-cookie login/logout) and CSRF are in [[21 - Cookies in Express]]. (XSS also relates to EJS output escaping in [[16 - Server-Side Rendering (SSR) & EJS]].)
 
 ## Access + refresh tokens
 A JWT can't easily be revoked before `exp`. The standard pattern: a **short-lived access token** (e.g. 15 min) used on every request, plus a **long-lived refresh token** (days) stored securely and used only to get new access tokens. Steal an access token and the damage window is small; the refresh token can be revoked server-side.
