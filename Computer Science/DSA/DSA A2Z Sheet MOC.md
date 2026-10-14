@@ -35,7 +35,6 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 
 ## Step 8 — Bit Manipulation
 
-## Step 8 — Bit Manipulation
 - ✅ [[Bit Manipulation]] (bitmasking, Brian Kernighan's, XOR single-number, power-of-2, subset enumeration, bitmask DP)
 
 ## Step 9 — Stack and Queues
@@ -54,7 +53,7 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 
 ## Step 12 — Greedy Algorithms
 
-- 🟨 Greedy Algorithms — taught in conversation, not yet saved to vault
+- ✅ [[Greedy Algorithms]] (sort+match, fractional knapsack, coins, interval scheduling, platforms, job sequencing, jump game, candy, gas station, remove K digits, task scheduler, Huffman, custom comparator)
 
 ## Step 13 — Binary Trees
 
@@ -123,19 +122,17 @@ Most named algorithms you listed already live as **patterns inside topic notes**
 
 ## Suggested next order
 
-1. **Greedy Algorithms** (already taught once — quick to formalize into a note)
-2. **Trees** (per your stated queue — Binary Trees then BST)
-3. **Stack and Queues**
-4. **Sliding Window & Two Pointer**
-5. **Bit Manipulation**
-6. **Heaps**
-7. **Graphs** (biggest step — will likely need its own folder like Algorithms/)
-8. **DP subtypes** (subsequences, strings, stocks — expand off the existing DP note)
-9. **Tries**
-10. **Advanced Strings (KMP/Z-function)**
+1. **Trees** (per your stated queue — Binary Trees then BST)
+2. **Stack and Queues**
+3. **Sliding Window & Two Pointer**
+4. **Heaps**
+5. **Graphs** (biggest step — will likely need its own folder like Algorithm/)
+6. **DP subtypes** (subsequences, strings, stocks — expand off the existing DP note)
+7. **Tries**
+8. **Advanced Strings (KMP/Z-function)**
 
 Update this tracker's checkboxes as each topic is covered — same pattern as [[System Design MOC]].
 
 ## ⭐ Revision Tracker
 
-[[Important Questions to Revise]] — your personal shortlist of problems worth drilling again. Add a row any time something feels important or trips you up; check it off once you can solve it again without hints.
+Important problems live as one note each in `imp question/` (e.g. [[13. Roman to Integer]]). Send a problem and say "add to imp question" to create a new entry.

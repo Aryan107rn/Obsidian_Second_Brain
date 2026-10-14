@@ -1,4 +1,4 @@
-# PostgreSQL
+
 
 ## What is it?
 
@@ -533,6 +533,13 @@ Two common approaches:
 1. **`pg` (node-postgres)** — write raw SQL; full control. Best for learning.
 2. **ORMs / query builders** — Prisma, Drizzle, Sequelize, Knex — generate SQL from JS/TS code and manage migrations.
 
+### What are the `pg` driver and a connection pool?
+
+- A **driver** is the library your application uses to speak a database's protocol. In Node.js, `pg` (node-postgres) is the PostgreSQL driver: it opens connections, sends SQL and parameters, and turns database responses into JavaScript results. It is application code; the PostgreSQL server is the database itself.
+- A **connection** is a live client/server session with PostgreSQL. Creating one takes time and uses server resources.
+- A **connection pool** is a reusable set of connections managed by the driver. The app checks out an available connection for a query and returns it for reuse when the query finishes. This avoids reconnecting for every request and limits how many connections the app opens.
+- In `pg`, `Pool` manages connections and `pool.query(...)` runs a query using one. Create a shared pool when the app starts, rather than creating a new pool or client for every request. For a transaction, check out one client with `pool.connect()` and use that same client for every statement until commit or rollback; release it in `finally`.
+
 ### Setup with `pg`
 ```bash
 npm install express pg dotenv
@@ -541,6 +548,8 @@ npm install express pg dotenv
 ```
 DATABASE_URL=postgresql://app_user:secret@localhost:5432/shop
 ```
+
+If your `package.json` uses `"type": "module"`, the ES module setup can load `.env` with `import 'dotenv/config'` and import `express` and `pg` using `import ... from ...`; then create the pool with `const { Pool } = pg`. `process.env.DATABASE_URL` reads the connection string from the environment. Keep secrets in `.env` locally and out of version control.
 
 `db.js` — one **connection pool** for the whole app:
 ```js
@@ -616,7 +625,8 @@ app.listen(3000);
 ```
 
 **Important points in the code**
-- `$1, $2, $3` are **parameterized placeholders**. The values are sent separately from the SQL, which **prevents SQL injection**. **Never** build SQL with string concatenation or template literals using user input.
+- `express.json()` parses an incoming JSON request body into `req.body`; add it before the routes that need it. Parsing is not validation: check that required fields exist and have the expected types/ranges before querying the database. Route parameters such as `req.params.id` arrive as strings, so validate them too.
+- `$1, $2, $3` are **parameterized placeholders**. The values are sent separately from the SQL, which **prevents SQL injection**. **Never** build SQL with string concatenation or template literals using user input. Parameterization does not validate the values; use application checks and database constraints together.
 - `rows` is an array of result objects; `rowCount` is how many rows were affected.
 - `RETURNING *` gives you the saved row without a second query.
 - Postgres error codes: `23505` unique violation, `23503` foreign-key violation, `23502` not-null violation, `22P02` invalid input (e.g. text where an integer was expected).

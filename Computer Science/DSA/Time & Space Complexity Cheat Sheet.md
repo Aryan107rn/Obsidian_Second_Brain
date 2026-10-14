@@ -128,6 +128,32 @@ A single-page summary of every pattern's complexity across the vault — for fas
 | DP on Grid | O(m·n) | O(m·n), optimizable to O(n) |
 | Diagonal Traversal | O(m·n) | O(m·n) |
 
+## [[Greedy Algorithms]]
+| Pattern | Time | Space |
+|---|---|---|
+| Sort + two-pointer matching | O(n log n) | O(1) |
+| Fractional Knapsack | O(n log n) | O(1) |
+| Interval scheduling (meetings, removals, arrows) | O(n log n) | O(1)–O(n) |
+| Minimum Platforms | O(n log n) | O(1) |
+| Job Sequencing | O(n log n + n·D) | O(D) |
+| Jump Game I / II | O(n) | O(1) |
+| Candy (two-pass) | O(n) | O(n) |
+| Gas Station | O(n) | O(1) |
+| Partition Labels | O(n) | O(1) |
+| Remove K Digits | O(n) | O(n) |
+| Huffman / heap greedy | O(n log n) | O(n) |
+| Largest Number (comparator) | O(n log n · L) | O(n·L) |
+
+## [[Bit Manipulation]]
+| Pattern | Time | Space |
+|---|---|---|
+| Set / clear / toggle / check bit | O(1) | O(1) |
+| Brian Kernighan's (count set bits) | O(k), k = set bits | O(1) |
+| XOR single / two unique numbers | O(n) | O(1) |
+| Power of 2 check | O(1) | O(1) |
+| Subset enumeration via bitmask | O(2ⁿ · n) | O(2ⁿ · n) |
+| Bitmask DP (TSP) | O(2ⁿ · n²) | O(2ⁿ · n) |
+
 ## Algorithm/ (standalone named algorithms)
 | Algorithm | Time | Space |
 |---|---|---|
@@ -156,4 +182,4 @@ A single-page summary of every pattern's complexity across the vault — for fas
 
 ## Related concepts
 - [[DSA A2Z Sheet MOC]] — topic coverage tracker
-- [[Important Questions to Revise]] — problem-level revision tracker (now individual notes in `imp question/`)
+- `imp question/` — problem-level revision notes, one per question (e.g. [[13. Roman to Integer]])

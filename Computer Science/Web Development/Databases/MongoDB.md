@@ -301,11 +301,19 @@ module.exports = router;
 
 ```mermaid
 flowchart LR
-    A[Client] -->|HTTP Request| B[Express Router]
-    B --> C[Controller / Route Handler]
-    C -->|Mongoose Model call| D[Mongoose]
-    D -->|Driver protocol| E[(MongoDB)]
-    E -->|Documents| D --> C -->|JSON Response| A
+    A["Client"]
+    B["Express Router"]
+    C["Controller / Route Handler"]
+    D["Mongoose"]
+    E[("MongoDB")]
+    A -->|"HTTP Request"| B
+    B --> C
+    C -->|"Mongoose Model call"| D
+    D -->|"Driver protocol"| E
+    E -->|"Documents"| D
+    D --> C
+    C -->|"JSON Response"| A
+    %% mermaid-flow:pos A=100,92 B=216,205 C=395,94 D=708,97 E=716,266
 ```
 
 ## When to use
