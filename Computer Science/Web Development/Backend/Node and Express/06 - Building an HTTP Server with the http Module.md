@@ -131,6 +131,70 @@ This binds the server to the port number discussed above and starts accepting in
 | `req.on('data', chunk => ...)` | Fires repeatedly as the request **body** arrives, in `Buffer` chunks (bodies arrive as a stream, not a ready-made property — this is why frameworks like Express need body-parsing middleware to give you a convenient `req.body`). |
 | `req.on('end', () => ...)` | Fires once the entire body has been received — where you'd assemble the collected chunks into the final body. |
 
+## Reading and parsing a request body manually
+
+`req` is an `http.IncomingMessage`, which is a **readable stream**. A request body may be larger than one convenient piece, so Node delivers it over time as `'data'` events. Each event gives you a **chunk**, usually a `Buffer` containing some of the raw body bytes. A chunk is only a transport-sized piece: it is not guaranteed to match a JSON value, a line, or even a complete character in a multibyte encoding.
+
+To parse a body, collect the chunks until `'end'`, join their bytes into one complete buffer, decode it as text, and then parse according to the request's `Content-Type`:
+
+```js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  if (req.method !== 'POST' || req.url !== '/api/data') {
+    res.writeHead(404);
+    return res.end('Not found');
+  }
+
+  const chunks = [];
+
+  req.on('data', chunk => {
+    chunks.push(chunk); // Keep the Buffer; don't assume this is the whole body.
+  });
+
+  req.on('end', () => {
+    const rawBody = Buffer.concat(chunks).toString('utf8');
+
+    try {
+      const contentType = req.headers['content-type'] || '';
+      let body;
+
+      if (contentType.includes('application/json')) {
+        body = JSON.parse(rawBody);
+      } else if (contentType.includes('application/x-www-form-urlencoded')) {
+        body = new URLSearchParams(rawBody);
+      } else {
+        res.writeHead(415, { 'Content-Type': 'text/plain; charset=utf-8' });
+        return res.end('Unsupported content type');
+      }
+
+      console.log(body);
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ received: true }));
+    } catch {
+      res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Invalid request body');
+    }
+  });
+
+  req.on('error', () => {
+    if (!res.headersSent) res.writeHead(400);
+    res.end('Could not read request');
+  });
+});
+
+server.listen(8000);
+```
+
+### What the buffering steps mean
+
+1. **Stream:** `req` emits data as it arrives, so the server can start reading without waiting for the whole body to be delivered at once.
+2. **Chunk:** each `'data'` callback receives the next piece of bytes as a `Buffer`. Chunk boundaries are arbitrary; one JSON string can arrive in several chunks.
+3. **Buffering:** `chunks.push(chunk)` temporarily retains each piece. After `'end'`, `Buffer.concat(chunks)` combines the byte pieces in order. Decoding only after concatenation avoids breaking a UTF-8 character that happened to span two chunks.
+4. **Parsing:** bytes are not yet a JavaScript object. Convert the complete bytes to UTF-8 text, then use a parser that matches `Content-Type` (`JSON.parse` for JSON, `URLSearchParams` for form data). Invalid JSON throws, so handle that error and return a client error response.
+
+This example buffers the **entire** request body in memory, so it is suitable only when request sizes are limited. For large uploads, process or pipe the stream incrementally and enforce size limits. Express's `express.json()` and `express.urlencoded()` middleware perform the reading and parsing for common body types and expose the result as `req.body` (see [[12 - express.urlencoded, express.json & req.body]]).
+
 ## Key `res` (response) properties/methods
 
 | Method | What it does |

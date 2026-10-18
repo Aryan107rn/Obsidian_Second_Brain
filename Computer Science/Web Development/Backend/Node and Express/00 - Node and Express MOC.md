@@ -34,7 +34,7 @@ Backend curriculum covering the Node.js runtime, its module system, the `http` m
 
 ### Chapter 5: Building a Server from Scratch
 * **[[06 - Building an HTTP Server with the http Module]]**
-  * *Focus:* What an HTTP server is conceptually, `localhost` and ports, `http.createServer(requestListener)` and why it takes a callback, `server.listen`, key `req`/`res` properties, manual routing via `if`/`switch` on `req.url`, and why this doesn't scale (motivating Express).
+  * *Focus:* What an HTTP server is conceptually, `localhost` and ports, `http.createServer(requestListener)` and why it takes a callback, `server.listen`, key `req`/`res` properties, request-body streams and Buffer chunks, collecting and parsing the complete body by `Content-Type`, manual routing via `if`/`switch` on `req.url`, and why this doesn't scale (motivating Express).
 
 ### Chapter 5b: URLs, Query Strings & HTTP Methods
 * **[[07 - URL Structure & Parsing in Node.js]]**

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/Databases/PostgreSQL.md",
+                "file": "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PostgreSQL"
+              "title": "00 - Node and Express MOC"
             }
           }
         ]
@@ -33,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 76.38724911452184,
+        "dimension": 53.46666666666666,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -82,7 +82,7 @@
       {
         "id": "1ed018cee1a20bb5",
         "type": "tabs",
-        "dimension": 23.612750885478157,
+        "dimension": 46.53333333333333,
         "children": [
           {
             "id": "900c9a5bf8abcb76",
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 212.9260139465332
+    "width": 315.6642532348633
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -228,35 +228,35 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "5ea0d8a1b22c2016",
+  "active": "f2339277baec7b99",
   "lastOpenFiles": [
-    "Computer Science/DSA/Topics/Greedy Algorithms.md",
-    "Computer Science/Web Development/Databases/MongoDB.md",
-    "Computer Science/Web Development/Databases/PostgreSQL.md",
-    "Computer Science/Web Development/Git/01 - Git Basics.md",
-    "Computer Science/Web Development/Git/04 - Git Rebase.md",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
-    "Computer Science/Web Development/Git/02 - Git Branching.md",
-    "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
-    "Computer Science/Web Development/Git/07 - Git Tags.md",
-    "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
-    "Computer Science/Web Development/Git/05 - Git Stash.md",
-    "Computer Science/Web Development/Backend/APIs/gRPC.md",
-    "Computer Science/Web Development/Backend/APIs/Authentication and Authorization.md",
-    "Computer Science/Web Development/Backend/APIs/API.md",
-    "Computer Science/Web Development/Git/11 - SSH Keys & GitHub Authentication.md",
-    "Computer Science/Web Development/Git/10 - Git Reflog, Cherry-pick & Recovery.md",
-    "Computer Science/Web Development/Git/09 - Branching Strategies & PR Workflow.md",
-    "Computer Science/Web Development/Git/08 - GitHub Basics.md",
+    "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
+    "Computer Science/Web Development/Backend/Node and Express/10 - Semantic Versioning & Dependency Management.md",
+    "Computer Science/Web Development/Backend/Node and Express/12 - express.urlencoded, express.json & req.body.md",
+    "Computer Science/Web Development/Backend/Node and Express/14 - Data Persistence with fs, Dynamic IDs & Validation.md",
+    "Computer Science/Linux.md",
+    "README.md",
+    "Computer Science/Computer Science MOC.md",
+    "Computer Science/Web Development/Backend/APIs/SOAP.md",
     "Computer Science/Web Development/Backend/APIs/JWT.md",
-    "Computer Science/Web Development/Git/01 - Git Basics.md.10ce66d347c3e931f88f15488509d54f.tmp",
-    "Computer Science/Web Development/Backend/Node and Express/04 - File Handling in Node.js (fs module).md",
-    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
-    "Computer Science/Web Development/Backend/APIs/GraphQL.md",
+    "Computer Science/Web Development/Backend/APIs/gRPC.md",
+    "Computer Science/DSA/Algorithm/Merge K Sorted Lists.md",
+    "Computer Science/DSA/Algorithm/Manacher's Algorithm.md",
+    "Computer Science/DSA/Algorithm/Kadane's Algorithm.md",
+    "Computer Science/DSA/Algorithm/Hash Collision Resolution.md",
+    "Computer Science/DSA/Algorithm/Euclidean Algorithm (GCD).md",
+    "Computer Science/DSA/Algorithm/Dynamic Programming.md",
+    "Computer Science/DSA/Topics/Greedy Algorithms.md",
+    "Computer Science/DSA/imp question/13. Roman to Integer.md",
+    "Computer Science/DSA/Algorithm/Sieve of Eratosthenes.md",
+    "Computer Science/DSA/Algorithm/Difference Array.md",
+    "Computer Science/DSA/Algorithm/Binary Search Variants.md",
     "Computer Science/System Design/System Design MOC.md",
-    "Computer Science/C++/02 - Pointers References and Memory Management.md",
-    "Computer Science/C++/03 - OOP in CPP.md",
-    "Computer Science/DSA/Topics/Bit Manipulation.md",
+    "Computer Science/Web Development/Backend/APIs/Authentication and Authorization.md",
+    "Computer Science/Web Development/Backend/APIs/WebSocket.md",
+    "Computer Science/Web Development/Backend/APIs/REST APIs.md",
+    "Computer Science/Web Development/Backend/APIs/GraphQL.md",
+    "Computer Science/Web Development/Git/01 - Git Basics.md.10ce66d347c3e931f88f15488509d54f.tmp",
     "Pasted image 20260822145332.png",
     "Pasted image 20260831010148.png",
     "Pasted image 20260831005959.png",
