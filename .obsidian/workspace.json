@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 315.6642532348633
+    "width": 209.13887786865234
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -230,6 +230,9 @@
   },
   "active": "5ea0d8a1b22c2016",
   "lastOpenFiles": [
+    "Computer Science/C++/11 - STL Quick Revision.md",
+    "Computer Science/C++/10 - Data Structure & Graph Templates.md",
+    "Computer Science/C++/09 - Competitive Programming Template & Math Utilities.md",
     "Computer Science/DSA/Topics/Stack & Queues.md",
     "Computer Science/DSA/Topics/Bit Manipulation.md",
     "Computer Science/DSA/Topics/Sliding Window & Two Pointer.md",
@@ -253,9 +256,6 @@
     "Computer Science/DSA/Algorithm/Euclidean Algorithm (GCD).md",
     "Computer Science/DSA/Algorithm/Sieve of Eratosthenes.md",
     "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
-    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
-    "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
-    "Computer Science/Web Development/Backend/Node and Express/10 - Semantic Versioning & Dependency Management.md",
     "Computer Science/Web Development/Git/01 - Git Basics.md.10ce66d347c3e931f88f15488509d54f.tmp",
     "Pasted image 20260822145332.png",
     "Pasted image 20260831010148.png",

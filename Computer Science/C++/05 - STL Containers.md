@@ -189,6 +189,82 @@ b.any(); b.all(); b.none();
 b[i];
 ```
 
+## Extra Container Functions & Idioms
+
+### vector extras
+```cpp
+v.reserve(n);                  // pre-allocate capacity, avoids repeated reallocation
+v.resize(n, 0);                // change size; new slots get 0
+v.assign(n, x);                // replace contents with n copies of x
+v.clear(); v.capacity(); v.swap(other);
+v.emplace_back(a, b);          // construct in place (pairs/structs): avoids a temporary copy
+v.insert(v.end(), w.begin(), w.end());     // append a whole range
+v.erase(v.begin() + l, v.begin() + r);     // erase the half-open range [l, r)
+vector<int> sub(v.begin() + l, v.begin() + r);   // copy of [l, r)
+```
+> [!warning] Trap
+> `vector<bool>` is a bit-packed special case: you cannot take a reference to an element and it is slower than a byte array. Use `vector<char>`, `vector<int>`, or `bitset` when you need plain flags.
+
+### Iterator invalidation (why "erase inside a loop" crashes)
+
+| Container | What invalidates iterators |
+|---|---|
+| `vector` | `push_back` that reallocates invalidates **all**; `insert`/`erase` invalidate everything at and after that point |
+| `deque` | insert/erase in the middle invalidates all; push at either end invalidates iterators (not references) |
+| `list`, `set`, `map` | only the erased element's iterator |
+| `unordered_*` | a rehash (triggered by insert) invalidates all iterators |
+
+Safe erase-while-iterating (works for `set`, `map`, `list`, `vector`):
+```cpp
+for (auto it = s.begin(); it != s.end(); ) {
+    if (shouldRemove(*it)) it = s.erase(it);   // erase returns the next valid iterator
+    else ++it;
+}
+```
+
+### Custom comparators for ordered containers and heaps
+```cpp
+set<int, greater<int>> descSet;                   // sorted descending
+map<int, int, greater<int>> descMap;
+
+struct ByIdx {                                     // functor comparator
+    bool operator()(const pair<int,int>& a, const pair<int,int>& b) const { return a.second < b.second; }
+};
+set<pair<int,int>, ByIdx> s2;
+
+struct Task {
+    int pri; string name;
+    bool operator<(const Task& o) const { return pri < o.pri; }   // priority_queue<Task> = max-heap on pri
+};
+priority_queue<Task> pq;
+```
+> [!warning] Trap
+> A comparator must be a **strict weak ordering**: `a < b`, never `a <= b`. Using `<=` is undefined behaviour (can crash `sort`/`set`). Also, `priority_queue`'s comparator is inverted relative to `sort`: `operator<` returning true means "lower priority", so the **largest** element ends up on top.
+
+### Insert / emplace return values
+```cpp
+auto [it, inserted] = s.insert(x);       // set/map insert returns pair<iterator, bool>
+mp.emplace(k, v);                         // construct in place
+mp.try_emplace(k, v);                     // does nothing if k already exists
+```
+
+### Member `lower_bound` vs `std::lower_bound`
+> [!warning] Trap
+> On `set`/`map` use the **member** `s.lower_bound(x)` (O(log n)). Calling `std::lower_bound(s.begin(), s.end(), x)` compiles but walks the tree linearly, O(n), because those iterators are not random access.
+
+### Rarely needed but good to know
+- `unordered_multiset<T>`: hash set that allows duplicates. `forward_list<T>`: singly linked list (no `size()`, no `push_back`).
+
+### More string functions
+```cpp
+s.rfind("ab");                  // last occurrence, or string::npos
+s.find_first_of("aeiou");       // first index of any listed character
+s.replace(pos, len, "xyz");     // replace len characters starting at pos
+s.resize(n, 'x');  string t(5, 'a');   // "aaaaa"
+s.substr(pos);                    // from pos to the end; substr is an O(len) copy
+// C++20: s.starts_with("ab"), s.ends_with("ab")
+```
+
 ## Which Container to Pick
 
 | Need | Container |
