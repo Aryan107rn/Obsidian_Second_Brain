@@ -128,6 +128,39 @@ A single-page summary of every pattern's complexity across the vault — for fas
 | DP on Grid | O(m·n) | O(m·n), optimizable to O(n) |
 | Diagonal Traversal | O(m·n) | O(m·n) |
 
+## [[Stack & Queues]]
+| Pattern | Time | Space |
+|---|---|---|
+| Valid parentheses | O(n) | O(n) |
+| Stack ↔ queue design | O(1) amortized per op | O(n) |
+| Min stack | O(1) per op | O(n) |
+| Circular queue | O(1) per op | O(k) |
+| Infix→postfix / RPN evaluation | O(n) | O(n) |
+| Next greater / smaller (monotonic stack) | O(n) | O(n) |
+| Daily temperatures / stock span | O(n) | O(n) |
+| Sum of subarray minimums / ranges | O(n) | O(n) |
+| Asteroid collision | O(n) | O(n) |
+| Largest rectangle in histogram | O(n) | O(n) |
+| Maximal rectangle | O(rows·cols) | O(cols) |
+| Celebrity problem | O(n) | O(1) |
+
+## [[Sliding Window & Two Pointer]]
+| Pattern | Time | Space |
+|---|---|---|
+| Fixed window | O(n) | O(1) |
+| Max points from cards | O(k) | O(1) |
+| Sliding window maximum (deque) | O(n) | O(k) |
+| Longest window (no repeat / ≤k zeros) | O(n) | O(1) |
+| At most K distinct | O(n) | O(k) |
+| Character replacement | O(n) | O(1) |
+| atMost(k) − atMost(k−1) counting | O(n) | O(1) / O(k) |
+| Min size subarray sum | O(n) | O(1) |
+| Min window substring | O(n + m) | O(1) |
+| Two Sum II / Container With Most Water | O(n) | O(1) |
+| 3Sum / 4Sum | O(n²) / O(n³) | O(1) |
+| Trapping rain water | O(n) | O(1) |
+| Remove duplicates / move zeroes | O(n) | O(1) |
+
 ## [[Greedy Algorithms]]
 | Pattern | Time | Space |
 |---|---|---|

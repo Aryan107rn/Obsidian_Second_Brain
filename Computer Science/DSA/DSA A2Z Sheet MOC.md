@@ -39,13 +39,11 @@ Tracks vault coverage against Striver's A2Z DSA sheet. ✅ = note exists and is 
 
 ## Step 9 — Stack and Queues
 
-- ⬜ Stack (monotonic stack, next greater/smaller element)
-- ⬜ Queues (circular queue, deque, monotonic deque)
+- ✅ [[Stack & Queues]] (valid parentheses, stack↔queue design, min stack, circular queue, infix/postfix, monotonic stack family, histogram & maximal rectangle, celebrity)
 
 ## Step 10 — Sliding Window & Two Pointer
 
-- ⬜ Sliding Window & Two Pointer (fixed/variable window, two-pointer on sorted arrays)
-  - *Note: Pattern 6 in [[Hashing]] covers sliding window + hash map specifically — this note should cover the general technique beyond hashing use cases.*
+- ✅ [[Sliding Window & Two Pointer]] (fixed window, variable longest/shortest, atMost(k) counting, monotonic deque, min window substring, opposite-end two pointer, 3Sum, trapping rain water, in-place slow/fast)
 
 ## Step 11 — Heaps
 
@@ -123,13 +121,11 @@ Most named algorithms you listed already live as **patterns inside topic notes**
 ## Suggested next order
 
 1. **Trees** (per your stated queue — Binary Trees then BST)
-2. **Stack and Queues**
-3. **Sliding Window & Two Pointer**
-4. **Heaps**
-5. **Graphs** (biggest step — will likely need its own folder like Algorithm/)
-6. **DP subtypes** (subsequences, strings, stocks — expand off the existing DP note)
-7. **Tries**
-8. **Advanced Strings (KMP/Z-function)**
+2. **Heaps**
+3. **Graphs** (biggest step — will likely need its own folder like Algorithm/)
+4. **DP subtypes** (subsequences, strings, stocks — expand off the existing DP note)
+5. **Tries**
+6. **Advanced Strings (KMP/Z-function)**
 
 Update this tracker's checkboxes as each topic is covered — same pattern as [[System Design MOC]].
 
