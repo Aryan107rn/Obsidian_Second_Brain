@@ -15,5 +15,6 @@
   "beauty-diagram",
   "mermaid-flow",
   "beautiful-mermaid-renderer",
-  "mcp-tools-istefox"
+  "mcp-tools-istefox",
+  "canvas-draw"
 ]
