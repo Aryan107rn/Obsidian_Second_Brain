@@ -11,10 +11,14 @@
             "id": "fc0beea50d5fce54",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Computer Science/Networking/04 - TCP and UDP.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "04 - TCP and UDP"
             }
           }
         ]
@@ -29,7 +33,7 @@
       {
         "id": "8b0fed0b7d6b23e3",
         "type": "tabs",
-        "dimension": 53.46666666666666,
+        "dimension": 73.33333333333333,
         "children": [
           {
             "id": "f2339277baec7b99",
@@ -78,7 +82,7 @@
       {
         "id": "1ed018cee1a20bb5",
         "type": "tabs",
-        "dimension": 46.53333333333333,
+        "dimension": 26.66666666666667,
         "children": [
           {
             "id": "900c9a5bf8abcb76",
@@ -94,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 209.13887786865234
+    "width": 260.6834182739258
   },
   "right": {
     "id": "833dfb8e29c37f6c",
@@ -226,19 +230,34 @@
   },
   "active": "fc0beea50d5fce54",
   "lastOpenFiles": [
-    "Computer Science/Web Development/Git/04 - Git Rebase.md",
-    "Computer Science/Web Development/Git/05 - Git Stash.md",
-    "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
-    "Computer Science/Web Development/Git/07 - Git Tags.md",
-    "Computer Science/Web Development/Git/08 - GitHub Basics.md",
-    "Computer Science/Computer Science MOC.md",
-    "Computer Science/Web Development/Git/10 - Git Reflog, Cherry-pick & Recovery.md",
-    "Computer Science/Web Development/Git/09 - Branching Strategies & PR Workflow.md",
-    "Computer Science/Web Development/Git/11 - SSH Keys & GitHub Authentication.md",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
-    "Computer Science/Web Development/Git/02 - Git Branching.md",
+    "Computer Science/Networking/07 - HTTP Deep Dive.md",
+    "Computer Science/Networking/08 - HTTPS, TLS and Certificates.md",
+    "Computer Science/Networking/09 - Cookies, Sessions and Browser Security.md",
+    "Computer Science/Networking/10 - Proxies, Load Balancers and API Gateways.md",
+    "Computer Science/Networking/11 - Real-Time Communication and SSE.md",
+    "Computer Science/Networking/12 - Practical Networking Toolkit.md",
+    "Computer Science/Networking/04 - TCP and UDP.md",
+    "Computer Science/Networking/03 - IP Addresses, Ports and Subnetting.md",
+    "Computer Science/Networking/02 - OSI and TCP-IP Models.md",
+    "Computer Science/Networking/01 - Networking Fundamentals.md",
+    "Computer Science/Networking/00 - Networking MOC.md",
+    "Computer Science/Web Development/Backend/Node and Express/21 - Cookies in Express.md",
+    "Computer Science/Networking/06 - DNS and CDN.md",
+    "Computer Science/Networking/05 - Link and Network Layer.md",
+    "Computer Science/Excalidraw/Encapsulation.excalidraw.md",
+    "Computer Science/Networking",
+    "Computer Science/Excalidraw",
+    "file:/home/aryan/Temp/Obsidian_Networking_Notes/Computer Science/Networking/03 - IP Addresses, Ports and Subnetting.md",
+    "file:/home/aryan/Temp/Obsidian_Networking_Notes/Computer Science/Networking/02 - OSI and TCP-IP Models.md",
+    "file:/home/aryan/Temp/Obsidian_Networking_Notes/Computer Science/Networking/01 - Networking Fundamentals.md",
+    "file:/home/aryan/Temp/Obsidian_Networking_Notes/Computer Science/Networking/00 - Networking MOC.md",
+    "file:/home/aryan/Temp/Obsidian_Networking_Notes/README.md",
     "Computer Science/Web Development/Git/01 - Git Basics.md",
-    "Computer Science/Web Development/Git/00 - Git & GitHub MOC.md",
+    "Computer Science/Web Development/Frontend/JavaScript/Array Methods.md",
+    "Computer Science/DSA/Algorithm/Euclidean Algorithm (GCD).md",
+    "Computer Science/Linux.md",
+    "Computer Science/Web Development/Backend/Node and Express/20 - Building Authentication from Scratch.md",
+    "Computer Science/Web Development/Backend/Node and Express/19 - Zod - Schema Validation.md",
     "Computer Science/Web Development/Git/06 - Git Undoing Changes - Diagram.excalidraw",
     "Computer Science/Web Development/Git/08 - GitHub Basics - Diagram.excalidraw",
     "Computer Science/Web Development/Git/09 - Branching Strategies & PR Workflow - Diagram 1.excalidraw",
@@ -247,21 +266,6 @@
     "Computer Science/Web Development/Git/05 - Git Stash - Diagram.excalidraw",
     "Computer Science/Web Development/Git/04 - Git Rebase - Diagram 2.excalidraw",
     "Computer Science/Web Development/Git/04 - Git Rebase - Diagram 1.excalidraw",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts - Diagram.excalidraw",
-    "Computer Science/Web Development/Git/02 - Git Branching - Diagram.excalidraw",
-    "Computer Science/DSA/Topics/Greedy Algorithms.md",
-    "Computer Science/DSA/Topics/Sliding Window & Two Pointer.md",
-    "Computer Science/C++/11 - STL Quick Revision.md",
-    "Computer Science/C++/10 - Data Structure & Graph Templates.md",
-    "Computer Science/C++/09 - Competitive Programming Template & Math Utilities.md",
-    "Computer Science/DSA/Topics/Stack & Queues.md",
-    "Computer Science/DSA/Topics/Bit Manipulation.md",
-    "Computer Science/DSA/Topics/Hashing.md",
-    "Computer Science/DSA/Topics/Linked List.md",
-    "Computer Science/DSA/Topics/Matrix.md",
-    "Computer Science/DSA/Topics/Recursion & Backtracking.md",
-    "Computer Science/DSA/Topics/Sorting Techniques.md",
-    "Computer Science/DSA/Topics/Strings.md",
     "Pasted image 20260822145332.png",
     "Pasted image 20260831010148.png",
     "Pasted image 20260831005959.png",

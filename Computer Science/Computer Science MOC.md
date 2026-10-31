@@ -20,6 +20,8 @@ Computer Science/
 │   ├── Git/
 │   └── APIs/
 ├── System Design/
+├── Networking/               → TCP/IP, DNS, HTTP, TLS, proxies (backend networking)
+├── Excalidraw/               → Diagrams embedded in notes
 └── Linux.md
 ```
 
@@ -43,6 +45,10 @@ Start here → [[C++ MOC]] — language fundamentals, memory management, OOP, an
 - [[Git and GitHub|Git & GitHub MOC]] — version control workflow, branching, rebase, stash
 - [[API|API MOC]] — REST, GraphQL, gRPC, WebSocket, SOAP, and [[Authentication and Authorization|authN/authZ]] including [[JWT]]
 - [[00 - Node and Express MOC|Node.js and Express.js]] — backend runtime, HTTP, and middleware
+
+## 🔌 Networking
+
+Start here → [[00 - Networking MOC]]: layers and encapsulation, IP/ports, TCP/UDP, DNS/CDN, HTTP/HTTPS/TLS, cookies/CORS/CSRF, proxies/load balancers, SSE, and the debugging toolkit (curl, dig, Wireshark, ss).
 
 ## 🏗️ System Design
 

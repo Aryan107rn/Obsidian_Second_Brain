@@ -78,3 +78,5 @@ QUERY  /search   { category: "shoes", price_min: 20, ... }
 [[08 - HTTP Methods & Method-Based Routing in Node.js]] — how `req.method` checks work in raw Node, applies identically to `QUERY`
 [[GraphQL]] — a natural use case for `QUERY`'s safe-request-with-body semantics
 [[gRPC]] — another protocol that relies on HTTP/2 specifically
+[[07 - HTTP Deep Dive]] — full HTTP fundamentals (methods, status codes, headers, keep-alive) plus HTTP/3 & QUIC
+[[00 - Networking MOC]] — the TCP/TLS/DNS layers underneath HTTP
