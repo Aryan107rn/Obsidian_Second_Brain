@@ -8,30 +8,11 @@ A sequence of nodes where each node stores data + a pointer to the next node. Un
 
 ## Visualizing Node Structures & Types
 
-```mermaid
-flowchart LR
-    subgraph Singly["1. Singly Linked List (One-directional)"]
-        direction LR
-        S1["[ Val: 1 | Next ]"] --> S2["[ Val: 2 | Next ]"] --> S3["[ Val: 3 | Next ]"] --> S_Null["nullptr"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-01.svg]]
 
-```mermaid
-flowchart LR
-    subgraph Doubly["2. Doubly Linked List (Bi-directional O(1) Deletion)"]
-        direction LR
-        D_Null1["nullptr"] <--> D1["[ Prev | Val: 1 | Next ]"] <--> D2["[ Prev | Val: 2 | Next ]"] <--> D3["[ Prev | Val: 3 | Next ]"] <--> D_Null2["nullptr"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-02.svg]]
 
-```mermaid
-flowchart LR
-    subgraph Circular["3. Circular Linked List (Tail loops to Head)"]
-        direction LR
-        C1["[ Val: 1 | Next ]"] --> C2["[ Val: 2 | Next ]"] --> C3["[ Val: 3 | Next ]"]
-        C3 -->|tail points back to head| C1
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-03.svg]]
 
 ## Node structure
 
@@ -96,18 +77,7 @@ Node* deleteHead(Node* head) {
 > [!tip] When to apply
 > whenever a problem needs the list processed back-to-front, or as a subroutine (e.g. palindrome check, reverse in groups, add two numbers).
 
-```mermaid
-flowchart LR
-    subgraph Reversal["Pointer Reversal Step: head->next = prev"]
-        direction LR
-        P["prev (nullptr)"]
-        H["curr / head"]
-        N["next (preserved)"]
-        H -->|1. Flip pointer| P
-        H -.->|2. Advance prev| H_New["prev = curr"]
-        N -.->|3. Advance curr| N_New["curr = next"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-04.svg]]
 
 **Iterative** (preferred — O(1) space):
 
@@ -149,13 +119,7 @@ Node* reverseRecursive(Node* head) {
 > [!tip] When to apply
 > need the middle node in a single pass, without knowing the length upfront (avoids a separate length-counting pass).
 
-```mermaid
-flowchart TD
-    subgraph SlowFast["Slow (1x) vs Fast (2x) Pointer Progression"]
-        direction LR
-        N1["Node 1<br/>(Start: S, F)"] --> N2["Node 2"] --> N3["Node 3<br/>(Step 1: S)"] --> N4["Node 4"] --> N5["Node 5<br/>(Step 2: S / Middle)"] --> N6["Node 6"] --> N7["Node 7<br/>(Step 3: F / End)"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-05.svg]]
 
 ```cpp
 Node* findMiddle(Node* head) {
@@ -182,15 +146,7 @@ Node* findMiddle(Node* head) {
 > [!tip] When to apply
 > need to detect if a list has a cycle, and optionally find where the cycle begins — without extra space (hashset would work too but costs O(n) space).
 
-```mermaid
-flowchart LR
-    Head["Head (Distance L)"] --> A["..."]
-    A --> Entry["Cycle Entry (Distance 0)"]
-    Entry --> C1["Node C1"]
-    C1 --> Meet["Meeting Point M (Distance d)"]
-    Meet --> C2["Node C2 (Distance C-d)"]
-    C2 --> Entry
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-06.svg]]
 
 ```cpp
 bool hasCycle(Node* head) {
@@ -421,17 +377,7 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
 > [!tip] When to apply
 > each node has an extra `random` pointer to any node in the list (or null) — need a deep copy.
 
-```mermaid
-flowchart LR
-    subgraph Interleaving["Interleaving Trick: A -> A' -> B -> B'"]
-        direction LR
-        A["A (Orig)"] --> A_prime["A' (Clone)"]
-        A_prime --> B["B (Orig)"]
-        B --> B_prime["B' (Clone)"]
-        A -.->|random| B
-        A_prime ==>|A'.random = A.random.next| B_prime
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-07.svg]]
 
 ```cpp
 struct RNode { int val; RNode *next, *random; };
@@ -491,20 +437,7 @@ RNode* copyRandomList(RNode* head) {
 > [!note] Intuition
 > DLL keeps items ordered by recency (head = most recent, tail = least recent); hashmap maps key → node pointer for O(1) lookup. On access, unlink node and move to head (O(1) because DLL). On overflow, remove tail.
 
-```mermaid
-flowchart LR
-    subgraph LRU["LRU Cache: Hash Map + Doubly Linked List"]
-        direction TB
-        subgraph Map["Hash Map (Key -> Node Pointer)"]
-            K1["Key: 'A'"] --> N1
-            K2["Key: 'B'"] --> N2
-            K3["Key: 'C'"] --> N3
-        end
-        subgraph List["Doubly Linked List (Recency Order)"]
-            Head["Head (MRU)"] <--> N1["[ A: Val1 ]"] <--> N2["[ B: Val2 ]"] <--> N3["[ C: Val3 ]"] <--> Tail["Tail (LRU)"]
-        end
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Linked-List--mermaid-08.svg]]
 
 > [!example] Complexity
 > O(1) get/put, Space: O(capacity)

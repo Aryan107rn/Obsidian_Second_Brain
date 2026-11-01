@@ -145,12 +145,7 @@ A running connection is uniquely identified by the **4-tuple**:
 
 This is how **one server port serves thousands of clients**: each client connects from a different ephemeral port, so each 4-tuple differs.
 
-```mermaid
-flowchart LR
-    C1["Client A<br/>10.0.0.5:51000"] --> S["Server<br/>203.0.113.7:443"]
-    C2["Client A (2nd tab)<br/>10.0.0.5:51001"] --> S
-    C3["Client B<br/>198.51.100.9:40222"] --> S
-```
+![[Networking Diagrams/03 - IP Addresses, Ports and Subnetting - Diagram 01.svg]]
 
 ### Server socket lifecycle (what `app.listen()` does)
 

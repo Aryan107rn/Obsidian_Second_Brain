@@ -17,25 +17,7 @@ The diagram below outlines the core loop of React: how changes in state and prop
 
 ![[react-architecture-diagram.svg|960]]
 
-```mermaid
-flowchart TD
-    State["State / Props Change"] --> Render["Render Phase"]
-    Render --> VDOM["Virtual DOM Tree"]
-    VDOM --> Diff["Reconciliation / Diffing"]
-    Diff --> Commit["Commit Phase"]
-    Commit --> DOM["Minimal Real DOM Updates"]
-    DOM --> Effects["Effects + Layout Work"]
-    Effects -.->|may schedule new state| State
-
-    classDef input fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef render fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef commit fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef effect fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class State input
-    class Render,VDOM,Diff render
-    class Commit,DOM commit
-    class Effects effect
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--00-React-MOC--mermaid-01.svg]]
 
 ---
 

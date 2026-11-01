@@ -30,14 +30,7 @@ npm install react-router-dom
 
 ### Basic Architecture Flow
 
-```mermaid
-graph TD
-    App[App Component] --> BrowserRouter["BrowserRouter <br/> (Keeps UI synced with browser URL)"]
-    BrowserRouter --> Routes[Routes Container]
-    Routes --> Route1["Route path='/' element=&lt;Home /&gt;"]
-    Routes --> Route2["Route path='/about' element=&lt;About /&gt;"]
-    Routes --> Route3["Route path='/product/:id' element=&lt;ProductDetails /&gt;"]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--08-React-Router-Navigation--mermaid-01.svg]]
 
 ### Complete Code Implementation
 

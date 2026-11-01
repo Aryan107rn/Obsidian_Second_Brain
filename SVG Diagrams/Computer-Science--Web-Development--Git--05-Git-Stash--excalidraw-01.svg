@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1244" height="299" viewBox="0 0 1244 299">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 272.0 87.0 L 462.0 87.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="369.5" y="68.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="369.5" dy="0">git stash</tspan></text>
+<path d="M 712.0 87.0 L 912.0 87.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="836.0" y="68.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="836.0" dy="0">Working tree is clean</tspan></text>
+<path d="M 587.0 142.0 L 587.0 267.0 L 152.0 267.0 L 152.0 142.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="386.0" y="248.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="386.0" dy="0">git stash pop / apply</tspan></text>
+<rect x="32.0" y="32.0" width="240.0" height="110.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="152.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="152.0" dy="0">Uncommitted changes</tspan></text>
+<rect x="462.0" y="32.0" width="250.0" height="110.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#ffedd5" opacity="1"/>
+<text x="587.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="587.0" dy="0">Stash stack</tspan></text>
+<rect x="912.0" y="32.0" width="300.0" height="110.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dcfce7" opacity="1"/>
+<text x="1062.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="1062.0" dy="0">Clean tree</tspan><tspan x="1062.0" dy="22.5">switch branch, pull, fix bug</tspan></text>
+</svg>

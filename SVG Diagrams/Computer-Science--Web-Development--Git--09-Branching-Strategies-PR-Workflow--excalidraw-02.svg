@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1519" height="774" viewBox="0 0 1519 774">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 252.0 77.0 L 322.0 77.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 542.0 77.0 L 612.0 77.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 832.0 77.0 L 912.0 77.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 1037.0 167.0 L 1037.0 242.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 912.0 307.0 L 832.0 307.0 L 832.0 437.0 L 577.0 437.0 L 577.0 492.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="752.0" y="422.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="752.0" dy="0">No — request changes</tspan></text>
+<path d="M 1172.0 307.0 L 1292.0 307.0 L 1292.0 492.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="1248.0" y="285.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="1248.0" dy="0">Yes — approved</tspan></text>
+<path d="M 442.0 537.0 L 362.0 537.0 L 362.0 177.0 L 722.0 177.0 L 722.0 122.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="520.0" y="485.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="520.0" dy="0">Push fixes and review again</tspan></text>
+<path d="M 1347.0 582.0 L 1347.0 652.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<rect x="32.0" y="32.0" width="220.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="142.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="142.0" dy="0">Create feature branch</tspan></text>
+<rect x="322.0" y="32.0" width="220.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="432.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="432.0" dy="0">Commit + push</tspan></text>
+<rect x="612.0" y="32.0" width="220.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#ede9fe" opacity="1"/>
+<text x="722.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="722.0" dy="0">Open pull request</tspan></text>
+<rect x="912.0" y="32.0" width="250.0" height="135.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="1037.0" y="62.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="1037.0" dy="0">CI checks + review</tspan></text>
+<path d="M 1042.0,242.0 L 1172.0,307.0 L 1042.0,372.0 L 912.0,307.0 Z" stroke="#334155" stroke-width="2.4" fill="#ffedd5" opacity="1"/>
+<text x="1042.0" y="272.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="1042.0" dy="0">Approved and checks pass?</tspan></text>
+<rect x="442.0" y="492.0" width="270.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#ffedd5" opacity="1"/>
+<text x="577.0" y="522.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="577.0" dy="0">Update branch with fixes</tspan></text>
+<rect x="1222.0" y="492.0" width="250.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dcfce7" opacity="1"/>
+<text x="1347.0" y="522.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="1347.0" dy="0">Merge pull request</tspan></text>
+<rect x="1207.0" y="652.0" width="280.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="1347.0" y="682.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#0f172a" opacity="1"><tspan x="1347.0" dy="0">Delete branch; update main</tspan></text>
+</svg>

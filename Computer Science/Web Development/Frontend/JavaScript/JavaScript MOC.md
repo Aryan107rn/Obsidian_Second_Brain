@@ -17,27 +17,7 @@ Complete placement-ready JavaScript revision roadmap — fundamentals $\to$ scop
 
 ## 🧭 JavaScript Learning Flow
 
-```mermaid
-flowchart TD
-    Fundamentals["Variables, Types, Operators"] --> Scope["Scope + Hoisting"]
-    Scope --> Functions["Functions + Closures + this"]
-    Functions --> Objects["Objects + Prototypes"]
-    Objects --> Collections["Arrays, Maps, Sets"]
-    Collections --> Async["Promises + async/await"]
-    Async --> Runtime["Event Loop"]
-    Runtime --> DOM["DOM + Events"]
-    DOM --> Patterns["Coding Patterns"]
-    Patterns --> Interviews["Tricky Outputs + Interview Prep"]
-
-    classDef base fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef core fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef async fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef practice fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Fundamentals base
-    class Scope,Functions,Objects,Collections core
-    class Async,Runtime async
-    class DOM,Patterns,Interviews practice
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--JavaScript--JavaScript-MOC--mermaid-01.svg]]
 
 ---
 

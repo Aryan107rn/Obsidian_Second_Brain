@@ -9,39 +9,7 @@ At every step, pick the choice that looks best **right now** and never reconside
 
 ## 🧭 Greedy Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    G["Greedy Problem"] --> Match{"Pair up two sorted lists\n(cookies, boats, trucks)?"}
-    Match -->|Yes| SortMatch["Sort + Two Pointer Matching"]
-
-    G --> Interval{"Pick max non-overlapping\nintervals / min removals?"}
-    Interval -->|Yes| IntervalSched["Sort by END time"]
-
-    G --> Ratio{"Divisible items,\nmaximize value in capacity?"}
-    Ratio -->|Yes| Frac["Sort by value/weight"]
-
-    G --> Reach{"Reach the end / min jumps\nwith ranges?"}
-    Reach -->|Yes| Jump["Track farthest reachable"]
-
-    G --> Neighbors{"Rule depends on both\nleft and right neighbors?"}
-    Neighbors -->|Yes| TwoPass["Two-pass (left→right, right→left)"]
-
-    G --> Remove{"Remove k elements for\nsmallest/largest result?"}
-    Remove -->|Yes| MonoStack["Monotonic Stack"]
-
-    G --> Frequent{"Always take most frequent /\nsmallest available?"}
-    Frequent -->|Yes| HeapGreedy["Heap-based Greedy"]
-
-    G --> Order{"Best ordering of items\n(concatenate, schedule)?"}
-    Order -->|Yes| Comparator["Custom Comparator Sort"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class G start
-    class Match,Interval,Ratio,Reach,Neighbors,Remove,Frequent,Order decision
-    class SortMatch,IntervalSched,Frac,Jump,TwoPass,MonoStack,HeapGreedy,Comparator pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Greedy-Algorithms--mermaid-01.svg]]
 
 ---
 
@@ -155,20 +123,16 @@ bool checkValidString(string s) {
 
 # PART B — Interval / Scheduling Greedy
 
-```mermaid
-flowchart LR
-    Sort["Sort intervals by END time"] --> Pick["Pick first interval"]
-    Pick --> Next{"next.start >= lastEnd?"}
-    Next -->|Yes| Take["Take it, lastEnd = next.end"]
-    Next -->|No| Skip["Skip (overlaps)"]
-    Take --> Next
-    Skip --> Next
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Greedy-Algorithms--mermaid-02.svg]]
 
 ## Pattern 6: Activity Selection / N Meetings in One Room
 **Difficulty:** Medium
 **When to apply:** maximize number of non-overlapping meetings/activities.
 **Intuition:** the meeting that **ends earliest** leaves the most room for the rest. Sorting by start time or duration fails.
+
+<img src="https://www.wasilzafar.com/images/series/data-structures/greedy-activity-selection-timeline.webp" alt="Activity selection timeline highlighting the compatible activities selected by earliest finish time" width="820">
+
+Source: [Greedy activity-selection timeline by Wasil Zafar](https://www.wasilzafar.com/pages/series/data-structures/dsa-graphs-dp-greedy-backtracking.html). If the remote image is unavailable, use the [[SVG Diagrams/Computer-Science--DSA--Topics--Greedy-Algorithms--mermaid-02.svg|local SVG algorithm flow]].
 ```cpp
 int maxMeetings(vector<int>& start, vector<int>& end) {
     int n = start.size();
@@ -305,13 +269,7 @@ int jump(vector<int>& nums) {                        // Jump Game II: min jumps
     return jumps;
 }
 ```
-```mermaid
-flowchart LR
-    A["Window of current jump: [.., curEnd]"] --> B["Scan it, record farthest reach"]
-    B --> C{"i == curEnd?"}
-    C -->|Yes| D["jumps++, curEnd = farthest"]
-    C -->|No| B
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Greedy-Algorithms--mermaid-03.svg]]
 - Time: O(n), Space: O(1)
 - **Remember:** Jump Game II is implicit BFS by levels: each jump = one level, `curEnd` = level boundary.
 

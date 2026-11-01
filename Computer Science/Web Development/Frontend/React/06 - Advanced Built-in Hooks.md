@@ -191,13 +191,7 @@ export function Parent() {
 
 For state that involves multiple sub-values or where the next state depends heavily on the previous state and action type, `useReducer` is cleaner than having 5 separate `useState` hooks. It implements the Redux-like "State, Action, Reducer" pattern.
 
-```mermaid
-flowchart LR
-    Component["Component View"] -->|dispatches action| Dispatch["dispatch({ type: 'INCREMENT' })"]
-    Dispatch --> Reducer["Reducer Function<br/>(state, action) => newState"]
-    Reducer -->|updates| State["Store/State"]
-    State -->|causes re-render| Component
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--06-Advanced-Built-in-Hooks--mermaid-01.svg]]
 
 ### Implementation Example: Shopping Cart
 

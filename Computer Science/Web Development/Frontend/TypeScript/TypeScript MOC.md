@@ -13,29 +13,7 @@ Complete placement-ready TypeScript revision roadmap — static typing $\to$ adv
 
 ## 🧭 TypeScript Learning Flow
 
-```mermaid
-flowchart TD
-    Intro["Introduction & Compiler Config"] --> Basics["Primitive & Special Types"]
-    Basics --> Functions["Functions in TypeScript"]
-    Functions --> Combos["Union, Intersection & Type Narrowing"]
-    Combos --> Structures["Type Aliases vs Interfaces"]
-    Structures --> OOP["Classes & OOP"]
-    OOP --> Generics["Generics & Utility Types"]
-    Generics --> Advanced["Advanced Type Manipulation"]
-    Advanced --> Assertions["Assertions & Ambient Declarations"]
-    Assertions --> Tooling["TS Integration & Tooling"]
-    Tooling --> Interviews["Interview Questions & Tricky Types"]
-
-    classDef base fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef core fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef advanced fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef practice fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    
-    class Intro,Basics,Functions base
-    class Combos,Structures,OOP,Generics core
-    class Advanced,Assertions advanced
-    class Tooling,Interviews practice
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--TypeScript--TypeScript-MOC--mermaid-01.svg]]
 
 ---
 

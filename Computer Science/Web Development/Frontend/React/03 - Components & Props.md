@@ -14,23 +14,7 @@ A **component** is a JavaScript function that returns a description of UI (via [
 
 ## Component Hierarchy & One-Way Data Flow
 
-```mermaid
-flowchart TD
-    subgraph Tree["Component Tree & Unidirectional Data Flow (Top -> Down)"]
-        App["App Component (Parent State Owner)"]
-        Nav["Navbar (Child)"]
-        Feed["Feed (Child)"]
-        User["UserProfile (Grandchild)"]
-        Post1["PostCard (Grandchild)"]
-        Post2["PostCard (Grandchild)"]
-
-        App -->|props: { username }| Nav
-        App -->|props: { posts, onLike }| Feed
-        Nav -->|props: { avatarUrl }| User
-        Feed -->|props: { post: posts[0], onLike }| Post1
-        Feed -->|props: { post: posts[1], onLike }| Post2
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--03-Components-Props--mermaid-01.svg]]
 
 ## Why does it exist?
 
@@ -59,11 +43,7 @@ function App() {
 
 ### Props: passing data down
 
-```mermaid
-flowchart LR
-    Parent["Parent Component<br/>&lt;Greeting name='Asha' /&gt;"] -->|passes read-only props| Child["Child Component<br/>Greeting(props)"]
-    Child -->|renders UI| DOM["&lt;h1&gt;Hello, Asha!&lt;/h1&gt;"]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--03-Components-Props--mermaid-02.svg]]
 
 ```jsx
 function Greeting(props) {

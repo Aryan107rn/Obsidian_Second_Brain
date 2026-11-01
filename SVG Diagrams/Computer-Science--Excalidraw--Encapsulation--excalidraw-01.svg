@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="824" height="419" viewBox="0 0 824 419">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="412.0" y="56.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#1e1e1e" opacity="1"><tspan x="412.0" dy="0">Encapsulation: what actually goes on the wire</tspan></text>
+<rect x="32.0" y="92.0" width="140.0" height="60.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#a5d8ff" opacity="1"/>
+<text x="102.0" y="118.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="102.0" dy="0">Ethernet</tspan><tspan x="102.0" dy="20.0">header</tspan></text>
+<rect x="172.0" y="92.0" width="140.0" height="60.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#b2f2bb" opacity="1"/>
+<text x="242.0" y="118.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="242.0" dy="0">IP</tspan><tspan x="242.0" dy="20.0">header</tspan></text>
+<rect x="312.0" y="92.0" width="140.0" height="60.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#ffec99" opacity="1"/>
+<text x="382.0" y="118.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="382.0" dy="0">TCP</tspan><tspan x="382.0" dy="20.0">header</tspan></text>
+<rect x="452.0" y="92.0" width="240.0" height="60.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#ffc9c9" opacity="1"/>
+<text x="572.0" y="118.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="572.0" dy="0">HTTP data</tspan><tspan x="572.0" dy="20.0">(request / response)</tspan></text>
+<rect x="692.0" y="92.0" width="100.0" height="60.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#a5d8ff" opacity="1"/>
+<text x="742.0" y="118.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="742.0" dy="0">Ethernet</tspan><tspan x="742.0" dy="20.0">trailer</tspan></text>
+<rect x="312.0" y="182.0" width="380.0" height="40.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#ffec99" opacity="1"/>
+<text x="502.0" y="208.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#1e1e1e" opacity="1"><tspan x="502.0" dy="0">TCP segment  (Transport layer)</tspan></text>
+<rect x="172.0" y="232.0" width="520.0" height="40.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#b2f2bb" opacity="1"/>
+<text x="432.0" y="258.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#1e1e1e" opacity="1"><tspan x="432.0" dy="0">IP packet  (Network layer)</tspan></text>
+<rect x="32.0" y="282.0" width="760.0" height="40.0" rx="10" stroke="#1e1e1e" stroke-width="2.0" fill="#a5d8ff" opacity="1"/>
+<text x="412.0" y="308.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#1e1e1e" opacity="1"><tspan x="412.0" dy="0">Ethernet frame  (Link layer)</tspan></text>
+<text x="412.0" y="363.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#1e1e1e" opacity="1"><tspan x="412.0" dy="0">Each layer wraps the data from the layer above with its own header (encapsulation).</tspan><tspan x="412.0" dy="20.0">The receiver unwraps in reverse order (decapsulation).</tspan></text>
+</svg>

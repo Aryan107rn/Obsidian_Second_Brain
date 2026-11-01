@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1694" height="879" viewBox="0 0 1694 879">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 702.0 122.0 L 702.0 187.0 L 182.0 187.0 L 182.0 287.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 702.0 122.0 L 702.0 187.0 L 1222.0 187.0 L 1222.0 287.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 182.0 377.0 L 182.0 422.0 L 622.0 422.0 L 622.0 467.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 1222.0 377.0 L 1222.0 422.0 L 782.0 422.0 L 782.0 467.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 622.0 597.0 L 622.0 657.0 L 262.0 657.0 L 262.0 737.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="422.0" y="647.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#475569" opacity="1"><tspan x="422.0" dy="0">Different lines</tspan></text>
+<path d="M 782.0 597.0 L 782.0 657.0 L 1162.0 657.0 L 1162.0 737.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="964.0" y="647.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#475569" opacity="1"><tspan x="964.0" dy="0">Same line, different content</tspan></text>
+<rect x="552.0" y="32.0" width="300.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="702.0" y="68.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="702.0" dy="0">Common ancestor commit</tspan></text>
+<rect x="32.0" y="287.0" width="300.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="182.0" y="323.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="182.0" dy="0">main: line 5 changed to X</tspan></text>
+<rect x="1072.0" y="287.0" width="300.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="1222.0" y="323.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="1222.0" dy="0">feature: line 5 changed to Y</tspan></text>
+<path d="M 701.21875,462.99493408203125 L 851.21875,527.9949340820312 L 701.21875,592.9949340820312 L 551.21875,527.9949340820312 Z" stroke="#334155" stroke-width="2.9" fill="#ffedd5" opacity="1"/>
+<text x="701.21875" y="498.99493408203125" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="701.21875" dy="0">Merge</tspan></text>
+<rect x="122.0" y="737.0" width="280.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dcfce7" opacity="1"/>
+<text x="262.0" y="773.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="262.0" dy="0">Auto-merged</tspan></text>
+<rect x="992.0" y="737.0" width="340.0" height="110.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#fee2e2" opacity="1"/>
+<text x="1162.0" y="773.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="24.0" fill="#0f172a" opacity="1"><tspan x="1162.0" dy="0">CONFLICT</tspan><tspan x="1162.0" dy="30.0">Git can&#x27;t pick a winner</tspan></text>
+</svg>

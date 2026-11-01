@@ -70,28 +70,11 @@ Instead of a complex timeline, let's track the **exact state** of the Call Stack
 
 ### 📊 Visual Execution Flow
 
-```mermaid
-flowchart TD
-    S1["1. console.log('1')"] --> S2["2. setTimeout callback registered"]
-    S2 --> S3["3. Promise.then callback queued"]
-    S3 --> S4["4. console.log('4')"]
-    S4 --> S5["Call stack empty"]
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/83/JavaScript_Event_Loop.png" alt="JavaScript event loop with Web APIs and queues" width="900">
 
-    S5 --> M1["5. Run microtask callback"]
-    M1 --> M2["Microtask queue empty"]
+Local copy: [[SVG Diagrams/Computer-Science--Web-Development--Frontend--JavaScript--Event-Loop--mermaid-01.svg|offline copy]]
 
-    M2 --> T1["6. Run macrotask callback"]
-    T1 --> T2["All queues empty"]
-
-    classDef sync fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef empty fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef micro fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef macro fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
-    class S1,S2,S3,S4 sync
-    class S5,M2,T2 empty
-    class M1 micro
-    class T1 macro
-```
+Source: [JavaScript Event Loop, Wikimedia Commons](https://commons.wikimedia.org/wiki/File:JavaScript_Event_Loop.png), Byteslovesbits, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ---
 

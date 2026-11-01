@@ -27,18 +27,7 @@ Plain HTTP is **client-initiated**: the server can only answer when asked ([[07 
 
 **Server-Sent Events** let a server **stream events to the browser over a normal HTTP connection** that stays open. The browser provides a built-in API, **`EventSource`**, which handles parsing and **automatic reconnection**.
 
-```mermaid
-sequenceDiagram
-    participant B as Browser (EventSource)
-    participant S as Server
-    B->>S: GET /events  Accept: text/event-stream
-    S-->>B: 200 OK  Content-Type: text/event-stream (connection stays open)
-    S-->>B: data: {"msg":"hello"}
-    S-->>B: event: price  data: 101.5
-    Note over S,B: ...server pushes whenever it wants...
-    Note over B: connection drops
-    B->>S: GET /events  Last-Event-ID: 42  (auto-reconnect, resume)
-```
+![[Networking Diagrams/11 - Real-Time Communication and SSE - Diagram 01.svg]]
 
 **Why not WebSocket for everything?** If you only need server → client updates, SSE is **simpler**: it is plain HTTP (works with existing auth, cookies, load balancers, HTTP/2, no upgrade handshake), reconnects automatically, and needs less infrastructure.
 
@@ -117,16 +106,7 @@ es.onerror = () => console.log('connection lost, the browser retries automatical
 
 ## Which one should I use? (decision guide)
 
-```mermaid
-flowchart TD
-    Q["Need server to client updates?"] -->|No| REST["Plain REST / HTTP requests"]
-    Q -->|Yes| Q2["Does the client also need to stream data to the server at high frequency?"]
-    Q2 -->|"Yes: chat, games, collaboration"| WS["WebSocket"]
-    Q2 -->|"No: one-way feed"| Q3["Browser app or service-to-service?"]
-    Q3 -->|"Browser: notifications, progress, LLM tokens, dashboards"| SSE["SSE"]
-    Q3 -->|"Internal microservices, typed contracts"| GRPC["gRPC streaming"]
-    Q3 -->|"Rare updates, simplest possible"| POLL["Polling / long polling"]
-```
+![[Networking Diagrams/11 - Real-Time Communication and SSE - Diagram 02.svg]]
 
 | Use case | Best fit |
 |---|---|

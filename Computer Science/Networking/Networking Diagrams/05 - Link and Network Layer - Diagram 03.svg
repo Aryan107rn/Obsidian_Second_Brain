@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="830" height="446" viewBox="0 0 830 446">
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#60748f"/></marker><marker id="dash" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#7086a6"/></marker></defs>
+<rect width="100%" height="100%" rx="18" fill="#fbfcff"/>
+<rect x="28" y="18" width="144" height="42" rx="12" fill="#e9f1ff" stroke="#7094c8" stroke-width="2.5"/>
+<text x="100" y="44" text-anchor="middle" font-family="Inter,Arial" font-size="13" fill="#17243a">Private host 192.168.1.10</text>
+<path d="M100 60 V421" stroke="#a6b4c7" stroke-dasharray="5 5"/>
+<rect x="238" y="18" width="144" height="42" rx="12" fill="#e9f1ff" stroke="#7094c8" stroke-width="2.5"/>
+<text x="310" y="44" text-anchor="middle" font-family="Inter,Arial" font-size="13" fill="#17243a">NAT router (public 203.0.113.7)</text>
+<path d="M310 60 V421" stroke="#a6b4c7" stroke-dasharray="5 5"/>
+<rect x="448" y="18" width="144" height="42" rx="12" fill="#e9f1ff" stroke="#7094c8" stroke-width="2.5"/>
+<text x="520" y="44" text-anchor="middle" font-family="Inter,Arial" font-size="13" fill="#17243a">Server 142.250.1.1</text>
+<path d="M520 60 V421" stroke="#a6b4c7" stroke-dasharray="5 5"/>
+<path d="M100 90 H310" stroke="#60748f" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="205.0" y="81" text-anchor="middle" font-family="Inter,Arial" font-size="11" fill="#33435c"><tspan x="205.0" dy="0">src 192.168.1.10:51000 → dst 142.250.1.1:443</tspan></text>
+<path d="M310 172 H520" stroke="#60748f" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="415.0" y="163" text-anchor="middle" font-family="Inter,Arial" font-size="11" fill="#33435c"><tspan x="415.0" dy="0">src 203.0.113.7:61001 → dst 142.250.1.1:443</tspan></text>
+<path d="M520 254 H310" stroke="#60748f" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="415.0" y="245" text-anchor="middle" font-family="Inter,Arial" font-size="11" fill="#33435c"><tspan x="415.0" dy="0">reply to 203.0.113.7:61001</tspan></text>
+<path d="M310 336 H100" stroke="#60748f" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="205.0" y="327" text-anchor="middle" font-family="Inter,Arial" font-size="11" fill="#33435c"><tspan x="205.0" dy="0">translated back to 192.168.1.10:51000</tspan></text>
+</svg>

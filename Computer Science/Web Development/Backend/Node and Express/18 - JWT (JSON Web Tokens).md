@@ -8,17 +8,7 @@ HTTP is **stateless**: each request is independent, so after `/login` the server
 - **Sessions (stateful):** server stores "session 91 = Aryan" and gives the client the ID. Needs a shared store once you run several servers.
 - **JWT (stateless):** the *token itself* says who you are and is **cryptographically signed**, so any server holding the secret can verify it with no lookup. This fits stateless REST APIs and horizontal scaling. Full stateful-vs-stateless comparison and trade-offs: [[17 - Authentication Fundamentals & Password Hashing (bcrypt)]].
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Express server
-    C->>S: POST /login (email, password)
-    S->>S: verify password (bcrypt)
-    S-->>C: 200 + JWT (signed with secret)
-    C->>S: GET /profile  (Authorization: Bearer JWT)
-    S->>S: verify signature + expiry
-    S-->>C: 200 profile data
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--18-JWT-JSON-Web-Tokens--mermaid-01.svg]]
 
 ## Structure: three parts, separated by dots
 ```

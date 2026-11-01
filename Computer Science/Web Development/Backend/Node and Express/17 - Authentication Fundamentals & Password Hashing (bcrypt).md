@@ -3,14 +3,7 @@
 ## What is authentication? (vs authorization)
 **Authentication** answers *"who are you?"* — verifying identity, usually email + password, before letting someone in. **Authorization** answers *"what are you allowed to do?"* — checked **after** identity is known. This is the same split as `401 Unauthorized` (not authenticated) vs `403 Forbidden` (authenticated, but not allowed) — see [[REST APIs]].
 
-```mermaid
-flowchart LR
-    A["Request with credentials"] --> B{"Authentication: who are you?"}
-    B -->|"Invalid"| C["401 Unauthorized"]
-    B -->|"Valid"| D{"Authorization: allowed to do this?"}
-    D -->|"No"| E["403 Forbidden"]
-    D -->|"Yes"| F["Request proceeds"]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--17-Authentication-Fundamentals-Password-Hashing-bcrypt--mermaid-01.svg]]
 
 ## Why passwords must never be stored in plain text
 Databases get breached, even at well-run companies. If raw passwords are stored, every user's password is exposed instantly, and because people reuse passwords, the damage spreads to their other accounts. Even *you* (and your teammates) should never be able to read a user's password.
@@ -96,32 +89,11 @@ Problem left: HTTP is stateless (see [[REST APIs]]). After `/login` succeeds, th
 Analogy: a **stateful** waiter remembers your table and order history, so you can just say "the usual". A **stateless** waiter remembers nothing, so you hand over a signed note with your full order every single time.
 
 ### Stateful authentication: server-side sessions
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    participant DB as Session store (memory / Redis / DB)
-    C->>S: POST /login (email, password)
-    S->>DB: save session 91 = user 42
-    S-->>C: Set-Cookie: sessionId=91
-    C->>S: GET /profile (cookie: sessionId=91)
-    S->>DB: look up session 91
-    DB-->>S: user 42
-    S-->>C: profile data
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--17-Authentication-Fundamentals-Password-Hashing-bcrypt--mermaid-02.svg]]
 The cookie holds only a meaningless random ID; the real login state lives on the server and must be looked up on **every** request.
 
 ### Stateless authentication: tokens (JWT)
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    C->>S: POST /login (email, password)
-    S-->>C: signed token containing user 42 + expiry
-    C->>S: GET /profile (Authorization: Bearer token)
-    S->>S: verify signature + expiry (no lookup)
-    S-->>C: profile data
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--17-Authentication-Fundamentals-Password-Hashing-bcrypt--mermaid-03.svg]]
 The state is **inside the token**, signed so it can't be forged. The server stores nothing about the login; any server holding the secret can verify it. See [[18 - JWT (JSON Web Tokens)]].
 
 ### Comparison

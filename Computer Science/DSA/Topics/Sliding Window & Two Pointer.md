@@ -12,56 +12,11 @@ Both techniques replace a nested loop with **two indices that only move forward 
 
 ## 🧭 Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    P["Contiguous subarray / substring\nor sorted pair problem"] --> Fixed{"Window size fixed (k)?"}
-    Fixed -->|Yes| FW["Fixed Window (add right, drop left)"]
-
-    P --> Longest{"Longest window\nsatisfying a condition?"}
-    Longest -->|Yes| LW["Variable Window: shrink while invalid"]
-
-    P --> Shortest{"Shortest window\nsatisfying a condition?"}
-    Shortest -->|Yes| SW["Variable Window: shrink while valid"]
-
-    P --> Count{"Count subarrays with\nat most / exactly k?"}
-    Count -->|Yes| AtMost["atMost(k) − atMost(k−1)"]
-
-    P --> Max{"Max/min of every window?"}
-    Max -->|Yes| Deque["Monotonic Deque"]
-
-    P --> Sorted{"Sorted array,\npair / triplet target?"}
-    Sorted -->|Yes| Opp["Opposite-end Two Pointer"]
-
-    P --> InPlace{"Filter / dedupe\narray in place?"}
-    InPlace -->|Yes| Same["Same-direction Slow/Fast"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class P start
-    class Fixed,Longest,Shortest,Count,Max,Sorted,InPlace decision
-    class FW,LW,SW,AtMost,Deque,Opp,Same pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Sliding-Window-Two-Pointer--mermaid-01.svg]]
 
 ## The two variable-window templates
 
-```mermaid
-flowchart LR
-    subgraph Longest["LONGEST window"]
-        direction TB
-        L1["r++ (add a[r])"] --> L2{"window invalid?"}
-        L2 -->|Yes| L3["l++ until valid"]
-        L2 -->|No| L4["update best = max(best, r-l+1)"]
-        L3 --> L4
-    end
-    subgraph Shortest["SHORTEST window"]
-        direction TB
-        S1["r++ (add a[r])"] --> S2{"window valid?"}
-        S2 -->|Yes| S3["update best = min(best, r-l+1), then l++"]
-        S3 --> S2
-        S2 -->|No| S1
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Sliding-Window-Two-Pointer--mermaid-02.svg]]
 **Rule:** for *longest*, update the answer after restoring validity. For *shortest*, update the answer while the window is valid, before shrinking.
 
 ---
@@ -122,13 +77,7 @@ vector<int> maxSlidingWindow(vector<int>& a, int k) {
     return res;
 }
 ```
-```mermaid
-flowchart LR
-    A["new a[i]"] --> B["pop front if index outside window"]
-    B --> C["pop back while a[back] < a[i]"]
-    C --> D["push i at back"]
-    D --> E["front = max of window"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Sliding-Window-Two-Pointer--mermaid-03.svg]]
 - Time: O(n) (each index pushed and popped once), Space: O(k)
 - **Remember:** store **indices**, not values, so you can tell when the front has expired.
 

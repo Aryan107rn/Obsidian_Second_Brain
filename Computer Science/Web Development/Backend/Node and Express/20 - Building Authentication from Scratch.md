@@ -3,27 +3,7 @@
 An end-to-end build that wires together everything from the auth notes: **Zod** validates input → **bcrypt** hashes/verifies passwords → **JWT** proves identity → **middleware** protects routes. Start from the pieces in [[17 - Authentication Fundamentals & Password Hashing (bcrypt)]], [[18 - JWT (JSON Web Tokens)]] and [[19 - Zod - Schema Validation]].
 
 ## The big picture
-```mermaid
-flowchart TD
-    subgraph Signup
-      S1["POST /signup"] --> S2["Zod validate body"]
-      S2 --> S3{"Email exists?"}
-      S3 -->|"Yes"| S4["409 Conflict"]
-      S3 -->|"No"| S5["bcrypt.hash password"]
-      S5 --> S6["Save user"] --> S7["201 Created"]
-    end
-    subgraph Login
-      L1["POST /login"] --> L2["Zod validate body"]
-      L2 --> L3["Find user + bcrypt.compare"]
-      L3 -->|"Fail"| L4["401 Invalid credentials"]
-      L3 -->|"OK"| L5["jwt.sign -> token"] --> L6["200 + token"]
-    end
-    subgraph Protected
-      P1["GET /me with Bearer token"] --> P2["requireAuth: jwt.verify"]
-      P2 -->|"Bad / expired"| P3["401"]
-      P2 -->|"OK"| P4["Handler runs with req.user"]
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--20-Building-Authentication-from-Scratch--mermaid-01.svg]]
 
 ## Step 1 — Project setup
 ```bash

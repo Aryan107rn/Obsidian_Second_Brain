@@ -19,50 +19,13 @@ updated: 2026-08-16
 
 ## 🍽️ The Core Mental Model (Cafeteria vs. À La Carte)
 
-```mermaid
-flowchart TD
-    Problem["Client needs user name and avatar"]
-    Problem --> RESTReq["REST: GET /user/5"]
-    RESTReq --> RESTResp["Server returns fixed full user payload"]
-    RESTResp --> Over["Over-fetching: extra fields downloaded"]
-
-    Problem --> GQLReq["GraphQL: query selected fields"]
-    GQLReq --> GQLResp["Server returns only name and avatar"]
-    GQLResp --> Fit["Payload matches client need"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef rest fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    classDef gql fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Problem start
-    class RESTReq,RESTResp,Over rest
-    class GQLReq,GQLResp,Fit gql
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--GraphQL--mermaid-01.svg]]
 
 ---
 
 ## ⚔️ REST vs. GraphQL: The Two Classic Fetching Problems
 
-```mermaid
-flowchart TD
-    RESTIssues["Classic REST fetching issues"]
-    RESTIssues --> OverFetch["Over-fetching"]
-    RESTIssues --> UnderFetch["Under-fetching"]
-
-    OverFetch --> Mobile["Mobile app wants name and avatar"]
-    Mobile --> LargePayload["Server returns many unused fields"]
-
-    UnderFetch --> Dashboard["Dashboard needs user, posts, comments"]
-    Dashboard --> Trip1["Request 1: user"]
-    Dashboard --> Trip2["Request 2: posts"]
-    Dashboard --> Trip3["Request 3: comments"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef issue fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    classDef detail fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class RESTIssues root
-    class OverFetch,UnderFetch issue
-    class Mobile,LargePayload,Dashboard,Trip1,Trip2,Trip3 detail
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--GraphQL--mermaid-02.svg]]
 
 ---
 
@@ -70,27 +33,7 @@ flowchart TD
 
 The **#1 most critical performance pitfall** in GraphQL backend architecture is the **N+1 Problem**:
 
-```mermaid
-flowchart TD
-    Query["GraphQL query: users with orders"]
-    Query --> Naive["Naive resolver path"]
-    Naive --> Users1["1 query: fetch 100 users"]
-    Users1 --> OrdersN["100 queries: fetch orders per user"]
-    OrdersN --> Slow["N+1 round trips"]
-
-    Query --> Batched["DataLoader path"]
-    Batched --> Users2["1 query: fetch 100 users"]
-    Users2 --> BatchIDs["Collect all user IDs in one tick"]
-    BatchIDs --> Orders1["1 query: fetch all matching orders"]
-    Orders1 --> Fast["1+1 round trips"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef bad fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    classDef good fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Query root
-    class Naive,Users1,OrdersN,Slow bad
-    class Batched,Users2,BatchIDs,Orders1,Fast good
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--GraphQL--mermaid-03.svg]]
 
 > [!IMPORTANT]
 > **What DataLoader Does:**

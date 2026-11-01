@@ -10,37 +10,7 @@ A matrix (2D array) is a grid of elements accessed via `(row, col)`. Almost ever
 
 ## 🧭 Matrix Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    M["Matrix Problem"] --> Sorted{"Rows/cols sorted?"}
-    Sorted -->|"Fully sorted (flattened)"| BS["Binary Search on Matrix"]
-    Sorted -->|"Each row & col sorted independently"| Stair["Staircase Search"]
-
-    M --> Transform{"Rearrange elements\nin place (rotate/transpose)?"}
-    Transform -->|Yes| InPlace["In-Place Transform (Transpose + Reverse)"]
-
-    M --> Traverse{"Need a specific\ntraversal order?"}
-    Traverse -->|Yes| SpiralPattern["Spiral / Diagonal Traversal"]
-
-    M --> Connected{"Find connected regions\n/ count islands?"}
-    Connected -->|Yes| DFS["Flood Fill (DFS/BFS)"]
-
-    M --> Path{"Shortest path / min cost\nthrough grid?"}
-    Path -->|Yes| BFSPath["BFS (unweighted) / DP (weighted)"]
-
-    M --> DPMat{"Count paths / min-max cost\nwith DP recurrence?"}
-    DPMat -->|Yes| DPGrid["DP on Grid"]
-
-    M --> Zero{"Zero out rows/cols\nbased on condition?"}
-    Zero -->|Yes| MatrixMarker["O(1)-space marker trick"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class M start
-    class Sorted,Transform,Traverse,Connected,Path,DPMat,Zero decision
-    class BS,Stair,InPlace,SpiralPattern,DFS,BFSPath,DPGrid,MatrixMarker pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-01.svg]]
 
 ---
 
@@ -97,13 +67,7 @@ vector<int> spiralOrder(vector<vector<int>>& mat) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Top["Traverse top row → top++"] --> Right["Traverse right col → right--"]
-    Right --> Bottom["Traverse bottom row → bottom--"]
-    Bottom --> Left["Traverse left col → left++"]
-    Left --> Top
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-02.svg]]
 
 > [!example] Complexity
 > O(m·n), Space: O(1) extra (excluding output).
@@ -132,12 +96,7 @@ void rotate(vector<vector<int>>& mat) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Original["Original Matrix"] --> Transpose["Transpose: mat[i][j] <-> mat[j][i]"]
-    Transpose --> Reverse["Reverse each row"]
-    Reverse --> Rotated["Rotated 90° clockwise ✅"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-03.svg]]
 
 > [!example] Complexity
 > O(n²), Space: O(1).
@@ -156,13 +115,7 @@ flowchart LR
 > [!note] Intuition
 > Use the matrix's own first row/column as marker space instead of extra arrays.
 
-```mermaid
-flowchart TD
-    Scan["Scan matrix once"] --> Mark["Found mat[i][j]==0 → mark row i and col j using first row/col as storage"]
-    Mark --> TrackFirst["Separately remember if row0/col0 originally had a zero"]
-    TrackFirst --> SecondPass["Second pass: zero cells whose marked row/col is flagged"]
-    SecondPass --> FixFirst["Finally zero row0/col0 themselves if flagged"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-04.svg]]
 
 > [!example] Complexity
 > O(m·n), Space: O(1).
@@ -221,15 +174,7 @@ bool searchMatrixII(vector<vector<int>>& mat, int target) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Start["Start at top-right corner"] --> Compare{"mat[row][col] vs target"}
-    Compare -->|"> target"| Left["col-- (move left)"]
-    Compare -->|"< target"| Down["row++ (move down)"]
-    Compare -->|"== target"| Found["Found ✅"]
-    Left --> Compare
-    Down --> Compare
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-05.svg]]
 
 > [!example] Complexity
 > O(m+n) — not O(log(mn)), since global sort order isn't guaranteed. Space: O(1).
@@ -340,11 +285,7 @@ int minPathSum(vector<vector<int>>& grid) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Above["dp[i-1][j]"] --> Cell["dp[i][j] = min/best(above, left) + grid[i][j]"]
-    Left["dp[i][j-1]"] --> Cell
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Matrix--mermaid-06.svg]]
 
 > [!example] Complexity
 > O(m·n), Space: O(m·n) (can optimize to O(n) with a rolling row, same idea as [[Kadane's Algorithm]]'s space optimization).

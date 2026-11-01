@@ -42,15 +42,7 @@ Data is not sent as one continuous stream. It is split into **packets**, each la
 
 Why this design? Sharing. Many users interleave packets on the same links, so no one reserves a whole line (unlike an old phone call). If one path fails, packets can take another.
 
-```mermaid
-flowchart LR
-    A["Your laptop"] -->|"packets 1,2,3,4"| R1["Router A"]
-    R1 --> R2["Router B"]
-    R1 --> R3["Router C"]
-    R2 --> R4["Router D"]
-    R3 --> R4
-    R4 -->|"reassembled"| S["Server"]
-```
+![[Networking Diagrams/01 - Networking Fundamentals - Diagram 01.svg]]
 
 Packets may arrive late, out of order, duplicated, or not at all. Handling that is the transport layer's job (see [[04 - TCP and UDP]]).
 
@@ -68,17 +60,7 @@ Important points beginners often miss:
 3. **One server serves many clients at the same time**, which is why servers need concurrency (Node's event loop, thread pools; see [[05 - Node.js Event Loop Phases & libuv Thread Pool]]).
 4. Communication follows **request → response**. The client talks first. (Real-time features such as [[WebSocket]] and [[11 - Real-Time Communication and SSE|SSE]] relax this so the server can push.)
 
-```mermaid
-sequenceDiagram
-    participant B as Browser (client)
-    participant A as API server (Node/Express)
-    participant D as Database server
-    B->>A: HTTP request: GET /users/42
-    Note over A: Here A is a server...
-    A->>D: SQL query (A is now a client of D)
-    D-->>A: Row data
-    A-->>B: HTTP response: 200 + JSON
-```
+![[Networking Diagrams/01 - Networking Fundamentals - Diagram 02.svg]]
 
 Notice that the API server is a **server** to the browser and a **client** to the database. Backends are chains of client-server relationships.
 

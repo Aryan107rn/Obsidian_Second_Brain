@@ -50,21 +50,11 @@ The model the Internet actually runs on. It is simpler and maps onto OSI:
 
 Some textbooks use a 5-layer hybrid that splits Link into Data Link + Physical. Know the 4-layer version for real systems and the 7-layer one because interviews and tooling vocabulary ("L4 load balancer", "L7 proxy") use it.
 
-```mermaid
-flowchart TB
-    subgraph OSI["OSI (concept)"]
-        direction TB
-        o7["7 Application"] --- o6["6 Presentation"] --- o5["5 Session"] --- o4["4 Transport"] --- o3["3 Network"] --- o2["2 Data Link"] --- o1["1 Physical"]
-    end
-    subgraph TCPIP["TCP/IP (reality)"]
-        direction TB
-        t4["Application: HTTP, DNS, TLS"] --- t3["Transport: TCP, UDP"] --- t2["Internet: IP"] --- t1["Link: Ethernet, Wi-Fi"]
-    end
-    o7 -.-> t4
-    o4 -.-> t3
-    o3 -.-> t2
-    o2 -.-> t1
-```
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/OSI_Model_v1.svg" alt="OSI seven-layer model" width="600">
+
+Local copy: [[Networking Diagrams/02 - OSI and TCP-IP Models - Diagram 01.svg|offline copy]]
+
+Source: [Wikimedia Commons, OSI Model v1](https://commons.wikimedia.org/wiki/File:OSI_Model_v1.svg), CC0/public domain.
 
 ## Encapsulation and decapsulation
 
@@ -76,17 +66,15 @@ This is *how* the layers cooperate, and it is the core idea of this note.
 
 Think of posting a letter: you write a letter (data), put it in an envelope with the receiving address (IP header), place that envelope in a courier bag with a route label (Ethernet header). Each handler reads only its own label.
 
-![[Encapsulation.excalidraw]]
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Encapsulation_and_decapsulation_in_networking.jpg" alt="Networking encapsulation and decapsulation" width="850">
+
+Local copy: [[Networking Diagrams/Encapsulation-and-decapsulation.svg|offline copy]]
+
+Source: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Encapsulation_and_decapsulation_in_networking.jpg), CC0 1.0.
 
 ### Walkthrough: `GET /users` over HTTP
 
-```mermaid
-flowchart TD
-    A["Application layer: HTTP request text<br/>GET /users HTTP/1.1"] --> B["Transport layer: add TCP header<br/>source port 52814, dest port 80, seq numbers<br/>= segment"]
-    B --> C["Network layer: add IP header<br/>source IP, destination IP, TTL<br/>= packet"]
-    C --> D["Link layer: add Ethernet header + trailer<br/>source MAC, next-hop MAC<br/>= frame"]
-    D --> E["Physical layer: bits on wire / radio"]
-```
+![[Networking Diagrams/02 - OSI and TCP-IP Models - Diagram 02.svg]]
 
 What each header contributes:
 

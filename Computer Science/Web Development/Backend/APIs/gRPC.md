@@ -19,57 +19,13 @@ updated: 2026-08-16
 
 ## 🧠 The Core Mental Model (Local vs. Remote Function Calls)
 
-```mermaid
-flowchart TD
-    Idea["Function-call mental model"]
-    Idea --> Local["Local call"]
-    Local --> App["App code"]
-    App --> Func["calculateTotal(orderId)"]
-    Func --> Memory["Returns in memory"]
-
-    Idea --> Remote["gRPC remote call"]
-    Remote --> Client["Client service"]
-    Client --> Stub["Generated client stub"]
-    Stub --> Wire["HTTP/2 plus Protobuf"]
-    Wire --> Server["Remote service"]
-    Server --> Response["Binary response"]
-    Response --> Client
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef local fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef remote fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Idea root
-    class Local,App,Func,Memory local
-    class Remote,Client,Stub,Wire,Server,Response remote
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--gRPC--mermaid-01.svg]]
 
 ---
 
 ## ⚙️ The Protobuf Compilation Workflow
 
-```mermaid
-flowchart TD
-    Proto[".proto contract file"]
-
-    Compiler["protoc compiler"]
-
-    Proto --> Compiler
-
-    Compiler -->|--go_out| GoStub["Go Client Stub & Interface"]
-    Compiler -->|--python_out| PyStub["Python Client Stub"]
-    Compiler -->|--java_out| JavaServer["Java Backend Server Base"]
-    Compiler -->|--cpp_out| CppEngine["C++ Low-Latency Engine"]
-
-    GoStub <==>|"HTTP/2 binary protocol"| JavaServer
-    PyStub <==>|"HTTP/2 binary protocol"| CppEngine
-
-    classDef contract fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef compiler fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef output fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Proto contract
-    class Compiler compiler
-    class GoStub,PyStub,JavaServer,CppEngine output
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--gRPC--mermaid-02.svg]]
 
 ---
 
@@ -144,32 +100,7 @@ func main() {
 
 ## 🌊 The 4 gRPC Communication Modes
 
-```mermaid
-flowchart TD
-    Modes["gRPC communication modes"]
-    Modes --> Unary["Unary RPC"]
-    Unary --> UnaryFlow["One request, one response"]
-
-    Modes --> ServerStream["Server streaming"]
-    ServerStream --> ServerFlow["One request, many responses"]
-
-    Modes --> ClientStream["Client streaming"]
-    ClientStream --> ClientFlow["Many requests, one response"]
-
-    Modes --> Bidi["Bidirectional streaming"]
-    Bidi --> BidiFlow["Both sides stream continuously"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef unary fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef client fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef bidi fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
-    class Modes root
-    class Unary,UnaryFlow unary
-    class ServerStream,ServerFlow server
-    class ClientStream,ClientFlow client
-    class Bidi,BidiFlow bidi
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--gRPC--mermaid-03.svg]]
 
 ---
 

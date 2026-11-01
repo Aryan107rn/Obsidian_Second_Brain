@@ -19,11 +19,7 @@ JavaScript is single-threaded — it can only execute one task at a time. Asynch
 
 ## Evolution of Async JavaScript
 
-```mermaid
-flowchart LR
-    A["1. Callbacks (ES5)<br/>Deep nesting / Callback Hell"] --> B["2. Promises (ES6)<br/>.then() / .catch() Chaining"]
-    B --> C["3. Async / Await (ES2017)<br/>Synchronous-looking syntax"]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--JavaScript--Asynchronous-JavaScript--mermaid-01.svg]]
 
 Each stage below shows the actual syntax, not just the concept — this is the section to copy-paste from when you forget the exact keywords.
 

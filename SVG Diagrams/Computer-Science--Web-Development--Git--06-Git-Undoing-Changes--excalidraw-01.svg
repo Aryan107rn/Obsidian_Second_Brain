@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672.3724101026862" height="836.4878800078194" viewBox="0 0 1672.3724101026862 836.4878800078194">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 400.3724101026862 347.0 L 400.3724101026862 427.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 920.3724101026862 347.0 L 920.3724101026862 387.0 L 890.3724101026862 387.0 L 890.3724101026862 427.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 770.3724101026862 77.0 L 620.3724101026862 77.0 L 620.3724101026862 167.0 L 400.3724101026862 167.0 L 400.3724101026862 227.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 920.3724101026862 117.0 L 920.3724101026862 227.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 1070.3724101026862 77.0 L 1220.3724101026862 77.0 L 1220.3724101026862 167.0 L 1420.3724101026862 167.0 L 1420.3724101026862 227.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="257.3724101026862" y="658.25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="257.3724101026862" dy="0">No — edited</tspan></text>
+<path d="M 400.3724101026862 557.0 L 400.3724101026862 632.0 L 469.8233318508849 658.185923451223 L 496.5970743486244 706.4735468705161" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="477.3724101026862" y="618.25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="477.3724101026862" dy="0">Yes — staged</tspan></text>
+<path d="M 740.3724101026862 492.0 L 690.3724101026862 492.0 L 690.3724101026862 662.0 L 705.3724101026862 662.0 L 705.3724101026862 707.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="623.3724101026862" y="653.25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="623.3724101026862" dy="0">Yes, keep staged</tspan></text>
+<path d="M 890.3724101026862 557.0 L 890.3724101026862 707.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="991.3724101026862" y="643.25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="991.3724101026862" dy="0">Yes, keep unstaged</tspan></text>
+<path d="M 1040.3724101026862 492.0 L 1070.3724101026862 492.0 L 1070.3724101026862 662.0 L 1245.3724101026862 662.0 L 1245.3724101026862 707.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="1153.3724101026862" y="653.25" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="1153.3724101026862" dy="0">No, discard</tspan></text>
+<path d="M 1420.3724101026862 347.0 L 1420.3724101026862 507.0" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<rect x="770.3724101026862" y="32.0" width="300.0" height="85.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="920.3724101026862" y="83.875" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="920.3724101026862" dy="0">I want to undo something</tspan></text>
+<rect x="180.3724101026862" y="227.0" width="440.0" height="120.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="400.3724101026862" y="296.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="400.3724101026862" dy="0">Uncommitted changes</tspan></text>
+<rect x="700.3724101026862" y="227.0" width="440.0" height="120.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="920.3724101026862" y="275.125" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="920.3724101026862" dy="0">Local commit</tspan><tspan x="920.3724101026862" dy="25.0">For last message / missed file:</tspan><tspan x="920.3724101026862" dy="25.0">git commit --amend</tspan></text>
+<rect x="1200.3724101026862" y="227.0" width="440.0" height="120.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="1420.3724101026862" y="296.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="1420.3724101026862" dy="0">Shared commit</tspan></text>
+<path d="M 400.3724101026862,427.0 L 550.3724101026862,492.0 L 400.3724101026862,557.0 L 250.3724101026862,492.0 Z" stroke="#334155" stroke-width="2.4" fill="#ffedd5" opacity="1"/>
+<text x="400.3724101026862" y="501.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="400.3724101026862" dy="0">Is it staged?</tspan></text>
+<rect x="32.0" y="714.4878800078194" width="270.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<path d="M 250.3724101026862 492.0 L 200.3724101026862 492.0 L 168.2335419362818 570.625070422026 L 176.16246287766853 640.9790717539269 L 219.09207652534943 715.3135454594686" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="167.0" y="768.8628800078194" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="167.0" dy="0">git restore file</tspan></text>
+<rect x="318.94865420284293" y="712.4735468705161" width="270.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="453.94865420284293" y="766.8485468705161" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="453.94865420284293" dy="0">git restore --staged file</tspan></text>
+<path d="M 890.3724101026862,427.0 L 1040.3724101026862,492.0 L 890.3724101026862,557.0 L 740.3724101026862,492.0 Z" stroke="#334155" stroke-width="2.4" fill="#ffedd5" opacity="1"/>
+<text x="890.3724101026862" y="490.75" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="890.3724101026862" dy="0">Keep the</tspan><tspan x="890.3724101026862" dy="25.0">changes?</tspan></text>
+<rect x="590.3724101026862" y="707.0" width="230.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="705.3724101026862" y="761.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="705.3724101026862" dy="0">git reset --soft HEAD~1</tspan></text>
+<rect x="860.3724101026862" y="707.0" width="230.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="975.3724101026862" y="750.75" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="975.3724101026862" dy="0">git reset HEAD~1</tspan><tspan x="975.3724101026862" dy="25.0">(mixed)</tspan></text>
+<rect x="1130.3724101026862" y="707.0" width="230.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#fee2e2" opacity="1"/>
+<text x="1245.3724101026862" y="761.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="1245.3724101026862" dy="0">git reset --hard HEAD~1</tspan></text>
+<rect x="1290.3724101026862" y="507.0" width="260.0" height="90.0" rx="10" stroke="#334155" stroke-width="2.4" fill="#dcfce7" opacity="1"/>
+<text x="1420.3724101026862" y="561.375" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#0f172a" opacity="1"><tspan x="1420.3724101026862" dy="0">git revert commit</tspan></text>
+</svg>

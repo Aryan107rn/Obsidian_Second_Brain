@@ -17,36 +17,7 @@ a >> k  // right shift — divide by 2^k (careful with negative numbers — see 
 
 ## 🧭 Bit Manipulation Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    B["Bit Manipulation Problem"] --> Single{"Find the single/odd\noccurring element?"}
-    Single -->|Yes| XOR["XOR Trick"]
-
-    B --> Count{"Count set bits\nin a number?"}
-    Count -->|Yes| Brian["Brian Kernighan's Algorithm"]
-
-    B --> Check{"Check/set/clear\na specific bit?"}
-    Check -->|Yes| BitOps["Bitmasking (set/clear/toggle/check)"]
-
-    B --> Power{"Check if power of 2,\nor round up to next power?"}
-    Power -->|Yes| PowerOf2["n & (n-1) trick"]
-
-    B --> Subset{"Generate all subsets\nof a set?"}
-    Subset -->|Yes| SubsetMask["Bitmask Subset Enumeration"]
-
-    B --> DPState{"DP with a small state\n(≤ ~20 items) to track?"}
-    DPState -->|Yes| BitmaskDP["Bitmask DP"]
-
-    B --> Swap{"Swap without a\ntemp variable?"}
-    Swap -->|Yes| XORSwap["XOR Swap"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class B start
-    class Single,Count,Check,Power,Subset,DPState,Swap decision
-    class XOR,Brian,BitOps,PowerOf2,SubsetMask,BitmaskDP,XORSwap pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Bit-Manipulation--mermaid-01.svg]]
 
 ---
 
@@ -77,12 +48,7 @@ int countSetBits(int n) {
 }
 // Or: __builtin_popcount(n) in GCC/Clang — O(1) intrinsic, know it exists for interviews
 ```
-```mermaid
-flowchart LR
-    N["n = 0b1100 (12)"] --> Step1["n & (n-1) = 0b1000 → count=1"]
-    Step1 --> Step2["n & (n-1) = 0b0000 → count=2"]
-    Step2 --> Done["n == 0 → stop, answer = 2"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Bit-Manipulation--mermaid-02.svg]]
 - Time: O(k), k = number of set bits (faster than O(32) naive bit-by-bit check when k is small)
 - **Remember:** `n & (n-1)` is the single most reused trick in bit manipulation — also the basis for Pattern 4 (power of 2 check).
 
@@ -144,10 +110,7 @@ vector<vector<int>> subsetsBitmask(vector<int>& nums) {
     return result;
 }
 ```
-```mermaid
-flowchart LR
-    M0["mask=000 → {}"] --- M1["mask=001 → {a}"] --- M2["mask=010 → {b}"] --- M3["mask=011 → {a,b}"] --- M4["mask=100 → {c}"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Bit-Manipulation--mermaid-03.svg]]
 - Time: O(2ⁿ · n), Space: O(2ⁿ · n) for output
 - **Remember:** This is functionally identical to [[Backtracking]]'s take/not-take subsets pattern — bitmasking is just an iterative encoding of the same choice tree, often preferred in competitive programming for being loop-based (no recursion overhead).
 

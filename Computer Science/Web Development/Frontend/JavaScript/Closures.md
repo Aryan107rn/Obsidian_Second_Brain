@@ -12,18 +12,7 @@ A **closure** is formed when a function "remembers" the variables from its lexic
 
 ## Visual Model: Scope Boundary & Memory Retention
 
-```mermaid
-flowchart TD
-    subgraph Memory["JavaScript Memory & Lexical Environment"]
-        subgraph OuterEnv["Outer Scope: makeCounter() (Popped from Call Stack)"]
-            VarCount["let count = 0 (Preserved in Heap Closure Scope)"]
-        end
-        subgraph InnerEnv["Inner Scope: counter()"]
-            InnerFunc["function() { count++; return count; }"]
-        end
-        InnerFunc -->|Retains Reference via [[Scope]]| VarCount
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--JavaScript--Closures--mermaid-01.svg]]
 
 ## Basic Example
 
@@ -88,20 +77,7 @@ console.log(triple(5)); // 15
 
 ## The Classic `var` in Loop Interview Question
 
-```mermaid
-flowchart LR
-    subgraph VarScope["var in Loop: Single shared binding"]
-        V["Shared i = 3 (loop done)"]
-        CB1["setTimeout 1"] --> V
-        CB2["setTimeout 2"] --> V
-        CB3["setTimeout 3"] --> V
-    end
-    subgraph LetScope["let in Loop: Fresh binding per iteration"]
-        L0["Iteration 0: i = 0"] <-- CBL0["setTimeout 1 (logs 0)"]
-        L1["Iteration 1: i = 1"] <-- CBL1["setTimeout 2 (logs 1)"]
-        L2["Iteration 2: i = 2"] <-- CBL2["setTimeout 3 (logs 2)"]
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--JavaScript--Closures--mermaid-02.svg]]
 
 ```javascript
 for (var i = 0; i < 3; i++) {

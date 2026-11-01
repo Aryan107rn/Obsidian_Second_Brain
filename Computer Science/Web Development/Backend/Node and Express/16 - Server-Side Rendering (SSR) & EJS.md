@@ -6,23 +6,9 @@
 
 **SSR** means the server builds the **complete HTML page** for a request and sends that finished markup to the browser — the browser just has to display it, with little extra work. This is the opposite approach to **Client-Side Rendering (CSR)**, where the server sends a mostly-empty HTML shell plus JavaScript, and the browser itself builds the actual page content by running that JS (this is how React apps typically work — see [[React MOC]]).
 
-```mermaid
-flowchart LR
-    subgraph SSR["Server-Side Rendering"]
-        A1["Browser requests /about"] --> A2["Server fills a template with data"]
-        A2 --> A3["Server sends complete HTML"]
-        A3 --> A4["Browser just displays it"]
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--16-Server-Side-Rendering-SSR-EJS--mermaid-01.svg]]
 
-```mermaid
-flowchart LR
-    subgraph CSR["Client-Side Rendering"]
-        B1["Browser requests /about"] --> B2["Server sends empty shell + JS bundle"]
-        B2 --> B3["Browser runs JS"]
-        B3 --> B4["JS builds the actual page content"]
-    end
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--16-Server-Side-Rendering-SSR-EJS--mermaid-02.svg]]
 
 ### Why does SSR matter / when is it the better choice?
 

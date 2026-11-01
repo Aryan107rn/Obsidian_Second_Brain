@@ -45,15 +45,11 @@ Properties:
 
 Before sending any data, client and server must agree on starting sequence numbers and confirm both directions work.
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server (LISTEN)
-    C->>S: 1. SYN (seq=x)  "I want to connect, my numbers start at x"
-    S->>C: 2. SYN-ACK (seq=y, ack=x+1)  "OK, mine start at y, I got your x"
-    C->>S: 3. ACK (ack=y+1)  "Got yours too"
-    Note over C,S: ESTABLISHED. Data can flow in both directions
-```
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/71/TCP_Three-Way_Handshake.svg" alt="TCP three-way handshake" width="700">
+
+Local copy: [[Networking Diagrams/TCP-Three-Way-Handshake.svg|offline copy]]
+
+Source: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:TCP_Three-Way_Handshake.svg), public domain.
 
 **Why three steps and not two?** Both sides need to (a) tell the other their initial sequence number and (b) have it acknowledged. SYN and SYN-ACK already do half of that each, and the final ACK completes the second half. It also protects against old duplicate SYNs from earlier connections creating false connections.
 
@@ -65,17 +61,11 @@ sequenceDiagram
 
 Each direction is closed independently, so closing takes four segments:
 
-```mermaid
-sequenceDiagram
-    participant A as Side A (active closer)
-    participant B as Side B
-    A->>B: FIN  "I am done sending"
-    B->>A: ACK
-    Note over B: B may still send data (half-close)
-    B->>A: FIN  "I am done too"
-    A->>B: ACK
-    Note over A: TIME_WAIT (about 60s on Linux), then CLOSED
-```
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/55/TCP_CLOSE.svg" alt="TCP connection close sequence" width="600">
+
+Local copy: [[Networking Diagrams/TCP-CLOSE.svg|offline copy]]
+
+Source: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:TCP_CLOSE.svg), CC BY-SA 3.0.
 
 (Often B's ACK and FIN merge into one segment, giving three segments.)
 
@@ -117,13 +107,7 @@ Flow control cannot see the network in between. The sender keeps its own **conge
 - **On loss** (taken as a congestion signal): cut `cwnd` sharply (often halve), then grow again. This **AIMD** (additive increase, multiplicative decrease) pattern lets many flows share links fairly.
 - Modern algorithms: **CUBIC** (Linux default), **BBR** (Google; models bandwidth and RTT instead of reacting only to loss).
 
-```mermaid
-flowchart LR
-    SS["Slow start<br/>cwnd doubles per RTT"] -->|"reach threshold"| CA["Congestion avoidance<br/>cwnd +1 per RTT"]
-    CA -->|"packet loss"| CUT["Reduce cwnd<br/>(multiplicative decrease)"]
-    CUT --> CA
-    SS -->|"packet loss"| CUT
-```
+![[Networking Diagrams/04 - TCP and UDP - Diagram 03.svg]]
 
 Backend relevance: **new connections are slow at first** because they start in slow start. A long-lived, warmed-up connection transfers data faster than many fresh ones. Another argument for connection reuse.
 

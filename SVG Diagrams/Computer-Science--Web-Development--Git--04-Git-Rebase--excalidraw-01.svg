@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1185" height="360" viewBox="0 0 1185 360">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker><marker id="ex-arrow-orange" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 Z" fill="#fb923c"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 247.0 66.0 L 387.0 66.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 667.0 286.0 L 807.0 286.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 455.0 108.0 L 455.0 153.0 L 597.0 153.0 L 597.0 290.0" fill="none" stroke="#fb923c" stroke-width="2.6" opacity="1" marker-end="url(#ex-arrow-orange)"/>
+<text x="421.0" y="171.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="19.0" fill="#475569" opacity="1"><tspan x="421.0" dy="0">branch</tspan></text>
+<path d="M 877.0 286.0 L 1107.0 286.0 L 1107.0 142.0 L 1051.0 100.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="1107.0" y="208.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="19.0" fill="#475569" opacity="1"><tspan x="1107.0" dy="0">merge</tspan></text>
+<path d="M 667.0 66.0 L 1017.0 66.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<rect x="177.0" y="32.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="245.0" y="65.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="245.0" dy="0">A</tspan></text>
+<rect x="387.0" y="32.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="455.0" y="65.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="455.0" dy="0">B</tspan></text>
+<rect x="597.0" y="252.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="665.0" y="285.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="665.0" dy="0">C</tspan></text>
+<rect x="807.0" y="252.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="875.0" y="285.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="875.0" dy="0">D</tspan></text>
+<rect x="597.0" y="32.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dcfce7" opacity="1"/>
+<text x="665.0" y="65.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="665.0" dy="0">E</tspan></text>
+<rect x="1017.0" y="32.0" width="136.0" height="76.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ffedd5" opacity="1"/>
+<text x="1085.0" y="65.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="1085.0" dy="0">M (merge)</tspan></text>
+<text x="162.0" y="75.0" text-anchor="end" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#334155" opacity="1"><tspan x="162.0" dy="0">main</tspan></text>
+<text x="162.0" y="295.0" text-anchor="end" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#334155" opacity="1"><tspan x="162.0" dy="0">feature</tspan></text>
+</svg>

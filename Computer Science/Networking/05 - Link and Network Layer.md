@@ -32,15 +32,7 @@ Your OS knows the destination IP (say the gateway `192.168.1.1`), but an Etherne
 2. The owner replies (unicast) with its MAC.
 3. The asker stores the pair in its **ARP cache** (`ip neigh` on Linux, `arp -a` on Windows/macOS) so it need not ask again for a few minutes.
 
-```mermaid
-sequenceDiagram
-    participant A as Laptop 192.168.1.10
-    participant L as Everyone on LAN
-    participant R as Router 192.168.1.1
-    A->>L: ARP request (broadcast): who has 192.168.1.1?
-    R->>A: ARP reply (unicast): 192.168.1.1 is at 3c:52:82:aa:bb:cc
-    Note over A: caches the mapping, then sends frames to that MAC
-```
+![[Networking Diagrams/05 - Link and Network Layer - Diagram 01.svg]]
 
 **Important detail:** for a destination **outside** your subnet (e.g. `142.250.x.x`), you ARP for the **default gateway's** MAC, not the remote server's. The frame goes to the router; the IP packet inside still carries the final destination.
 
@@ -87,14 +79,7 @@ Destination        Gateway        Interface
 
 `ip route` shows it on Linux. A packet for `8.8.8.8` matches only `0.0.0.0/0`, so it goes to `192.168.1.1`, which looks at its own table and forwards to the ISP's router, and so on.
 
-```mermaid
-flowchart LR
-    L["Laptop<br/>192.168.1.10"] -->|"frame to gateway MAC"| H["Home router<br/>NAT"]
-    H --> I["ISP router"]
-    I --> B["Backbone / IXP"]
-    B --> D["Destination ISP"]
-    D --> S["Server<br/>203.0.113.7"]
-```
+![[Networking Diagrams/05 - Link and Network Layer - Diagram 02.svg]]
 
 **How do routers learn routes?**
 - **Static:** configured manually (small networks, default routes).
@@ -118,16 +103,7 @@ NAT table:
   203.0.113.7:61002  ↔  192.168.1.11:51000
 ```
 
-```mermaid
-sequenceDiagram
-    participant P as Private host 192.168.1.10
-    participant N as NAT router (public 203.0.113.7)
-    participant S as Server 142.250.1.1
-    P->>N: src 192.168.1.10:51000 → dst 142.250.1.1:443
-    N->>S: src 203.0.113.7:61001 → dst 142.250.1.1:443
-    S->>N: reply to 203.0.113.7:61001
-    N->>P: translated back to 192.168.1.10:51000
-```
+![[Networking Diagrams/05 - Link and Network Layer - Diagram 03.svg]]
 
 **Consequences for developers:**
 
@@ -145,15 +121,7 @@ A DHCP **lease** includes: IP address, subnet mask, **default gateway**, **DNS s
 
 The **DORA** exchange (UDP ports 67 server / 68 client; the client has no IP yet, so it broadcasts):
 
-```mermaid
-sequenceDiagram
-    participant C as New device (no IP)
-    participant D as DHCP server (router)
-    C->>D: DISCOVER (broadcast): anyone give me an address?
-    D->>C: OFFER: you can have 192.168.1.23 for 24h
-    C->>D: REQUEST: I accept 192.168.1.23
-    D->>C: ACK: confirmed, plus gateway and DNS
-```
+![[Networking Diagrams/05 - Link and Network Layer - Diagram 04.svg]]
 
 Leases are **renewed** before expiry. If DHCP fails the OS may self-assign `169.254.x.x`.
 

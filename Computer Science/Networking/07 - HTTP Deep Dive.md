@@ -17,13 +17,7 @@ Why backend developers must master it: every API you build is an HTTP contract. 
 
 ## Anatomy of a request and a response
 
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant S as Server
-    C->>S: Request: method + path + headers + (optional) body
-    S-->>C: Response: status code + headers + (optional) body
-```
+![[Networking Diagrams/07 - HTTP Deep Dive - Diagram 01.svg]]
 
 **Raw HTTP/1.1 request:**
 
@@ -149,17 +143,7 @@ Don't confuse *stateless protocol* with *stateless application*: the HTTP layer 
 
 **Connection pooling:** a client keeps a **pool** of open connections to a host and borrows one for each request instead of creating new ones. Same idea as database connection pools (Postgres, Mongo drivers).
 
-```mermaid
-flowchart LR
-    subgraph NoReuse["No reuse (slow)"]
-        direction LR
-        a1["connect+TLS"] --> a2["request"] --> a3["close"] --> a4["connect+TLS"] --> a5["request"] --> a6["close"]
-    end
-    subgraph Reuse["Keep-alive (fast)"]
-        direction LR
-        b1["connect+TLS (once)"] --> b2["request 1"] --> b3["request 2"] --> b4["request 3"]
-    end
-```
+![[Networking Diagrams/07 - HTTP Deep Dive - Diagram 02.svg]]
 
 **In Node.js:**
 - Outbound calls use an `http.Agent`. With `keepAlive: true` sockets are reused (newer Node versions enable this for the global agent by default; older ones did not; set it explicitly when unsure).

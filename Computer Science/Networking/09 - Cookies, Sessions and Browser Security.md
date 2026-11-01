@@ -17,16 +17,7 @@ HTTP is stateless ([[07 - HTTP Deep Dive]]). After you log in, request #2 looks 
 
 A **cookie** is a small name=value piece of data that the **server asks the browser to store** and the **browser sends back automatically** on later requests to that site.
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant S as Server
-    B->>S: POST /login (email + password)
-    S->>B: 200 OK + Set-Cookie: sid=a8f3c2...; HttpOnly; Secure; SameSite=Lax
-    Note over B: Browser stores the cookie
-    B->>S: GET /profile + Cookie: sid=a8f3c2...
-    S->>B: 200 OK (profile of the user behind sid)
-```
+![[Networking Diagrams/09 - Cookies, Sessions and Browser Security - Diagram 01.svg]]
 
 Server sets it with a response header; browser returns it with a request header:
 
@@ -60,13 +51,7 @@ A **session** is **server-side stored state about a user's visit**. The common p
 3. Every later request carries the ID; the server **looks up** the record to know who it is.
 4. Logout = **delete the record** (effective immediately).
 
-```mermaid
-flowchart LR
-    B["Browser<br/>cookie: sid=a8f3"] -->|"request"| A["App server"]
-    A -->|"lookup sid"| ST[("Session store<br/>Redis / DB")]
-    ST -->|"userId: 42"| A
-    A -->|"response for user 42"| B
-```
+![[Networking Diagrams/09 - Cookies, Sessions and Browser Security - Diagram 02.svg]]
 
 **Session stores:** in-memory (dev only; lost on restart, not shared between servers), **Redis** (standard: fast, expiry built in), or a database. With multiple servers behind a load balancer, they must **share** one store, or use sticky sessions ([[10 - Proxies, Load Balancers and API Gateways]]).
 
@@ -132,16 +117,7 @@ Real apps *need* cross-origin calls: React on `localhost:5173` calling Express o
 - **Simple request:** `GET`/`HEAD`/`POST` with only basic headers and content types (`text/plain`, form-encoded, multipart). Browser sends it directly, then checks `Allow-Origin` on the response before letting JS read it.
 - **Preflighted request:** anything else (`PUT`, `DELETE`, `PATCH`, custom headers like `Authorization`, **`Content-Type: application/json`**). The browser first sends an **`OPTIONS`** request asking permission; only if the server approves does it send the real request.
 
-```mermaid
-sequenceDiagram
-    participant B as Browser (origin: app.example.com)
-    participant S as API (api.example.com)
-    B->>S: OPTIONS /orders  Origin: app.example.com<br/>Access-Control-Request-Method: POST<br/>Access-Control-Request-Headers: content-type
-    S-->>B: 204  Access-Control-Allow-Origin: app.example.com<br/>Allow-Methods: POST  Allow-Headers: content-type
-    B->>S: POST /orders (the real request, with JSON body)
-    S-->>B: 201  Access-Control-Allow-Origin: app.example.com
-    Note over B: JS is now allowed to read the response
-```
+![[Networking Diagrams/09 - Cookies, Sessions and Browser Security - Diagram 03.svg]]
 
 ### Credentials rule
 
@@ -183,16 +159,7 @@ Place it **before** your routes (it's middleware; see [[11 - Middleware in Expre
 
 The browser **automatically attaches bank.com's cookies** to that request. The bank sees a valid session and executes the transfer. Evil.com never read anything; it only needed the browser to *send* the request. SOP/CORS don't stop this.
 
-```mermaid
-sequenceDiagram
-    participant V as Victim browser (logged in to bank)
-    participant E as evil.com
-    participant B as bank.com
-    V->>E: visits malicious page
-    E-->>V: page with hidden auto-submitting form
-    V->>B: POST /transfer + bank cookies (attached automatically)
-    B-->>V: 200 transfer done (server can't tell it wasn't intended)
-```
+![[Networking Diagrams/09 - Cookies, Sessions and Browser Security - Diagram 04.svg]]
 
 **Defences (use several):**
 

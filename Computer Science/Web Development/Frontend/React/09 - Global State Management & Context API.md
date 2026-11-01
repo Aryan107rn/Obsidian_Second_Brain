@@ -14,14 +14,7 @@ As a React application expands, managing state can become complicated. State mus
 
 Before reaching for a global state solution, ask yourself: *"Who needs access to this state?"*
 
-```mermaid
-flowchart TD
-    StateQuestion["Does more than one distant branch of components need this state?"]
-    StateQuestion -->|No: UI flags, localized input, active dropdowns| Local["Use Local State<br/>(useState inside Component)"]
-    StateQuestion -->|Yes: Auth User session, Shopping Cart, Theme| CheckDrilling["Is the state being passed down through > 3 intermediate layers?"]
-    CheckDrilling -->|No| LiftState["Lift State Up<br/>(Move state to common ancestor and pass via props)"]
-    CheckDrilling -->|Yes| Global["Use Global State<br/>(Context API, Zustand, or Redux)"]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--09-Global-State-Management-Context-API--mermaid-01.svg]]
 
 ---
 

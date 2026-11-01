@@ -299,22 +299,7 @@ module.exports = router;
 
 ### Request flow
 
-```mermaid
-flowchart LR
-    A["Client"]
-    B["Express Router"]
-    C["Controller / Route Handler"]
-    D["Mongoose"]
-    E[("MongoDB")]
-    A -->|"HTTP Request"| B
-    B --> C
-    C -->|"Mongoose Model call"| D
-    D -->|"Driver protocol"| E
-    E -->|"Documents"| D
-    D --> C
-    C -->|"JSON Response"| A
-    %% mermaid-flow:pos A=100,92 B=216,205 C=395,94 D=708,97 E=716,266
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Databases--MongoDB--mermaid-01.svg]]
 
 ## When to use
 - Data shape varies between records (not every document needs identical fields)

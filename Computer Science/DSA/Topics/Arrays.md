@@ -20,37 +20,7 @@ Contiguous block of memory holding same-type elements, accessed via index in O(1
 
 ## 🧭 Array Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    Problem["Array Problem"] --> Sorted{"Sorted / monotonic?"}
-    Sorted -->|Yes| Pair{"Pair, triplet, boundary, or target?"}
-    Pair -->|Pair / triplet| TwoPointer["Two Pointer"]
-    Pair -->|Boundary / search| Binary["Binary Search / Bounds"]
-
-    Problem --> Contiguous{"Contiguous subarray?"}
-    Contiguous -->|Fixed / non-negative condition| Window["Sliding Window"]
-    Contiguous -->|Negative numbers or range queries| Prefix["Prefix Sum + HashMap"]
-    Contiguous -->|Max/min subarray sum| Kadane["Kadane's Algorithm"]
-
-    Problem --> Partition{"Small fixed value set?"}
-    Partition -->|0/1/2 or categories| Dutch["Dutch National Flag"]
-
-    Problem --> Frequency{"Majority / frequency guarantee?"}
-    Frequency -->|More than n/2| Moore["Moore's Voting"]
-
-    Problem --> Order{"Need kth, not full sort?"}
-    Order -->|Average fast| Quickselect["Quickselect"]
-    Order -->|Worst-case safer| Heap["Heap of size k"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef fallback fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class Problem start
-    class Sorted,Pair,Contiguous,Partition,Frequency,Order decision
-    class TwoPointer,Binary,Window,Prefix,Kadane,Dutch,Moore,Quickselect pattern
-    class Heap fallback
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-01.svg]]
 
 ---
 
@@ -77,15 +47,7 @@ bool pairSum(vector<int>& a, int target) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Arr["[2, 7, 11, 15]  target = 9"]
-    L["l → index 0 (value 2)"] --> Check{"a[l] + a[r] vs target"}
-    R["r → index 3 (value 15)"] --> Check
-    Check -->|"sum > target"| MoveR["r-- (shrink from right)"]
-    Check -->|"sum < target"| MoveL["l++ (grow from left)"]
-    Check -->|"sum == target"| Found["Pair found ✅"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-02.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -124,13 +86,7 @@ int longestSubarrayWithSumK(vector<int>& a, int k) {  // variable window
 }
 ```
 
-```mermaid
-flowchart LR
-    Expand["Expand window: r++, add a[r]"] --> CheckC{"Constraint violated?"}
-    CheckC -->|Yes| Shrink["Shrink window: l++, remove a[l]"]
-    CheckC -->|No| Record["Record window size / update answer"]
-    Shrink --> CheckC
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-03.svg]]
 
 > [!example] Complexity
 > O(n) — each pointer moves forward at most n times total.
@@ -184,11 +140,7 @@ for (int i = 0; i < a.size(); i++) prefix[i+1] = prefix[i] + a[i];
 // sum(l, r) inclusive = prefix[r+1] - prefix[l]
 ```
 
-```mermaid
-flowchart LR
-    Raw["a = [3, 1, 4, 1, 5]"] --> Pre["prefix = [0, 3, 4, 8, 9, 14]"]
-    Pre --> Query["sum(l=1, r=3) = prefix[4] - prefix[1] = 9 - 3 = 6"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-04.svg]]
 
 > [!example] Complexity
 > O(n), Query: O(1)
@@ -218,17 +170,7 @@ void sort012(vector<int>& a) {
 }
 ```
 
-```mermaid
-flowchart LR
-    subgraph Zones["Array during partitioning"]
-    direction LR
-    Z0["0s [0, low)"] --- Z1["1s [low, mid)"] --- Z2["unknown [mid, high]"] --- Z3["2s (high, n)"]
-    end
-    Mid{"a[mid] = ?"}
-    Mid -->|0| SwapLow["swap(low, mid); low++, mid++"]
-    Mid -->|1| MidPlus["mid++"]
-    Mid -->|2| SwapHigh["swap(mid, high); high--"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-05.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -258,14 +200,7 @@ int majorityElement(vector<int>& a) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Elem["Next element x"] --> CheckCount{"count == 0?"}
-    CheckCount -->|Yes| SetCand["candidate = x, count = 1"]
-    CheckCount -->|No| Compare{"x == candidate?"}
-    Compare -->|Yes| Inc["count++"]
-    Compare -->|No| Dec["count--"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-06.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -294,14 +229,7 @@ int quickSelect(vector<int>& a, int l, int r, int k) {
 }
 ```
 
-```mermaid
-flowchart TD
-    Pivot["Choose pivot (last element)"] --> Partition["Partition: smaller left, larger right"]
-    Partition --> CheckPos{"pivot's final index i vs k?"}
-    CheckPos -->|"i == k"| Done["Found kth element ✅"]
-    CheckPos -->|"i < k"| RecurseRight["Recurse on right partition"]
-    CheckPos -->|"i > k"| RecurseLeft["Recurse on left partition"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-07.svg]]
 
 > [!example] Complexity
 > O(n) average, O(n²) worst. Space: O(1)
@@ -333,14 +261,7 @@ void nextPermutation(vector<int>& a) {
 }
 ```
 
-```mermaid
-flowchart TD
-    Find["Find rightmost i where a[i] < a[i+1]"] --> Found{"Ascent found?"}
-    Found -->|No| Reverse1["Fully descending → reverse whole array"]
-    Found -->|Yes| FindJ["Find rightmost j > i where a[j] > a[i]"]
-    FindJ --> Swap["swap(a[i], a[j])"]
-    Swap --> Reverse2["Reverse suffix after i"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-08.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -369,16 +290,7 @@ int findDuplicate(vector<int>& a) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Idx["Treat index i as pointing to a[i]"] --> Cycle["Duplicate value creates a cycle"]
-    Cycle --> Slow["slow moves 1 step"]
-    Cycle --> Fast["fast moves 2 steps"]
-    Slow --> Meet{"slow == fast?"}
-    Fast --> Meet
-    Meet -->|Yes| Reset["Reset slow to start; move both 1 step"]
-    Reset --> Entry["Next meeting point = duplicate value"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-09.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -409,12 +321,7 @@ vector<vector<int>> merge(vector<vector<int>>& iv) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Sort["Sort intervals by start"] --> Compare{"current.start ≤ lastMerged.end?"}
-    Compare -->|"Yes, overlap"| Extend["Extend lastMerged.end = max(...)"]
-    Compare -->|"No, gap"| NewEntry["Push current as new interval"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-10.svg]]
 
 > [!example] Complexity
 > O(n log n) sort-dominated. Space: O(n)
@@ -442,12 +349,7 @@ void rotate(vector<int>& a, int k) {
 }
 ```
 
-```mermaid
-flowchart LR
-    Full["Reverse entire array"] --> Part1["Reverse first k elements"]
-    Part1 --> Part2["Reverse remaining n−k elements"]
-    Part2 --> Result["Result: array rotated right by k ✅"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-11.svg]]
 
 > [!example] Complexity
 > O(n), Space: O(1)
@@ -466,13 +368,7 @@ flowchart LR
 > [!note] Intuition
 > Use the matrix's own first row/column as marker space.
 
-```mermaid
-flowchart TD
-    Scan["Scan matrix once"] --> Mark["Found a[i][j]==0 → mark row i and col j using first row/col as storage"]
-    Mark --> TrackFirst["Separately remember if row0/col0 originally had a zero"]
-    TrackFirst --> SecondPass["Second pass: zero cells whose marked row/col is flagged"]
-    SecondPass --> FixFirst["Finally zero row0/col0 themselves if flagged"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Arrays--mermaid-12.svg]]
 
 > [!example] Complexity
 > O(m·n), Space: O(1)

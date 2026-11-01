@@ -36,43 +36,13 @@ fib(5)
 
 ## 🧭 Visualizing Overlapping Subproblems
 
-```mermaid
-flowchart TD
-    fib5["fib(5)"] --> fib4["fib(4)"]
-    fib5 --> fib3a["fib(3)"]
-    fib4 --> fib3b["fib(3) ⚠️ duplicate"]
-    fib4 --> fib2a["fib(2)"]
-    fib3a --> fib2b["fib(2) ⚠️ duplicate"]
-    fib3a --> fib1a["fib(1)"]
-    fib3b --> fib2c["fib(2) ⚠️ duplicate"]
-    fib3b --> fib1b["fib(1)"]
-
-    classDef normal fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef dup fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class fib5,fib4,fib3a,fib2a,fib1a normal
-    class fib3b,fib2b,fib2c dup
-```
+![[SVG Diagrams/Computer-Science--DSA--Algorithm--Dynamic-Programming--mermaid-01.svg]]
 
 Every highlighted (⚠️) node is the *same subproblem* being recomputed from scratch under plain recursion. DP's entire value proposition is turning each of those into an O(1) cache lookup instead.
 
 ## 🧭 Top-Down vs Bottom-Up Flow
 
-```mermaid
-flowchart TB
-    subgraph TopDown["Top-Down (Memoization)"]
-        direction TB
-        Big["Call for n"] --> Check{"In cache?"}
-        Check -->|Yes| ReturnCached["Return cached value"]
-        Check -->|No| RecurseDown["Recurse into smaller subproblems"] --> Store["Store result in cache"] --> ReturnCached
-    end
-    subgraph BottomUp["Bottom-Up (Tabulation)"]
-        direction TB
-        Base["Fill in base cases (dp[0], dp[1], ...)"] --> Build["Iteratively compute dp[i] from earlier entries"] --> Answer["Final answer = dp[n]"]
-    end
-
-    classDef box fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Big,Check,ReturnCached,RecurseDown,Store,Base,Build,Answer box
-```
+![[SVG Diagrams/Computer-Science--DSA--Algorithm--Dynamic-Programming--mermaid-02.svg]]
 
 ## When does DP apply? (the two required properties)
 

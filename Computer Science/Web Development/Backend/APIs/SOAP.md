@@ -19,26 +19,7 @@ updated: 2026-08-16
 
 ## ✉️ The Core Mental Model (Notarized Postal Mail vs. Postcard)
 
-```mermaid
-flowchart TD
-    APIStyle["API message style"]
-    APIStyle --> REST["REST postcard"]
-    REST --> REST1["Lightweight JSON"]
-    REST --> REST2["Uses standard HTTP semantics"]
-
-    APIStyle --> SOAP["SOAP legal envelope"]
-    SOAP --> SOAP1["Formal XML envelope"]
-    SOAP --> SOAP2["Message-level security"]
-    SOAP --> SOAP3["Reliable enterprise standards"]
-    SOAP --> SOAP4["Transport independent"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef rest fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef soap fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class APIStyle root
-    class REST,REST1,REST2 rest
-    class SOAP,SOAP1,SOAP2,SOAP3,SOAP4 soap
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--SOAP--mermaid-01.svg]]
 
 ---
 
@@ -46,26 +27,7 @@ flowchart TD
 
 Every SOAP payload is strictly enclosed within an XML **Envelope**:
 
-```mermaid
-flowchart TD
-    Envelope["SOAP Envelope: root XML wrapper"]
-    Envelope --> Header["SOAP Header: optional metadata"]
-    Header --> Auth["Authentication and WS-Security"]
-    Header --> Txn["Transaction and routing IDs"]
-
-    Envelope --> Body["SOAP Body: mandatory payload"]
-    Body --> Payload["Actual request or response data"]
-    Body --> Fault["SOAP Fault for standardized errors"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef header fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef body fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef fault fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    class Envelope root
-    class Header,Auth,Txn header
-    class Body,Payload body
-    class Fault fault
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--SOAP--mermaid-02.svg]]
 
 ---
 
@@ -142,29 +104,7 @@ A WSDL document acts as the strict, machine-readable contract describing all dat
 
 ## 🛡️ The Enterprise WS-* Standard Extensions
 
-```mermaid
-flowchart TD
-    WS["WS-* Standards Suite"]
-
-    WS --> Sec["WS-Security"]
-    Sec --> SecDetail["Encryption and digital signatures"]
-
-    WS --> Rel["WS-ReliableMessaging"]
-    Rel --> RelDetail["Guaranteed end-to-end delivery"]
-
-    WS --> Atom["WS-AtomicTransaction"]
-    Atom --> AtomDetail["Distributed ACID transactions"]
-
-    WS --> Addr["WS-Addressing"]
-    Addr --> AddrDetail["Transport-independent routing metadata"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef standard fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef detail fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:1px
-    class WS root
-    class Sec,Rel,Atom,Addr standard
-    class SecDetail,RelDetail,AtomDetail,AddrDetail detail
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--SOAP--mermaid-03.svg]]
 
 ---
 

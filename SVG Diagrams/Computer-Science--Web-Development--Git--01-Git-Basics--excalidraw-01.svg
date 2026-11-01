@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1974" height="419" viewBox="0 0 1974 419">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="522.0" y="379.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#475569" opacity="1"><tspan x="522.0" dy="0">git pull = fetch + merge</tspan></text>
+<path d="M 1042.0 150.0 L 1042.0 387.0 L 142.0 387.0 L 142.0 150.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="892.0" y="269.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="20.0" fill="#475569" opacity="1"><tspan x="892.0" dy="0">git fetch</tspan></text>
+<path d="M 1042.0 150.0 L 1042.0 277.0 L 742.0 277.0 L 742.0 150.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="891.3740234375" y="67.63739013671875" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#475569" opacity="1"><tspan x="891.3740234375" dy="0">git push</tspan></text>
+<path d="M 852.0 91.0 L 932.0 91.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="591.39794921875" y="77.83856201171875" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#475569" opacity="1"><tspan x="591.39794921875" dy="0">git commit</tspan></text>
+<path d="M 552.0 91.0 L 632.0 91.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="290.8811340332031" y="60.52838134765625" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16.0" fill="#475569" opacity="1"><tspan x="290.8811340332031" dy="0">git add</tspan></text>
+<path d="M 252.0 91.0 L 332.0 91.0" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<rect x="32.0" y="32.0" width="220.0" height="118.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="142.0" y="72.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="22.0" fill="#0f172a" opacity="1"><tspan x="142.0" dy="0">Working directory</tspan><tspan x="142.0" dy="27.5">(files on disk)</tspan></text>
+<rect x="332.0" y="32.0" width="220.0" height="118.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ffedd5" opacity="1"/>
+<text x="442.0" y="72.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="22.0" fill="#0f172a" opacity="1"><tspan x="442.0" dy="0">Staging area / Index</tspan><tspan x="442.0" dy="27.5">(next commit contents)</tspan></text>
+<rect x="635.0112915039062" y="35.819427490234375" width="220.0" height="118.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="745.0112915039062" y="75.81942749023438" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="22.0" fill="#0f172a" opacity="1"><tspan x="745.0112915039062" dy="0">Local repository</tspan><tspan x="745.0112915039062" dy="27.5">(.git history)</tspan></text>
+<rect x="932.0" y="32.0" width="220.0" height="118.0" rx="10" stroke="#334155" stroke-width="2.9" fill="#dcfce7" opacity="1"/>
+<text x="1042.0" y="72.0" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="22.0" fill="#0f172a" opacity="1"><tspan x="1042.0" dy="0">Remote</tspan><tspan x="1042.0" dy="27.5">(GitHub)</tspan></text>
+</svg>

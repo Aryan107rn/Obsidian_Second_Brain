@@ -28,14 +28,7 @@ Read a domain **right to left**:
         └─ subdomain (you create these freely)
 ```
 
-```mermaid
-flowchart TD
-    ROOT["Root servers (.)"] --> COM[".com TLD servers"]
-    ROOT --> IN[".in TLD servers"]
-    COM --> EX["example.com authoritative servers"]
-    EX --> W["www.example.com → A 93.184.216.34"]
-    EX --> A["api.example.com → A 203.0.113.7"]
-```
+![[Networking Diagrams/06 - DNS and CDN - Diagram 01.svg]]
 
 ## Who's who in DNS
 
@@ -56,23 +49,11 @@ flowchart TD
 
 Looking up `www.example.com` with cold caches:
 
-```mermaid
-sequenceDiagram
-    participant B as Browser / OS (stub)
-    participant R as Recursive resolver (8.8.8.8)
-    participant Root as Root server
-    participant TLD as .com TLD server
-    participant Auth as example.com authoritative
-    B->>B: Check browser cache, OS cache, /etc/hosts
-    B->>R: www.example.com ?
-    R->>Root: www.example.com ?
-    Root-->>R: Don't know, ask .com servers (referral)
-    R->>TLD: www.example.com ?
-    TLD-->>R: Don't know, ask ns1.example.com (referral)
-    R->>Auth: www.example.com ?
-    Auth-->>R: A 93.184.216.34, TTL 300
-    R-->>B: 93.184.216.34 (cached for TTL)
-```
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Example_of_an_iterative_DNS_resolver.svg" alt="Iterative DNS resolution" width="800">
+
+Local copy: [[Networking Diagrams/DNS-Iterative-Resolver.svg|offline copy]]
+
+Source: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Example_of_an_iterative_DNS_resolver.svg), public domain.
 
 Then the browser opens a TCP connection to that IP ([[04 - TCP and UDP]]). Typical transport is **UDP port 53** (fast, small); **TCP 53** for large responses and zone transfers; encrypted variants **DoH** (DNS over HTTPS) and **DoT** (over TLS) hide queries from the network.
 
@@ -133,13 +114,7 @@ example.com.        TXT    "v=spf1 -all"
 
 **CDN:** a global network of **edge servers** (points of presence, PoPs) that **cache copies** of your content close to users.
 
-```mermaid
-flowchart LR
-    U1["User (India)"] --> E1["Edge: Mumbai"]
-    U2["User (Germany)"] --> E2["Edge: Frankfurt"]
-    E1 -->|"cache MISS only"| O["Origin server"]
-    E2 -->|"cache MISS only"| O
-```
+![[Networking Diagrams/06 - DNS and CDN - Diagram 03.svg]]
 
 **How requests reach the nearest edge:** you point your domain at the CDN (a **CNAME** to the CDN's hostname, or the CDN runs your DNS). DNS or **anycast** routing then returns an edge close to the user.
 

@@ -12,21 +12,7 @@ created: 2026-10-31
 
 A **proxy** is a server that sits **between** a client and another server and forwards traffic on someone's behalf. The big distinction is **whose side it is on**.
 
-```mermaid
-flowchart LR
-    subgraph FP["Forward proxy: acts for CLIENTS"]
-        direction LR
-        c1["Client A"] --> fp["Forward proxy"]
-        c2["Client B"] --> fp
-        fp --> net1["Internet / any server"]
-    end
-    subgraph RP["Reverse proxy: acts for SERVERS"]
-        direction LR
-        net2["Any client"] --> rp["Reverse proxy"]
-        rp --> s1["Server 1"]
-        rp --> s2["Server 2"]
-    end
-```
+![[Networking Diagrams/10 - Proxies, Load Balancers and API Gateways - Diagram 01.svg]]
 
 ## Forward proxy
 
@@ -86,15 +72,7 @@ app.set('trust proxy', 1); // trust exactly one proxy hop
 
 **Problem:** one server has finite CPU/memory and can fail. **Solution:** run multiple identical instances (**horizontal scaling**) and put a **load balancer (LB)** in front that distributes requests, giving **scalability**, **availability** (survive instance failures), and **zero-downtime deploys**.
 
-```mermaid
-flowchart TD
-    U["Clients"] --> LB["Load balancer<br/>(health checks + algorithm)"]
-    LB --> A["App instance 1"]
-    LB --> B["App instance 2"]
-    LB --> C["App instance 3 (unhealthy, removed)"]
-    A --> DB[("Database / cache")]
-    B --> DB
-```
+![[Networking Diagrams/10 - Proxies, Load Balancers and API Gateways - Diagram 02.svg]]
 
 ### L4 vs L7 load balancers
 
@@ -144,14 +122,7 @@ An **API gateway** is a reverse proxy specialized as the **single entry point** 
 - **Aggregation** (combine responses from several services into one)
 - Logging, metrics, tracing, caching, API versioning, TLS
 
-```mermaid
-flowchart LR
-    M["Mobile app"] --> G["API Gateway<br/>auth, rate limit, routing"]
-    W["Web app"] --> G
-    G --> U["User service"]
-    G --> O["Order service"]
-    G --> P["Payment service"]
-```
+![[Networking Diagrams/10 - Proxies, Load Balancers and API Gateways - Diagram 03.svg]]
 
 Examples: Kong, AWS API Gateway, Apigee, Azure API Management, Traefik/Envoy-based gateways.
 

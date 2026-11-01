@@ -12,51 +12,11 @@ Legend: ⬜ not covered · 🟨 covered in chat, not saved · ✅ note exists
 
 ## 🧭 Interview System Design Mental Model
 
-```mermaid
-flowchart TD
-    Prompt["Design Prompt"] --> Requirements["1. Clarify Requirements"]
-    Requirements --> Estimation["2. Back-of-the-envelope Estimation"]
-    Estimation --> API["3. API + Data Model"]
-    API --> Architecture["4. High-level Architecture"]
-    Architecture --> DeepDive["5. Deep Dives"]
-    DeepDive --> Bottlenecks["6. Bottlenecks + Trade-offs"]
-
-    DeepDive --> Storage["Storage"]
-    DeepDive --> Cache["Caching"]
-    DeepDive --> Async["Queues / Streams"]
-    DeepDive --> Scale["Sharding / Replication"]
-    DeepDive --> Reliability["Retries / Circuit Breakers / DR"]
-    DeepDive --> Observability["Logs / Metrics / Traces"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef step fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef deep fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Prompt start
-    class Requirements,Estimation,API,Architecture,DeepDive,Bottlenecks step
-    class Storage,Cache,Async,Scale,Reliability,Observability deep
-```
+![[SVG Diagrams/Computer-Science--System-Design--System-Design-MOC--mermaid-01.svg]]
 
 ## 🗺️ Topic Dependency Map
 
-```mermaid
-flowchart TD
-    Fundamentals["Fundamentals"] --> Networking["Networking + APIs"]
-    Networking --> Databases["Databases"]
-    Databases --> Scaling["Scaling"]
-    Scaling --> Caching["Caching + Load Balancing"]
-    Scaling --> Messaging["Messaging + Reliability"]
-    Messaging --> Distributed["Distributed Systems"]
-    Distributed --> Senior["Senior-depth Topics"]
-
-    classDef base fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef core fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef scale fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef advanced fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Fundamentals base
-    class Networking,Databases core
-    class Scaling,Caching,Messaging scale
-    class Distributed,Senior advanced
-```
+![[SVG Diagrams/Computer-Science--System-Design--System-Design-MOC--mermaid-02.svg]]
 
 ## Tier 1 — Must know (core interview readiness)
 

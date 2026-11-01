@@ -9,22 +9,7 @@ Repeatedly halve the search space by comparing the middle element to a target/co
 
 ## Visualizing Search Space Halving
 
-```mermaid
-flowchart TD
-    subgraph Iteration1["Iteration 1: Search Space [0..6]"]
-        direction LR
-        A0["0: [2] (Low)"] --- A1["1: [5]"] --- A2["2: [8]"] --- A3["3: [12] (Mid)"] --- A4["4: [16]"] --- A5["5: [23]"] --- A6["6: [38] (High)"]
-    end
-    subgraph Action["Target = 23 > 12 -> Discard Left Half -> New Low = Mid + 1"]
-        direction LR
-        D["[0..3] Discarded"] -.-> K["[4..6] Search Space Retained"]
-    end
-    subgraph Iteration2["Iteration 2: Search Space [4..6]"]
-        direction LR
-        B4["4: [16] (Low)"] --- B5["5: [23] (Mid = Target Found!)"] --- B6["6: [38] (High)"]
-    end
-    Iteration1 --> Action --> Iteration2
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Binary-Search--mermaid-01.svg]]
 
 ## How It Works
 
@@ -67,16 +52,7 @@ int binarySearch(vector<int>& a, int target) {
 > [!tip] When to apply
 > Need first index ≥ target (lower bound) or first index > target (upper bound) — e.g. insertion point, counting occurrences.
 
-```mermaid
-flowchart LR
-    subgraph Bounds["Array: [ 10, 20, 20, 20, 30 ], Target = 20"]
-        direction LR
-        I0["Idx 0: 10"] --> I1["Idx 1: 20<br/>(Lower Bound: first >= 20)"]
-        I1 --> I2["Idx 2: 20"]
-        I2 --> I3["Idx 3: 20"]
-        I3 --> I4["Idx 4: 30<br/>(Upper Bound: first > 20)"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Binary-Search--mermaid-02.svg]]
 
 ```cpp
 int lowerBound(vector<int>& a, int target) {   // first index with a[i] >= target
@@ -105,14 +81,7 @@ int lowerBound(vector<int>& a, int target) {   // first index with a[i] >= targe
 > [!tip] When to apply
 > Array was sorted then rotated at an unknown pivot — one half of any `[low, high]` window is always still sorted; use that to decide direction.
 
-```mermaid
-flowchart LR
-    subgraph Rotated["Rotated Array: [ 4, 5, 6, 7, 0, 1, 2 ]"]
-        direction LR
-        L["Left Half [4, 5, 6, 7]<br/>Sorted: a[low] <= a[mid]"]
-        R["Right Half [0, 1, 2]<br/>Contains Pivot"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Binary-Search--mermaid-03.svg]]
 
 ```cpp
 int searchRotated(vector<int>& a, int target) {
@@ -146,13 +115,7 @@ int searchRotated(vector<int>& a, int target) {
 > [!tip] When to apply
 > You're asked to minimize/maximize some value (capacity, speed, days, distance) subject to a feasibility check that's monotonic — "can this value achieve the goal?" flips from false to true (or true to false) exactly once as the value increases. Classic phrasing: "minimum X such that condition holds" or "maximum X such that condition holds."
 
-```mermaid
-flowchart LR
-    subgraph Monotonic["Monotonic Feasibility Curve: isFeasible(X)"]
-        direction LR
-        F1["F"] --- F2["F"] --- F3["F"] --- T1["T (Optimal Min Ans)"] --- T2["T"] --- T3["T"]
-    end
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Binary-Search--mermaid-04.svg]]
 
 Examples: Koko eating bananas (min speed to finish in h hours), ship packages within D days (min capacity), aggressive cows / book allocation (max-min or min-max distance).
 

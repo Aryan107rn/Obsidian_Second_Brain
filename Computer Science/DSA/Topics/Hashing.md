@@ -12,36 +12,7 @@ Internally, a hash function converts a key into an array index; collisions (two 
 
 ## 🧭 Hashing Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    H["Hashing Problem"] --> Count{"Count / frequency /\nduplicate?"}
-    Count -->|Yes| Freq["Frequency Counting"]
-
-    H --> Exist{"Just an existence\ncheck?"}
-    Exist -->|Yes| Set["Hash Set"]
-
-    H --> Pair{"Pair/triplet summing\nto a target?"}
-    Pair -->|Yes| TwoSum["Complement / Two Sum"]
-
-    H --> Sub{"Subarray sum equals\nor divisible by k?"}
-    Sub -->|Yes| Prefix["Prefix Sum + Hash Map"]
-
-    H --> Group{"Group items by a\ncomputed key?"}
-    Group -->|Yes| GroupKey["Grouping (Anagrams)"]
-
-    H --> Win{"Longest/shortest substring\nwith a distinct/repeat constraint?"}
-    Win -->|Yes| SW["Sliding Window + Hash Map"]
-
-    H --> Graph{"Graph traversal needing\nvisited tracking or node mapping?"}
-    Graph -->|Yes| GraphHash["Hashing in Graphs"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class H start
-    class Count,Exist,Pair,Sub,Group,Win,Graph decision
-    class Freq,Set,TwoSum,Prefix,GroupKey,SW,GraphHash pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Hashing--mermaid-01.svg]]
 
 ## Recognizing the pattern
 

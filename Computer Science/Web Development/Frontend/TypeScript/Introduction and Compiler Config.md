@@ -15,27 +15,7 @@ TypeScript is an open-source, strongly-typed superset of JavaScript developed by
 
 Unlike traditional compiled languages (like C++ or Rust), the TypeScript compiler (`tsc`) does not produce machine code or binaries. Instead, it compiles TypeScript code (`.ts`) down to clean, standards-compliant JavaScript (`.js`).
 
-```mermaid
-flowchart TD
-    Source["TypeScript Source Code (.ts)"] --> Parser["Parser (Generates AST)"]
-    Parser --> AST["Abstract Syntax Tree (AST)"]
-    AST --> Binder["Binder (Scope Analysis)"]
-    AST --> Checker["Type Checker (Validates Types)"]
-    AST --> Emitter["Emitter (Removes Types & Transpiles)"]
-    
-    Checker --> ErrorResult{"Type Errors Found?"}
-    ErrorResult -- "Yes (Console Warnings)" --> DevNotification["Reporter (tsc output)"]
-    ErrorResult -- "No (or ignored via emitOnError)" --> Emitter
-    
-    Emitter --> JS["Compiled JavaScript (.js)"]
-    Emitter --> Declarations["Declaration Files (.d.ts)"]
-    Emitter --> SourceMaps["Source Maps (.js.map)"]
-
-    classDef stage fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef product fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    class Parser,Binder,Checker,Emitter stage
-    class JS,Declarations,SourceMaps product
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--TypeScript--Introduction-and-Compiler-Config--mermaid-01.svg]]
 
 ### Key Concept: Type Erasure
 TypeScript is completely erased at compile-time. The browser and the Node.js runtime only execute the generated JavaScript and are entirely unaware of TypeScript.

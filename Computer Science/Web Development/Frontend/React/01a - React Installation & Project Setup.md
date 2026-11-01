@@ -14,20 +14,7 @@ To build a modern React application, you need to understand the development pipe
 1. **Package Managers (npm, pnpm, yarn):** These download, install, and manage third-party JS libraries (like React, React Router, or Tailwind CSS) inside your local workspace.
 2. **Build Tools / Bundlers (Vite, Parcel, Create React App):** These compile JSX into browser-ready plain JS, bundle multiple module files together, optimize assets, and run a **development server** with live reload.
 
-```mermaid
-flowchart LR
-    Source["Developer Source Code\n(JSX, Components, CSS)"] --> Bundler["Build Tool / Bundler\n(Vite, Parcel, Webpack)"]
-    Deps["Third-Party Packages\n(node_modules via npm/pnpm/yarn)"] --> Bundler
-    Bundler --> Output["Optimized Output\n(Plain HTML/CSS/JS Bundle)"]
-    Output --> Browser["Browser (Chrome, Safari, Firefox)"]
-
-    classDef tool fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px;
-    classDef files fill:#F3F4F6,stroke:#4B5563,color:#111827,stroke-width:2px;
-    classDef client fill:#D1FAE5,stroke:#059669,color:#111827,stroke-width:2px;
-    class Bundler tool;
-    class Source,Deps,Output files;
-    class Browser client;
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--01a-React-Installation-Project-Setup--mermaid-01.svg]]
 
 ---
 
@@ -57,25 +44,7 @@ A package manager reads your project's `package.json` manifest file, fetches lis
 
 Browsers natively do not understand JSX syntax or imports of non-JS assets (like images or CSS). A **bundler** processes these files and packages them into clean, compiled static assets.
 
-```mermaid
-graph TD
-    subgraph CRA_Webpack [Webpack / CRA Architecture (Bundle-based)]
-        Start1[Start Dev Server] --> Entry1[Resolve Entry File]
-        Entry1 --> Process1[Transpile & Bundle Entire Application]
-        Process1 --> Ready1[Dev Server Ready]
-        Ready1 --> Request1[Browser Requests Page - Instant Load]
-    end
-
-    subgraph Vite_Architecture [Vite Architecture (Native ESM-based)]
-        Start2[Start Dev Server] --> Ready2[Dev Server Ready - Near Instant!]
-        Ready2 --> Request2[Browser Requests Page / Module]
-        Request2 --> Dynamic[Dynamic Compile requested file via esbuild]
-        Dynamic --> Serve[Serve compiled module on-demand]
-    end
-
-    style Ready1 fill:#FEF3C7,stroke:#D97706,stroke-width:2px
-    style Ready2 fill:#DCFCE7,stroke:#16A34A,stroke-width:2px
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--01a-React-Installation-Project-Setup--mermaid-02.svg]]
 
 ### 1. Vite (The Modern Default)
 
@@ -239,23 +208,7 @@ yarn start
 
 ## 🎯 Which to Use & When to Use (Decision Matrix)
 
-```mermaid
-graph TD
-    Start([What type of React App are you building?]) --> StandardSPA[Client-Side SPA / Dashboard / Personal Project]
-    Start --> HighPerformance[SEO Crucial / Large E-Commerce / Server Rendered]
-    Start --> SimpleLearning[Single File / Minimal Zero-Config Setup]
-
-    StandardSPA --> ChooseVite[Use Vite + React]
-    HighPerformance --> ChooseNext[Use Next.js / Remix]
-    SimpleLearning --> ChooseParcel[Use Parcel or Vite]
-
-    ChooseVite --> PM_Decision{Which Package Manager?}
-    ChooseNext --> PM_Decision
-
-    PM_Decision -->|I want speed + save disk storage| Usepnpm[Use pnpm]
-    PM_Decision -->|I want zero-setup, safe default| Usenpm[Use npm]
-    PM_Decision -->|Working in a monorepo / Meta ecosystem| UseYarn[Use yarn]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--01a-React-Installation-Project-Setup--mermaid-03.svg]]
 
 ### Summary Recommendations
 

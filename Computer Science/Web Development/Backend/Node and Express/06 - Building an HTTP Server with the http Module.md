@@ -210,19 +210,7 @@ This example buffers the **entire** request body in memory, so it is suitable on
 
 This is the single most important mental model for everything above:
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant N as Node.js HTTP Server
-    participant CB as Your Callback (req, res)
-
-    B->>N: HTTP Request (GET /)
-    N->>N: Node receives the request
-    N->>CB: Node creates req + res, then calls your callback
-    CB->>CB: your code decides what to do<br/>(e.g. check req.url)
-    CB->>N: res.end("Hello World")
-    N->>B: HTTP Response
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--06-Building-an-HTTP-Server-with-the-http-Module--mermaid-01.svg]]
 
 In words: browser sends a request → Node receives it → Node builds fresh `req`/`res` objects for this exact request → Node invokes **your** callback with them → your code runs and calls `res.end(...)` → Node sends that back as the HTTP response → the browser receives it.
 

@@ -429,33 +429,7 @@ CREATE TABLE enrollments (
 );
 ```
 
-```mermaid
-erDiagram
-    USERS ||--o{ ORDERS : places
-    ORDERS ||--|{ ORDER_ITEMS : contains
-    PRODUCTS ||--o{ ORDER_ITEMS : "appears in"
-    USERS {
-        bigint id PK
-        text name
-        text email UK
-    }
-    ORDERS {
-        bigint id PK
-        bigint user_id FK
-        numeric total
-        timestamptz created_at
-    }
-    ORDER_ITEMS {
-        bigint order_id FK
-        bigint product_id FK
-        int quantity
-    }
-    PRODUCTS {
-        bigint id PK
-        text name
-        numeric price
-    }
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Databases--PostgreSQL--mermaid-01.svg]]
 
 **Denormalization** (deliberately duplicating data for read speed) is a valid tradeoff, but do it consciously.
 
@@ -652,14 +626,7 @@ async function transfer(fromId, toId, amount) {
 ```
 
 ### Request flow
-```mermaid
-flowchart LR
-    A[Client] -->|HTTP request| B[Express route]
-    B -->|validate input| C[Controller / service]
-    C -->|parameterized SQL| D[pg Pool]
-    D -->|TCP connection| E[(PostgreSQL)]
-    E -->|rows| D --> C -->|JSON response| A
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Databases--PostgreSQL--mermaid-02.svg]]
 
 ### Schema migrations
 A **migration** is a versioned script that changes the schema (e.g. `001_create_users.sql`, `002_add_phone.sql`). Don't edit tables by hand in production. Tools: `node-pg-migrate`, Knex, Prisma Migrate, Drizzle Kit. Migrations make schema changes repeatable across dev/staging/prod.

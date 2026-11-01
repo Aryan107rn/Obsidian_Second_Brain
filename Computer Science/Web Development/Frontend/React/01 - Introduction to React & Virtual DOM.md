@@ -54,14 +54,7 @@ Updating JavaScript objects is incredibly fast because it doesn't trigger browse
 
 When state or props change, React updates the UI through a process called **Reconciliation**:
 
-```mermaid
-graph TD
-    StateChange[1. State or Props Change] --> Render[2. Create New Virtual DOM Tree]
-    Render --> Diff[3. Compare New VDOM with Old VDOM via Diffing Algorithm]
-    Diff --> Patch[4. Compute Minimal Batch of Changes]
-    Patch --> Commit[5. Apply Changes to Real DOM in one batch]
-    Commit --> Paint[6. Browser Repaints Screen]
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Frontend--React--01-Introduction-to-React-Virtual-DOM--mermaid-01.svg]]
 ![[Pasted image 20260822152721.png]]
 
 #### The Heuristic Diffing Algorithm ($O(N)$ Complexity)

@@ -6,16 +6,7 @@ A **cookie** is a small piece of data (name=value, max ~4 KB) that a server asks
 ## Why they exist
 HTTP forgets every request. To keep a login, a theme preference, or a shopping cart, the server needs the client to carry something back. Cookies do this using plain headers ([[15 - HTTP Headers in Express.js]]) with no JavaScript required.
 
-```mermaid
-sequenceDiagram
-    participant B as Browser
-    participant S as Server
-    B->>S: GET /  (no cookie yet)
-    S-->>B: 200 + Set-Cookie: theme=dark
-    Note over B: browser stores theme=dark for this site
-    B->>S: GET /about  + Cookie: theme=dark
-    S-->>B: 200 (server now knows the preference)
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--21-Cookies-in-Express--mermaid-01.svg]]
 Two headers do everything:
 - **`Set-Cookie`** — response header: server → browser, "store this".
 - **`Cookie`** — request header: browser → server, "here's what you gave me".

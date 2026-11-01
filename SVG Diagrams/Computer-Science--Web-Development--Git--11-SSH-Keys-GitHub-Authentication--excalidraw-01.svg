@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1184.0" height="858.32" viewBox="0 0 1184.0 858.32">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<rect x="32.0" y="32.0" width="427.37" height="120.84" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="245.67999999999998" y="65.74000000000001" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="19.0" fill="#0f172a" opacity="1"><tspan x="245.67999999999998" dy="0">Your machine (private</tspan><tspan x="245.67999999999998" dy="23.75">key)</tspan></text>
+<path d="M 245.68 155.79000000000002 L 245.68 826.3199999999999" fill="none" stroke="#94a3b8" stroke-width="2.4" opacity="1"/>
+<rect x="724.63" y="32.0" width="427.37" height="120.84" rx="10" stroke="#334155" stroke-width="2.4" fill="#dbeafe" opacity="1"/>
+<text x="938.31" y="65.74000000000001" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="19.0" fill="#0f172a" opacity="1"><tspan x="938.31" dy="0">GitHub (has your public</tspan><tspan x="938.31" dy="23.75">key)</tspan></text>
+<path d="M 938.31 155.79000000000002 L 938.31 826.3199999999999" fill="none" stroke="#94a3b8" stroke-width="2.4" opacity="1"/>
+<path d="M 245.68 205.89 L 938.31 205.89" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="591.9949999999999" y="170.83999999999997" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="591.9949999999999" dy="0">Connect as</tspan><tspan x="591.9949999999999" dy="22.5">git@github.com</tspan></text>
+<path d="M 938.31 306.1 L 245.68 306.1" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="591.9949999999999" y="271.05" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="591.9949999999999" dy="0">Challenge: prove you</tspan><tspan x="591.9949999999999" dy="22.5">own the matching key</tspan></text>
+<path d="M 245.68 406.30999999999995 L 938.31 406.30999999999995" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="591.995" y="355.05" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="591.995" dy="0">Signed response</tspan><tspan x="591.995" dy="22.5">(made with private</tspan><tspan x="591.995" dy="22.5">key)</tspan></text>
+<path d="M 955.9999999999999 506.52 L 920.6299999999999 506.52" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="938.3149999999999" y="455.26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="938.3149999999999" dy="0">Verify signature</tspan><tspan x="938.3149999999999" dy="22.5">with stored public</tspan><tspan x="938.3149999999999" dy="22.5">key</tspan></text>
+<path d="M 938.31 606.74 L 245.68 606.74" fill="none" stroke="#334155" stroke-width="2.4" opacity="1" marker-end="url(#ex-arrow)"/>
+<text x="591.995" y="571.68" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18.0" fill="#475569" opacity="1"><tspan x="591.995" dy="0">Authenticated, git</tspan><tspan x="591.995" dy="22.5">push/pull allowed</tspan></text>
+</svg>

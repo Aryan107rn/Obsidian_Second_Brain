@@ -68,11 +68,7 @@ A **digital certificate** (X.509) contains:
 
 ### Chain of trust
 
-```mermaid
-flowchart TD
-    ROOT["Root CA certificate<br/>(self-signed, pre-installed in OS/browser trust store)"] -->|"signs"| INT["Intermediate CA certificate"]
-    INT -->|"signs"| LEAF["Your server certificate<br/>example.com + public key"]
-```
+![[Networking Diagrams/08 - HTTPS, TLS and Certificates - Diagram 01.svg]]
 
 The server sends the **leaf + intermediate(s)**. The client verifies each signature up the chain until it reaches a **root it already trusts** (stored in the OS/browser trust store). Roots stay offline and sign intermediates, which do the day-to-day issuing.
 
@@ -107,21 +103,11 @@ Goal: agree on the TLS version and cipher suite, **authenticate the server**, an
 
 ### TLS 1.3 (1 round trip)
 
-```mermaid
-sequenceDiagram
-    participant C as Client (browser)
-    participant S as Server
-    Note over C,S: TCP handshake already done
-    C->>S: ClientHello: TLS versions, cipher suites, key share (ECDHE public value), SNI
-    S->>C: ServerHello: chosen cipher + server's key share
-    Note over C,S: Both can now compute the shared secret, everything after this is encrypted
-    S->>C: Certificate + CertificateVerify (signature proving private key) + Finished
-    C->>C: Validate certificate chain, hostname, signature
-    C->>S: Finished
-    Note over C,S: Secure channel ready
-    C->>S: HTTP request (encrypted)
-    S->>C: HTTP response (encrypted)
-```
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Full_TLS_1.3_Handshake.svg" alt="Full TLS 1.3 handshake" width="750">
+
+Local copy: [[Networking Diagrams/Full-TLS-1.3-Handshake.svg|offline copy]]
+
+Source: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Full_TLS_1.3_Handshake.svg), public domain.
 
 Summary of the idea: both sides exchange **temporary public values**, independently compute the **same secret** (Diffie-Hellman), the server proves its identity by presenting a certificate and **signing** the handshake with its private key, and both derive session keys for symmetric encryption.
 

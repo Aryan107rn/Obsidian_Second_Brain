@@ -13,14 +13,7 @@ created: 2026-10-31
 
 When "it doesn't work", don't guess; narrow the layer with one tool per question:
 
-```mermaid
-flowchart TD
-    A["1. DNS: does the name resolve?<br/>dig / nslookup"] --> B["2. Network: is the host reachable?<br/>ping / traceroute"]
-    B --> C["3. Transport: is the port open?<br/>nc -zv / curl / ss"]
-    C --> D["4. TLS: does the handshake and certificate work?<br/>openssl s_client / curl -v"]
-    D --> E["5. HTTP: is the response right?<br/>curl -i / -v"]
-    E --> F["6. Still unclear: look at the packets<br/>Wireshark / tcpdump"]
-```
+![[Networking Diagrams/12 - Practical Networking Toolkit - Diagram 01.svg]]
 
 | Question | Tool |
 |---|---|

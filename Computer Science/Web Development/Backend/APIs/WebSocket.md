@@ -19,35 +19,7 @@ updated: 2026-08-16
 
 ## ⚡ The Real-Time Dilemma: 4 Approaches Compared
 
-```mermaid
-flowchart TD
-    RealTime["Real-time communication choices"]
-
-    RealTime --> Short["Short polling"]
-    Short --> ShortFlow["Client asks repeatedly"]
-    ShortFlow --> ShortTrade["Simple but delayed and wasteful"]
-
-    RealTime --> Long["Long polling"]
-    Long --> LongFlow["Request stays open until event"]
-    LongFlow --> LongTrade["Better latency, still request-based"]
-
-    RealTime --> SSE["Server-Sent Events"]
-    SSE --> SSEFlow["Server pushes one-way stream"]
-    SSEFlow --> SSETrade["Good for feeds and notifications"]
-
-    RealTime --> WS["WebSocket"]
-    WS --> WSFlow["HTTP upgrade creates persistent TCP pipe"]
-    WSFlow --> WSTrade["Best for two-way low-latency traffic"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef weak fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    classDef mid fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef good fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class RealTime root
-    class Short,ShortFlow,ShortTrade weak
-    class Long,LongFlow,LongTrade,SSE,SSEFlow,SSETrade mid
-    class WS,WSFlow,WSTrade good
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--WebSocket--mermaid-01.svg]]
 
 ---
 
@@ -114,36 +86,7 @@ wss.on('connection', (ws) => {
 
 Because WebSockets are **stateful** (a connection is tied to a specific physical server memory), scaling across multiple instances requires a **Pub/Sub message broker**:
 
-```mermaid
-flowchart TD
-    ClientA["Client A connected to server 1"]
-    ClientB["Client B connected to server 2"]
-
-    LB["Load Balancer (Sticky Sessions / IP Hash)"]
-
-    subgraph WebSockets["WebSocket Server Fleet"]
-        WS1["WebSocket Server Instance #1"]
-        WS2["WebSocket Server Instance #2"]
-    end
-
-    Broker[("Redis Pub/Sub or RabbitMQ backplane")]
-
-    ClientA <==>|Persistent WS| WS1
-    ClientB <==>|Persistent WS| WS2
-
-    WS1 <-->|"publish message"| Broker
-    Broker <-->|"broadcast to nodes"| WS2
-    WS2 -->|"push to Client B"| ClientB
-
-    classDef client fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef lb fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef broker fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
-    class ClientA,ClientB client
-    class LB lb
-    class WS1,WS2 server
-    class Broker broker
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--WebSocket--mermaid-02.svg]]
 
 ---
 

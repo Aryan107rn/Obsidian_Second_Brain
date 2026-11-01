@@ -11,39 +11,7 @@
 
 ## 🧭 Pattern Decision Flow
 
-```mermaid
-flowchart TD
-    P["Stack / Queue Problem"] --> Match{"Matching or nesting\n(brackets, undo, parse)?"}
-    Match -->|Yes| Basic["Plain Stack"]
-
-    P --> Expr{"Expression with\noperators?"}
-    Expr -->|Yes| Postfix["Infix→Postfix / Postfix Eval"]
-
-    P --> Near{"Nearest greater / smaller\nelement to left or right?"}
-    Near -->|Yes| Mono["Monotonic Stack"]
-
-    P --> Range{"Sum or max over ALL subarrays\nwhere each element is the min/max?"}
-    Range -->|Yes| Contribution["Monotonic Stack + Contribution"]
-
-    P --> Rect{"Largest rectangle /\nhistogram-like?"}
-    Rect -->|Yes| Hist["Histogram Stack"]
-
-    P --> Build{"Implement one structure\nusing another / O(1) min?"}
-    Build -->|Yes| Design["Design: 2 stacks / 1 queue / min tracking"]
-
-    P --> Order{"Process in arrival order\nor level by level?"}
-    Order -->|Yes| Queue["Queue / BFS"]
-
-    P --> Window{"Max/min of each\nsliding window?"}
-    Window -->|Yes| Deque["Monotonic Deque"]
-
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef decision fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef pattern fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class P start
-    class Match,Expr,Near,Range,Rect,Build,Order,Window decision
-    class Basic,Postfix,Mono,Contribution,Hist,Design,Queue,Deque pattern
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Stack-Queues--mermaid-01.svg]]
 
 ---
 
@@ -184,13 +152,7 @@ int evalRPN(vector<string>& t) {
 
 **Idea:** keep the stack in sorted order (increasing or decreasing). When a new element breaks the order, pop elements; each pop **resolves** the popped element ("its next greater/smaller is the current one"). Every index is pushed and popped once, so total O(n).
 
-```mermaid
-flowchart LR
-    A["new element x"] --> B{"stack top breaks order vs x?"}
-    B -->|Yes| C["pop top: x is its next greater/smaller → record answer"]
-    C --> B
-    B -->|No| D["push x"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Stack-Queues--mermaid-02.svg]]
 
 | You want | Stack order (top → bottom) | Pop while |
 |---|---|---|
@@ -317,12 +279,7 @@ int largestRectangleArea(vector<int>& h) {
     return best;
 }
 ```
-```mermaid
-flowchart LR
-    A["bar i shorter than stack top"] --> B["pop top: height = h[top]"]
-    B --> C["right = i, left = new top (or -1)"]
-    C --> D["area = height × (right − left − 1)"]
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Stack-Queues--mermaid-03.svg]]
 - Time: O(n), Space: O(n)
 - **Remember:** width is `i - left - 1`, not `i - left`. The sentinel pass is required or bars still on the stack are never counted.
 

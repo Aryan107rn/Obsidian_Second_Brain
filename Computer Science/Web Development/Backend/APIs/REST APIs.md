@@ -19,30 +19,7 @@ A **REST API** (Representational State Transfer) is an architectural style desig
 
 ## 🏛️ The 6 Architectural Constraints of REST
 
-```mermaid
-flowchart TD
-    REST["RESTful System"]
-    REST --> C1["Client-server separation"]
-    REST --> C2["Stateless requests"]
-    REST --> C3["Cacheable responses"]
-    REST --> C4["Uniform interface"]
-    REST --> C5["Layered system"]
-    REST --> C6["Code on demand optional"]
-
-    C1 --> D1["UI and storage evolve independently"]
-    C2 --> D2["Each request carries required context"]
-    C3 --> D3["Responses declare cache behavior"]
-    C4 --> D4["Resources use URIs and HTTP verbs"]
-    C5 --> D5["Proxy or cache layers can sit between"]
-    C6 --> D6["Server may send executable client logic"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef rule fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef detail fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:1px
-    class REST root
-    class C1,C2,C3,C4,C5,C6 rule
-    class D1,D2,D3,D4,D5,D6 detail
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--REST-APIs--mermaid-01.svg]]
 
 ### Client-Server Separation — the foundational rule
 
@@ -52,31 +29,7 @@ This is the constraint everything else builds on: **the client (a browser, a mob
 
 ## 🔄 HTTP Verbs: Safety vs. Idempotency
 
-```mermaid
-flowchart TD
-    Methods["HTTP Methods"] --> Safe["Safe: read-only"]
-    Methods --> Idem["Idempotent: repeat-safe state"]
-    Methods --> NonIdem["Non-idempotent: repeat changes state"]
-
-    Safe --> GET["GET"]
-    Safe --> HEAD["HEAD"]
-    Safe --> OPTIONS["OPTIONS"]
-
-    Idem --> PUT["PUT: full replace"]
-    Idem --> DELETE["DELETE: remove"]
-
-    NonIdem --> POST["POST: create or append"]
-    NonIdem --> PATCH["PATCH: partial update, context-dependent"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef safe fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef idem fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef risk fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    class Methods root
-    class Safe,GET,HEAD,OPTIONS safe
-    class Idem,PUT,DELETE idem
-    class NonIdem,POST,PATCH risk
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--REST-APIs--mermaid-02.svg]]
 
 ### Complete HTTP Methods Matrix
 
@@ -130,49 +83,7 @@ Every HTTP status code is a 3-digit number, and **the first digit alone tells yo
 
 You'll rarely handle 1xx codes explicitly in everyday Express route code (see [[09 - Introduction to Express.js]]) — they're typically handled at the protocol/server level rather than something you `res.status(100)` yourself.
 
-```mermaid
-flowchart TD
-    Code["HTTP Response Status Code"]
-
-    Code --> S1["1xx Informational"]
-    S1 --> Continue["100 Continue"]
-    S1 --> Switch["101 Switching Protocols"]
-
-    Code --> S2["2xx Success"]
-    S2 --> OK["200 OK"]
-    S2 --> Created["201 Created"]
-    S2 --> NoContent["204 No Content"]
-
-    Code --> S3["3xx Redirection"]
-    S3 --> Moved["301 Moved Permanently"]
-    S3 --> NotModified["304 Not Modified"]
-
-    Code --> S4["4xx Client Error"]
-    S4 --> Bad["400 Bad Request"]
-    S4 --> Auth["401 Unauthorized"]
-    S4 --> Forbidden["403 Forbidden"]
-    S4 --> Missing["404 Not Found"]
-    S4 --> Limit["429 Too Many Requests"]
-
-    Code --> S5["5xx Server Error"]
-    S5 --> Crash["500 Internal Error"]
-    S5 --> Gateway["502 Bad Gateway"]
-    S5 --> Unavailable["503 Service Unavailable"]
-    S5 --> Timeout["504 Gateway Timeout"]
-
-    classDef root fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef info fill:#E0E7FF,stroke:#4F46E5,color:#111827,stroke-width:2px
-    classDef success fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef redirect fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef client fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef server fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    class Code root
-    class S1,Continue,Switch info
-    class S2,OK,Created,NoContent success
-    class S3,Moved,NotModified redirect
-    class S4,Bad,Auth,Forbidden,Missing,Limit client
-    class S5,Crash,Gateway,Unavailable,Timeout server
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--REST-APIs--mermaid-03.svg]]
 
 ### Common mistakes with status codes
 ### 🛠️ Daily-Use Status Codes — the ones you'll actually write yourself
@@ -229,41 +140,7 @@ app.delete('/users/:id', (req, res) => {
 
 ## ⚖️ Statelessness & Horizontal Scaling
 
-```mermaid
-flowchart TD
-    Client["Client (Sends Request + JWT Token)"]
-    LB["Load Balancer (Round Robin)"]
-
-    subgraph AppCluster["Stateless Backend Pool"]
-        S1["Server Instance #1"]
-        S2["Server Instance #2"]
-        S3["Server Instance #3"]
-    end
-
-    DB[(Shared Database)]
-    Cache[(Shared Redis Session Cache)]
-
-    Client --> LB
-    LB -->|Req 1| S1
-    LB -->|Req 2| S3
-    LB -->|Req 3| S2
-
-    S1 <--> Cache
-    S2 <--> Cache
-    S3 <--> Cache
-    S1 <--> DB
-    S2 <--> DB
-    S3 <--> DB
-
-    classDef client fill:#DBEAFE,stroke:#2563EB,color:#111827,stroke-width:2px
-    classDef lb fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    classDef server fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    classDef data fill:#FCE7F3,stroke:#DB2777,color:#111827,stroke-width:2px
-    class Client client
-    class LB lb
-    class S1,S2,S3 server
-    class DB,Cache data
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--APIs--REST-APIs--mermaid-04.svg]]
 
 ---
 

@@ -27,26 +27,7 @@ Before Linux, Unix-like systems were expensive and closed-source. In 1991 Linus 
 
 ## Distributions
 
-```mermaid
-graph LR
-    subgraph Debian["Debian family — apt / .deb"]
-        Debian1[Debian] --> Ubuntu
-        Ubuntu --> Mint[Linux Mint]
-        Ubuntu --> PopOS[Pop!_OS]
-    end
-    subgraph RedHat["Red Hat family — dnf / .rpm"]
-        RHEL --> Fedora
-        RHEL --> CentOS[CentOS / Rocky Linux]
-    end
-    subgraph Arch["Arch family — pacman"]
-        ArchLinux[Arch Linux] --> Manjaro
-        ArchLinux --> EndeavourOS
-    end
-    subgraph Independent["Independent"]
-        Alpine["Alpine — minimal, Docker default"]
-        NixOS["NixOS — declarative, reproducible"]
-    end
-```
+![[SVG Diagrams/Computer-Science--Linux--mermaid-01.svg]]
 
 | Family | Package manager | Known for | Examples |
 |---|---|---|---|
@@ -61,16 +42,7 @@ graph LR
 
 Unlike Windows (`C:\`, `D:\`), Linux has **one tree** rooted at `/`. Every disk or drive is *mounted* as a folder inside that tree instead of getting its own letter.
 
-```mermaid
-graph TD
-    root["/"] --> home["/home — user directories"]
-    root --> etc["/etc — config files"]
-    root --> var["/var — logs, caches"]
-    root --> bin["/bin, /usr/bin — programs"]
-    root --> tmp["/tmp — cleared on reboot"]
-    root --> rootuser["/root — root user's home"]
-    home --> alice["/home/alice"]
-```
+![[SVG Diagrams/Computer-Science--Linux--mermaid-02.svg]]
 
 - `/home/<user>` — your personal files
 - `/etc` — system-wide config (plain text, human-editable)

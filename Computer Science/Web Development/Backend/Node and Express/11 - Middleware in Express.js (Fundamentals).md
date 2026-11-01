@@ -27,15 +27,7 @@ Express processes each request through a **chain** of functions, executed strict
 2. **End the request-response cycle itself** — e.g. `res.status(401).send("Unauthorized")` — without calling `next()`, stopping the chain right there (useful for auth checks that reject a request before it ever reaches your route logic).
 3. Do nothing and forget `next()` entirely — **this is a bug**: the request just hangs forever, since nothing ever tells Express to continue or respond (same failure mode as forgetting `res.end()` in raw `http`, see [[06 - Building an HTTP Server with the http Module]]).
 
-```mermaid
-flowchart LR
-    Req["Incoming Request"] --> M1["Middleware 1\n(e.g. logging)"]
-    M1 -->|next| M2["Middleware 2\n(e.g. body parsing)"]
-    M2 -->|next| M3["Middleware 3\n(e.g. auth check)"]
-    M3 -->|next| Handler["Route Handler\napp.get/post/etc."]
-    Handler --> Res["Response Sent"]
-    M3 -->|"or: rejects here"| Res
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--11-Middleware-in-Express.js-Fundamentals--mermaid-01.svg]]
 
 ## Registering middleware
 

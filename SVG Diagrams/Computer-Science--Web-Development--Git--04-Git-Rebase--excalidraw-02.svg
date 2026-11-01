@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1184.0" height="427.9099999999999" viewBox="0 0 1184.0 427.9099999999999">
+<defs><marker id="ex-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L0,8 L9,4 z" fill="#334155"/></marker><marker id="ex-arrow-orange" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0 0 L11 5.5 L0 11 Z" fill="#fb923c"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<path d="M 296.33 73.80000000000001 L 468.45 73.80000000000001" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 812.68 344.27000000000004 L 984.8 344.27000000000004" fill="none" stroke="#334155" stroke-width="2.9" opacity="1" marker-end="url(#ex-arrow)"/>
+<path d="M 552.05 125.44 L 552.05 195.44 L 726.63 195.44 L 726.63 349.19" fill="none" stroke="#fb923c" stroke-width="2.6" opacity="1" marker-end="url(#ex-arrow-orange)"/>
+<text x="510.25" y="198.52999999999997" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="19.0" fill="#475569" opacity="1"><tspan x="510.25" dy="0">branch</tspan></text>
+<rect x="210.27" y="32.0" width="167.2" height="93.44" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="293.865" y="67.29000000000002" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="293.865" dy="0">A</tspan></text>
+<rect x="468.45" y="32.0" width="167.2" height="93.44" rx="10" stroke="#334155" stroke-width="2.9" fill="#dbeafe" opacity="1"/>
+<text x="552.045" y="67.29000000000002" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="552.045" dy="0">B</tspan></text>
+<rect x="726.63" y="302.46999999999997" width="167.2" height="93.44" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="810.225" y="337.76000000000005" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="810.225" dy="0">C&#x27; (rebased)</tspan></text>
+<rect x="984.8" y="302.46999999999997" width="167.2" height="93.44" rx="10" stroke="#334155" stroke-width="2.9" fill="#ede9fe" opacity="1"/>
+<text x="1068.405" y="337.76000000000005" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="1068.405" dy="0">D&#x27; (rebased)</tspan></text>
+<rect x="726.63" y="32.0" width="167.2" height="93.44" rx="10" stroke="#334155" stroke-width="2.9" fill="#dcfce7" opacity="1"/>
+<text x="810.225" y="67.29000000000002" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#0f172a" opacity="1"><tspan x="810.225" dy="0">E</tspan></text>
+<text x="191.82" y="79.58999999999997" text-anchor="end" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#334155" opacity="1"><tspan x="191.82" dy="0">main</tspan></text>
+<text x="191.82" y="350.06" text-anchor="end" font-family="Inter,Arial,sans-serif" font-size="23.0" fill="#334155" opacity="1"><tspan x="191.82" dy="0">feature</tspan></text>
+</svg>

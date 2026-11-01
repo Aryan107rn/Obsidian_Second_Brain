@@ -79,15 +79,7 @@ fs.readFile(__filename, () => {
 
 Some operations have **no native async support at the OS level** — the underlying system call is inherently blocking (e.g. most filesystem operations on many platforms, DNS lookups via `dns.lookup`, some `crypto` functions, `zlib` compression). Since Node can't make the OS itself non-blocking for these, **libuv offloads them to a pool of background OS threads** so the main JS thread isn't stuck waiting.
 
-```mermaid
-flowchart TD
-    JS["Your JS code\n(single thread, call stack)"] --> LibuvLoop["libuv Event Loop\n(6 phases, still single-threaded)"]
-    LibuvLoop -->|"network I/O"| Kernel["OS Kernel Async I/O\n(epoll / kqueue / IOCP)\nNo thread pool needed"]
-    LibuvLoop -->|"fs, dns.lookup, crypto, zlib"| Pool["libuv Thread Pool\n(default 4 background OS threads)"]
-    Kernel -->|"result ready"| LibuvLoop
-    Pool -->|"result ready"| LibuvLoop
-    LibuvLoop -->|"callback queued"| JS
-```
+![[SVG Diagrams/Computer-Science--Web-Development--Backend--Node-and-Express--05-Node.js-Event-Loop-Phases-libuv-Thread-Pool--mermaid-01.svg]]
 
 **Key distinction — what actually uses the thread pool:**
 

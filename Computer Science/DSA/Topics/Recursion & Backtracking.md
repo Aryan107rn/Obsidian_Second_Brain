@@ -24,47 +24,13 @@ Many problems are naturally self-similar (a tree is a node + two smaller trees; 
 
 Each call pauses and waits for the one below it. Nothing computes until the base case is hit — then results flow back up ("unwind"), each frame combining its own value with what it got from below.
 
-```mermaid
-flowchart TD
-    subgraph Growth["Growing — factorial(4) calls itself downward"]
-        direction TB
-        F4["factorial(4) waiting on factorial(3)"] --> F3["factorial(3) waiting on factorial(2)"]
-        F3 --> F2["factorial(2) waiting on factorial(1)"]
-        F2 --> F1["factorial(1) → base case, returns 1"]
-    end
-    subgraph Unwind["Unwinding — values combine back up"]
-        direction BT
-        R1["factorial(1) returns 1"] --> R2["factorial(2) returns 2×1 = 2"]
-        R2 --> R3["factorial(3) returns 3×2 = 6"]
-        R3 --> R4["factorial(4) returns 4×6 = 24"]
-    end
-    Growth --> Unwind
-    classDef grow fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef unwind fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class F4,F3,F2,F1 grow
-    class R1,R2,R3,R4 unwind
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Recursion-Backtracking--mermaid-01.svg]]
 
 ### Model 2: A branching tree (recursion that calls itself more than once)
 
 The moment a function calls itself **twice** (like `fib(n-1) + fib(n-2)`), you no longer get a single line of stack frames — you get a *tree*. This is the shape almost every backtracking problem takes.
 
-```mermaid
-flowchart TD
-    A["fib(4)"] --> B["fib(3)"]
-    A --> C["fib(2) ⚠️ duplicate"]
-    B --> D["fib(2) ⚠️ duplicate"]
-    B --> E["fib(1)=1"]
-    D --> F["fib(1)=1"]
-    D --> G["fib(0)=0"]
-    C --> H["fib(1)=1"]
-    C --> I["fib(0)=0"]
-
-    classDef normal fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef dup fill:#FEF3C7,stroke:#D97706,color:#111827,stroke-width:2px
-    class A,B,E,F,G,H,I normal
-    class C,D dup
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Recursion-Backtracking--mermaid-02.svg]]
 
 Every ⚠️ node is the **same subproblem recomputed from scratch**. This is *why* memoization exists (Pattern 4 below), and it's the same branching shape backtracking uses to enumerate answers — except backtracking's branches are *choices*, not overlapping subproblems.
 
@@ -249,21 +215,7 @@ void backtrack(/* state */, vector<int>& path, vector<vector<int>>& result) {
 
 Full subsets exploration for `[1, 2]` — every root-to-leaf path is one recorded subset:
 
-```mermaid
-flowchart TD
-    Start["path = [], idx = 0"] -->|exclude 1| A["path = [], idx = 1"]
-    Start -->|include 1| B["path = [1], idx = 1"]
-    A -->|exclude 2| A1["path = [] → recorded ✅"]
-    A -->|include 2| A2["path = [2] → recorded ✅"]
-    B -->|exclude 2| B1["path = [1] → recorded ✅"]
-    B -->|include 2| B2["path = [1,2] → recorded ✅"]
-    classDef start fill:#EDE9FE,stroke:#7C3AED,color:#111827,stroke-width:2px
-    classDef mid fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef leaf fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class Start start
-    class A,B mid
-    class A1,A2,B1,B2 leaf
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Recursion-Backtracking--mermaid-03.svg]]
 The "undo" step (`pop_back()`) is what lets the algorithm walk back up from a leaf and try the sibling branch — without it, `path` carries stale elements into the next branch.
 
 ## The "take / not-take" subsequence framework (the master pattern)
@@ -406,18 +358,7 @@ void generate(int open, int close, int n, string& cur, vector<string>& result) {
 }
 ```
 
-```mermaid
-flowchart TD
-    Start["open=0, close=0, n=2"] --> A["'(' → open=1,close=0"]
-    A --> B["'(' → open=2,close=0"]
-    A --> C["')' → open=1,close=1"]
-    B --> D["')' → open=2,close=1"]
-    C --> E["'(' → open=2,close=1"]
-    D --> F["')' → '(())' ✅"]
-    E --> G["')' → '()()' ✅"]
-    classDef leaf fill:#DCFCE7,stroke:#16A34A,color:#111827,stroke-width:2px
-    class F,G leaf
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Recursion-Backtracking--mermaid-04.svg]]
 
 ## Generate Binary Strings Without Consecutive 1s
 
@@ -484,20 +425,7 @@ void partition(string& s, int idx, vector<string>& path, vector<vector<string>>&
 > [!info] Difficulty
 > Medium
 
-```mermaid
-flowchart TD
-    Cell["board[i][j] matches word[k]?"] -->|yes: mark visited| Explore["Try 4 directions"]
-    Explore --> Up["dfs(i-1, j, k+1)"]
-    Explore --> Down["dfs(i+1, j, k+1)"]
-    Explore --> Left["dfs(i, j-1, k+1)"]
-    Explore --> Right["dfs(i, j+1, k+1)"]
-    Up & Down & Left & Right -->|any true?| Found["propagate true up"]
-    Found -->|either way| Undo["unmark board[i][j] before returning"]
-    classDef step fill:#E0F2FE,stroke:#0284C7,color:#111827,stroke-width:2px
-    classDef undo fill:#FEE2E2,stroke:#DC2626,color:#111827,stroke-width:2px
-    class Cell,Explore,Up,Down,Left,Right,Found step
-    class Undo undo
-```
+![[SVG Diagrams/Computer-Science--DSA--Topics--Recursion-Backtracking--mermaid-05.svg]]
 The grid *is* the visited-tracker: mark the cell, explore all 4 neighbors, then **always** unmark it on the way back out — even on failure — or a later path can't reuse that cell.
 
 ```cpp
