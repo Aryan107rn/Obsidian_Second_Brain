@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "be3377c4a3eacdf4",
+        "id": "1563245c35ce0fb2",
         "type": "tabs",
         "children": [
           {
-            "id": "fc0beea50d5fce54",
+            "id": "078093f0218285cd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/C++/06 - STL Algorithms and Iterators.md",
+                "file": "file:/home/aryan/OpenSource/Zulip-Development-Setup.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06 - STL Algorithms and Iterators"
+              "title": "Zulip-Development-Setup"
             }
           }
         ]
@@ -228,8 +228,15 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "fc0beea50d5fce54",
+  "active": "900c9a5bf8abcb76",
   "lastOpenFiles": [
+    "file:/home/aryan/OpenSource/Zulip-Development-Setup.md",
+    "Computer Science/DSA/Topics/Hashing.md",
+    "Computer Science/C++/09 - Competitive Programming Template & Math Utilities.md",
+    "Computer Science/C++/08 - DSA Patterns with STL.md",
+    "Computer Science/C++/06 - STL Algorithms and Iterators.md",
+    "Computer Science/C++/05 - STL Containers.md",
+    "Computer Science/C++/07 - C++ Built-in Functions for DSA.md",
     "Computer Science/C++/03 - OOP in CPP.md",
     "Computer Science/C++/01 - Data Types and Fundamentals.md",
     "Computer Science/DSA/Topics/Sliding Window & Two Pointer.md",
@@ -263,13 +270,6 @@
     "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
     "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
     "Computer Science/Web Development/Git/08 - GitHub Basics.md",
-    "Computer Science/Web Development/Git/06 - Git Undoing Changes.md",
-    "Computer Science/Web Development/Git/05 - Git Stash.md",
-    "Computer Science/Web Development/Git/03 - Merge Conflicts.md",
-    "Computer Science/Computer Science MOC.md",
-    "Computer Science/Web Development/Frontend/TypeScript/Advanced Type Manipulation.md",
-    "Computer Science/Web Development/Git/11 - SSH Keys & GitHub Authentication.md",
-    "Computer Science/Web Development/Git/10 - Git Reflog, Cherry-pick & Recovery.md",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--11-SSH-Keys-GitHub-Authentication--excalidraw-01.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-02.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-01.json",
