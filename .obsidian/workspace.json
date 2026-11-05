@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "file:/home/aryan/OpenSource/Zulip-Development-Setup.md",
+                "file": "Computer Science/Web Development/Frontend/React/01 - Introduction to React & Virtual DOM.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Zulip-Development-Setup"
+              "title": "01 - Introduction to React & Virtual DOM"
             }
           }
         ]
@@ -228,8 +228,9 @@
       "mermaid-flow:Mermaid Flow Editor": false
     }
   },
-  "active": "900c9a5bf8abcb76",
+  "active": "078093f0218285cd",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Frontend/React/00 - React MOC.md",
     "file:/home/aryan/OpenSource/Zulip-Development-Setup.md",
     "Computer Science/DSA/Topics/Hashing.md",
     "Computer Science/C++/09 - Competitive Programming Template & Math Utilities.md",
@@ -269,7 +270,6 @@
     "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
     "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
     "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
-    "Computer Science/Web Development/Git/08 - GitHub Basics.md",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--11-SSH-Keys-GitHub-Authentication--excalidraw-01.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-02.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-01.json",
