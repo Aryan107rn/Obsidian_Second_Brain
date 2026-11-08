@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Computer Science/Web Development/Frontend/React/01 - Introduction to React & Virtual DOM.md",
+                "file": "Computer Science/C++/05 - STL Containers.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 - Introduction to React & Virtual DOM"
+              "title": "05 - STL Containers"
             }
           }
         ]
@@ -230,6 +230,7 @@
   },
   "active": "078093f0218285cd",
   "lastOpenFiles": [
+    "Computer Science/Web Development/Frontend/React/01 - Introduction to React & Virtual DOM.md",
     "Computer Science/Web Development/Frontend/React/00 - React MOC.md",
     "file:/home/aryan/OpenSource/Zulip-Development-Setup.md",
     "Computer Science/DSA/Topics/Hashing.md",
@@ -269,7 +270,6 @@
     "Computer Science/Networking/03 - IP Addresses, Ports and Subnetting.md",
     "Computer Science/Web Development/Backend/Node and Express/03 - npm, package.json & Node Modules.md",
     "Computer Science/Web Development/Backend/Node and Express/02 - Node.js Runtime vs Browser Environment.md",
-    "Computer Science/Web Development/Backend/Node and Express/00 - Node and Express MOC.md",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--11-SSH-Keys-GitHub-Authentication--excalidraw-01.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-02.json",
     "SVG Diagram Sources/Computer-Science--Web-Development--Git--09-Branching-Strategies-PR-Workflow--excalidraw-01.json",
