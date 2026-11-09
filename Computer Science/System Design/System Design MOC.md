@@ -124,4 +124,6 @@ When we cover a topic in chat and you ask to save it, the note gets created in t
 
 ## Related
 
+- Hussein Nasser backend playlist: [[Hussein Nasser - Backend Engineering (Beginner)/Backend Engineering (Beginner) — Complete Notes|Backend Engineering (Beginner) — Complete Notes]].
+
 - System design is a separate track from DSA prep — per the roadmap: "System design does not replace DSA."
